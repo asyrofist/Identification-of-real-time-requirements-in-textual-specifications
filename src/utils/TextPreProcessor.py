@@ -17,13 +17,13 @@ class TextPreProcessor(object):
 
     @staticmethod
     def get_default_stop_words():
-        exclude_list = [
+        include_list = [
             'above', 'after', 'afterwards', 'again', 'already', 'always', 'before', 'behind', 'below', 'between',
-            'beyond', 'can', 'cannot', 'could', 'last', 'then', '''under''', 'until', 'up', 'upon', 'when', 'will',
+            'beyond', 'can', 'cannot', 'could', 'last', 'then', 'under', 'until', 'up', 'upon', 'when', 'will',
         ]
         if TextPreProcessor.default_stop_words is None:
             stop_words = nlp.load('en').Defaults.stop_words
-            stop_words -= exclude_list
+            stop_words -= include_list
             TextPreProcessor.default_stop_words = stop_words
         return TextPreProcessor.default_stop_words
 
@@ -43,7 +43,6 @@ class TextPreProcessor(object):
         Init nlp model according to embedding type
         :param embedding: type of embedding, see embeddings_types
         """
-        global nlp, nlp_type
         if embedding == 'default':
             if TextPreProcessor.nlp_type != 'large':
                 TextPreProcessor.nlp_type = 'large'
@@ -65,9 +64,9 @@ class TextPreProcessor(object):
         if TextPreProcessor.google_embeddings is None:
             TextPreProcessor.google_embeddings = gensim.models.KeyedVectors.load_word2vec_format(google_word2vec_path,
                                                                                                  binary=True)
-            for tok in tokens:
-                tok.vector = TextPreProcessor.google_embeddings[tok.text]
-                tok.has_vector = True
+        for tok in tokens:
+            tok.vector = TextPreProcessor.google_embeddings[tok.text]
+            tok.has_vector = True
         return tokens
 
     @staticmethod
