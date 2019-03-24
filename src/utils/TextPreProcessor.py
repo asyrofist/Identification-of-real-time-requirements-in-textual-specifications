@@ -22,7 +22,7 @@ class TextPreProcessor(object):
             'beyond', 'can', 'cannot', 'could', 'last', 'then', 'under', 'until', 'up', 'upon', 'when', 'will',
         ]
         if TextPreProcessor.default_stop_words is None:
-            stop_words = nlp.load('en').Defaults.stop_words
+            stop_words = spacy.load('en').Defaults.stop_words
             stop_words -= include_list
             TextPreProcessor.default_stop_words = stop_words
         return TextPreProcessor.default_stop_words
@@ -36,6 +36,7 @@ class TextPreProcessor(object):
         TextPreProcessor.nlp_type = None
         TextPreProcessor.stop_words = None
         TextPreProcessor.google_embeddings = None
+        TextPreProcessor.default_stop_words = None
 
     @staticmethod
     def init_nlp(embedding):
