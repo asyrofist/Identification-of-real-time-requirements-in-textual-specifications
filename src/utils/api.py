@@ -2,6 +2,69 @@ import random
 from decimal import *
 import numpy as np
 
+############## fetch begin ###############
+
+"""
+    TODO note: the doc must be save in directory "/files"
+"""
+
+def has_keyword(sentence, keywords):
+    """
+        @param sentence: string
+        @param keywords: list of string, [string, string, ...]
+        @return : if sentence has any keyword in keywords
+            type: boolean
+    """
+    for key in keywords:
+        if sentence.find(key) != -1:
+            return True
+    return False
+
+def get_total_text(doc_list, keywords):
+    """
+        @param doc_list: list of filename []
+        @return total_text: all sentences in these doc
+            type: list of string [string, string, ...] -> [sentence, sentence, ...]
+    """
+    total_list = []
+    for doc in doc_list:
+        with open("files/"+str(doc), "rt", encoding="utf-8") as f:
+            total_list += [sentence.split('\n')[0] for sentence in f.readlines() if has_keyword(sentence, keywords)]
+    return total_list
+
+
+def fetch(numberOfAllSentences, doc_list=[i for i in range(1, 49)], shuffle=False, keywords=[""]):
+    """
+        @param numberOfAllSentences: 
+        @param doc_list: list of int, [1,2,3, ...]
+        @param shuffle: boolean, true or false, decide whether shuffe the oeder of the sentences
+        @param keywords: list of string, [keyword1, keyword2, ...], the keyword used to select sentence
+        @return: list of sentences, which are selected from the doc_list 
+            type: list of string [string, string, ...] -> [sentence, sentence, ...]
+    """
+
+    text = []
+    total_text = get_total_text(doc_list, keywords)
+    len_total_text = len(total_text)
+    for i in range(numberOfAllSentences if numberOfAllSentences < len_total_text else len_total_text):
+        sentence = random.choice(total_text)
+        text += [sentence]
+        total_text.remove(sentence)
+    if shuffle:
+        random.shuffle(text)
+
+    return text
+
+
+def test_fetch():
+    print(fetch(10, [1,2]))
+
+
+
+############## fetch end #################
+
+########## change ratio begin ############
+
 
 def update_now_ratio(now_text):
     return [len(now_text[i]) for i in range(2)]
@@ -149,7 +212,7 @@ def change_ratio(origin, division ,ratio, mode):
     return now_text
 
 
-def test():
+def test_change_ratio():
     text = {
         "1_1😂1😂", "2_1😂1😂", "3_1😂1😂", "4_1😂1😂", "5_1😂1😂", "6_1😂1😂", "7_1😂1😂", "8_1😂1😂", "9_1😂1😂", "10_1😂1😂",
         "1_0😂0😂", "2_0😂0😂", "3_0😂0😂", "4_0😂0😂", "5_0😂0😂", "6_0😂0😂", "7_0😂0😂", "8_0😂0😂", "9_0😂0😂", "10_0😂0😂",
@@ -159,5 +222,9 @@ def test():
     print(res_text)
 
 
+############ change ratio end ############
+
+
 if __name__ == "__main__":
-    test()
+    test_fetch()
+    test_change_ratio()
