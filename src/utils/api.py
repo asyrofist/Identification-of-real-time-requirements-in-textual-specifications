@@ -4,6 +4,7 @@ import numpy as np
 
 ############## fetch begin ###############
 
+
 """
     TODO note: the doc must be save in directory "/files"
 """
