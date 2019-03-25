@@ -8,6 +8,7 @@ import numpy as np
     TODO note: the doc must be save in directory "/files"
 """
 
+
 def has_keyword(sentence, keywords):
     """
         @param sentence: string
@@ -20,6 +21,7 @@ def has_keyword(sentence, keywords):
             return True
     return False
 
+
 def get_total_text(doc_list, keywords):
     """
         @param doc_list: list of filename []
@@ -28,18 +30,18 @@ def get_total_text(doc_list, keywords):
     """
     total_list = []
     for doc in doc_list:
-        with open("files/"+str(doc), "rt", encoding="utf-8") as f:
+        with open("files/" + str(doc), "rt", encoding="utf-8") as f:
             total_list += [sentence.split('\n')[0] for sentence in f.readlines() if has_keyword(sentence, keywords)]
     return total_list
 
 
 def fetch(numberOfAllSentences, doc_list=[i for i in range(1, 49)], shuffle=False, keywords=[""]):
     """
-        @param numberOfAllSentences: 
+        @param numberOfAllSentences:
         @param doc_list: list of int, [1,2,3, ...]
         @param shuffle: boolean, true or false, decide whether shuffe the oeder of the sentences
         @param keywords: list of string, [keyword1, keyword2, ...], the keyword used to select sentence
-        @return: list of sentences, which are selected from the doc_list 
+        @return: list of sentences, which are selected from the doc_list
             type: list of string [string, string, ...] -> [sentence, sentence, ...]
     """
 
@@ -57,8 +59,7 @@ def fetch(numberOfAllSentences, doc_list=[i for i in range(1, 49)], shuffle=Fals
 
 
 def test_fetch():
-    print(fetch(10, [1,2]))
-
+    print(fetch(10, [1, 2]))
 
 
 ############## fetch end #################
@@ -76,8 +77,8 @@ def treat(origin):
         @return: {sentence : type}
             type:  map, {string : int}
     """
-    map = [sentence.split("😂") for sentence in origin]
-    return {m[0]: int(m[1]) for m in map}
+    map_to_type = [sentence.split("😂") for sentence in origin]
+    return {m[0]: int(m[1]) for m in map_to_type}
 
 
 def partition(text):
@@ -146,7 +147,7 @@ def ratio_equal(now_ratio, ratio, base_index, adjust_index):
         @return if now_ratio is equal than target ratio
             type: boolean
     """
-    return (Decimal(now_ratio[adjust_index]) / Decimal(now_ratio[base_index]) == 
+    return (Decimal(now_ratio[adjust_index]) / Decimal(now_ratio[base_index]) ==
             Decimal(ratio[adjust_index]) / Decimal(ratio[base_index]))
 
 
@@ -182,7 +183,7 @@ def adjust_over(now_ratio, ratio, now_text, typed_text, base_index, adjust_index
         add_list_size(now_text, typed_text, base_index)
 
 
-def change_ratio(origin, division ,ratio, mode):
+def change_ratio(origin, division, ratio, mode):
     """
         @param origin: list (of string), format is sentence😂type😂description
         @param ratio: list, [elem_1, elem_2]
@@ -213,12 +214,12 @@ def change_ratio(origin, division ,ratio, mode):
 
 
 def test_change_ratio():
-    text = {
+    text = [
         "1_1😂1😂", "2_1😂1😂", "3_1😂1😂", "4_1😂1😂", "5_1😂1😂", "6_1😂1😂", "7_1😂1😂", "8_1😂1😂", "9_1😂1😂", "10_1😂1😂",
         "1_0😂0😂", "2_0😂0😂", "3_0😂0😂", "4_0😂0😂", "5_0😂0😂", "6_0😂0😂", "7_0😂0😂", "8_0😂0😂", "9_0😂0😂", "10_0😂0😂",
         "1_2😂2😂", "2_2😂2😂", "3_2😂2😂", "4_2😂2😂", "5_2😂2😂", "6_2😂2😂", "7_2😂2😂", "8_2😂2😂", "9_2😂2😂", "10_2😂2😂",
-    }
-    res_text = change_ratio(text, [[0,1],[2]], [4, 1], "overSample")
+    ]
+    res_text = change_ratio(text, [[0, 1], [2]], [4, 1], "overSample")
     print(res_text)
 
 
