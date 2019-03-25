@@ -148,6 +148,7 @@ def change_ratio(origin, division ,ratio, mode):
             now_ratio = update_now_ratio(now_text)
     return now_text
 
+
 def test():
     text = {
         "1_1😂1😂", "2_1😂1😂", "3_1😂1😂", "4_1😂1😂", "5_1😂1😂", "6_1😂1😂", "7_1😂1😂", "8_1😂1😂", "9_1😂1😂", "10_1😂1😂",
@@ -156,6 +157,7 @@ def test():
     }
     res_text = change_ratio(text, [[0,1],[2]], [4, 1], "overSample")
     print(res_text)
+
 
 if __name__ == "__main__":
     test()
