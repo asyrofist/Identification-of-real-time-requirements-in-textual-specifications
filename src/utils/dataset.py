@@ -6,8 +6,8 @@ class Dataset(object):
     def __init__(self, pos_data: list, neg_data: list):
         """
         Init dataset
-        :param pos_data: positive data, list of positive sentences
-        :param neg_data: negative data, list of negative sentences
+        :param pos_data: positive data, list of positive sentences/features
+        :param neg_data: negative data, list of negative sentences/features
         """
         self.pos_data = pos_data
         self.neg_data = neg_data
