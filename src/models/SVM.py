@@ -1,24 +1,21 @@
-from base import BaseModel
+from .base import BaseModel
 import sklearn.svm as svm
 
 
 class SVMModel(BaseModel):
     model_type_list = {
         "SVM": svm.SVC,
-        "nuSVM":svm.NuSVC
+        "nuSVM": svm.NuSVC
     }
 
-    def __init__(self, author=None, name=None, type="SVM", **kwargs):
-        super.__init__(self, author=author, name=name, **kwargs)
+    def __init__(self, author=None, name=None, model_type="SVM", **kwargs):
+        super().__init__(author=author, name=name, **kwargs)
 
-        self.model = SVMModel.model_type_list[type](**kwargs)
+        self.model = SVMModel.model_type_list[model_type](**kwargs)
 
-    def _model_train(self, X, y, **kwargs):
-        partial = kwargs.get("partial", False)
-        if partial:
-            print("SVM does not support partial training, overwrite the model instead")
-        self.model.fit(X, y)
+    def _model_train(self, x, y, **kwargs):
+        self.model.fit(x, y)
 
-    def _estimate(self,X,**kwargs):
-        result = self.model.predict(X)
+    def _estimate(self, x, **kwargs):
+        result = self.model.predict(x)
         return result.tolist()

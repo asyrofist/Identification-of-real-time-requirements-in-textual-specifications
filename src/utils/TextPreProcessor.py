@@ -17,10 +17,10 @@ class TextPreProcessor(object):
 
     @staticmethod
     def get_default_stop_words():
-        include_list = [
+        include_list = {
             'above', 'after', 'afterwards', 'again', 'already', 'always', 'before', 'behind', 'below', 'between',
-            'beyond', 'can', 'cannot', 'could', 'last', 'then', 'under', 'until', 'up', 'upon', 'when', 'will',
-        ]
+            'beyond', 'can', 'cannot', 'could', 'last', 'then', 'under', 'until', 'up', 'upon', 'when', 'will', 'shall'
+        }
         if TextPreProcessor.default_stop_words is None:
             stop_words = spacy.load('en').Defaults.stop_words
             stop_words -= include_list
@@ -76,6 +76,7 @@ class TextPreProcessor(object):
                                  embedding_type: str = 'default'):
         """
         get word embedding of input sentence with certain mode
+
         :param sentence: input sentence string
         :param embedding_type: see embeddings_types
         :param stop_words: stop word list

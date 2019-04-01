@@ -31,8 +31,8 @@ class Dataset(object):
                                train_data, train_label,
                                evaluate_data, evaluate_label)
         """
-        pos = Dataset._split(self.pos_data, [0, 1], train, evaluation)
-        neg = Dataset._split(self.neg_data, [1, 0], train, evaluation)
+        pos = Dataset._split(self.pos_data, (0, 1), train, evaluation)
+        neg = Dataset._split(self.neg_data, (1, 0), train, evaluation)
         total = [a + b for a, b in zip(pos, neg)]
         total = [Dataset.shuffle(rand_seed, total[2 * i], total[2 * i + 1]) for i in range(3)]
         return total
@@ -58,9 +58,9 @@ class Dataset(object):
         train_data = data[:a]
         evaluate_data = data[a:b]
 
-        test_label = [label[:] for _ in range(size - b)]
-        train_label = [label[:] for _ in range(a)]
-        evaluate_label = [label[:] for _ in range(b - a)]
+        test_label = [label] * (size - b)
+        train_label = [label] * a
+        evaluate_label = [label] * (b - a)
         return test_data, test_label, train_data, train_label, evaluate_data, evaluate_label
 
     @staticmethod
@@ -86,13 +86,14 @@ def batch_generator(data, batch_size: int = 32, epochs: int = 50, shuffle: bool 
     :return: one batch one time
     """
     data_size = len(data)
-    n_batches_per_epoch = int((len(data) - 1) / batch_size) + 1
+    n_batches_per_epoch = (len(data) - 1) // batch_size + 1
     for epoch in range(epochs):
         if shuffle:
             shuffle_indices = np.random.permutation(np.arange(data_size))
             shuffled_data = data[shuffle_indices]
         else:
             shuffled_data = data
+
         for batch_num in range(n_batches_per_epoch):
             start_index = batch_num * batch_size
             end_index = min((batch_num + 1) * batch_size, data_size)
