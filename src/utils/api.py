@@ -3,11 +3,10 @@ from decimal import *
 import numpy as np
 from utils import *
 
-def fetch(numberOfAllSentences, doc_list=[i for i in range(1, 49)], shuffle=False, keywords=[""]):
+def fetch(numberOfAllSentences, doc_list=range(1, 49), keywords=[""]):
     """
         @param numberOfAllSentences:
         @param doc_list: list of int, [1,2,3, ...]
-        @param shuffle: boolean, true or false, decide whether shuffe the oeder of the sentences
         @param keywords: list of string, [keyword1, keyword2, ...], the keyword used to select sentence
         @return: list of sentences, which are selected from the doc_list
             type: list of string [string, string, ...] -> [sentence, sentence, ...]
@@ -37,10 +36,10 @@ def change_ratio(origin, division, ratio, mode):
         part2 += typed_text[i]
     now_text = [part1, part2]
     now_ratio = [len(now_text[0]), len(now_text[1])]
-    
+
     base = 0
     the_other = 1
-    
+
     if mode == "subSample":
         ChangeRatio.adjust_sub(now_ratio, ratio, now_text, base, the_other)
     elif mode == "overSample":
