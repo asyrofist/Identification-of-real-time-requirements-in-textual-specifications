@@ -118,18 +118,13 @@ class RatioChanger:
         if RatioChanger.ratio_low(now_ratio, ratio, base, the_other):
             random.shuffle(now_text[base])
             new_size = len(now_text[the_other]) * ratio[base] // ratio[the_other]
-            print(new_size)
             now_text[base] = now_text[base][:new_size]
             
-            print(len(now_text[base]), len(now_text[the_other]))
-
         elif RatioChanger.ratio_high(now_ratio, ratio, base, the_other):
             random.shuffle(now_text[the_other])
             new_size = len(now_text[base]) * ratio[the_other] // ratio[base]
-            print(new_size)
             now_text[the_other] = now_text[the_other][:new_size]
-            
-            print(len(now_text[base]), len(now_text[the_other]))
+
 
     @staticmethod
     def adjust_over(now_ratio, ratio, now_text, base=0, the_other=1):
