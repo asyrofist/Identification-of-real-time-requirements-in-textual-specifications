@@ -1,12 +1,17 @@
 from .base import BaseModel
-import sklearn.neighbors.classification as knn
+import sklearn.linear_model as lr
 
 
-class KNNModel(BaseModel):
-    def __init__(self, author=None, name=None, **kwargs):
+class LRModel(BaseModel):
+    model_type_list = {
+        "naive": lr.LogisticRegression,
+        "CV": lr.LogisticRegressionCV,
+    }
+
+    def __init__(self, author=None, name=None, model_type="naive", **kwargs):
         super().__init__(author=author, name=name, **kwargs)
 
-        self.model = knn.KNeighborsClassifier()
+        self.model = LRModel.model_type_list[model_type](**kwargs)
 
     def _model_train(self, data, **kwargs):
         x, y = self.get_data(data)
