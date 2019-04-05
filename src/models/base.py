@@ -54,8 +54,8 @@ class BaseModel(object):
             counter['TN'] += 1
 
     def generate_filename(self):
-        return "../data/temp/"+self.name + '_%s_%d_by_' % (
-            datetime.datetime.now().strftime('%Y_%m_%d_%H_%M_%S'), self.data_size) + self.author + '.csv'
+        return "../data/temp/" + self.name + '_%s_%d_by_' % (
+            datetime.datetime.now().strftime('%m_%d_%H_%M'), self.data_size) + self.author + '.csv'
 
     @staticmethod
     def _get_line(doc_results, doc):
@@ -81,7 +81,7 @@ class BaseModel(object):
             counter = doc_results[item[BaseModel.doc_index]]
             BaseModel.update_counter(counter, pred, item[BaseModel.label_index])
 
-        with open(self.generate_filename(), 'wt',newline="") as outfile:
+        with open(self.generate_filename(), 'wt', newline="") as outfile:
             output = csv.DictWriter(outfile, BaseModel.fields)
             output.writeheader()
             for doc in self.doc_list:

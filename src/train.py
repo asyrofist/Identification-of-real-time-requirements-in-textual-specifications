@@ -7,7 +7,7 @@ import time
 import numpy as np
 
 start_time = time.time()
-RAND_SEED = 777
+RAND_SEED = 1874647856
 SIZE = int(1E6)
 EMBEDDING_TYPE = 'default'
 FEATURE_MODE = 'word2vec'  # or 'tfidf', 'word2vec'
@@ -53,7 +53,7 @@ def change_inner_ratio(x, label):
     return x, label
 
 
-Database.dump_example(pos_sentences, neg_sentences, STOP_WORDS, FEATURE_MODE)
+# Database.dump_example(pos_sentences, neg_sentences, STOP_WORDS, FEATURE_MODE)
 pos, neg = Database.load_example(FEATURE_MODE)
 if FEATURE_MODE == 'word2vec':
     avg = lambda sentence: sum([item.vector for item in sentence]) / len(sentence)
@@ -69,7 +69,11 @@ print('Feature fetched! %ss' % (time.time() - start_time))
 print('pos ', len(pos))
 print('neg ', len(neg))
 
-model = NBModel(name='test', author='wang')
+model_name = "" + FEATURE_MODE
+if FEATURE_MODE == "word2vec":
+    model_name += "_" + EMBEDDING_TYPE
+model_name += "_" + str(RAND_SEED)
+model = NBModel(name=model_name, author='wang')
 train_data = [np.array(item).reshape(-1) for item in train_data]
 evaluate_data = [np.array(item).reshape(-1) for item in evaluate_data]
 model.train(train_data, train_label)
