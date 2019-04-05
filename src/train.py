@@ -27,8 +27,8 @@ for dtype in DIVISION[0]:
     neg_sentences += data[dtype]
 for dtype in DIVISION[1]:
     pos_sentences += data[dtype]
-print('Positive sentences ', len(pos_sentences))
-print('Negative sentences ', len(neg_sentences))
+# print('Positive sentences ', len(pos_sentences))
+# print('Negative sentences ', len(neg_sentences))
 
 
 def change_inner_ratio(x, label):
@@ -50,7 +50,7 @@ def change_inner_ratio(x, label):
     return x, label
 
 
-# Database.dump_example(pos_sentences, neg_sentences, STOP_WORDS, EMBEDDING_TYPE)
+Database.dump_example(pos_sentences, neg_sentences, STOP_WORDS, EMBEDDING_TYPE)
 pos, neg = Database.load_example(FEATURE_MODE)
 test_data, test_label, train_data, train_label, evaluate_data, evaluate_label = Dataset(list(pos), list(neg)).split(0.6, 0.2)
 test_data, test_label = change_inner_ratio(test_data, test_label)

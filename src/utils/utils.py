@@ -47,7 +47,7 @@ class Fetcher(object):
             except ValueError:
                 return -1
 
-        root = r'D:\ML\Projects\Identification-of-real-time-requirements-in-textual-specifications\data\doc_set'
+        root = r'..\data\doc_set'
         filenames = [os.path.join(dp, f) for dp, _, filenames in os.walk(root)
                      for f in filenames if is_capable(f, ['txt'])]
         filenames = [file for file in filenames if get_doc_index(file) in doc_list]
@@ -71,7 +71,7 @@ class RatioChanger:
         """
         # print(origin[0].split("😂"))
         map_to_type = [sentence.split("😂") for sentence in origin]
-        return [(m[3], int(m[1])) for m in map_to_type]
+        return [(m[3], int(m[1])) for m in map_to_type if not m[2]]
 
     @staticmethod
     def partition(text):
