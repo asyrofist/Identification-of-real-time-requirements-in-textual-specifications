@@ -1,4 +1,4 @@
-from utils import *
+from .utils import *
 
 
 def fetch(number_of_sentences: int, doc_list: tuple = tuple(range(1, 49)), keywords: list = None):
