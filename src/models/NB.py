@@ -8,8 +8,8 @@ class NBModel(BaseModel):
 
         self.model = nb.GaussianNB()
 
-    def _model_train(self, data, **kwargs):
-        x, y = self.get_data(data)
+    def _model_train(self, x, y, **kwargs):
+        y = [yy[1] for yy in y]
         partial = kwargs.pop("partial", False)
         if partial:
             self.model.partial_fit(x, y, **kwargs)

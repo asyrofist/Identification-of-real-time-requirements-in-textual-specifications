@@ -8,6 +8,8 @@ class BaseModel(object):
     doc_index = 1
     notation_index = 2
     label_index = 3
+    FALSE_LABEL = (1, 0)
+    TRUE_LABEL = (0, 1)
     fields = ['doc_id', 'precision', 'recall', 'accuracy']
 
     def __init__(self, author, name=None, **kwargs):
@@ -17,9 +19,9 @@ class BaseModel(object):
         self.doc_list = set()
         self.data_size = 0
 
-    def train(self, data, **kwargs):
-        self.data_size += len(data)
-        self._model_train(data, **kwargs)
+    def train(self, x, y, **kwargs):
+        self.data_size = len(x)
+        self._model_train(x, y, **kwargs)
         self.trained = True
 
     def get_data(self, data):
@@ -37,18 +39,18 @@ class BaseModel(object):
         raise NotImplementedError()
 
     @abc.abstractmethod
-    def _model_train(self, data, **kwargs):
+    def _model_train(self, x, y, **kwargs):
         raise NotImplementedError()
 
     @staticmethod
     def update_counter(counter, pred, label):
-        if pred == 1 and label == 1:
+        if pred == 1 and label == BaseModel.TRUE_LABEL:
             counter['TP'] += 1
-        if pred == 1 and label == 0:
+        if pred == 1 and label == BaseModel.FALSE_LABEL:
             counter['FP'] += 1
-        if pred == 0 and label == 1:
+        if pred == 0 and label == BaseModel.TRUE_LABEL:
             counter['FN'] += 1
-        if pred == 0 and label == 0:
+        if pred == 0 and label == BaseModel.FALSE_LABEL:
             counter['TN'] += 1
 
     def generate_filename(self):
@@ -70,6 +72,7 @@ class BaseModel(object):
             raise RuntimeError('The model is not trained yet.\nEvaluation will now terminate.')
 
         x, y = self.get_data(test_data)
+        y = [yy[1] for yy in y]
         estimation, score = self._estimate(x, y, **kwargs)
         doc_results = {doc: {'TP': 1, 'FP': 1, 'TN': 1, 'FN': 1}
                        for doc in self.doc_list}

@@ -39,7 +39,8 @@ print('pos ', len(pos))
 print('neg ', len(neg))
 
 model = NBModel(name='test', author='wang')
-data = [(np.array(sentence).reshape(-1), 1, "", 1) for sentence in pos]
-data += [(np.array(sentence).reshape(-1), 1, "", 0) for sentence in neg]
-model.train(data)
-model.evaluate(data)
+train_data = [np.array(item).reshape(-1) for item in train_data]
+evaluate_data = [np.array(item).reshape(-1) for item in evaluate_data]
+model.train(train_data, train_label)
+evaluate = list(zip(evaluate_data, [0] * len(evaluate_label), [""] * len(evaluate_label), evaluate_label))
+model.evaluate(evaluate)

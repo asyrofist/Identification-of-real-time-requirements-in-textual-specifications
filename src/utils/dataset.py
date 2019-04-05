@@ -34,7 +34,8 @@ class Dataset(object):
         pos = Dataset._split(self.pos_data, (0, 1), train, evaluation)
         neg = Dataset._split(self.neg_data, (1, 0), train, evaluation)
         total = [a + b for a, b in zip(pos, neg)]
-        total = [Dataset.shuffle(rand_seed, total[2 * i], total[2 * i + 1]) for i in range(3)]
+        for i in range(3):
+            Dataset.shuffle(rand_seed, total[2 * i], total[2 * i + 1])
         return total
 
     @staticmethod
