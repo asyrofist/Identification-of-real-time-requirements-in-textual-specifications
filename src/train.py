@@ -1,3 +1,6 @@
+from src.models.NB import NBModel
+from src.models.kNN import KNNModel
+from src.models.LR import LRModel
 from src.models.SVM import SVMModel
 from src.utils.api import *
 from src.utils.database import Database
@@ -7,16 +10,16 @@ import time
 import numpy as np
 
 start_time = time.time()
-RAND_SEED = 16555436
+model_type = SVMModel
+RAND_SEED = 1874647856
 SIZE = int(1E6)
 EMBEDDING_TYPE = 'default'
 FEATURE_MODE = 'word2vec'  # or 'tfidf', 'word2vec'
+CHANGE_RATIO_MODE = 'overSample'
 DOC_LIST = (1, 2, 4, 7, 11, 16, 19, 20, 21, 22, 25, 26, 30, 31, 32, 37, 39, 51, 53)
-# DOC_LIST = (25,)
 STOP_WORDS = TextPreProcessor.get_default_stop_words()
 DIVISION = [[0, 1], [2]]
 RATIO = [1, 1]
-CHANGE_RATIO_MODE = 'overSample'
 
 raw_sentences = fetch(number_of_sentences=SIZE, doc_list=DOC_LIST, seed=RAND_SEED)
 print('Total sentences: ', len(raw_sentences))
@@ -53,7 +56,7 @@ def change_inner_ratio(x, label):
     return x, label
 
 
-#Database.dump_example(pos_sentences, neg_sentences, STOP_WORDS, FEATURE_MODE)
+# Database.dump_example(pos_sentences, neg_sentences, STOP_WORDS, FEATURE_MODE)
 pos, neg = Database.load_example(FEATURE_MODE)
 if FEATURE_MODE == 'word2vec':
     avg = lambda sentence: sum([item.vector for item in sentence]) / len(sentence)
@@ -69,14 +72,11 @@ print('Feature fetched! %ss' % (time.time() - start_time))
 print('pos ', len(pos))
 print('neg ', len(neg))
 
-model_type = SVMModel
-
-model_name = model_type.__name__ +"_"+ FEATURE_MODE
+model_name = model_type.__name__ + "_" + FEATURE_MODE
 if FEATURE_MODE == "word2vec":
     model_name += "_" + EMBEDDING_TYPE
 model_name += "_" + str(RAND_SEED)
-
-model = model_type(name=model_name, author='wang')
+model = NBModel(name=model_name, author='wang')
 train_data = [np.array(item).reshape(-1) for item in train_data]
 evaluate_data = [np.array(item).reshape(-1) for item in evaluate_data]
 model.train(train_data, train_label)
