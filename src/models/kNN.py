@@ -2,7 +2,7 @@ from .base import BaseModel
 import sklearn.neighbors.classification as knn
 
 
-class KNNModel(BaseModel):
+class KNN(BaseModel):
     def __init__(self, author=None, name=None, **kwargs):
         super().__init__(author=author, name=name, **kwargs)
 

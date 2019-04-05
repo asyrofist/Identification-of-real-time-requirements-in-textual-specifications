@@ -1,7 +1,7 @@
-from src.models.NB import NBModel
-from src.models.kNN import KNNModel
-from src.models.LR import LRModel
-from src.models.SVM import SVMModel
+from src.models.NB import NB
+from src.models.kNN import KNN
+from src.models.LR import LR
+from src.models.SVM import SVM
 from src.utils.api import *
 from src.utils.database import Database
 from src.utils.TextPreProcessor import TextPreProcessor
@@ -10,7 +10,7 @@ import time
 import numpy as np
 
 start_time = time.time()
-model_type = SVMModel
+model_type = SVM
 RAND_SEED = 1874647856
 SIZE = int(1E6)
 EMBEDDING_TYPE = 'default'
@@ -75,8 +75,9 @@ print('neg ', len(neg))
 model_name = model_type.__name__ + "_" + FEATURE_MODE
 if FEATURE_MODE == "word2vec":
     model_name += "_" + EMBEDDING_TYPE
+
 model_name += "_" + str(RAND_SEED)
-model = NBModel(name=model_name, author='wang')
+model = model_type(name=model_name, author='wang')
 train_data = [np.array(item).reshape(-1) for item in train_data]
 evaluate_data = [np.array(item).reshape(-1) for item in evaluate_data]
 model.train(train_data, train_label)

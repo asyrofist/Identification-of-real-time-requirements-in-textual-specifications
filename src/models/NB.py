@@ -2,7 +2,7 @@ from .base import BaseModel
 import sklearn.naive_bayes as nb
 
 
-class NBModel(BaseModel):
+class NB(BaseModel):
     def __init__(self, author=None, name=None, **kwargs):
         super().__init__(author=author, name=name, **kwargs)
 
