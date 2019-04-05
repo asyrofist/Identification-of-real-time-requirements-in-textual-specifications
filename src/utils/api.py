@@ -1,12 +1,14 @@
-from .utils import *
+from utils import *
 
 
 def fetch(number_of_sentences: int, doc_list: tuple = tuple(range(1, 49)), keywords: list = None):
     """
-        @param number_of_sentences:
-        @param doc_list: list of int, [1,2,3, ...]
-        @param keywords: list of string, [keyword1, keyword2, ...], the keyword used to select sentence
-        @return: list of sentences, which are selected from the doc_list
+        fetch sentences from doc_list. (might with keywords)
+
+        :param number_of_sentences:
+        :param doc_list: list of int, [1,2,3, ...]
+        :param keywords: list of string, [keyword1, keyword2, ...], the keyword used to select sentence
+        :return: list of sentences, which are selected from the doc_list
             type: list of string [string, string, ...] -> [sentence, sentence, ...]
     """
     keywords = [str()] if keywords is None else keywords
@@ -18,11 +20,13 @@ def fetch(number_of_sentences: int, doc_list: tuple = tuple(range(1, 49)), keywo
 
 def change_ratio(origin, division, ratio, mode):
     """
-        @param origin: list (of string), format is sentence😂type😂description
-        @param ratio: list, [elem_1, elem_2]
-        @param division: list of list, [[], []]
-        @param mode: string, "subSample" or "oversample"
-        @return: text that suitable for the @param ratio
+        change the ratio of difference type of sentences 
+
+        :param origin: list (of string), format is sentence😂type😂description
+        :param ratio: list, [elem_1, elem_2]
+        :param division: list of list, [[], []]
+        :param mode: string, "subSample" or "oversample"
+        :return: text that suitable for the :param ratio
             type: same as origin
     """
     # text : map, from sentences to 0/1/2
@@ -85,10 +89,10 @@ def test_change_ratio():
         "1_2😂2😂", "2_2😂2😂", "3_2😂2😂", "4_2😂2😂", "5_2😂2😂", "6_2😂2😂", "7_2😂2😂", "8_2😂2😂", "9_2😂2😂",
         "10_2😂2😂",
     ]
-    print(change_ratio(text, [[0, 1], [2]], [4, 1], "overSample"))
-    print(change_ratio(text, [[0, 1], [2]], [4, 1], "subSample"))
+    print(change_ratio(text, [[0, 1], [2]], [13, 4], "overSample"))
+    print(change_ratio(text, [[0, 1], [2]], [13, 17], "subSample"))
 
 
 if __name__ == "__main__":
-    test_fetch()
+    #test_fetch()
     test_change_ratio()
