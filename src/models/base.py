@@ -20,6 +20,7 @@ class BaseModel(object):
     def train(self, data, **kwargs):
         self.data_size += len(data)
         self._model_train(data, **kwargs)
+        self.trained = True
 
     def get_data(self, data):
         x = []
