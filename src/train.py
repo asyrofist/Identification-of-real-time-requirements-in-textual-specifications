@@ -7,11 +7,11 @@ import time
 import numpy as np
 
 start_time = time.time()
-RAND_SEED = 0
-SIZE = 6000
+RAND_SEED = 777
+SIZE = int(1E6)
 EMBEDDING_TYPE = 'default'
-FEATURE_MODE = 'tfidf'  # or 'tfidf', 'word2vec'
-DOC_LIST = (1, 2, 4, 7, 11, 16, 19, 20, 21, 22, 25, 26, 30, 31, 32, 37, 39)
+FEATURE_MODE = 'word2vec'  # or 'tfidf', 'word2vec'
+DOC_LIST = (1, 2, 4, 7, 11, 16, 19, 20, 21, 22, 25, 26, 30, 31, 32, 37, 39, 51, 53)
 # DOC_LIST = (25,)
 STOP_WORDS = TextPreProcessor.get_default_stop_words()
 DIVISION = [[0, 1], [2]]
@@ -53,10 +53,15 @@ def change_inner_ratio(x, label):
     return x, label
 
 
-Database.dump_example(pos_sentences, neg_sentences, STOP_WORDS, EMBEDDING_TYPE)
+Database.dump_example(pos_sentences, neg_sentences, STOP_WORDS, FEATURE_MODE)
 pos, neg = Database.load_example(FEATURE_MODE)
-test_data, test_label, train_data, train_label, evaluate_data, evaluate_label = Dataset(list(pos), list(neg)).split(0.6,
-                                                                                                                    0.2)
+if FEATURE_MODE == 'word2vec':
+    avg = lambda sentence: sum([item.vector for item in sentence]) / len(sentence)
+    pos = [avg(sentence) for sentence in pos if len(sentence)]
+    neg = [avg(sentence) for sentence in neg if len(sentence)]
+
+test_data, test_label, train_data, train_label, evaluate_data, evaluate_label = \
+    Dataset(list(pos), list(neg)).split(0.6, 0.35, RAND_SEED)
 test_data, test_label = change_inner_ratio(test_data, test_label)
 train_data, train_label = change_inner_ratio(train_data, train_label)
 evaluate_data, evaluate_label = change_inner_ratio(evaluate_data, evaluate_label)

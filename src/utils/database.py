@@ -47,7 +47,7 @@ class Database(object):
         return data
 
     @staticmethod
-    def dump_example(pos: list, neg: list, stop_words: set, embedding_type: str = 'default'):
+    def dump_example(pos: list, neg: list, stop_words: set, mode='word2vec', embedding_type: str = 'default'):
         """
         Change input data to features and store them in files
 
@@ -56,8 +56,12 @@ class Database(object):
         :param stop_words: set of stop_words
         :param embedding_type: type of word embedding, must be in ['default', 'google_word2vec']
         """
-        Database.dump_tf_idf_example(pos, neg, stop_words)
-        Database.dump_word2vec_example(pos, neg, stop_words, embedding_type)
+        if mode == 'word2vec':
+            Database.dump_word2vec_example(pos, neg, stop_words, embedding_type)
+        elif mode == 'tfidf':
+            Database.dump_tf_idf_example(pos, neg, stop_words)
+        else:
+            raise NotImplementedError('Mode', mode, 'not implemented')
 
     @staticmethod
     def _load_tf_idf_example():

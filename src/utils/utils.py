@@ -56,6 +56,7 @@ class Fetcher(object):
             with open(name, "rt", encoding="utf-8") as f:
                 total_list += [sentence.strip() for sentence in f.readlines() if
                                Fetcher.has_keyword(sentence, keywords)]
+        total_list = [sentence.lower() for sentence in total_list if len(sentence)]
         return total_list
 
 
