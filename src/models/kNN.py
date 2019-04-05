@@ -8,8 +8,8 @@ class KNNModel(BaseModel):
 
         self.model = knn.KNeighborsClassifier()
 
-    def _model_train(self, data, **kwargs):
-        x, y = self.get_data(data)
+    def _model_train(self, x, y, **kwargs):
+        y = [yy[1] for yy in y]
         self.model.fit(x, y)
 
     def _estimate(self, x, y, **kwargs):

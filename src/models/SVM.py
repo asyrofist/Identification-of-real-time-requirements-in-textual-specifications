@@ -13,8 +13,8 @@ class SVMModel(BaseModel):
 
         self.model = SVMModel.model_type_list[model_type](**kwargs)
 
-    def _model_train(self, data, **kwargs):
-        x, y = self.get_data(data)
+    def _model_train(self, x, y, **kwargs):
+        y = [yy[1] - yy[0] for yy in y]
         self.model.fit(x, y)
 
     def _estimate(self, x, y, **kwargs):
