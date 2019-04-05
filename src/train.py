@@ -30,10 +30,32 @@ for dtype in DIVISION[1]:
 print('Positive sentences ', len(pos_sentences))
 print('Negative sentences ', len(neg_sentences))
 
+
+def change_inner_ratio(x, label):
+    pos_label = (0, 1)
+    neg_label = (1, 0)
+    data = list(zip(x, label))
+    pos, neg = [], []
+    for v, lab in data:
+        if lab == pos_label:
+            pos.append((v, lab))
+        elif lab == neg_label:
+            neg.append((v, lab))
+        else:
+            raise ValueError('Unknown label', lab)
+    pos, neg = change_feature_ratio(pos, neg, RATIO, mode=CHANGE_RATIO_MODE)
+    data = pos + neg
+    random.Random(0).shuffle(data)
+    x, label = list(zip(*data))
+    return x, label
+
+
 # Database.dump_example(pos_sentences, neg_sentences, STOP_WORDS, EMBEDDING_TYPE)
 pos, neg = Database.load_example(FEATURE_MODE)
-pos, neg = change_feature_ratio(list(pos), list(neg), RATIO, mode=CHANGE_RATIO_MODE)
-test_data, test_label, train_data, train_label, evaluate_data, evaluate_label = Dataset(pos, neg).split(0.6, 0.2)
+test_data, test_label, train_data, train_label, evaluate_data, evaluate_label = Dataset(list(pos), list(neg)).split(0.6, 0.2)
+test_data, test_label = change_inner_ratio(test_data, test_label)
+train_data, train_label = change_inner_ratio(train_data, train_label)
+evaluate_data, evaluate_label = change_inner_ratio(evaluate_data, evaluate_label)
 print('Feature fetched! %ss' % (time.time() - start_time))
 print('pos ', len(pos))
 print('neg ', len(neg))
