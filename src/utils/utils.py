@@ -71,7 +71,7 @@ class RatioChanger:
         """
         # print(origin[0].split("😂"))
         map_to_type = [sentence.split("😂") for sentence in origin]
-        return {m[3]: int(m[1]) for m in map_to_type}
+        return [(m[3], int(m[1])) for m in map_to_type]
 
     @staticmethod
     def partition(text):
@@ -82,9 +82,9 @@ class RatioChanger:
         :return: list of list
         """
         return [
-            [key for key in text.keys() if text[key] == 0],
-            [key for key in text.keys() if text[key] == 1],
-            [key for key in text.keys() if text[key] == 2]
+            [key for key, type in text if type == 0],
+            [key for key, type in text if type == 1],
+            [key for key, type in text if type == 2]
         ]
 
     @staticmethod
