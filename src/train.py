@@ -13,6 +13,7 @@ start_time = time.time()
 model_type = SVM
 RAND_SEED = 1874647856
 SIZE = int(1E6)
+BETA = 1
 EMBEDDING_TYPE = 'default'
 FEATURE_MODE = 'word2vec'  # or 'tfidf', 'word2vec'
 CHANGE_RATIO_MODE = 'overSample'
@@ -82,4 +83,4 @@ train_data = [np.array(item).reshape(-1) for item in train_data]
 evaluate_data = [np.array(item).reshape(-1) for item in evaluate_data]
 model.train(train_data, train_label)
 evaluate = list(zip(evaluate_data, [0] * len(evaluate_label), [""] * len(evaluate_label), evaluate_label))
-model.evaluate(evaluate)
+model.evaluate(evaluate,beta=BETA)

@@ -10,7 +10,7 @@ class BaseModel(object):
     label_index = 3
     FALSE_LABEL = (1, 0)
     TRUE_LABEL = (0, 1)
-    fields = ['doc_id', 'precision', 'recall', 'accuracy']
+    fields = ['doc_id', 'precision', 'recall', 'accuracy', 'fbeta_score']
 
     def __init__(self, author, name=None, **kwargs):
         self.author = author
@@ -58,18 +58,25 @@ class BaseModel(object):
             datetime.datetime.now().strftime('%m_%d_%H_%M'), self.data_size) + self.author + '.csv'
 
     @staticmethod
-    def _get_line(doc_results, doc):
+    def _get_line(doc_results, doc, beta):
         counter = doc_results[doc]
         TP, FP, TN, FN = counter['TP'], counter['FP'], counter['TN'], counter['FN']
+        precision = TP / (TP + FP)
+        recall = TP / (TP + FN)
+        accuracy = (TP + TN) / (TP + FP + TN + FN)
+        fbeta_score = (1 + beta ** 2) * (precision * recall) / (beta ** 2 * precision + recall)
         line = {BaseModel.fields[0]: doc,
-                BaseModel.fields[1]: TP / (TP + FP),
-                BaseModel.fields[2]: TP / (TP + FN),
-                BaseModel.fields[3]: (TP + TN) / (TP + FP + TN + FN)}
+                BaseModel.fields[1]: precision,
+                BaseModel.fields[2]: recall,
+                BaseModel.fields[3]: accuracy,
+                BaseModel.fields[4]: fbeta_score}
         return line
 
     def evaluate(self, test_data, **kwargs):
         if not self.trained:
             raise RuntimeError('The model is not trained yet.\nEvaluation will now terminate.')
+
+        beta = kwargs.pop("beta", 1)
 
         x, y = self.get_data(test_data)
         y = [yy[1] for yy in y]
@@ -85,6 +92,6 @@ class BaseModel(object):
             output = csv.DictWriter(outfile, BaseModel.fields)
             output.writeheader()
             for doc in self.doc_list:
-                line = BaseModel._get_line(doc_results, doc)
+                line = BaseModel._get_line(doc_results, doc, beta)
                 output.writerow(line)
         return doc_results, score
