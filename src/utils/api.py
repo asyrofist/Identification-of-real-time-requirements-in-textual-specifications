@@ -49,7 +49,27 @@ def change_ratio(origin, division, ratio, mode):
     elif mode == "overSample":
         RatioChanger.adjust_over(now_ratio, ratio, now_text, base, the_other)
 
-    return now_text[0] + now_text[1]
+    now_text = now_text[0] + now_text[1]
+    text_0 = [sentence for sentence in now_text if text[sentence] == 0]
+    text_1 = [sentence for sentence in now_text if text[sentence] == 1]
+    text_2 = [sentence for sentence in now_text if text[sentence] == 2]
+    return text_0, text_1, text_2
+
+
+def change_feature_ratio(pos, neg, ratio, mode):
+    pos = pos.copy()
+    neg = neg.copy()
+    now_ratio = [len(pos), len(neg)]
+    now_text = [pos, neg]
+    base = 0
+    the_other = 1
+
+    if mode == "subSample":
+        RatioChanger.adjust_sub(now_ratio, ratio, now_text, base, the_other)
+    elif mode == "overSample":
+        RatioChanger.adjust_over(now_ratio, ratio, now_text, base, the_other)
+
+    return now_text[0], now_text[1]
 
 
 def test_fetch():

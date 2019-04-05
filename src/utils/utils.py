@@ -1,5 +1,6 @@
 import random
 from decimal import *
+import os
 
 
 class Fetcher(object):
@@ -25,9 +26,33 @@ class Fetcher(object):
                  type: list of string [string, string, ...] -> [sentence, sentence, ...]
         """
         total_list = []
-        for doc in doc_list:
-            with open(r"/src/data/" + str(doc), "rt", encoding="utf-8") as f:
-                total_list += [sentence.split('\n')[0] for sentence in f.readlines() if
+
+        def is_capable(filename: str, type_list: list):
+            filename = filename.lower()
+            for t in type_list:
+                t = t.lower()
+                if filename.endswith(t):
+                    return True
+            return False
+
+        def get_doc_index(path):
+            # print(path)
+            filename = os.path.basename(path)
+            index = filename.split('#')[0]
+            try:
+                index = int(index)
+                return index
+            except ValueError:
+                return -1
+
+        root = r'D:\ML\Projects\Identification-of-real-time-requirements-in-textual-specifications\data\doc_set'
+        filenames = [os.path.join(dp, f) for dp, _, filenames in os.walk(root)
+                     for f in filenames if is_capable(f, ['txt'])]
+        filenames = [file for file in filenames if get_doc_index(file) in doc_list]
+
+        for name in filenames:
+            with open(name, "rt", encoding="utf-8") as f:
+                total_list += [sentence.strip() for sentence in f.readlines() if
                                Fetcher.has_keyword(sentence, keywords)]
         return total_list
 
@@ -40,8 +65,9 @@ class RatioChanger:
         @return: {sentence : type}
             type:  map, {string : int}
         """
+        # print(origin[0].split("😂"))
         map_to_type = [sentence.split("😂") for sentence in origin]
-        return {m[0]: int(m[1]) for m in map_to_type}
+        return {m[3]: int(m[1]) for m in map_to_type}
 
     @staticmethod
     def partition(text):
@@ -98,12 +124,13 @@ class RatioChanger:
     @staticmethod
     def adjust_sub(now_ratio, ratio, now_text, base=0, the_other=1):
         """
-        @param now_ratio: [int, int], target text's ratio
-        @param ratio: [int, int], target ratio
-        @param now_text: [[string,..], [string,..]], target text
-        @param base:
-        @param the_other: int, used to compare strings' ratio in this two index
-        @return: nothing adjust ratio in subsample mode
+        adjust ratio in subsample mode
+        :param now_ratio: [int, int], target text's ratio
+        :param ratio: [int, int], target ratio
+        :param now_text: [[string,..], [string,..]], target text
+        :param base:
+        :param the_other: int, used to compare strings' ratio in this two index
+        :return: None
         """
         if RatioChanger.ratio_low(now_ratio, ratio, base, the_other):
             random.shuffle(now_text[base])
@@ -114,24 +141,28 @@ class RatioChanger:
             random.shuffle(now_text[the_other])
             new_size = len(now_text[base]) * ratio[the_other] // ratio[base]
             now_text[the_other] = now_text[the_other][:new_size]
-        return now_text
 
     @staticmethod
     def adjust_over(now_ratio, ratio, now_text, base=0, the_other=1):
         """
-        @param now_ratio: [int, int], target text's ratio
-        @param ratio: [int, int], target ratio
-        @param now_text: [[string,..], [string,..]], target text
-        @param base:
-        @param the_other: int, used to compare strings' ratio in this two index
-        @return: nothing adjust ratio in oversample mode
+        adjust ratio in oversample mode
+        :param now_ratio: [int, int], target text's ratio
+        :param ratio: [int, int], target ratio
+        :param now_text: [[string,..], [string,..]], target text
+        :param base:
+        :param the_other: int, used to compare strings' ratio in this two index
+        :return: None
         """
         if RatioChanger.ratio_low(now_ratio, ratio, base, the_other):
             random.shuffle(now_text[the_other])
             extend = len(now_text[base]) * ratio[the_other] // ratio[base]
-            now_text[the_other] += now_text[the_other][:extend]
+            leng = len(now_text[the_other])
+            now_text[the_other] *= extend // leng
+            now_text[the_other] += now_text[the_other][:extend % leng]
 
         elif RatioChanger.ratio_high(now_ratio, ratio, base, the_other):
             random.shuffle(now_text[base])
             extend = len(now_text[the_other]) * ratio[base] // ratio[the_other]
-            now_text[base] += now_text[base][:extend]
+            leng = len(now_text[base])
+            now_text[base] *= extend // leng
+            now_text[base] += now_text[base][:extend % leng]

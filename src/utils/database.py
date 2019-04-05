@@ -56,7 +56,7 @@ class Database(object):
         :param stop_words: set of stop_words
         :param embedding_type: type of word embedding, must be in ['default', 'google_word2vec']
         """
-        Database.dump_tf_idf_example(pos + neg, stop_words)
+        Database.dump_tf_idf_example(pos, neg, stop_words)
         Database.dump_word2vec_example(pos, neg, stop_words, embedding_type)
 
     @staticmethod
@@ -69,7 +69,8 @@ class Database(object):
         """
         path = Database.example_path + '.tf_idf'
         try:
-            return sparse.load_npz(path)
+            return (pickle.load(open(path + '.pos', 'rb')),
+                    pickle.load(open(path + '.neg', 'rb')))
         except IOError as e:
             print('please dump your example first!')
             raise e
@@ -85,23 +86,29 @@ class Database(object):
         """
         path = Database.example_path + '.word2vec'
         try:
-            pos, neg = pickle.load(path)
+            pos, neg = pickle.load(open(path, 'rb'))
             return pos, neg
         except IOError as e:
             print('please dump your example first!')
             raise e
 
     @staticmethod
-    def dump_tf_idf_example(corpus: list, stop_words: set):
+    def dump_tf_idf_example(pos: list, neg: list, stop_words: set):
         """
         Change corpus to feature and store features in example_file
 
-        :param corpus: list of input sentences
+        :param pos: list of positive sentences
+        :param neg: list of negative sentences
         :param stop_words: set of stop words
         """
-        tf_idf = TextPreProcessor.get_tf_idf_matrix(corpus, stop_words)
         path = Database.example_path + '.tf_idf'
-        sparse.save_npz(path, tf_idf)
+        tf_idf = TextPreProcessor.get_tf_idf_matrix(neg + pos, stop_words).todense()
+        neg = tf_idf[:len(neg)]
+        pos = tf_idf[len(neg):]
+        # print(pos)
+        pickle.dump(neg, open(path + '.neg', 'wb'))
+        pickle.dump(pos, open(path + '.pos', 'wb'))
+        print('TF-IDF dumped')
 
     @staticmethod
     def dump_word2vec_example(pos: list, neg: list, stop_words: set, embedding_type: str):
@@ -123,4 +130,4 @@ class Database(object):
 
         data = [pos_data, neg_data]
         path = Database.example_path + '.word2vec'
-        pickle.dump(data, path)
+        pickle.dump(data, open(path, 'wb'))

@@ -9,6 +9,12 @@ embeddings_types = [
 google_word2vec_path = './data/word_embedding/GoogleNews-vectors-negative300.bin'
 
 
+class Token(object):
+    def __init__(self, text, vector):
+        self.text = text
+        self.vector = vector
+
+
 class TextPreProcessor(object):
     nlp = None
     nlp_type = None
@@ -48,26 +54,30 @@ class TextPreProcessor(object):
             if TextPreProcessor.nlp_type != 'large':
                 TextPreProcessor.nlp_type = 'large'
                 TextPreProcessor.nlp = spacy.load('en_core_web_lg')
+                print('NLP object loaded!')
         elif embedding == 'google_word2vec':
             if TextPreProcessor.nlp_type != 'small':
                 TextPreProcessor.nlp_type = 'small'
                 TextPreProcessor.nlp = spacy.load('en_core_web_sm')
+                print('NLP object loaded!')
         else:
             raise NotImplementedError('embedding mode {} not supported'.format(embedding))
+
 
     @staticmethod
     def get_google_word2vec(tokens: list):
         """
         add google word2vec embedding (300d) to tok as tok.vector
-        :param tokens: list of tokens
+        :param tokens: list of word text
         :return: list of tokens with word embeddings
         """
         if TextPreProcessor.google_embeddings is None:
             TextPreProcessor.google_embeddings = gensim.models.KeyedVectors.load_word2vec_format(google_word2vec_path,
                                                                                                  binary=True)
-        for tok in tokens:
-            tok.vector = TextPreProcessor.google_embeddings[tok.text]
-            tok.has_vector = True
+
+        embeddings = TextPreProcessor.google_embeddings
+        embeddings = [embeddings[text] for text in tokens]
+        tokens = [Token(text, vector) for text, vector in zip(tokens, embeddings)]
         return tokens
 
     @staticmethod
@@ -88,9 +98,17 @@ class TextPreProcessor(object):
         tokens = list(doc)
         tokens = [tok for tok in tokens if tok.text not in stop_words]
 
-        if embeddings_types == 'google_word2vec':
+        if embedding_type == 'default':
+            embeddings = [tok.vector for tok in tokens]
+            tokens = [tok.text for tok in tokens]
+            tokens = [Token(text, vector) for text, vector in zip(tokens, embeddings)]
+        elif embedding_type == 'google_word2vec':
+            tokens = [tok.text for tok in tokens]
             tokens = TextPreProcessor.get_google_word2vec(tokens)
+        else:
+            raise NotImplementedError("Embedding type not implemented")
 
+        # print('Word2vec Finished!')
         return tokens
 
     @staticmethod
@@ -106,4 +124,5 @@ class TextPreProcessor(object):
 
         tf_idf_vectorizer = TfidfVectorizer(stop_words=stop_words)
         tf_idf_matrix = tf_idf_vectorizer.fit_transform(corpus)
+        print("TF-IDF calculated")
         return tf_idf_matrix
