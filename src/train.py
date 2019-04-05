@@ -2,6 +2,7 @@ from src.models.NB import NBModel
 from src.utils.api import *
 from src.utils.database import Database
 from src.utils.TextPreProcessor import TextPreProcessor
+from src.utils.dataset import Dataset
 import time
 import numpy as np
 
@@ -29,15 +30,16 @@ for dtype in DIVISION[1]:
 print('Positive sentences ', len(pos_sentences))
 print('Negative sentences ', len(neg_sentences))
 
-#Database.dump_example(pos_sentences, neg_sentences, STOP_WORDS, EMBEDDING_TYPE)
+# Database.dump_example(pos_sentences, neg_sentences, STOP_WORDS, EMBEDDING_TYPE)
 pos, neg = Database.load_example(FEATURE_MODE)
 pos, neg = change_feature_ratio(list(pos), list(neg), RATIO, mode=CHANGE_RATIO_MODE)
+test_data, test_label, train_data, train_label, evaluate_data, evaluate_label = Dataset(pos, neg).split(0.6, 0.2)
 print('Feature fetched! %ss' % (time.time() - start_time))
 print('pos ', len(pos))
 print('neg ', len(neg))
 
-model = NBModel(name='test',author='wang')
-data = [(np.array(sentence).reshape(-1),1,"",1) for sentence in pos]
-data += [(np.array(sentence).reshape(-1),1,"",0) for sentence in neg]
+model = NBModel(name='test', author='wang')
+data = [(np.array(sentence).reshape(-1), 1, "", 1) for sentence in pos]
+data += [(np.array(sentence).reshape(-1), 1, "", 0) for sentence in neg]
 model.train(data)
 model.evaluate(data)
