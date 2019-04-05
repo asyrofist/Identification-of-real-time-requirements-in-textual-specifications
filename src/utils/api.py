@@ -1,26 +1,27 @@
 from .utils import *
 
 
-def fetch(number_of_sentences: int, doc_list: tuple = tuple(range(1, 49)), keywords: list = None):
+def fetch(number_of_sentences: int, doc_list: tuple = tuple(range(1, 49)), keywords: list = None, seed=0):
     """
         fetch sentences from doc_list. (might with keywords)
 
         :param number_of_sentences:
         :param doc_list: list of int, [1,2,3, ...]
         :param keywords: list of string, [keyword1, keyword2, ...], the keyword used to select sentence
+        :param seed: rand seed
         :return: list of sentences, which are selected from the doc_list
             type: list of string [string, string, ...] -> [sentence, sentence, ...]
     """
     keywords = [str()] if keywords is None else keywords
     text = Fetcher.get_total_text(doc_list, keywords)
-    random.shuffle(text)
+    random.Random(seed).shuffle(text)
 
     return text[:number_of_sentences]
 
 
-def change_ratio(origin, division, ratio, mode):
+def change_ratio(origin, division, ratio, mode, seed=0):
     """
-        change the ratio of difference type of sentences 
+        change the ratio of difference type of sentences
 
         :param origin: list (of string), format is sentence😂type😂description
         :param ratio: list, [elem_1, elem_2]
@@ -49,9 +50,9 @@ def change_ratio(origin, division, ratio, mode):
     the_other = 1
 
     if mode == "subSample":
-        RatioChanger.adjust_sub(now_ratio, ratio, now_text, base, the_other)
+        RatioChanger.adjust_sub(now_ratio, ratio, now_text, base, the_other, seed)
     elif mode == "overSample":
-        RatioChanger.adjust_over(now_ratio, ratio, now_text, base, the_other)
+        RatioChanger.adjust_over(now_ratio, ratio, now_text, base, the_other, seed)
 
     now_text = now_text[0] + now_text[1]
     text_0 = [sentence for sentence in now_text if text[sentence] == 0]
@@ -60,7 +61,7 @@ def change_ratio(origin, division, ratio, mode):
     return text_0, text_1, text_2
 
 
-def change_feature_ratio(pos, neg, ratio, mode):
+def change_feature_ratio(pos, neg, ratio, mode, seed=0):
     pos = pos.copy()
     neg = neg.copy()
     now_ratio = [len(pos), len(neg)]
@@ -69,9 +70,9 @@ def change_feature_ratio(pos, neg, ratio, mode):
     the_other = 1
 
     if mode == "subSample":
-        RatioChanger.adjust_sub(now_ratio, ratio, now_text, base, the_other)
+        RatioChanger.adjust_sub(now_ratio, ratio, now_text, base, the_other, seed)
     elif mode == "overSample":
-        RatioChanger.adjust_over(now_ratio, ratio, now_text, base, the_other)
+        RatioChanger.adjust_over(now_ratio, ratio, now_text, base, the_other, seed)
 
     return now_text[0], now_text[1]
 
@@ -94,5 +95,5 @@ def test_change_ratio():
 
 
 if __name__ == "__main__":
-    #test_fetch()
+    # test_fetch()
     test_change_ratio()

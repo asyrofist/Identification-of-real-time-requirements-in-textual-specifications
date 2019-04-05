@@ -7,7 +7,8 @@ import time
 import numpy as np
 
 start_time = time.time()
-SIZE = 4000
+RAND_SEED = 0
+SIZE = 6000
 EMBEDDING_TYPE = 'default'
 FEATURE_MODE = 'tfidf'  # or 'tfidf', 'word2vec'
 DOC_LIST = (1, 2, 4, 7, 11, 16, 19, 20, 21, 22, 25, 26, 30, 31, 32, 37, 39)
@@ -17,7 +18,7 @@ DIVISION = [[0, 1], [2]]
 RATIO = [1, 1]
 CHANGE_RATIO_MODE = 'overSample'
 
-raw_sentences = fetch(number_of_sentences=SIZE, doc_list=DOC_LIST)
+raw_sentences = fetch(number_of_sentences=SIZE, doc_list=DOC_LIST, seed=RAND_SEED)
 print('Total sentences: ', len(raw_sentences))
 
 data = RatioChanger.partition(RatioChanger.get_map(raw_sentences))
@@ -27,6 +28,8 @@ for dtype in DIVISION[0]:
     neg_sentences += data[dtype]
 for dtype in DIVISION[1]:
     pos_sentences += data[dtype]
+
+
 # print('Positive sentences ', len(pos_sentences))
 # print('Negative sentences ', len(neg_sentences))
 
@@ -43,7 +46,7 @@ def change_inner_ratio(x, label):
             neg.append((v, lab))
         else:
             raise ValueError('Unknown label', lab)
-    pos, neg = change_feature_ratio(pos, neg, RATIO, mode=CHANGE_RATIO_MODE)
+    pos, neg = change_feature_ratio(pos, neg, RATIO, mode=CHANGE_RATIO_MODE, seed=RAND_SEED)
     data = pos + neg
     random.Random(0).shuffle(data)
     x, label = list(zip(*data))
@@ -52,7 +55,8 @@ def change_inner_ratio(x, label):
 
 Database.dump_example(pos_sentences, neg_sentences, STOP_WORDS, EMBEDDING_TYPE)
 pos, neg = Database.load_example(FEATURE_MODE)
-test_data, test_label, train_data, train_label, evaluate_data, evaluate_label = Dataset(list(pos), list(neg)).split(0.6, 0.2)
+test_data, test_label, train_data, train_label, evaluate_data, evaluate_label = Dataset(list(pos), list(neg)).split(0.6,
+                                                                                                                    0.2)
 test_data, test_label = change_inner_ratio(test_data, test_label)
 train_data, train_label = change_inner_ratio(train_data, train_label)
 evaluate_data, evaluate_label = change_inner_ratio(evaluate_data, evaluate_label)

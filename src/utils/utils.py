@@ -130,7 +130,7 @@ class RatioChanger:
                 Decimal(ratio[adjust_index]) / Decimal(ratio[base_index]))
 
     @staticmethod
-    def adjust_sub(now_ratio, ratio, now_text, base=0, the_other=1):
+    def adjust_sub(now_ratio, ratio, now_text, base=0, the_other=1, seed=0):
         """
         adjust ratio in subsample mode
         :param now_ratio: [int, int], target text's ratio
@@ -141,35 +141,36 @@ class RatioChanger:
         :return: None
         """
         if RatioChanger.ratio_low(now_ratio, ratio, base, the_other):
-            random.shuffle(now_text[base])
+            random.Random(seed).shuffle(now_text[base])
             new_size = len(now_text[the_other]) * ratio[base] // ratio[the_other]
             now_text[base] = now_text[base][:new_size]
 
         elif RatioChanger.ratio_high(now_ratio, ratio, base, the_other):
-            random.shuffle(now_text[the_other])
+            random.Random(seed).shuffle(now_text[the_other])
             new_size = len(now_text[base]) * ratio[the_other] // ratio[base]
             now_text[the_other] = now_text[the_other][:new_size]
 
     @staticmethod
-    def adjust_over(now_ratio, ratio, now_text, base=0, the_other=1):
+    def adjust_over(now_ratio, ratio, now_text, base=0, the_other=1, seed=0):
         """
         adjust ratio in oversample mode
         :param now_ratio: [int, int], target text's ratio
         :param ratio: [int, int], target ratio
         :param now_text: [[string,..], [string,..]], target text
         :param base:
+        :param seed
         :param the_other: int, used to compare strings' ratio in this two index
         :return: None
         """
         if RatioChanger.ratio_low(now_ratio, ratio, base, the_other):
-            random.shuffle(now_text[the_other])
+            random.Random(seed).shuffle(now_text[the_other])
             extend = len(now_text[base]) * ratio[the_other] // ratio[base]
             leng = len(now_text[the_other])
             now_text[the_other] *= extend // leng
             now_text[the_other] += now_text[the_other][:extend % leng]
 
         elif RatioChanger.ratio_high(now_ratio, ratio, base, the_other):
-            random.shuffle(now_text[base])
+            random.Random(seed).shuffle(now_text[base])
             extend = len(now_text[the_other]) * ratio[base] // ratio[the_other]
             leng = len(now_text[base])
             now_text[base] *= extend // leng
