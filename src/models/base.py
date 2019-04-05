@@ -19,8 +19,7 @@ class BaseModel(object):
 
     def train(self, data, **kwargs):
         self.data_size += len(data)
-        x, y = self.get_data(data)
-        self._model_train(x, y, **kwargs)
+        self._model_train(data, **kwargs)
 
     def get_data(self, data):
         x = []
@@ -33,11 +32,11 @@ class BaseModel(object):
         return x, y
 
     @abc.abstractmethod
-    def _estimate(self, x, **kwargs):
+    def _estimate(self, x, y, **kwargs):
         raise NotImplementedError()
 
     @abc.abstractmethod
-    def _model_train(self, x, y, **kwargs):
+    def _model_train(self, data, **kwargs):
         raise NotImplementedError()
 
     @staticmethod
@@ -69,8 +68,8 @@ class BaseModel(object):
         if not self.trained:
             raise RuntimeError('The model is not trained yet.\nEvaluation will now terminate.')
 
-        x, _ = self.get_data(test_data)
-        estimation = self._estimate(x, **kwargs)
+        x, y = self.get_data(test_data)
+        estimation, score = self._estimate(x, y, **kwargs)
         doc_results = {doc: {'TP': 1, 'FP': 1, 'TN': 1, 'FN': 1}
                        for doc in self.doc_list}
 
@@ -83,4 +82,4 @@ class BaseModel(object):
             for doc in self.doc_list:
                 line = BaseModel._get_line(doc_results, doc)
                 output.writerow(line)
-        return doc_results
+        return doc_results, score

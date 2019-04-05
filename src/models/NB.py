@@ -8,13 +8,15 @@ class NBModel(BaseModel):
 
         self.model = nb.GaussianNB()
 
-    def _model_train(self, x, y, **kwargs):
+    def _model_train(self, data, **kwargs):
+        x, y = self.get_data(data)
         partial = kwargs.pop("partial", False)
         if partial:
             self.model.partial_fit(x, y, **kwargs)
         else:
             self.model.fit(x, y, **kwargs)
 
-    def _estimate(self, x, **kwargs):
+    def _estimate(self, x, y, **kwargs):
         result = self.model.predict(x)
-        return result.tolist()
+        score = self.model.score(x, y)
+        return result.tolist(), score
