@@ -1,0 +1,44 @@
+😂0😂😂 The purpose of the FRS is to get a common understanding between the customer and PDSL on the product requirements of the Platform-i MSN application.
+😂0😂😂 The document serves as a basis for the Architectural Design of the Platform-i MSN application.
+😂0😂😂 The intended audience for this document are the customer and the development team.
+😂0😂😂 The requirements will be in the format.
+😂0😂😂 Additional requirements can only be added at the end of a section with the next higher number.
+😂0😂😂 If a requirement is removed, the number remains empty.
+😂0😂😂 An instant messenger is an application, which allows instant text communication between two or more people through a network such as the Internet.
+😂0😂😂 Predefined presence identifier.
+😂0😂😂 With setting the status the user can let others know if he is actively using your PC.
+😂0😂😂 In MSN Messenger you have the following statuses: Offline, Online, Busy, Idle, Be Right Back, Away, On the Phone and Out to Lunch.
+😂0😂😂 When you block someone, you prevent that person from seeing your status and sending you messages.
+😂0😂😂 .NET Passport is an online service that makes it possible for you to use your e-mail address and a single password to sign in to any .NET Passport-participating Web site or service.
+😂0😂😂 One of these services is the MSN Messenger.
+😂0😂😂 The MSN messenger xlet is a MHP version of the popular PC application.
+😂0😂😂 It is an application to demonstrate the possibilities of MHP and Platform-i.
+😂0😂😂 The Platform-i MSN messenger application is independent of other projects.
+😂0😂😂 The produced product will be an MHP MSN messenger xlet.
+😂0😂😂 With the xlet the user shall be able to see online friends, chat with them and see which TV program they are watching.
+😂0😂😂 Unlike the PC variant, the xlet cannot transfer files and doesn't have webcam support.
+😂0😂😂 There are only end-users.
+😂0😂😂 If we cannot use the MSN messenger service protocol this FRS has to be adjusted to reflect the new situation.
+😂0😂😂 With the use of an existing Passport account the user can login to the messenger.
+😂0😂😂 It is not possible to create a new Passport account.
+😂0😂😂 The application provides a list where the end-user can choose the new status.
+😂0😂😂 The application will display the status of the end-users buddies.
+😂0😂😂 When a buddy changes his status, the application shall update it.
+😂0😂😂 The end-user is able to change the nickname with which the user is visible to the buddies.
+😂0😂😂 Show the nicknames of the end-users buddies on the buddy list.
+😂0😂😂 The application updates the displayed nick in the contact list when a buddy changes the nickname.
+😂0😂😂 The application provides the possibility to assign a nickname to a specified buddy; this nickname has preference above the nickname set by the buddy itself.
+😂0😂😂 The application provides an option to add a buddy to the buddy list.
+😂0😂😂 The application has an option to delete a buddy from the buddy list.
+😂0😂😂 The application has an option to block certain buddies.
+😂0😂😂 The application has a visible notification when an incoming message is received.
+😂0😂😂 Show incoming messages on the screen.
+😂0😂😂 Show emoticons in incoming and outgoing messages.
+😂0😂😂 Display a list of emoticons to choose from when the user wants to include an emoticon in the message he is writing.
+😂0😂😂 Show the history of messages sent and received in the current chat session.
+😂0😂😂 Chat with multiple buddies together.
+😂0😂😂 Show a notification when there is new e-mail at the users hotmail inbox.
+😂0😂😂 Display the inbox of the users Hotmail account Show e-mails from the users Hotmail account on the screen.
+😂0😂😂 Play games with online buddies.
+😂0😂😂 The used protocol for communication is the .NET messenger service protocol.
+😂0😂😂 The used version of this protocol will be MSNPv8 which is the standard protocol at this moment.

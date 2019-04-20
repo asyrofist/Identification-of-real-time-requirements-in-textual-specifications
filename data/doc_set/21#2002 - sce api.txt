@@ -1,0 +1,899 @@
+😂0😂😂There is an urgent need for the EDA industry to meet the exploding verification requirements of SoC design teams.
+😂0😂😂While the industry has delivered verification performance in the form of a variety of emulation and rapid prototyping platforms, there remains the problem of connecting them into SoC modeling environments while realizing their full performance potential.
+😂0😂😂Existing standard verification interfaces were designed to meet the needs of design teams of over 10 years ago.
+😂0😂😂A new type of interface is needed to meet the verification challenges of the next 10 years.
+😂0😂😂This document is a proposal for a multichannel communication interface that addresses these challenges.
+😂0😂😂This new interface must cater to the needs of both emulation end users and emulation suppliers.
+😂0😂😂All emulators on the market today have proprietary APIs.
+😂0😂😂The proliferation of APIs makes it very difficult for software-based verification products to port to the different emulators, thus restricting the solutions available to customers.
+😂0😂😂This also leads to low productivity and low return on investment (ROI) for emulator customers who build their own solutions.
+😂0😂😂The emulation “APIs” which exist today are oriented to gate-level and not system-level verification.
+😂0😂😂The industry needs an API which takes full advantage of emulation performance.
+😂0😂😂Customers are reluctant to invest in building applications on proprietary APIs.
+😂0😂😂Traditional simulator APIs like programmable language interface (PLI) and VHDL PLI slow down emulators.
+😂0😂😂Third parties are reluctant to invest in building applications on proprietary APIs.
+😂0😂😂This document is directed to members of the <code> technical committee.
+😂0😂😂The committee members represent a consortium of EDA customers and EDA tool suppliers dedicated to the creation of a breakthrough high-performance common emulation API.
+😂0😂😂The founding participants in the consortium are Aptix, CoWare, Ikos Systems, Mentor Graphics, ST Microelectronics, Synopsys, and TransEDA.
+😂0😂😂The scope of this document shall be restricted to what is specifically referred to herein as the <code>.
+😂0😂😂This modeling interface is intended to be one of possibly several parts making up the whole <code> standard.
+😂0😂😂In the future, <code> may be expanded to include additional parts to handle such features as debug and control, code coverage, etc.
+😂0😂😂This document is intended to describe an overall use model of the <code>, a tutorial illustrating this use model, and a formal functional specification of the <code> API itself.
+😂0😂😂Future revisions of the document will continue to reflect the feedback from members of the <code> technical committee.
+😂0😂😂It is hoped that the document will undergo a relatively quick evolution phase which culminates with a common industry standard that can be used by simulation and emulation tool vendors to provide plugand- play high speed verification solutions to end users on SoC design teams.
+😂0😂😂A formal glossary of terms used in this document can be found in the appendices.
+😂0😂😂Some of the acronyms referenced in the document are defined here.
+😂0😂😂This specification describes a modeling interface that provides multiple channels of communication that allow software models describing system behavior to connect to structural models describing implementation of a device under test.
+😂0😂😂Each communication channel is designed to transport untimed messages of arbitrary abstraction between its two end points or “ports” of a channel.
+😂0😂😂These message channels are not meant to connect software models to each other but rather to connect software proxy models to message port interfaces on the hardware side of the design.
+😂0😂😂The means to interconnect software models to each other must be provided by a software modeling and simulation environment such as SystemC which is beyond the scope of this document.
+😂0😂😂Although the software side of a system can be modeled at several different levels of abstraction including untimed, cycle accurate, and even gate level, the focus of the <code> is to interface purely untimed software models with an RTL or gate level DUT.
+😂0😂😂This can be summarized with the following recommendations regarding the API.
+😂0😂😂Do not use it to <code> event based or sub-cycle accurate simulation environments.
+😂0😂😂It is possible but not ideal to <code> cycle accurate simulation environments.
+😂0😂😂It is ideal for bridging an untimed simulation environment with a cycle accurate simulation environment.
+😂0😂😂There are many references in the document to SystemC as the modeling environment for untimed software models.
+😂0😂😂This is because, although SystemC is capable of modeling at the cycle accurate RTL abstraction level, it is also considered ideally suited for untimed modeling.
+😂0😂😂As such, it has been chosen for use in many of the examples in this document.
+😂0😂😂While the software side of the described interface is generic in its ability to be used in any C/C++ modeling environment, it is optimized to be compatible with SystemC.
+😂0😂😂Similarly, its hareware side is optimized to prevent undue throttling of an emulator during a co-modeling session run.
+😂0😂😂Throughout this document the term emulation or emulator is used to denote a structural or RTL model of a DUT running in an emulator, rapid prototype, or other simulation environment including software HDL simulators.
+😂0😂😂That said however, the focus of the design of this interface is to avoid communication bottlenecks that might become most apparent when interfacing software models to an emulator as compared to interfacing them to a slower software HDL simulator or even an HDL accelerator.
+😂0😂😂Such bottlenecks could severely compromise the performance of an emulator which is otherwise very fast.
+😂0😂😂Although some implementations of the interface can be more inefficient than others, there should be nothing in the specification of the interface itself that renders it inherently susceptible to such bottlenecks.
+😂0😂😂For this reason, the communication channels described herein are message or transaction oriented rather than event oriented with the idea that a single message over a channel originating from a software model can trigger dozens to hundreds of clocked events in the hardware side of the channel.
+😂0😂😂Similarly, it can take thousands of clocked events on the hardware side to generate the content of a message on a channel <code>ating from the hardware that is ultimately destined for an untimed software model.
+😂0😂😂The document is divided into the following three major chapters:<list>.
+😂0😂😂Any references to actual literal names that might be found in source code, identifiers that are part of the API, file names, and other literal names are represented in courier font.
+😂0😂😂Key concepts words, or phrases are often italicized.
+😂0😂😂Also, there is a good chance that any italicized text may have a definition in the glossary, so the reader is directed there for a more detailed meaning of a term.
+😂0😂😂The diagram in <img> shows a high level view of how <code> interconnects untimed software models to structural hardware transactor and DUT models.
+😂0😂😂The <code> provides a transport infrastructure between the emulator and host workstation sides of each channel, that interconnects transactor models in the emulator to C models on the workstation.
+😂0😂😂Again it is important to note that for purposes of this document, the term emulator can be used interchangeably with any simulator capable of executing RTL or gate-level models, including software HDL simulators.
+😂0😂😂These interconnects are provided in the form of message channels that run between the software side and the hardware side of the <code> infrastructure.
+😂0😂😂Each message channel has two ends.
+😂0😂😂The end on the software side is called a <code> which is a C++ object that gives API access to the channel.
+😂0😂😂The end on the hardware side is a <code> macro that is instantiated inside a transactor and connected to other components in the transactor.
+😂0😂😂Each message channel is either an input or an output channel with respect to the hardware side.
+😂0😂😂It is important to note that message channels are not unidirectional or bidirectional busses in the sense of hardware signals, but are rather more like network sockets that use message passing protocols.
+😂0😂😂It is the job of the transactors to serve as abstraction gaskets that decompose messages arriving on input channels from the software side into sequences of cycle accurate events that are to be clocked into the DUT.
+😂0😂😂For the other direction of flow, transactors recompose sequences of events coming from the DUT back into messages to be sent via output channels to the software side.
+😂0😂😂In addition, the <code> infrastructure provides clock generation and shared clock control using handshake signals with the transactor.
+😂0😂😂This allows the transactor to “freeze” controlled time while performing message composition and decomposition operations.
+😂0😂😂The <code> is designed to couple easily with multi-threaded environments such as SystemC, yet it also functions just as easily in single-threaded environments such as simple C programs.
+😂0😂😂A special service loop function is provided by the <code> that can be called from an application to give the <code> infrastructure an opportunity to service its communication channels.
+😂0😂😂It is inside this function that queued up input messages can be sent to the hardware side and arriving output messages can be dispatched to the appropriate software models.
+😂0😂😂While there is no thread specific code inside the service loop function or elsewhere in the <code>, in a multi-threaded environment this function is designed to be called periodically from a dedicated thread so that the interface is automatically serviced while other threads are running.
+😂0😂😂In a single-threaded environment, the service loop function can be “sprinkled” throughout the application code at strategically placed points to allow it to frequently yield CPU cycles to the <code> infrastructure so that it can service its <code> channels.
+😂0😂😂A major goal of this specification is to address the needs of three target audiences, each with a distinct interest in their use of the interface.
+😂0😂😂The target audiences are as follows:<list>.
+😂0😂😂The end user is interested in quickly and easily establishing a <code> between a software testbench that can be composed of high level, untimed, algorithmic software models, and a hardware DU that can be modeled at the RTL, cycle accurate level of abstraction.
+😂0😂😂While end users might be aware of the need for a “gasket” that bridgess these two levels of abstraction, they want the creation of these abstraction bridge to be as painless and automated as possible.
+😂0😂😂Ideally, the end users are not required to be familiar with the details of <code> API.
+😂0😂😂Rather, on the hardware side, they might wish to rely on the transactor implementor to provide predefined transactor models that can directly interface to their DUT.
+😂0😂😂This would remove any requirement for them to be familiar with any of the <code> hardware-side interface macros (see section 4.1 on page 46) except possibly the <code> macro whose interface is easy to understand because all it really does is furnish a clock and a reset.
+😂0😂😂Similarly, on the software side, the end users can also rely on the transactor implementors to furnish them with plug-and-play software models, custom tailored for a software modeling environment such as SystemC.
+😂0😂😂Such models would encapsulate the details of interfacing to the <code> <code> and, might present a fully untimed, easy to use interface to the rest of the software testbench.
+😂0😂😂The transactor implementor is familiar with the interface presented by the <code> but is not concerned with its implementation.
+😂0😂😂The job of the transactor implementor is to provide plug-and-play transactor models on the hardware side and proxy models on the software side that might be used by end users to easily <code> their untimed software models with their RTL-represented DUT.
+😂0😂😂Additionally, the transactor implementor can supply proxy models on the software side that provide untimed “sockets” to the transactors.
+😂0😂😂Using the models is like using any other vendor supplied, stand-alone IP models and the details of bridging not only two different abstraction levels but possibly two different verification platforms, is completely hidden within the implementations of the models.
+😂0😂😂They must be distributed with appropriate object code, netlists, RTL code, configuration files, and all necessary documentation.
+😂0😂😂The <code> infrastructure implementor is interested in furnishing a working implementation of an <code> that runs on some vendor supplied verification platform.
+😂0😂😂Any distributed product release from the infrastructure implementor will necessarily include both the software side and the hardware side components of the <code>.
+😂0😂😂For such a release to be complaint, it must conform to all the requirements set forth in this specification.
+😂0😂😂The central goal of this specification is to provide an interface designed to <code> two modeling environments, each of which supports a different level of modeling abstraction.
+😂0😂😂Suppose we have a testbench consisting of several, possibly independent models that stimulate and respond to a DUT at different interface points.
+😂0😂😂<img> depicts such a system.
+😂0😂😂Such a configuration can be used to test a processor DUT that has some communications interfaces that can include an ethernet adapter, PCI interface, and a USB interface.
+😂0😂😂The testbench can consist of several models that independently interact with these interfaces, playing their protocols and exchanging packets with them.
+😂0😂😂These packets might be recoded as messages with the intent of verifying the processor DUT’s ability to deal with them.
+😂0😂😂The system in <img> might initially be implemented fully at the untimed level of abstraction using the SystemC software modeling environment.
+😂0😂😂Now suppose that we ultimately want to create cycle accurate RTL models of the DUT model and eventually synthesize it to gates that can be verified on a high speed emulation platform.
+😂0😂😂Once we do this however, we might still want to test them with the unaltered, untimed testbench models.
+😂0😂😂Doing so requires a way of somehow bridging the untimed level of abstraction to the <ref> level.
+😂0😂😂Suppose now that we take the purely untimed system shown in <img>, “pry apart” the direct coupling between the testbench models and the untimed DUT model, and insert an abstraction <code> in order to <code> the still untimed system testbench model to what is now a emulator resident, RTL-represented DUT.
+😂0😂😂<img> depicts this new configuration.
+😂0😂😂This <code> consists of a set of DUT proxy models, <code> message input and output port proxies, a set of message channels which are transaction conduits between the software simulator and the emulator, message input and output ports, and a set of user implemented transactors.
+😂0😂😂The <code> infrastructure performs the task of serving as a transport layer that guarantees delivery of messages back and forth between the <code> and <code> ends of each channel.
+😂0😂😂Messages arriving on input channels are presented to the transactors through <code>.
+😂0😂😂Similarly, messages arriving on output channels are dispatched to the DUT proxy software models via <code> that present them to the rest of the testbench as if they had come directly from <code>al untimed DUT model as depicted in <img>.
+😂0😂😂In fact, the testbench models do not know that the messages have actually come from and gone to a totally different abstraction level.
+😂0😂😂The DUT input proxies have the job of accepting untimed messages from various C models and sending them to the message input port proxies for transport to the hardware side.
+😂0😂😂The DUT output proxies establish callbacks that monitor the message output port proxies for arrival of messages from the hardware side.
+😂0😂😂In other words, the <code> infrastructure dispatches these messages to the specific DUT proxy models to which they are addressed.
+😂0😂😂Taking this discussion back to the context of users of the interface described in <ref>, the end user only has to know how to interface with the DUT proxy models on the software side of <img> with the transactor models on the hardware side; whereas, the transactor implementor authors the proxy and transactor models using the <code> message port and clock control components between them, and provides those models to the end user.
+😂0😂😂At this point, it makes sense to describe in more detail what a message is and how it is used in an untimed software modeling environment.
+😂0😂😂In the discussion above, the implied meaning of a message is that it is a unit of data of arbitrary size and abstraction to be transported over a channel.
+😂0😂😂In a purely untimed modeling environment, messages are not associated with specific clocks or events.
+😂0😂😂Rather, they can be considered arbitrary data types ranging in abstraction from a simple bit, boolean or integer, on up to something as complex as a C++ class or even some aggregate of objects.
+😂0😂😂It is in this form that messages can be transported either by value or by reference over abstract ports between fully untimed software models of the sort described in <img> and, in substantially more detail in <ref>.
+😂0😂😂However, before messages can be transported over an <code> message channel, their content must be serialized into a large bit vector by the DUT proxy model.
+😂0😂😂Conversely, after a message arrives on a message output channel and is dispatched to a DUT output proxy model, it might be de-serialized back into an abstract C++ data type.
+😂0😂😂At this point, it is ready for presentation at the abstract output ports of the DUT proxy to the connected software testbench models.
+😂0😂😂Meanwhile, on the hardware side, a message arriving on the message input channel can trigger many dozens to hundreds of clocks of event activity.
+😂0😂😂It is the job of the transactor to perform this decomposition of message data content to sequences of clocked events that are presented to the DUT hardware model inputs.
+😂0😂😂Conversely, for output messages, it might be the job of the transactor to accept possibly hundreds to thousands of clocked events <code>ating from the DUT hardware model, and assemble them into serialized bit streams that are sent back to the software side for de-serialization back into abstract data types.
+😂0😂😂Note that, for the most part, the term message can be used interchangeably with transaction.
+😂0😂😂However, in some contexts, transaction can be thought of as including infrastructure overhead content in addition to user payload data whereas, the term message denotes only user payload data.
+😂0😂😂One of the implications of the transactor’s job of converting between message bit streams and clocked events is that it might need the ability to “freeze” controlled time while performing these operations such that the controlled clock that feeds the DUT is stopped long enough for the operations to occur.
+😂0😂😂If one visualizes the transactor operations strictly in terms of controlled clock cycles, they appear between edges of the controlled clock.
+😂0😂😂This is depicted in the controlled time view shown in <img>.
+😂0😂😂But if they are shown for all cycles of the uncontrolled clock, the waveforms would appear more like the uncontrolled time view shown in <img>.
+😂0😂😂In this view, the controlled clock is suspended or disabled and the DUT is “frozen in controlled time”.
+😂0😂😂Suppose a system has multiple controlled clocks and multiple transactors controlling them.
+😂0😂😂Any one of these transactors has the option of stopping any clock.
+😂0😂😂If this happens, all controlled clocks in the system stop in unison.
+😂0😂😂Furthermore, all other transactors that did not themselves stop the clock, must still sense that the clocks were globally stopped and continue to function correctly even though they themselves had no need to stop the clock.
+😂0😂😂In this case, they might typically idle for the number of <code> during which the <code>s are stopped as illustrated in <img>.
+😂0😂😂In the <code> use model, the semantics of clock control can be described as follows.
+😂0😂😂Any transactor can instruct the <code> infrastructure to stop the controlled clock and thus cause controlled time to freeze.
+😂0😂😂All transactors are told by the <code> infrastructure when the controlled clock is stopped.
+😂0😂😂Any transactor must function correctly if controlled time is stopped due to operations of another transactor, even if the transactor in question does not itself need to stop the clock.
+😂0😂😂A transactor might need to stop the controlled clock when performing operations that involve decomposition or composition of transactions arriving from, or going to a message channel.
+😂0😂😂The DUT is always clocked by one or more controlled clocks that are controlled by one or more transactors.
+😂0😂😂All transactors are clocked by a free running uncontrolled clock that is provided by the <code> hardware side infrastructure.
+😂0😂😂There are four major aspects of work flow involved in constructing a system verification with the SCEMI environment.
+😂0😂😂They are as follows:<list>.
+😂0😂😂The models to be run on the workstation are compiled using a common C/C++ compiler or possibly obtained from other sources such as third party vendors in the form of IP, ISS simulators, etc.
+😂0😂😂The compiled models are linked with the software side of the <code> infrastructure to form an executable program.
+😂0😂😂Infrastructure linkage is the process that reads a user description of the hardware, namely the source or <code> netlist that describes the interconnect between the <code>s, the DUT, and the <code> interface components, and compiles that netlist into a form suitable for emulation.
+😂0😂😂Part of this compile process can involve adding additional structure to the <code> netlist, that properly interfaces the user supplied netlist to the <code> infrastructure implementation components.
+😂0😂😂Put more simply, the infrastructure linker is responsible for providing the core of the <code> interface macros on the hardware side.
+😂0😂😂As part of this process, the infrastructure linker also looks at the parameters specified on the instantiated interface macros in the user-supplied <code> netlist and uses them to properly establish the dimensions of the interface.
+😂0😂😂Among the parameters it analyzes are the following:<list>.
+😂0😂😂Once the final netlist is created, the infrastructure linker can then appropriately compile it for the emulation platform and accordingly convert it to a form suitable to run on the emulator.
+😂0😂😂The compiled netlist is downloaded to the emulator, elaborated, and prepared for binding to the software.
+😂0😂😂The software executable compiled and linked in the software compilation phase is now executed which causes all the software models to be constructed in the workstation process image space.
+😂0😂😂Once construction takes place, the software models bind themselves to the message port proxies using special calls provided in the API.
+😂0😂😂Parameters passed to these calls establish a means by which specific message port proxies can rendezvous with its associated <code> macro in the hardware.
+😂0😂😂Once this binding occurs, the co-modeling session can proceed.
+😂0😂😂The <code> run time environment consists of a set of interface components on both the hardware side and the software side of the interface, each of which provides a distinct level of functionality.
+😂0😂😂They are introduced in this section, and each is discussed in more detail later in this document.
+😂0😂😂The interface components presented by the <code> hardware side consist of a small set of macros that provide connection points between the transactors and the <code> infrastructure.
+😂0😂😂These compactly defined and simple to use macros fully present all necessary aspects of the interface to the transactors and the DUT.
+😂0😂😂From the point of view of this specification, these macros are simply represented as empty Verilog or VHDL models with clearly defined port and parameter interfaces.
+😂0😂😂This is analogous to a software API specification that defines function prototypes of the API calls without showing their implementations.
+😂0😂😂Future implementations of the interface can also accommodate modeling hardware in RTL C using a C modeling language like SystemC, rather than RTL Verilog or VHDL.
+😂0😂😂Such implementations would need to provide the RTC equivalents of the same macros defined in this specification.
+😂0😂😂Briefly stated, the four macros present the following interfaces to the transactors and DUT:<list>.
+😂0😂😂The interface presented by <code> infrastructure to the software side consists of a set of C++ objects and methods which provide the following functionality:<list>.
+😂0😂😂In addition to the C++ object oriented interface, a set of C API functions is also provided for the benefit of pure C applications.
+😂0😂😂The hardware side interface of the <code> consists of a set of parametrized macros which can be instantiated inside transactors that are to interact which the <code> infrastructure.
+😂0😂😂The macros are parametrized such that, at the point of instantiation, crucial parameters that will dictate the dimensions of the <code> <code> to software can be easily specified by the user.
+😂0😂😂It is the job of the infrastructure linker to learn the values of these parameters and customize implementation components inserted underneath the macros accordingly.
+😂0😂😂The following four macros fully characterize how the <code> interface of the <code> is presented to the bridges and the DUT:<list>.
+😂0😂😂Any number of these macros can be instantiated as is required by the system.
+😂0😂😂One <code> macro must be instantiated for each required message input channel, and one <code> macro for each output channel.
+😂0😂😂Message macro bit-widths are parametrized at the point of instantiation.
+😂0😂😂Exactly one <code> macro is instantiated for each defined clock in the system.
+😂0😂😂This <code> macro instance will, via a set of parameters, fully characterize a particular clock.
+😂0😂😂The <code> macro is instantiated at the top level and provides a controlled clock and reset directly to the DUT.
+😂0😂😂The <code> macro instance is named and assigned a reference <code> parameter that is used to associate it with one or more counterpart <code> macros inside one or more transactors.
+😂0😂😂The <code> macro is used by its <code> for all clock controlling operations for its associated clock.
+😂0😂😂These two macros are mutually associated by the <code> parameter and every <code> macro must have a minimum of one <code> macro associated with it.
+😂0😂😂The infrastructure linker is responsible for properly hooking up these, essentially empty, macro instances to the internally generated <code> infrastructure and clock generation circuitry.
+😂0😂😂The following parameters specified at the points of instantiation of the macros fully specify the required dimensions of the <code> infrastructure components:<list>.
+😂0😂😂<img> shows a simple example of how a transactor and DUT might connect to the hardware side interface of the <code>.
+😂0😂😂This example features a single transactor interacting with a DUT and interfacing to the software side through a <code> and a <code>.
+😂0😂😂In addition, it defines a single clock that is controlled by the transactor internally using the <code> macro.
+😂0😂😂This clock drives the DUT from the top level through a <code> macro.
+😂0😂😂A key point that this example illustrates is that only the transactor implementor needs to be aware of all <code> interface macros.
+😂0😂😂Because the transactor encapsulates the message port macros and the <code> macro, the end user only has to be aware of how to hook up to the transactor itself and to the <code> macro.
+😂0😂😂The <code> macro instantiation is where all the clock parameters are specified.
+😂0😂😂The numbers shown in the component instantiation label as <code>, map to the parameters defined for the <code> macro.
+😂0😂😂They are summarized here:<list>.
+😂0😂😂Of these parameters, the <code> parameter is used to uniquely identify this particular clock and also to associate it with its 1 or more counterpart <code> macros which must be parametrized to the same <code> value, in this case 1.
+😂0😂😂In addition to learning the clock specification parameters, the infrastructure linker also learns the name of each clock by looking at the instance label of each <code> instance, in this case <code>.
+😂0😂😂Similarly, message ports have a parametrized <code> parameter.
+😂0😂😂To summarize, the infrastructure linker learns the following specific information from analyzing this netlist.
+😂0😂😂Controlled clock has a 1/1 ratio which, when enabled, is ideally the same frequency as the uncontrolled clock.
+😂0😂😂Controlled clock is parametrized to 50/50 duty cycle with 0 phase shift.
+😂0😂😂Controlled reset is parametrized to 8 controlled clock cycles of reset.
+😂0😂😂A more complicated example that involves two transactors and three clocks is shown in <ref>.
+😂0😂😂The <code> tutorial documents a real life example that uses the <code> to interface between untimed software models modeled in SystemC, and hardware models of transactors and a DUT modeled in RTL Verilog.
+😂0😂😂This tutorial tries to illustrate how the use model of the <code> can be applied in a multithreaded SystemC environment.
+😂0😂😂It assumes some familiarity with the concepts of SystemC including abstract ports, autonomous threads, slave threads, module and port definition, and module instantiation and interconnect.
+😂0😂😂<ref> has a description of these concepts.
+😂0😂😂The <code> design is a small design that simulates air passengers traveling from <code> to <code> by traversing various interconnected <code> and <code> in a <code>.
+😂0😂😂In this design, the <code> and <code> are the transactors and the <code> model is the DUT.
+😂0😂😂Each <code> transactor interfaces to a <code> to gain access to messages arriving from the software side.
+😂0😂😂Each <code> transactor interfaces to a <code> to send messages to the software side.
+😂0😂😂There is also an <code> module that has both an <code> and <code> transactor contained within it.
+😂0😂😂The “world” consists of these <code>, <code>, and these <code>, <code>.
+😂0😂😂Travel from any <code> to any <code> is possible by traversing the <code> containing the following <code> interconnected <code>, <code>.
+😂0😂😂Each controlled clock cycle represents one hour of travel or layover time.
+😂0😂😂<img> shows how the <code> world is interconnected.
+😂0😂😂The numbers shown by the directed arcs are the travel time to travel the indicated <code>.
+😂0😂😂Layover time in each <code> is two hours.
+😂0😂😂The <code> is initialized by injecting <code> messages for the entire system through the <code> transactor.
+😂0😂😂Each <code> message contains a piece of routing information addressed to a particular <code> to load the route into its <code> module.
+😂0😂😂Using this simple mechanism, the software side <code> model progressively teaches each <code> its routes so that it can, in turn, pass additional <code> tokens to <code> more distant from <code>.
+😂0😂😂In other words, by first teaching closer hubs, the <code> learns to pass routes bound for more distant hubs.
+😂0😂😂This process continues until the entire mesh is initialized, at which point it is ready to serve as a backbone for all air travel activity.
+😂0😂😂After initiating the route configuration, the testbench then executes the itineraries of 4 passengers over a period of 22 days.
+😂0😂😂Each itinerary consists of several legs, each with scheduled departure from a specified <code> and each with a specified <code>.
+😂0😂😂The scheduled leg is sent as a message token to its designated <code> transactor.
+😂0😂😂It is the job of the transactor to count the number of clocks until the specified departure time before sending the token into the <code> mesh.
+😂0😂😂The hierarchy of the whole system is textually shown in the following subsections.
+😂0😂😂Note that the interactions shown between the <code> and <code> software side models and the <code>, <code>, and <code> hardware side models.
+😂0😂😂These interactions occur over <code> message channels.
+😂0😂😂Following is the hierarchy of the hardware side components instantiated under the <code> netlist.
+😂0😂😂Notice that at the <code> level only the <code> macro, transactor components, and the DUT appear.
+😂0😂😂Encapsulated within the <code> and <code> transactors are the <code>, <code>, and <code> macros.
+😂0😂😂The <code> transactor has both message input and output ports in addition to the required <code> macro.
+😂0😂😂The bridge between the hardware and software side of the design is depicted in <img>.
+😂0😂😂Notice that this diagram more or less follows the structure of the generalized abstraction bridge shown in <img> on <ref>.
+😂0😂😂The design uses 13 message channels in all.
+😂0😂😂Two for the <code> connection, six message input channels for the <code> connections, and five output channels for the <code> connections.
+😂0😂😂The two software models that interact with the hardware side are the <code> model and the <code> model.
+😂0😂😂These models encapsulate message port proxies which give them direct access to the message channels leading to the <code> and <code> transactors on the hardware side.
+😂0😂😂These two software models are the only ones that are aware of the <code> link.
+😂0😂😂They converse with the other models through SystemC abstract ports.
+😂0😂😂On the hardware side, there is a set of <code> and <code> transactors that service the message channels that interface with the <code> and route tokens to or from the DUT.
+😂0😂😂Some locations, such as <code> and the <code>, are both <code> and <code>.
+😂0😂😂In addition, there is a <code> transactor that interfaces directly with the <code> model.
+😂0😂😂The <code> is a stand-alone transactor that does not converse with the DUT.
+😂0😂😂Its only job is to allow time to advance a day at a time.
+😂0😂😂<img> shows a representative portion of the <code> to show how it interconnects DUT components to form the <code> mesh.
+😂0😂😂<code> are inserted between two <code> or between an <code> or <code> transactor and a <code>.
+😂0😂😂Longer <code> can be created by cascading primitive one hour <code> to form the proper length.
+😂0😂😂Each <code> primitive represents one hour of travel.
+😂0😂😂In this diagram, a <code> model is inserted between the <code> and <code> for a four hour flight leg.
+😂0😂😂Since travel can occur in either direction between <code> and <code>, a <code> is inserted between them for each direction.
+😂0😂😂<img> shows the structure of the DUT and transactor components.
+😂0😂😂Each <code> transactor contains a clock control macro and a message input port macro to receive departure tokens from the <code> on the software side.
+😂0😂😂Each received token is passed to the <code> port when the scheduled departure time has matured.
+😂0😂😂Although the <code> transactor has a clock control macro, it does not actively control the clock.
+😂0😂😂Its only use of the clock control macro is to monitor the <code> signal to know on which <code> the <code> is active so that it can properly count <code> until the scheduled departure time of a pending departure token.
+😂0😂😂Each <code> transactor contains a clock control macro and a message output port macro to send arrival tokens back to the <code> on the software side.
+😂0😂😂The arrival tokens represent a passenger emerging from the <code> mesh and arriving at a <code> through its <code> port.
+😂0😂😂See <ref> for a detailed description of the <code> transactor.
+😂0😂😂This transactor was chosen to be described in detail because it provides a simple example of clock control and <code> interfacing.
+😂0😂😂Each token is a 32-bit vector signal.
+😂0😂😂There are no handshakes in the system.
+😂0😂😂Rather, the tokens are “self announcing”.
+😂0😂😂Normally, 0s are clocked through the mesh so if, on any given cycle, a <code> or <code> senses a non-0 value on its input port, it knows it has received a token that needs to be processed.
+😂0😂😂Token formats are also shown in <img>.
+😂0😂😂A departure token contains the passenger ID, destination ID, and scheduled time of departure.
+😂0😂😂As the departure token travels through the mesh, it collects layover information consisting of the IDs of all the <code> encountered before reaching its <code>, having been transformed into an arrival token.
+😂0😂😂The arrival token then has a complete record of layover information that is passed back to the software side and displayed to the console.
+😂0😂😂A <code> consists of a <code> that accepts tokens from up to four different sources, and a <code> that routes a token up to four different destinations.
+😂0😂😂The <code> contains a small <code> that is initialized at the beginning of the simulation with routing information by receiving <code> tokens.
+😂0😂😂The <code> transactor accepts tokens arriving from a point-of-exit on the <code> and passes them to the message output port.
+😂0😂😂The <code> transactor uses clock control to avoid losing potentially successive tokens arriving from the <code> to this destination portal.
+😂0😂😂It de-asserts the <code> in the event that a token comes in, but the message output port is not able to take it because of tokens simultaneously arriving at other destination portals.
+😂0😂😂This way, it guarantees that the entire <code> is disabled until all tokens are off-loaded from the requesting <code> transactors.
+😂0😂😂The Verilog source code for the <code> transactor is shown in the following listing.
+😂0😂😂Notice that the <code> macro references the same <code> as that in the <code> transactor.
+😂0😂😂This means that the <code> and the <code> transactor share in the control of the same <code>.
+😂0😂😂In fact there is only one <code> in the entire <code> that is specified at the default 1/1 ratio.
+😂0😂😂Notice also that, although the <code> handshakes with the message output port, the data that it sends is always 0.
+😂0😂😂This is because the only thing that the software side needs from the <code> is the cycle stamp which is automatically included in each message output response.
+😂0😂😂The software side of the <code> design is written completely in SystemC and C++.
+😂0😂😂It is compiled as an executable program that links with the <ref> software side.
+😂0😂😂The <code> model is the top level “software netlist” of SystemC modules.
+😂0😂😂It specifies the construction and interconnect of the component models as well.
+😂0😂😂A block diagram of the <code> model is shown in <img>.
+😂0😂😂Following is the source code for the <code> model.
+😂0😂😂SystemC interconnect channels are declared as <code> data types.
+😂0😂😂These can be thought of as abstract signals that interconnect abstract ports.
+😂0😂😂The parametrized data type associated with each <code> denotes the data type of the message that the channel is capable of transferring from an output abstract port to an input abstract port.
+😂0😂😂Notice that the <code> channel is declared with a “by value” data type whereas some of the other channels such as the <code> are declared as “by reference” data types.
+😂0😂😂The former is less efficient but safer because the message is passed by value and therefore there is no danger of the receiver corrupting the sender’s data or worse, having the sender’s data go out of scope leaving the receiver with a possibly dangling reference.
+😂0😂😂However, passing messages by reference is more efficient but care must be taken in their use.
+😂0😂😂Declaring them as <code> pointers helps alleviate some, but not all of the safety problems.
+😂0😂😂Module pointers are declared inside the <code> object and constructed in its SystemC constructor.
+😂0😂😂After each child module is constructed, its abstract ports are mapped to one of the declared interconnect channels.
+😂0😂😂It is important to stress that SystemC channels, while conceptually the same, are distinctly different from <ref> message channels.
+😂0😂😂Both types of channels pass messages, but SystemC channels are designed strictly to pass messages of arbitrary C++ data types between SystemC modules.
+😂0😂😂An entire simulation can be built of just software models communicating with each other.
+😂0😂😂See reference [1] for more details about SystemC interconnect channels.
+😂0😂😂<ref> message channels have a completely different interface and are optimized for implementing abstraction bridges between a software subsystem and a hardware subsystem.
+😂0😂😂In the use model presented in this example, their interfaces are encapsulated by SystemC models.
+😂0😂😂The thick round arrows in <img> represent the SystemC autonomous threads contained in the <code> and <code> modules.
+😂0😂😂These two threads are the only autonomous threads in the <code>.
+😂0😂😂All the other code is executed inside slave threads.
+😂0😂😂The following listing shows the <code> routine which is the top level entrypoint to the program.
+😂0😂😂The <code> is required when linking to a SystemC kernel facility, but it is very much like a conventional <code> C or C++ entrypoint and has the same program argument passing semantics.
+😂0😂😂The first routine defined is the <code>.
+😂0😂😂This is the master error handling function that is registered with the <ref>.
+😂0😂😂Whenever an error occurs, this function is called to format the message before throwing a C++ exception.
+😂0😂😂The exceptions are caught in the throw blocks at the end of the throw routine where they are displayed before exiting the program.
+😂0😂😂Once the error handler is registered, the <ref> is initialized by calling <code>.
+😂0😂😂This method returns a pointer to an <code> object that manages the whole <ref> software side infrastructure.
+😂0😂😂Next the <code> model described in the previous section is constructed.
+😂0😂😂The constructor causes all of its child software models to get constructed by calling, in turn, their <code> constructors.
+😂0😂😂Once the whole system is statically constructed, models that interface with <ref> are given the master <code> object pointer so that they can access its methods, by calling special <code> accessor methods on those models.
+😂0😂😂Finally, the SystemC main kernel loop is initialized by calling the <code> function.
+😂0😂😂The -1 parameter tells it to go indefinitely until the program decides to end.
+😂0😂😂How the program ends is explained in the next section.
+😂0😂😂The <code> module contains an autonomous thread that yields to the <ref> infrastructure so that it may service its message port proxies, by making repeated calls to the <code> method.
+😂0😂😂By placing this logic on its own dedicated thread, other models in the system do not have to worry about yielding to the <ref>.
+😂0😂😂Following is the source code for the <code>.
+😂0😂😂Between each call to the service loop, the autonomous thread yields to other threads in the system by calling the <code> function.
+😂0😂😂Actually, the only other autonomous thread in the <code> system is the one in the <code> model.
+😂0😂😂Both of these threads are represented by the thick round arrows in <img> on <ref>.
+😂0😂😂The other job of the <code> is shut down the <code> when it detects a notification on its <code> port that the simulation is complete.
+😂0😂😂The <code> inslave port is bound to the slave thread, <code> on construction.
+😂0😂😂The <code> port is driven from its associated outmaster port on the <code> module, so it is the <code> that ultimately decides when the simulation is complete.
+😂0😂😂The following data types are defined in the <code> header file.
+😂0😂😂They will be referenced throughout the subsequent discussion.
+😂0😂😂They are data types that are specific to this application.
+😂0😂😂The <code> model contains a SystemC autonomous thread that serves as the main driver for the <code> design.
+😂0😂😂Its job is to look at the four passenger itineraries and schedule the legs in those itineraries on the appropriate dates and at the appropriate departure times by interacting with the <code> model.
+😂0😂😂The condensed source code for the passenger <code> declarations for the <code> model is as follows.
+😂0😂😂There are four passengers whose itineraries are given as lists of <code> records.
+😂0😂😂Each record represents a leg of that passenger’s journey consisting of a date of departure, time of departure, passenger, <code>, and destination.
+😂0😂😂The <code> and <code> are strings use for printing of messages.
+😂0😂😂Following is the SystemC module definition for the <code> model with its standard SystemC constructor.
+😂0😂😂Following is the autonomous thread for the main driver loop.
+😂0😂😂Before entering its main loop, the autonomous <code> does two things.
+😂0😂😂First, by signaling the <code> outmaster port, it triggers the <code> model to teach all the routes to the <code> of all the <code> in the <code>.
+😂0😂😂Each taught route that is injected to the hardware is staggered by one clock.
+😂0😂😂These small one clock advances are achieved when the <code> model signals the <code> port on the <code> model.
+😂0😂😂Passenger travel in the <code> is not possible until all the <code> have been properly programmed with their routes.
+😂0😂😂Once all the routes have been taught to the <code>, the <code> is advanced to day one.
+😂0😂😂This will, in turn, cause the <code> model to announce the arrival of day one via the <code> inslave port.
+😂0😂😂Once the day change has been detected, the <code> then enters into a loop where it schedules any travel on the itineraries scheduled for the current day.
+😂0😂😂If no travel is scheduled, it advances the <code> to the first day on which travel is scheduled to occur.
+😂0😂😂Legs of each <code> are scheduled by sending the <code> record over the <code> outmaster port to the <code> model which encodes it into a token and sends it to the hardware.
+😂0😂😂This operation continues for each leg of each <code> until all passengers have traveled all legs of their trip and have finally arrived at the <code>.
+😂0😂😂This serves as the termination condition that is conveyed to the <code> model by signaling the <code> outmaster port.
+😂0😂😂Upon receiving this notification, the <code> model gracefully shuts down the <ref> and exits the program with a normal exit status.
+😂0😂😂The <code> model also announces arrivals of passengers at their systems as they occur.
+😂0😂😂The <code> slave thread detects an arrival by receiving an <code> on its <code> inslave port.
+😂0😂😂It prints out the arrival information to the console.
+😂0😂😂Following is the source code.
+😂0😂😂Following is the SystemC module definition and constructor for the <code> model.
+😂0😂😂There are two slave threads defined in this model: the <code> and the <code>.
+😂0😂😂The <code>, though not described in detail here, is responsible for sending <code> tokens into the <code> mesh via the <code> transactor when the <code> is first being configured at the beginning of the simulation.
+😂0😂😂This thread is activated each time the <code> module wants to teach a new route during its <code> operation.
+😂0😂😂The <code> is activated when the <code> receives <code> messages on its <code> inslave port from the <code> model.
+😂0😂😂It sends those legs encoded as departure tokens across the message input channels to their designated <code> transactors.
+😂0😂😂The <code> has pointers to each of the message input port proxies that are connected to <code> transactors.
+😂0😂😂Each departure token is encoded with the passenger ID and <code> ID from the <code> record.
+😂0😂😂Following is the source code for the <code>.
+😂0😂😂The <code> method is called prior to simulation from the <code> routine.
+😂0😂😂Here is where the <ref> message input and output port proxies leading to each of the <code> and <code> transactors are bound.
+😂0😂😂Notice that for each of the output port proxies, the output receive callback, <code>, is specified in the binding structure.
+😂0😂😂See <ref> for more information about message output port binding.
+😂0😂😂The <code> is also responsible for processing of arrivals.
+😂0😂😂Once the <code> is advanced, arrivals can occur at any time over the course of 24 hours.
+😂0😂😂Each arrival token is sent by a <code> transactor, over a message output port to the <code>.
+😂0😂😂The <ref> infrastructure dispatches the arriving messages to the <code> function that was registered in the <code> method described above.
+😂0😂😂The <code> function, in turn, passes the message to the private <code> method described below.
+😂0😂😂Following is the code for the <code> function.
+😂0😂😂The <code> method processes the arrival token.
+😂0😂😂It converts the encoded arrival token to the <code> data type, stamps it with <code>, and sends it out through the <code> outmaster port to the <code> model which displays the arrival information to the console as follows.
+😂0😂😂The <code> model is responsible for advancing time on the <code> one or more days at a time.
+😂0😂😂Once a set of scheduled departures has been programmed in each <code> transactor that has departures scheduled for a particular day, the <code> allows the DUT to advance by 24 clocks or some multiple of 24 clocks if the next scheduled departure occurs more than one day from now.
+😂0😂😂The <code> advances time by sending a message to the <code> transactor in the hardware which has direct control of the DUT clock via the <code> macro.
+😂0😂😂The source code for the <code> module is very similar in structure to that for the <code>; therefore, most of it is not shown here.
+😂0😂😂The <code> model has two slave threads that respond to requests to advance time.
+😂0😂😂The <code> responds to requests on the Advance<code> port to advance a given number of days.
+😂0😂😂The <code> responds to requests to advance one clock at a time which occurs during <code> configuration to stagger the injection of each <code> token by one clock.
+😂0😂😂This method is as follows.
+😂0😂😂Notice that this method enters a loop that calls <code> to yield to the SystemC kernel.
+😂0😂😂The reason for this is that it wants to guarantee that the clock has completed its advance before returning.
+😂0😂😂By yielding to the SystemC kernel while it is waiting for this condition, the autonomous <code> thread is naturally given a chance to service the message output ports.
+😂0😂😂This is necessary to reach the condition that the <code> is waiting for, namely, for the <code> data member to change value.
+😂0😂😂The <code> changes value when the <code> responds on its output port that it has completed its one clock time advance which, in turn, causes the <code> function to get called from the <code>.
+😂0😂😂The <code> function is as follows.
+😂0😂😂The cycle stamp is updated directly from the <code> method on the <code> object.
+😂0😂😂This reflects a count of elapsed controlled clock counts that had occurred from the beginning of the simulation to the time this message was sent from the hardware side.
+😂0😂😂This is a convenient way for software to keep track of elapsed clock time in the hardware.
+😂0😂😂Once the <code> is updated, the <code> loop in the <code> described above, is released and the function can return.
+😂0😂😂Keep in mind the <code> and <code> functions are being called under two different autonomous threads that each frequently yield to each other.
+😂0😂😂The former is called from the autonomous <code> and the latter is called ultimately from the <code> function that is called from underneath the autonomous <code>.
+😂0😂😂This illustrates the clean interaction between a general multithreaded application software environment and the <ref> service loop.
+😂0😂😂The message port macros on the hardware side use a general PCI-like dual ready protocol.
+😂0😂😂Before going into detail about how these macros work, the dual ready handshake protocol that they use is explained in this section.
+😂0😂😂The waveforms in <img> depict several dual ready handshake scenarios.
+😂0😂😂Briefly, the dual ready handshake works as follows.
+😂0😂😂The transmitter asserts <code> on any clock cycle when it has data, and de-asserts when it does not.
+😂0😂😂The receiver asserts <code> on any cycle when it is ready for data, and de-asserts when it is not.
+😂0😂😂In any clock cycle in which <code> and <code> are both asserted, data “moves” meaning that it is taken by the receiver.
+😂0😂😂The dual ready protocol has the following two advantages.
+😂0😂😂Signals are level-based; therefore, they are easily sampled by posedge clocked logic.
+😂0😂😂The <code> macro presents messages arriving from the software side of a channel to the transactor.
+😂0😂😂The macro consists of two handshake signals that play a dual-ready protocol and a data bus that presents the message itself.
+😂0😂😂<img> shows the symbol for the <code> macro as well as Verilog and VHDL source code for the empty macro wrappers.
+😂0😂😂The message width in bits is derived from the setting of this parameter.
+😂0😂😂The port’s name is derived from its instance label.
+😂0😂😂A value of one on this signal indicates that the transactor is ready to accept data from the software.
+😂0😂😂By asserting this signal, the hardware indicates to the software that it has a location into which it can put any data that might arrive on the message input port.
+😂0😂😂When a new message arrives, as indicated by the <code> and <code> both being true, that location is consumed.
+😂0😂😂When this happens, a notification is sent to the software side that a new empty location is available and this triggers an input ready callback to occur on the software side.
+😂0😂😂The next section explains in detail when input ready propagation notifications are <code> with respect to the timing of the <code> and <code> handshakes.
+😂0😂😂Note that it is possible for transactors not to utilize <code> and the input ready callback.
+😂0😂😂If this is the case, the <code> input must be permanently asserted and, on the software side, no input ready callback is registered.
+😂0😂😂In this case, <code> merely acts as a strobe for each arriving message.
+😂0😂😂The transactor must be designed to take any arriving data immediately as it is not guaranteed to be held for subsequent <code> cycles.
+😂0😂😂A value of one on this signal sampled on any posedge of the <code> indicates that the channel has message data ready for the transactor to take.
+😂0😂😂If <code> is not asserted, the <code> remains asserted until and during the first clock in which <code> finally becomes asserted.
+😂0😂😂During this clock data moves and, if no more messages have arrived from the software side, the <code> is de-asserted.
+😂0😂😂This vector signal constitutes the payload data of the message.
+😂0😂😂If the software client code registers an input ready callback when it first binds to a message input port proxy, the hardware side of the infrastructure must notify the software side each time it is ready for more input.
+😂0😂😂Each time it is so notified, the port proxy on the software side makes a call to the user registered input ready callback.
+😂0😂😂This mechanism is called input ready propagation.
+😂0😂😂The prototype for the input ready callback is as follows.
+😂0😂😂When this function is called, a software model can assume that a message can be sent to the message input port proxy for transmission to the message input port on the hardware side.
+😂0😂😂The <code> argument can be a pointer to any user-defined object, presumably the software model that has bound the proxy.
+😂0😂😂An important point to note is that it is totally up to the application to follow the protocol that if, the transactor is not ready to receive input, the software model should not do a send.
+😂0😂😂A well behaved software model should know not to do a send if it has not received an input ready callback.
+😂0😂😂The <ref> infrastructure will not enforce this.
+😂0😂😂So, the idea is that, when the transactor wants to say, "I'm ready for input", it will assert the <code> input to the <code> which will cause an input ready callback to be called on the software side, the next time <code> is entered.
+😂0😂😂The software model should then typically either set a flag that can be consulted later on outside <code>, indicating that the transactor is ready for input, or, in some cases, it may choose to do a send right then and there.
+😂0😂😂The point is that a send should not be <code> by the software model until some time after the input ready callback has been received.
+😂0😂😂A second point to be made is that it should be fine for an application to service as many output callbacks as is desired while <code> an input callback.
+😂0😂😂In other words, the software model may have an outer loop that checks the status of an application defined <code> flag on each iteration and skips the send if the flag is false.
+😂0😂😂So suppose an application has an outer loop that repeatedly calls <code> and checks for arriving output messages and input ready notifications.
+😂0😂😂Each callback function sets a flag in the <code> that the outer loop uses to know if an output message has arrived and needs processing, or an input port needs more input.
+😂0😂😂It is possible that, before an input ready callback gets called, that outer loop may have called <code> say 50 times each time resulting in an output message callback and the subsequent processing of that output message.
+😂0😂😂Finally, on the 51'st time <code> is called, the input ready callback is called which sets the <code> flag in its context, after which the outer loop would detect the new flag status and initiate a send on that input channel.
+😂0😂😂The handshake waveforms in <img> on <ref> are intended purely to illustrate the semantics of the dual ready protocol.
+😂0😂😂There can be a couple of reasons why these waveforms might not be realistic in an actual implementation of a <code> macro.
+😂0😂😂First, if input ready propagation is enabled, the sender on the software side might expect input ready notifications before transmitting messages so that two back-to-back messages, and hence <code> assertions on consecutive clocks might be impossible.
+😂0😂😂Second, even if input ready callbacks were not registered on a given port, the timing of the physical layer of the <ref> bridge might be such that two successive transmissions are not possible unless the software end somehow batched consecutive message transmissions to the hardware.
+😂0😂😂All of this said however, the hardware in the transactor should be designed so as to anticipate any of the above scenarios whether or not they are likely to happen.
+😂0😂😂The waveforms shown in <img> are typical of what one might see with input ready callbacks enabled.
+😂0😂😂It shows four possible scenarios in which an input ready notification occurs.
+😂0😂😂In the depicted scenarios, an input ready notification is propagated to the software if <code> from transactor is asserted in the first clock following a reset or, <code> from transactor transitions from a 0 to a 1 or, <code> from transactor remains asserted in a clock following one in which a transfer occurred due to a assertions on both <code> and <code>.
+😂0😂😂The <code> macro allows transactors to send messages to the software side.
+😂0😂😂Like the <code> macro, it also uses a dual ready handshake except that in this case, the transmitter is the transactor and the receiver is the <ref> interface.
+😂0😂😂A transactor can have any number of <code> macro instances.
+😂0😂😂<img> shows the symbol for the <code> macro as well as Verilog and VHDL source code for the empty macro wrappers.
+😂0😂😂The message width in bits is derived from the setting of this parameter.
+😂0😂😂The priority for determining which output messages are sent to the output channel first, should more than one arrive on the same <code>.
+😂0😂😂See <ref> for details on the meaning of this parameter.
+😂0😂😂The port’s name is derived from its instance label.
+😂0😂😂A value of one on this signal indicates that the transactor has message data ready for the output channel to take.
+😂0😂😂If <code> is not asserted, the <code> must remain asserted until and during the first clock in which <code> finally becomes asserted.
+😂0😂😂During this clock data moves and, if the transactor has no more messages for transmission, it de-asserts the <code>.
+😂0😂😂A value of one on this signal sampled on any <code> posedge indicates that the output channel is ready to accept data from the transactor.
+😂0😂😂By asserting this signal, the <ref> hardware side indicates to the transactor that the output channel has a location into which it can put any data that is destined for the software side of the channel.
+😂0😂😂In any cycle during which both the <code> and <code> are asserted, the transactor can assume that the data moved.
+😂0😂😂If, in the subsequent cycle, the <code> remains asserted, that means that a new empty location is available which the transactor can load any time by asserting <code> again.
+😂0😂😂Meanwhile, the last message data, upon arrival to the software side, triggers a receive callback on its message output port proxy.
+😂0😂😂This vector signal constitutes the payload data of the message originating from the transactor, to be sent to the software side of the channel.
+😂0😂😂The <code> macro supplies a controlled clock to the DUT.
+😂0😂😂The <code> macro is parametrized such that each instance of a <code> fully specifies a controlled clock of a given frequency, <code> shift, and duty cycle.
+😂0😂😂The <code> macro also supplies a controlled reset whose duration is the specified number of cycles of the <code>.
+😂0😂😂<img> shows the symbol for the <code> macro as well as Verilog and VHDL source code for the empty macro wrappers.
+😂0😂😂Note that all of the clock parameters have default values.
+😂0😂😂In simpler systems where only one controlled clock is needed, exactly one instance of a <code> can be instantiated at the top level with no parameters specified.
+😂0😂😂This results in a single controlled clock with a ratio of 1/1, a <code>, and a <code> shift of 0.
+😂0😂😂Ideally, this clock’s frequency matches that of the <code> during cycles in which it is enabled.
+😂0😂😂The <ref> infrastructure always implicitly creates a controlled clock with a 1/1 ratio which is the highest frequency controlled clock in the system.
+😂0😂😂Whether or not it is visible to the user’s design depends on whether a <code> with a 1/1 ratio is explicitly declared.
+😂0😂😂In more complex systems that require multiple clocks, a <code> instance must be created for each required clock.
+😂0😂😂The clock ratio that is specified in the instantiation parameters always specifies the frequency of the clock as a ratio relative to the highest frequency controlled clock in the <code>.
+😂0😂😂For example if a <code> is defined with a ratio of 4/1 this is interpreted as, “for every 4 edges of the 1/1 <code> there is only 1 edge of this <code>”.
+😂0😂😂This would be a “divide-by-four” clock.
+😂0😂😂This parameter is used to assign a unique number to a clock that is used to differentiate it from other <code> instances.
+😂0😂😂It shall be considered an error if more than one <code> instances share the same <code>.
+😂0😂😂The default <code> is 1.
+😂0😂😂These parameters constitute the numerator and denominator respectively of this clock’s ratio.
+😂0😂😂The numerator always designates the number of cycles of the fastest 1/1 controlled clock that occur during the number of cycles of “this” clock specified in the denominator.
+😂0😂😂For example, with <code> and <code> a 5/2 clock is specified which means that for every 5 cycles of the 1/1 clock that occur, only 2 cycles of this clock occur.
+😂0😂😂The default clock ratio is 1/1.
+😂0😂😂The duty cycle is expressed with arbitrary <code>s that are normalized to their sum such that the sum of <code> and <code> represent the number of units for a whole cycle of the clock.
+😂0😂😂For example, with <code> and <code> the high time of the clock is 75 out of 100 units or 75% of the period.
+😂0😂😂Similarly, the low time would be 25% of the period.
+😂0😂😂The phase shift is expressed in the same units so that if <code>, that would mean that the clock should be shifted by 30% of its period before the first low to high transition occurs.
+😂0😂😂The default duty cycle shown in the macro wrappers in <img> above is a <code> of 0/ 100.
+😂0😂😂This parameter specifies how many cycles of this controlled clock shall occur before the controlled reset transitions from its initial value of 1 back to 0.
+😂0😂😂The clock port’s name is derived from its instance label.
+😂0😂😂This is the controlled clock signal that is supplied to the DUT by the <ref> infrastructure via this macro.
+😂0😂😂This clock’s characteristics is derived from the parameters specified on instantiation of this macro.
+😂0😂😂This is the controlled reset signal that is supplied to the DUT by the <ref> infrastructure via this macro.
+😂0😂😂Another way of to specify clock ratios is enter them directly as frequencies all normalized to the clock with the highest frequency.
+😂0😂😂To specify ratios this way requires the following: <list>.
+😂0😂😂For example, suppose a system has 100Mhz, 25Mhz, and 10Mhz, 7.
+😂0😂5😂 Mhz, and 32kHz clocks.
+😂0😂😂To specify the ratios, the frequencies can be directly entered as <code>s using kHz as the unit.
+😂0😂😂Users who like to think in frequencies rather than ratios can use this simple technique.
+😂0😂😂It is also possible that an implementor of the <ref> API may wish to provide a tool to assist in deriving clock ratios from frequencies.
+😂0😂😂Such a tool could allow a user to enter clock specifications in terms of frequencies and then generate a set of equivalent ratios.
+😂0😂😂In addition, the tool could post process waveforms generated by the simulation in such a way that the defined clocks appear in the waveform display to be the exact same frequencies given by the user.
+😂0😂😂The default duty cycle shown in the macro wrappers in <img> above is a <code>.
+😂0😂😂Users can specify that they only care about posedges of the <code> and do not care where the negedge falls.
+😂0😂😂This is known as <code>.
+😂0😂😂In such a case, the <code> is given as a 0.
+😂0😂😂The <code> can be given as an arbitrary number of units such that the <code> offset can still be expressed as a percentage of the whole period.
+😂0😂😂For example if a user specifies this combination.
+😂0😂😂The user is saying the following.
+😂0😂😂I don’t care about the duty cycle.
+😂0😂😂Specifically I don’t care where the negedge of the clock falls.
+😂0😂😂If the total period is expressed as 100 units, the <code> should be shifted by 30 of those units.
+😂0😂😂This represents a phase shift of 30%.
+😂0😂😂Another example.
+😂0😂😂This says, I care about both intervals of the duty cycle.
+😂0😂😂Duty cycle is 75%/25%.
+😂0😂😂Phase shift is 50% of period.
+😂0😂😂It is also possible to have a <code>.
+😂0😂😂In this case, the <code> parameter is given as a 0 and the <code> is given as a positive number > 0.
+😂0😂😂For example.
+😂0😂😂It means, I don’t care about duty cycle.
+😂0😂😂Specifically I don’t care where the posedge of a clock falls.
+😂0😂😂Phase shift is 0.
+😂0😂😂In any clock specification, it is considered an error if <code>.
+😂0😂😂The <code> output of the <code> macro shall obey the following semantics.
+😂0😂😂<code> will start low and transition to high one or more <code>s later.
+😂0😂😂It will then remain high for a at least a minimum duration specified by the <code> parameter adorning the <code> macro.
+😂0😂😂This duration is expressed as a number of edges of associated <code>.
+😂0😂😂Following the reset duration, the <code> will then go low and remain low for the remaining duration of the simulation.
+😂0😂😂Some applications require 2 edged resets at the beginning of a simulation.
+😂0😂😂For multiple <code>, the reset duration must have a minimum length such that it is guaranteed to span the <code> parameter of any clock.
+😂0😂😂In other words, the controlled reset duration for all clocks must be, as a mininum, <code>.
+😂0😂😂Some implementations may chose to use a reset duration that is larger than the quantify shown above if it is required to achieve proper alignment of multiple systems on the edges of the controlled reset as described in <ref>.
+😂0😂😂During the assertion of <code>, <code> edges shall be forced regardless of the state of the <code> inputs to the <code> macros.
+😂0😂😂Once the reset duration completes, the <code> will be controlled normally by the <code> inputs.
+😂0😂😂Note: The operation of controlled reset just described provides the default controlled reset behavior generated by the <code> macro.
+😂0😂😂If more sophisticated reset handling is required it will have implemented with a specially written reset transactor that is used in lieu of the simpler controlled resets that come from the <code> instances.
+😂0😂😂For example, if a software controlled reset is required, an application would need to create a reset transactor that responds to a special software <code>ated reset command that arrives on its message input port.
+😂0😂😂In general, all <code> should align on the first rising <code> edge following the trailing edge of the <code>.
+😂0😂😂This <code> edge shall be referred to as the point of alignment.
+😂0😂😂For <code> with phases of 0 this means that rising edges of these clocks should coincide with the point of alignment.
+😂0😂😂For cclocks with <code> > 0 edges will occur some time after the point of alignment.
+😂0😂😂<img> shows an assortment of systems with the <code> and <code>.
+😂0😂😂It also shows how those systems behave at the point of alignment.
+😂0😂😂In the diagram, <code>, <code>, and <code> have phases of 0 and therefore have rising edges at the point of alignment.
+😂0😂😂<code> has the same duty cycle as <code> but a <code> phase shift of 50%.
+😂0😂😂Therefore its rising edge occurs 2 <code> after the point of alignment.
+😂0😂😂Its starting value at the point of alignment is still 0.
+😂0😂😂<code> has the same duty cycle as <code> but a <code> of 50%.
+😂0😂😂Again, its rising edge occurs 1/2 cycle after the point of alignment.
+😂0😂😂But notice that its starting value at the point of alignment is 1.
+😂0😂😂This can be alternatively thought of as an inverted phase.
+😂0😂😂Anytime the <code> is greater than the initial duty cycle interval, the starting value at the point of alignment will be a 1.
+😂0😂😂For every <code> macro instance there must be at least one counterpart <code> macro instance presumably encapsulated in a transactor.
+😂0😂😂The <code> macro is the means by which a transactor can control a DUT’s clock and by which the <ref> infrastructure can indicate to a transactor on which <code> cycles that controlled clock have edges.
+😂0😂😂<img> shows the symbol for the <code> macro as well as Verilog and VHDL source code for the empty macro wrappers.
+😂0😂😂For each <code> defined in the <code>, at least one corresponding <code> macro must be instantiated in one or more transactors.
+😂0😂😂In addition to providing uncontrolled clocks and resets, this macro also provides handshakes that provide explicit control of both edges of the generated <code>.
+😂0😂😂This is the only parameter given to the <code> macro.
+😂0😂😂This parameter is used to associate a <code> instance with its counterpart <code> instance that is defined at the top level.
+😂0😂😂The default <code> is 1.
+😂0😂😂Note that associated with each instance of <code> there must be exactly one instance in the <code> of <code>.
+😂0😂😂But for each instance of <code>, there can be one or more instances of <code>.
+😂0😂😂A <code> instance identifies the <code> it is associated with by properly specifying a <code> parameter matching that of its associated <code>.
+😂0😂😂This is the uncontrolled clock signal generated by the <ref> infrastructure.
+😂0😂😂This is the uncontrolled reset generated by the <ref> infrastructure.
+😂0😂😂This signal is high at the beginning of simulated time and transitions to a low an arbitrary number of <code> later.
+😂0😂😂It can be used to reset the transactor.
+😂0😂😂Note: The uncontrolled reset must have a duration spanning that of the longest controlled reset as measured in <code>.
+😂0😂😂This guarantees that all DUTs and transactors properly wake up in an initialized state the first <code> following expiration of the last controlled reset.
+😂0😂😂This input to the macro indicates to the <ref> infrastructure that a transactor is willing to allow its associated DUT clock to advance.
+😂0😂😂The transactor de-asserts this signal when it needs to perform operations during which the DUT must be frozen.
+😂0😂😂One of the most useful applications of this feature is to perform complex algorithmic operations on the data content of a transaction before presenting it to the DUT.
+😂0😂😂If this input to one of the <code> instances that are associated with a given controlled clock is deasserted, the next posedge of that <code> will be disabled.
+😂0😂😂In reacting to a <code> of a slower clock, the infrastructure must not prematurely disable posedges of other faster clocks that occur prior to the last possible <code> preceding the edge to be disabled.
+😂0😂😂In other words, that edge is disabled “just in time” so as to allow faster clock activity to proceed until the last moment possible.
+😂0😂😂Once the edge is finally disabled, all posedges of all controlled clocks are also disabled.
+😂0😂😂Similarly, for negedge control, if this input to one of the <code> instances that are associated with a given controlled clock is deasserted, the next negedge of that clock will be disabled.
+😂0😂😂In reacting to a <code> of a slower clock, the infrastructure must not prematurely disable negedges of other faster clocks that occur prior to the last possible <code> preceding the edge to be disabled.
+😂0😂😂In other words, that edge is disabled “just in time” so as to allow faster clock activity to proceed until the last moment possible.
+😂0😂😂Once the edge is finally disabled, all negedges of all controlled clocks are also disabled.
+😂0😂😂Support for explicit negedge control is needed because without it, transactor logic that only cares about controlling posedge clocks could not inadvertently disable the next negedge of a clock when it only intended to disable the next posedge of a clock.
+😂0😂😂Transactors that do not care about controlling negedges should tie this signal high.
+😂0😂😂This macro output signals the transactor that on the next posedge of <code> there is a posedge of the controlled clock.
+😂0😂😂The transactor can thus sample this signal to know if a DUT clock edge occurs.
+😂0😂😂The <ref> infrastructure looks at the <code> from all the transactors and asserts <code> only if they are all asserted.
+😂0😂😂This means that any transactor can stop all the clocks in the <code> by simply de-asserting <code>.
+😂0😂😂Note: for a <code>, since the user does not care about the posedge, the <code> will always be 0.
+😂0😂😂This signal works like <code> except that it indicates if the negedge of a controlled clock occurs on the next posedge of the <code>.
+😂0😂😂This can be useful for transactors that control double pumped DUTs.
+😂0😂😂Transactors that do not care about negedge control can ignore this signal.
+😂0😂😂Note: for <code>, since the user does not care about the negedge, the <code> will always be 0.
+😂0😂😂The contents of this section is strictly the concern of the <code> class of user, as defined in <ref>.
+😂0😂😂End users and transactor implementors can assume that the operations described herein are automatically handled by the <code>.
+😂0😂😂As described in <ref>, infrastructure linkage is the process that analyzes the user’s bridge netlist on the hardware side and compiles it into a form suitable to run on the emulator.
+😂0😂😂This may involve expanding the interface macros into infrastructure components that are added to the existing structure as well as to generate parameter information that is used to bind the hardware side to the software side.
+😂0😂😂In order to determine this information, the infrastructure linker analyzes the netlist and searches for instances of the <ref> hardware side macros, read the parameter values from those instances, and generate a parameters file that can be read during software side initialization to properly bind message port proxies to the hardware side.
+😂0😂😂It can also be typical for the infrastructure linker to provide options either in the form of switches and/or an input configuration file that allow a user to pass along or override implementation specific options.
+😂0😂😂A well crafted infrastructure linker however, should maximize ease-of-use by transparently providing the end user with a suitable set of default values for implementation specific parameters, so that most, if not all of these parameters need not be overridden.
+😂0😂😂The following set of parameters define the minimum set that is needed for all implementations of the <ref> standard.
+😂0😂😂Specific implementations might require additional parameters.
+😂0😂😂The number of transactors shall be derived by counting the number of modules in the user’s design that contain <code> macros.
+😂0😂😂It shall be assumed that any module that is to be officially considered a transactor must have at least one <code> instance immediately inside it.
+😂0😂😂The transactor name shall be derived from the hierarchical path name to an instance of a module that qualifies as a transactor as per the above definition.
+😂0😂😂Naturally, if there are multiple instances of a given type of transactor, they shall be uniquely distinguished by their instance path names.
+😂0😂😂The syntax used to express the path name must be that of the HDL language that the bridge netlist is expressed in.
+😂0😂😂The infrastructure linker derives the number of message input and output ports by counting instances of the <code> and <code> macros.
+😂0😂😂The name of each port shall be derived from the relative instance path name to that port relative to its containing transactor module.
+😂0😂😂For example, if the full path name to a message input port macro instance is, using Verilog notation, <code> and the transactor name is <code>, then the port name is <code>.
+😂0😂😂If an output port is instantiated one level down from the input port and its full path is <code>.
+😂0😂😂<code>, then its port name is <code> since it is instantiated a level down relative to the transactor root level.
+😂0😂😂The full pathname to a port can be derived by concatenating the transactor name to the port name.
+😂0😂😂The width of a port in bits shall be derived from the <code> parameter defined in the message port macro.
+😂0😂😂This width defaults to 1 but is almost always overridden to a significantly larger value at the point of instantiation.
+😂0😂😂The priority of a message output port shall be derived from the <code> parameter defined in the <code> macro.
+😂0😂😂For certain implementations, it might be useful as a “hint” to the infrastructure linker to decide which output ports should be serviced first, should they happen to present message data on the same <code>, and are implemented over a number of “physical message channels” that is less than the limitless number of virtual message channels.
+😂0😂😂To some users this might be important.
+😂0😂😂For those who do not care, the default value of 10 does not need to be overridden and need not be specified in the instantiation statement.
+😂0😂😂With some exceptions, the output port priority generally follows the semantics of the UNIX <code> command as follows.
+😂0😂😂Default priority value is 10.
+😂0😂😂The lower the number the higher the priority.
+😂0😂😂Output port priority 0 is reserved for internal use by the infrastructure.
+😂0😂😂For message output ports with the same priority number, their relative priority is undetermined and strictly an artifact of infrastructure linker implementation.
+😂0😂😂This number shall be derived by counting all instances of the <code> macro.
+😂0😂😂The name of a controlled clock is derived from the instance label of its <code> instance, necessarily instantiated at the top level of the user’s bridge netlist and unique among all instances of <code>.
+😂0😂😂The clock ratio is determined from the <code> and <code> parameters of the <code> macro.
+😂0😂😂The <code> designates the number of cycles of the fastest 1/1 controlled clock that occur during the number of cycles of “this” clock specified in <code>.
+😂0😂😂See <ref> for more details about the clock ratio.
+😂0😂😂The duty cycle is determined from the <code>, <code>, and <code> parameters of the <code> macro.
+😂0😂😂The duty cycle is expressed as a pair of arbitrary <code>s, <code> and <code> interpreted as follows: if the sum of <code> and <code> represents the number of units in a period of the clock, then <code> represents the number of units of high time and <code>, the number of units of low time.
+😂0😂😂Similarly, <code> represents the number of units the clock is phase shifted relative to the reference 1/1 <code>.
+😂0😂😂It is also possible for a user to specify a <code>.
+😂0😂😂See <ref> for more details about the duty cycle and phase.
+😂0😂😂The duration of a controlled reset expressed in terms of <code> cycles is determined from the <code> parameter of the <code> macro.
+😂0😂😂A parameter file should be automatically generated by the infrastructure linker after analyzing the user supplied netlist and determining all the parameters identified in the previous section.
+😂0😂😂The parameter file can be read by the software side of the <ref> infrastructure to facilitate binding operations that occur after software model construction.
+😂0😂😂Because it is automatically generated, content and syntax of the parameter file is left to specific implementors of the <ref>.
+😂0😂😂The content itself is not intended to be portable.
+😂0😂😂However, on the software side, a parameter access API must be provided by the infrastructure implementor that conforms to the specification in <ref>.
+😂0😂😂This access block must support access to a specifically named set of parameters required by the <ref> as well as an optional, implementation specified set of named parameters.
+😂0😂😂All <ref> required parameters are read-only because their values are automatically determined by the infrastructure linker by analyzing the user supplied netlist.
+😂0😂😂Implementation specific parameters can be read-only or read-write as required by the implementation.
+😂0😂😂To gain access to the hardware side of the <ref>, the software side must first initialize the <ref> software side infrastructure and then bind to port proxies representing each message port defined on the hardware side.
+😂0😂😂Part of initializing the <ref> involves instructing the <ref> to load the parameter file that was generated by the infrastructure linker.
+😂0😂😂The information in the parameter file gives the <code> software side the means to establish rendezvous with the hardware side in response to port binding calls from the user’s software models.
+😂0😂😂Rendezvous during port binding is achieved primarily by name association involving transactor names and port names.
+😂0😂😂Note that clock names and properties identified in the parameter file are of little significance during the binding process although this information is procedurally available to applications that might need it through the parameter file API.
+😂0😂😂Access to the software side of the interface is facilitated by a number of C++ classes that are as follows.
+😂0😂😂In addition to C data types such as <code>, <code>, and <code>, many of the arguments to the methods in the API require <code> data types of specific width.
+😂0😂😂To support these, the following data types are placed in the header files for the API.
+😂0😂😂Note that most of the calls in the interface take an <code> as the last argument.
+😂0😂😂Because the usage of this argument is consistent for all methods, error handling semantics are explained in detail in this section rather than documenting error handling for each method in the API.
+😂0😂😂Error handling in <ref> was designed to be flexible enough to either use a traditional style of error handling where an error status is returned and checked with each call, or a callback based scheme where a registered error handler is called when an error occurs.
+😂0😂😂This method registers an optional error handler with the <ref> that is to be called in the event that an error occurs.
+😂0😂😂When any <ref> operation encounters an error, the following procedure is followed.
+😂0😂😂If the <code> pointer passed into the function was non-NULL, the values of the <code> structure are filled out by the errant call with appropriate information describing the error, and control is returned to the caller.
+😂0😂😂It is up to the application code to check the error status after each call to the API and take appropriate abortive action if an error is detected.
+😂0😂😂Else if the <code> pointer passed to the function is NULL, and an error handler was registered, that error handler is called from within the errant API call.
+😂0😂😂The error handler is passed an internally allocated <code> structure filled out with the error information.
+😂0😂😂In this error handler callback approach, the user-defined code within the handler can initiate abort operations.
+😂0😂😂If it is a C++ application, a <code> and <code> mechanism might be deployed.
+😂0😂😂A C application can simply call the <code> or <code> function after printing out or logging the error information.
+😂0😂😂Else if the <code> pointer passed to the function is NULL, and no error handler is registered, an <code> structure is constructed and passed to a default error handler.
+😂0😂😂The default error handler attempts to print a message to the console and to a log file and then calls <code>.
+😂0😂😂It is important to note that this error handling facility only supports irrecoverable errors.
+😂0😂😂This means that if an error is returned through the <code> object, either via a handler or a return object, that there is no point in continuing with the co-modeling session.
+😂0😂😂Any calls that support returning a recoverable error status should return that status using a separate, dedicated return argument.
+😂0😂😂A second point to note is that the <code> text filled out in the error structure is meant to fully describe the nature of the error and can be logged or displayed to the console verbatim by the application error handling code.
+😂0😂😂The <code> text is the name of the errant API function and can optionally be added to the message that is displayed or logged.
+😂0😂😂Because every API call returns either a success or fatal error status, and because the detailed nature of errors is fully described within the returned error message, the <code> enum has only two values pertaining to success or failure.
+😂0😂😂The <code> returned from API functions to the caller can be either of these two values de<code> on whether the call was a success or a failure.
+😂0😂😂However the <code> passed into an error handler will, by definition, always have the value <code>, since otherwise the error handler would not have been called in the first place.
+😂0😂😂The optional <code> field can be used further classify different major error types, or even to tag each distinct error message with a unique <code> identifier.
+😂0😂😂The <ref> also provides a means of conveying warnings and informational status messages to the application.
+😂0😂😂Like error handling, info handling is <code> with callback functions and a special structure that is used to convey the warning information.
+😂0😂😂This method registers an optional info handler with the <ref> that is to be called in the event that a warning or informational status message occurs.
+😂0😂😂When any <ref> operation encounters a warning or wishes to issue an informational message, the following procedure is followed.
+😂0😂😂If an info handler was registered, that info handler is called from within the API call that wants to issue the warning.
+😂0😂😂The info handler is passed an internally allocated <code> structure filled out with the warning information.
+😂0😂😂In this info handler callback approach, the user-defined code within the handler can convey the warning to the user in a manner that is appropriate for that application.
+😂0😂😂For example, it can be displayed to the console, or logged to a file, or both.
+😂0😂😂Else if no info handler is registered, a <code> structure is constructed and passed to a default, implementation defined error handler.
+😂0😂😂The default error handler can attempt to print a message to the console and/or to a log file in an implementation specific format.
+😂0😂😂It is important to note that the <code> text filled out in the error structure is meant to fully describe the nature of the info message and can be logged or displayed to the console verbatim by the application’s warning and info handling code.
+😂0😂😂The <code> text is the name of the API function that detected the message and can optionally be added to the message that is displayed or logged.
+😂0😂😂The <code> is an extra piece of information that indicates if the message is a warning or just some informational status.
+😂0😂😂An additional category called <code> can be used to log all error conditions leading up to a fatal error.
+😂0😂😂The final fatal error message should always be logged using a <code> structure and <code> function so that an abort sequence is properly handled.
+😂0😂😂In addition, the info message can optionally be tagged with a unique identifying <code> specified in the <code> field.
+😂0😂😂Regarding memory allocation semantics of the <ref> API.
+😂0😂😂the following rules apply.
+😂0😂😂Anything constructed by the user is the user’s responsibility to delete.
+😂0😂😂Anything constructed by the API is the API’s responsibility to delete.
+😂0😂😂So this means that any object, such as <code>, that is created by the application using that object’s constructor, must be deleted by the application when it is no longer in use.
+😂0😂😂Some objects, such as <code> objects, are constructed by the API then handed over to the application as pointers.
+😂0😂😂Those objects must not be deleted by the application.
+😂0😂😂Rather, they are deleted when the entire interface is shut down during the call to <code>.
+😂0😂😂Similarly, non-null <code> structures that are passed to functions are assumed to be allocated and deleted by the application.
+😂0😂😂If a NULL <code> pointer is passed to a function and an error occurs, the API allocates the structure to pass to the error handler and therefore is responsible for freeing it.
+😂0😂😂This is the singleton object that represents the software side of the <ref> infrastructure itself.
+😂0😂😂Operations global to the interface are performed using methods of this class.
+😂0😂😂This method allows an application to make queries about the version prior to initializing the <ref> that gives it its best chance of specifying a version that it is compatible with.
+😂0😂😂A series of calls can be made to this function until a compatible version is found.
+😂0😂😂With each call, the application can pass version numbers corresponding to those it is familiar with and the <ref> can respond with a version handle that is compatible with the queried version.
+😂0😂😂This handle can then be passed onto the initialization call described in the next section.
+😂0😂😂If the given version string is not compatible with version of the <ref> that the application is interfacing to, a -1 is returned.
+😂0😂😂At this point, the application has the option of aborting with a fatal error or attempting other versions that it might also know how to use.
+😂0😂😂This process is sometimes referred to as mutual discovery.
+😂0😂😂This argument is of the form <code> and can be obtained by the application code from the header file of a particular <ref> installation.
+😂0😂😂This call is the constructor of the <ref> interface.
+😂0😂😂It gives access to all the other global methods of the interface.
+😂0😂😂The return argument is a pointer to an object of <code> on which all other methods can be called.
+😂0😂😂This input argument is the version number returned by the <code> method described in the previous section.
+😂0😂😂An error results if the version number is not compatible with the <ref> infrastructure being accessed.
+😂0😂😂This input argument is a pointer to the parameter block object that is initialized from the parameter file generated by the infrastructure linker.
+😂0😂😂See <ref> for a description of how this object is obtained.
+😂0😂😂This is the destructor of the <ref> infrastructure object that must be called when connection to the interface is to be terminated.
+😂0😂😂This call is the means by which graceful decoupling of the hardware side and the software side is achieved.
+😂0😂😂It is also during this call that termination callbacks registered by the application are called.
+😂0😂😂This call searches the list of input ports learned from the parameter file that is generated during infrastructure linkage for one whose names match the <code> and <code> arguments.
+😂0😂😂If one is found, an object of <code> is constructed to serve as the proxy interface to that port and the pointer to the constructed object is returned to the caller to serve all future accesses to that port.
+😂0😂😂It is considered an error if no match is found.
+😂0😂😂These arguments uniquely identify a specific message input port in a specific transactor on the hardware side to which the caller wishes to bind.
+😂0😂😂These names must be the path names expressed in the syntax of the HDL language that the hardware side bridge netlist is expressed in.
+😂0😂😂The binding argument is a pointer to an object defined as follows.
+😂0😂😂whose data members are used for the following.
+😂0😂😂The application is free to use this pointer for any purposes it wishes.
+😂0😂😂Neither <code> nor <code> interpret this pointer other than to store it and pass it when calling either the <code> or <code> callbacks.
+😂0😂😂This is the function pointer for the callback that is to be called whenever an input ready notification has been received from the hardware side.
+😂0😂😂This call signals that it is okay to send a new message to the input port.
+😂0😂😂If this pointer is given as a NULL, the <ref> assumes that this port does not need to deploy input ready notification on this particular channel.
+😂0😂😂See <ref> for a detailed description of the input ready callback.
+😂0😂😂This is a termination callback function pointer.
+😂0😂😂It is called during destruction of the <ref>.
+😂0😂😂This pointer can also be optionally specified as NULL.
+😂0😂😂This call searches the list of output ports learned from the parameter file that was generated during infrastructure linkage for one whose names match the <code> and <code> argument.
+😂0😂😂If one is found, an object of <code> is constructed to serve as the proxy interface to that port and the handle to the constructed object is returned to the caller to serve all future accesses to that port.
+😂0😂😂It is considered an error if no match is found.
+😂0😂😂These arguments uniquely identify a specific message output port in a specific transactor on the hardware side to which the caller wishes to bind.
+😂0😂😂These names must be the path names expressed in the syntax of the HDL language that the hardware side bridge netlist is expressed in.
+😂0😂😂The binding argument is a pointer to an object defined as follows.
+😂0😂😂whose data members are used for the following.
+😂0😂😂The application is free to use this pointer for any purposes it wishes.
+😂0😂😂Neither <code> nor <code> interpret this pointer other than to store it and pass it when calling either the <code> or <code> callbacks.
+😂0😂😂This is the function pointer for the receive callback that is to be called whenever an output message arrives on the port.
+😂0😂😂This callback is required on every output port proxy so it is considered an error if this function pointer is given as a NULL.
+😂0😂😂See <ref> for more information about how receive callbacks process output messages.
+😂0😂😂This is a termination callback function pointer.
+😂0😂😂It is called during destruction of the <ref>.
+😂0😂😂This pointer can also be optionally specified as NULL.
+😂0😂😂This is the main workhorse method that yields CPU processing time to the <ref>.
+😂0😂😂In both singlethreaded and multi-threaded environments, calls to this method gives the <ref> an opportunity to service all its port proxies and check for arriving messages or messages that are <code> to be sent.
+😂0😂😂It is also inside this call that the <ref> dispatches any input ready or receive callbacks that might be needed.
+😂0😂😂The underlying transport mechanism that supports the port proxies must respond in a relatively timely manner to messages enqueued on the input or output port proxies.
+😂0😂😂Since these messages cannot be handled until a call to <code> is made, it is advisable that applications call this function frequently.
+😂0😂😂The return argument is the number of output messages that arrived and were processed since the last call to <code>.
+😂0😂😂If <code> is NULL, check for transfers to be performed and dispatch them, returning immediately afterwards.
+😂0😂😂If <code> is non-NULL, enter a loop of performing transfers and calling <code>.
+😂0😂😂When <code> returns 0, return from the loop.
+😂0😂😂When <code> is called, an indication of whether there is at least one message <code> is made with the <code> flag.
+😂0😂😂The <code> argument to <code> is the pointer which is passed as the <code> argument to <code>.
+😂0😂😂<code> argument to be passed to the <code> function.
+😂0😂😂There are several different ways to use the <code> function.
+😂0😂😂Some applications might like to force a return from the <code> call after processing each message.
+😂0😂😂The <code> call will always guarantee that a separate call is made to the <code> function for each message processed.
+😂0😂😂In fact, it is possible to force <code> to return back to the application once per message by having the <code> function return a 0.
+😂0😂😂So even if all <code> does is return 0 as follows, <code>, the application will forces a return from <code> for each processed message.
+😂0😂😂Note, in this case, the <code> will not block because it also returns even if no message was found.
+😂0😂😂So basically, <code> will return no matter what in this case.
+😂0😂😂No messages or 1 message.
+😂0😂😂An application can use the <code> function to put <code> into a blocking mode rather than its default polling mode.
+😂0😂😂The <code> function can be written to cause <code> to block until it gets 1 message then return on the message it got: This is <code> by making use of the <code> argument to the <code> function.
+😂0😂😂This argument simply indicates if there is a message to be processed or not.
+😂0😂😂Here is how it would be written in this case.
+😂0😂😂What this does it to block until a message occurs then return on processing the first message.
+😂0😂😂Alternatively, suppose the application would like <code> to block until at least 1 message occurs, then return only after all the currently <code> messages have been processed.
+😂0😂😂To do this the application can define a <code> flag as follows.
+😂0😂😂Call <code> giving the <code> function and this flag's address as the context.
+😂0😂😂Now define the <code> function as follows.
+😂0😂😂In conclusion, depending on precisely what type of operation of <code> is desired, the <code> function can be tailored accordingly.
+😂0😂😂This class provides a generic API that can be used by application code to access the interface parameter set described in <ref>.
+😂0😂😂It is basically initialized with the contents of the parameter file that is generated during infrastructure linkage.
+😂0😂😂It provides accessors that facilitate the reading and possibly overriding of parameters and their values.
+😂0😂😂All <ref> required parameters are read-only because their values are automatically determined by the infrastructure linker by analyzing the user supplied netlist.
+😂0😂😂Implementation specific parameters can be read-only or read-write as required by the implementation.
+😂0😂😂All parameters in a <code> object must be overridden before that object is passed to the <code> call to construct the interface.
+😂0😂😂Overriding parameters afterwards has no effect.
+😂0😂😂While the format of the parameter file is implementation specific, the set of parameters required by the <ref> and the methods used to access them must conform to the specifications described in this section.
+😂0😂😂For purposes of access, the parameter set shall be organized as a database of attributed objects, where each object instance is decorated with a set of attributes expressed as name/value pairs.
+😂0😂😂There can be zero or more instances of each object kind.
+😂0😂😂The API shall provide a simple accessor to return the number of objects of a given kind, and read and write accessors to allow reading or overriding attribute values of specific objects.
+😂0😂😂The objects in the database are composed of the set of necessary interfacing components that interface the <ref> infrastructure to the application.
+😂0😂😂For example, there is a distinct object instance for each message port and a distinct object instance representing each defined clock in the <code>.
+😂0😂😂Attributes of each of the objects then represent, collectively, the parameters that uniquely characterize the dimensions and consititution of the interface components needed for a particular application.
+😂0😂😂So, for example, a system that requires 1 input port, 2 output ports and 2 distinct clocks is represented with 5 objects parametrized such that each port object has name and width attributes, each clock object has ratio, duty cycle attributes, etc.
+😂0😂😂These objects and their attributes precisely and fully describe the interfacing requirements between that application and the <ref> infrastructure.
+😂0😂😂The following table gives the minimal, predefined set of objects and attributes required by the <ref>.
+😂0😂😂Additional objects and attributes can be added by implementations.
+😂0😂😂For example, there may be a single, implementation specific object representing the entire <ref> infrastructure facility itself.
+😂0😂😂The attributes of this singleton object might be the set of implementation specific parameters that an implementor of the <ref> needs to allow the user to specify.
+😂0😂😂For more details of attribute meanings, see <ref>.
+😂0😂😂For simplicity, values can be either signed integer or string values.
+😂0😂😂More complex data types can be derived by the application code from string values.
+😂0😂😂Each attribute definition of each object kind implies a specific value type.
+😂0😂😂Although the accessors provided by the <code> class directly provide the information given in the above table, other implied parameters can be easily derived by the application.
+😂0😂😂Following are some of the implied parameters and how they are determined.
+😂0😂😂<code> objects indicate the total number of transactor - clock control macro combinations.
+😂0😂😂From the <code> objects, one can ascertain the number of distinct contributors to the control of a given clock, as well as the number of distinct transactors in the <code>.
+😂0😂😂The number of transactors in the <code> is determined by counting the number of distinct <code> encountered in the <code> objects.
+😂0😂😂The number of controlled clocks is determined by reading the number of <code> objects.
+😂0😂😂The number of input and output ports are determined by reading the number of <code> and <code> objects, respectively.
+😂0😂😂In addition, the following semantics characterize the parameter set: Transactor names are absolute hierarchical path names, and must conform to the syntax of the HDL language that the bridge netlist is expressed in.
+😂0😂😂Port names are relative hierarchical path names, and must conform to the syntax of the HDL language that the bridge netlist is expressed in.
+😂0😂😂Clock names are identifiers, not path names, and must conform to identifier naming syntax of the HDL language that the bridge netlist is expressed in.
+😂0😂😂The constructor constructs an object containing all the default values of parameters and then overrides them with any settings it finds in the specified parameter file.
+😂0😂😂All parameters, whether specified by the user or not must have default values.
+😂0😂😂Once constructed, parameters can be further overridden procedurally.
+😂0😂😂This is the name of the file generated by the infrastructure linker that contains all the parameters derived from the user’s hardware side netlist.
+😂0😂😂This name can be either a full pathname to a file or pathname relative to the local directory.
+😂0😂😂This is the destructor for the parameters object.
+😂0😂😂This accessor returns the number of instances of objects of the specified <code> name.
+😂0😂😂These two accessors read return an integer or string attribute value.
+😂0😂😂These two accessors override an integer or string attribute value.
+😂0😂😂It is considered an error to attempt to override any of the object attributes shown in the table in <ref> or any implementation specific attributes designated as read-only.
+😂0😂😂The following argument descriptions generally apply to all the accessors shown above.
+😂0😂😂Name of the kind of object for which an attribute value is being accessed.
+😂0😂😂It is considered an error to pass an unrecognized <code> name to any of the accessors.
+😂0😂😂Index of the instance of the object for which an attribute value is being accessed.
+😂0😂😂It is considered an error if the <code> the number returned by the <code> accessor.
+😂0😂😂Name of the attribute whose value is being read or overwritten.
+😂0😂😂It is considered an error if the <code> does not identify one of the attributes allowed for the given <code>.
+😂0😂😂Returned or passed in <code> of the attribute being read or overridden respectively.
+😂0😂😂Two overloaded variants of each accessor are provided.
+😂0😂😂One for string values and one for integer values.
+😂0😂😂The <code> represents the vector of message data that can be transferred from a <code> on the software side to its associated <code> on the hardware side, or from a <code> on the hardware side to its associated <code> on the software side.
+😂0😂😂The message data payload is represented as a fixed length array of <code> data words large enough to contain the bit vector being transferred to or from the hardware side message port.
+😂0😂😂For example if the message port had a width of 72 bits, the following diagram shows how the those bits would be organized in the data array contained inside the <code> object.
+😂0😂😂Construct a message data object whose size matches the width of the specified input port.
+😂0😂😂The constructed message data object can only be used for sends on that port or an error will result.
+😂0😂😂Destruct the object, free data array.
+😂0😂😂Return the width of the message in terms of number of bits.
+😂0😂😂Return the size of the data array in terms of number of <code> words.
+😂0😂😂Set word element i of array to word.
+😂0😂😂Set bit element <code> of the message vector to 0 if <code>, 1 otherwise.
+😂0😂😂It is an error if <code>.
+😂0😂😂Set <code> bit elements whose LSB’s start at bit element i of the message vector to the value of <code>.
+😂0😂😂It is an error if <code>.
+😂0😂😂Return the word at slot <code> in the array.
+😂0😂😂It is an error if <code>.
+😂0😂😂Return the value of bit element <code> in the message vector.
+😂0😂😂It is an error if <code>.
+😂0😂😂Return the value of <code> bit elements whose LSB’s start at i of the message vector.
+😂0😂😂It is an error if <code>.
+😂0😂😂The <ref> supports a feature called cycle stamping.
+😂0😂😂Each output message sent to the software side is stamped with the number of cycles of the 1/1 controlled clock elapsed since the beginning of emulation time.
+😂0😂😂This provides a convenient way for applications to keep track of elapsed cycles in their respective transactors as the simulation proceeds.
+😂0😂😂The returned value is an absolute, 64-bit unsigned quantity.
+😂0😂😂The <code> presents to the application a proxy interface to a transactor message input port.
+😂0😂😂This method sends a message to the message input channel.
+😂0😂😂This message appears on the hardware side as a bit vector presented to the transactor via the <code> macro instance bound to this proxy.
+😂0😂😂Message data object containing the message to be sent.
+😂0😂😂This method replaces the <code> object originally furnished to the <code> call that created this port proxy object.
+😂0😂😂This can be useful for replacing systems or input ready callback functions some time after the input message port proxy has been established.
+😂0😂😂New callback and <code> information to be associated with this message input port proxy.
+😂0😂😂This method returns the name of the transactor that is connected to the port.
+😂0😂😂This is the absolute hierarchical path name to the transactor instance expressed in the syntax of HDL language that the netlist is expressed in.
+😂0😂😂This method returns the port name.
+😂0😂😂This is the path name to the <code> macro instance relative to the containing transactor expressed in the syntax of HDL language that the netlist is expressed in.
+😂0😂😂This method returns the port width.
+😂0😂😂This is the value of the <code> parameter that was passed to the associated <code> instance on the hardware side.
+😂0😂😂There is no public destructor for this class.
+😂0😂😂Destruction of all message input ports shall automatically occur when the <code> function is called.
+😂0😂😂The class <code> presents to the application a proxy interface to the transactor message output port.
+😂0😂😂Receiving Output Messages There are no methods on this object specifically for reading messages that arrive on the output port proxy.
+😂0😂😂Rather, that operation is handled by the receive callbacks.
+😂0😂😂Receive callbacks are registered with an output port proxy when it is first bound to the channel.
+😂0😂😂The prototype for the receive callback is as follows.
+😂0😂😂When called, the receive callback is passed a pointer to a <code> object that contains the content of the received message.
+😂0😂😂It is also passed the <code> pointer.
+😂0😂😂The <code> pointer is typically a pointer to the object representing the software model that is interfacing to the port proxy.
+😂0😂😂Proper usage of this callback is to process the data quickly and return as soon as possible.
+😂0😂😂The reference to the <code> is of limited lifetime and ceases to exist once the callback returns and goes out of scope.
+😂0😂😂Typically in a SystemC <code>, the callback might do some minor manipulation to the <code> object then immediately return and let a suspended thread resume and do the main processing of the received transaction.
+😂0😂😂Notice that no <code> error status object is passed to the call.
+😂0😂😂This is because if an error occurs within the <code> function, the callback is never called in the first place and standard error handling procedures are followed by the service loop function itself.
+😂0😂😂If an error occurs inside the receive callback, by implication it is an application error not an <ref> error and thus it is the responsibility of the application to handle the error by perhaps setting a flag in the <code> object before returning from the callback.
+😂0😂😂This method replaces the <code> object originally furnished to the <code> call that created this port proxy object.
+😂0😂😂This can be useful for replacing systems or receive callback functions some time after the output message port proxy has been established.
+😂0😂😂New callback and context information to be associated with this message output port proxy.
+😂0😂😂This method returns the name of the transactor that is connected to the port.
+😂0😂😂This is the absolute hierarchical path name to the transactor instance expressed in the syntax of HDL language that the netlist is expressed in.
+😂0😂😂This method returns the port name.
+😂0😂😂This is the path name to the <code> macro instance relative to the containing transactor expressed in the syntax of HDL language that the netlist is expressed in.
+😂0😂😂This method returns the port width.
+😂0😂😂This is the value of the <code> parameter that was passed to the associated <code> instance on the hardware side.
+😂0😂😂There is no public destructor for this class.
+😂0😂😂Destruction of all message output ports shall automatically occur when the <code> function is called.
+😂0😂😂The <ref> software side also provides an ANSI standard C API.
+😂0😂😂All of the subsections to follow will parallel those in the C++ API described starting in <ref>.
+😂0😂😂It is possible to implement the C API as functions that wrap calls to methods described in the C++ API.
+😂0😂😂The prototypes of those functions shall follow with a minimum of explanatory text.
+😂0😂😂For full documentation about a function, see its corresponding subsection of <ref>.

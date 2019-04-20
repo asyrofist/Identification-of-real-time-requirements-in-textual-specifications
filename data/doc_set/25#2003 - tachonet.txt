@@ -1,0 +1,272 @@
+😂0😂😂Functional requirements specify actions that a system must be able to perform, without taking physical constraints into consideration.
+😂0😂😂 Functional requirements thus specify the input and output behaviour of a system.
+😂0😂😂 A list of these functional requirements is given below with an identification and a short description for each of them.
+😂0😂😂 These functional requirements are best described once translated into use cases.
+😂0😂😂 Each identified functional requirement is assigned a unique key “FUN-nn” where <ref> is a sequence number identifying the functional requirement.
+😂0😂😂 The table hereafter lists all the functional requirements.
+😂0😂😂 The system must allow a member of the network to send requests to a particular or all the other members about possible delivery of a driver’s smart card to a similar person.
+😂0😂😂 The system must allow a member of the network to send a bulk request on all or a large part of its driver’s smart card holders to a particular or all members of the network.
+😂0😂😂 The system must allow a member to do statistics on messages issued and received from/to his system.
+😂0😂😂 The system must provide automatic reply to the sender of the request through the use of a standard interface to the Members systems.
+😂0😂😂 The system must track the workflow between senders and related replies.
+😂0😂😂 The system must be able, in accordance with the rules on delays for each transaction, to automatically transmit alert messages to senders/replier/administrator when, <ref> a constraint on delay for reply is not fulfilled.
+😂0😂😂 The system must allow the administrator to extract statistics of use, standard delay of reply by member/period, percentage of unsuccessful transaction.
+😂0😂😂 The system must provide the management of user rights and permissions.
+😂0😂😂 The system must be able to define and manage various type of messages already in the driver’s smart card holder like predelivery check, stolen/lost cards, renewals, exchanges and duplicates.
+😂0😂😂 The system must be able to include new members in the network through simple administrative tasks.
+😂0😂😂 The system must be highly automatic to relieve the users of as many repetitive and tedious tasks as possible.
+😂0😂😂 The system must provide at application level a full security and encryption policy compatible with the level of security required in such situation.
+😂0😂😂 The system must be such that none of the Member States of the network, including the administrator, re-construct a consolidated European database.
+😂0😂😂 The system must allow a Member State to ask for the status of card to the corresponding <ref> of the Member State having issued the card.
+😂0😂😂 The system must allow a Member State to send card status modification requests to the corresponding <ref> of the Member State having issued the card.
+😂0😂😂 The system must allow enforcement authorities to ask for driver’s card status to the corresponding <ref> of the Member State having issued the card.
+😂0😂😂 The system must allow enforcement authorities to ask for workshop card status to the corresponding <ref> of the Member State having issued the card.
+😂0😂😂 Non-functional requirements describe only attributes of the system or attributes of the system environment.
+😂0😂😂 Each identified non-functional requirement is assigned a unique key “XXX-nn” where <ref> identifies the type of requirement and <ref> is a sequence number identifying the non-functional requirement.
+😂0😂😂 The table hereafter lists all the non-functional “usability” requirements.
+😂1😂😂 The system must guide users through an interface based on end user concepts.
+😂1😂😂 The system must be easy to learn and does not obstruct the thematic understanding of the users.
+😂1😂😂 The system must make it easy to correct mistakes.
+😂0😂😂 The table hereafter lists all the non-functional “reliability” requirements.
+😂1😂😂 The system is to be designed as a robust and dependable operational system which is tolerant to operator errors and which will recover cleanly from power cuts or other disasters.
+😂1😂😂 The system must function reliably, with few or no interruptions in its first operational year and fewer still thereafter.
+😂1😂😂 The system must give stable and reproducible results.
+😂0😂😂 The table hereafter lists all the non-functional “performance” requirements.
+😂0😂😂 This is no longer the case since everybody agrees upon having a single point of contact per Member State.
+😂1😂😂 There will be no restriction in time or place for the use of the software built from the specifications produced under this contract.
+😂1😂😂 The system must be able to establish and keep the dialog with the Members systems despite the various technical environments and technologies used on their sites.
+😂1😂😂 The system will be designed so that background tasks can continue while the user performs foreground tasks.
+😂2😂😂 The system will be used 24x7 by operators under pressure to produce results rapidly.
+😂2😂😂 The system must respond rapidly to user requests irrespective of any background tasks.
+😂2😂😂 Such high availability is also required from the Member States systems to ensure acceptable response time to enforcement authorities requests.
+😂0😂😂 The table hereafter lists all the non-functional “supportability” requirements.
+😂1😂😂 The system should be able to support other types of message structure to cover for instance a future driving licence network and correlated activities.
+😂1😂😂 The system must be maintainable and extensible.
+😂1😂😂 The system must be designed so that it can migrate to upgraded hardware or new versions of the operating systems involved.
+😂1😂😂 The system must be able to migrate to other type of network than the one proposed by TESTA-II.
+😂1😂😂 The system must provide solutions/rules regarding data encoding problems such as supporting different character sets, name truncation rules, name matching in case of misspelling.
+😂0😂😂 The table hereafter lists all the non-functional “design” requirements.
+😂1😂😂 The system must be designed and documented with the expectation that its operational lifetime will be many years.
+😂1😂😂 Each Member of this network will organise its data about smart card holders with no constraints or recommendations on operating system and/or technology used.
+😂1😂😂 The system will be able to dialog with these environments or specify a generic interface to dialog with the Member’s applications.
+😂0😂😂 The table hereafter lists all the non-functional “implementation” requirements.
+😂1😂😂 The system must use the network facilities supplied by the TESTA-II network.
+😂1😂😂 The algorithms in the software will be based on existing techniques and no research will be required to develop new algorithms under this contract.
+😂1😂😂 Most of the functionality of the new software shall depend on pre-existing or commercially available software.
+😂0😂😂 The table hereafter lists all the non-functional “physical” requirements.
+😂0😂😂 This chapter describes the use-case model comprehensively, in terms of how the model is structured into packages and what use cases and actors are in the model.
+😂0😂😂 This chapter contains the following topics.
+😂0😂😂 A use-case model is a model of the system's intended functions and its surroundings.
+😂0😂😂 It serves as a contract between the customer, the users and the system developers on the functionality of the system, which allows: <list>.
+😂0😂😂 The same use-case model is used in system analysis, design, implementation, and testing.
+😂0😂😂 The use-case model consists of use cases and actors.
+😂0😂😂 An actor defines a coherent set of roles that users of the system can play when interacting with it.
+😂0😂😂 A user can either be an individual or an external system.
+😂0😂😂 A use case defines a set of use-case instances, where each instance is a sequence of actions a system performs that yields an observable result of value to a particular actor.
+😂0😂😂 Each use case in the model is described in detail, showing step-by-step how the system interacts with the actors, and what the system does in the use case.
+😂0😂😂 Use cases function as a unifying thread throughout the software lifecycle.
+😂0😂😂 This map describes the list of identified actors.
+😂0😂😂 The following figure describes the different actors.
+😂0😂😂 This use case consists of processing a request for checking driver’s issued card coming from a <ref>.
+😂0😂😂 Such request could contain the data for a single driver or several drivers.
+😂0😂😂 This use case is also used by enforcers during road checks.
+😂0😂😂 The basic flow consists of the following steps.
+😂0😂😂 TACHOnet deciphers the received request and logs the received request as-is in its tracking database.
+😂0😂😂 TACHOnet validates its syntax and assigns it a TACHOnet refid.
+😂0😂😂 TACHOnet will build as many new requests as issuing Member State codes identified in the original request by applying defined name encoding rules to the given surname and first name in order to compute the search keys.
+😂0😂😂 For each issuing Member State identified in the original request, TACHOnet builds, logs and encrypts a new request, sends it to the corresponding Member State’s <ref> application and waits for receiving the response.
+😂0😂😂 For the sub-request mentioning any issuing Member State code, TACHOnet builds, logs and encrypts a new request, broadcasts it to all the Member States configured in TACHOnet and waits for receiving each response.
+😂0😂😂 For each received response, TACHOnet deciphers it, logs it as-is in its tracking database and validates its syntax.
+😂0😂😂 If it is valid, TACHOnet stores the response data in the database.
+😂0😂😂 When all responses are received or when the timeout is reached, TACHOnet builds, from the received responses stored in its database, the single consolidated response.
+😂0😂😂 TACHOnet logs the consolidated response is in its tracking database, encrypts it and sends it to the original caller.
+😂0😂😂 Several alternate flows may exist depending on the result of some events/actions of the basic flow.
+😂0😂😂 When TACHOnet receives a negative response from a Member State <ref>, it should log it and consider the request sent to that Member State <ref> as completed.
+😂0😂😂 When TACHOnet receives multiple responses (corresponding to a single request) from a <ref>, it should ignore the superfluous additional responses.
+😂0😂😂 The first received response is the processed one.
+😂0😂😂 When TACHOnet doesn’t receive within time a <ref> response, it should mention ‘timeout’ as status code for that Member State <ref> in the consolidated response.
+😂0😂😂 When TACHOnet receives a late <ref> response, it should log it and ignore it.
+😂0😂😂 When TACHOnet receives a syntactically invalid request / response, it should always send back a negative receipt with ‘Invalid Format request’ as status code and warn the TCN Administrator.
+😂0😂😂 When TACHOnet receives an invalid XML message, it will respond with a negative receipt mentioning the reason.
+😂0😂😂 Data privacy must also be guaranteed.
+😂0😂😂 All <ref> must provide services for: <list>.
+😂0😂😂 The <ref> requesting the check must be defined in TACHOnet.
+😂0😂😂 The <ref> requesting the check must send its request using the TACHOnet required request format.
+😂0😂😂 The <ref> requesting the check has received a response to its request.
+😂0😂😂 The following diagram outlines the flow of messages exchanged between actors.
+😂0😂😂 Please refer to <ref> for a complete description.
+😂0😂😂 In case of problems when sending a message, TACHOnet will automatically retry to send it 3 times at regular interval till request timeout.
+😂0😂😂 Afterwards, if still unsuccessful, it will record a ‘Server Error’ status code.
+😂0😂😂 This use case consists of checking the status of a tachograph card based on its card number.
+😂0😂😂 This use case is very useful for <ref> in order to check the validity of a card prior to performing some administrative tasks.
+😂0😂😂 It is also useful for enforcement authorities during road-checks where workshop could also be checked.
+😂0😂😂 The checked card is identified by its card number and its issuing Member State code.
+😂0😂😂 As an issued card must be unique, it should only exist in a single <ref> data store.
+😂0😂😂 The basic flow consists of the following steps.
+😂0😂😂 TACHOnet deciphers the received request and logs the received request as-is in its tracking database.
+😂0😂😂 TACHOnet validates its syntax and assigns it a TACHOnet refid.
+😂0😂😂 TACHOnet will build as many new requests as issuing Member State codes identified in the original request.
+😂0😂😂 TACHOnet figures out the target issuing Member State from the issuing Member State code given for each to-be-checked card.
+😂0😂😂 Every new request only contains card number issued by a particular Member State.
+😂0😂😂 For each identified issuing Member State, TACHOnet builds, logs and encrypts the new request, sends it to it and waits for receiving the response.
+😂0😂😂 For each received response, TACHOnet deciphers it, logs it as-is in its tracking database and validates its syntax.
+😂0😂😂 If it’s valid, TACHOnet stores the response message in the database.
+😂0😂😂 When all responses are received or when the timeout is reached, TACHOnet builds, logs and encrypts the consolidated response, and sends it to the original caller.
+😂0😂😂 The same alternate flows as described for UC-01 may exist depending on the result of some events/actions of the basic flow.
+😂0😂😂 Data privacy must also be guaranteed.
+😂0😂😂 All <ref>s must provide services for: <list>.
+😂0😂😂 The <ref> sending the request must be defined in TACHOnet.
+😂0😂😂 The <ref> sending the request must send it using the TACHOnet required request format.
+😂0😂😂 The <ref> sending the request has received a response to its request.
+😂0😂😂 Please refer to <ref> for a complete description.
+😂0😂😂 The following diagram outlines the flow of messages exchanged between actors.
+😂0😂😂 In case of problems when sending a message, TACHOnet will automatically retry to send it 3 times at regular interval till request timeout.
+😂0😂😂 Afterwards, if still unsuccessful, it will record a ‘Server Error’ status code.
+😂0😂😂 This use case consists of processing a request for declaring the modification of the status of card.
+😂0😂😂 It can be asked by <ref> clerks or by enforcers.
+😂0😂😂 The following table describes which new card status codes are allowed when declaring a card status modification.
+😂0😂😂 The basic flow consists of the following steps.
+😂0😂😂 TACHOnet deciphers the received request and logs the received request as-is in its tracking database.
+😂0😂😂 TACHOnet validates its syntax and assigns it a TACHOnet refid.
+😂0😂😂 TACHOnet will build as many new requests as issuing Member State codes identified in the original request.
+😂0😂😂 TACHOnet figures out the target issuing Member States based on the <ref> country code given in the original request.
+😂0😂😂 Every new request only contains card number issued by a particular Member State.
+😂0😂😂 For each identified issuing Member State, TACHOnet builds, logs and encrypts the new request, sends it to the Member State and waits for receiving the response.
+😂0😂😂 For each received response, TACHOnet deciphers it, logs it as-is in its tracking database and validates its syntax.
+😂0😂😂 If it’s valid, TACHOnet stores the response message in the database.
+😂0😂😂 When all responses are received or when the timeout is reached, TACHOnet builds, logs and encrypts the consolidated response, and sends it to the original caller.
+😂0😂😂 The same alternate flows as described for UC-01 may exist depending on the result of some events/actions of the basic flow.
+😂0😂😂 Data privacy must also be guaranteed.
+😂0😂😂 All <ref>s must provide services for: <list>.
+😂0😂😂 The <ref> sending the declaration must be defined in TACHOnet.
+😂0😂😂 The <ref> sending the declaration must send its request using the TACHOnet required request format.
+😂0😂😂 The <ref> sending the declaration must have first sent a request for checking the card number for which status modification is required.
+😂0😂😂 This use case is born from the “Luxemburg agreement”.
+😂0😂😂 It should be used by <ref> in the particular case when a card has been issued to a driver who showed a foreign driving license.
+😂0😂😂 The <ref> must then warn, via TACHOnet, the Member State having issued the driving license that a brand new card has been issued with the corresponding driving license number.
+😂0😂😂 Upon receipt of such request, the Member State having issued the driving license should store that information in its own local data store.
+😂0😂😂 The basic flow consists of the following steps.
+😂0😂😂 TACHOnet deciphers the received request and logs the received request as-is in its tracking database.
+😂0😂😂 TACHOnet validates its syntax and assigns it a TACHOnet refid.
+😂0😂😂 TACHOnet will build as many new requests as issuing Member State codes identified in the original request.
+😂0😂😂 TACHOnet figures out the issuing Member State code based on the driving license issuing nation given for each sub request.
+😂0😂😂 Every new request only contains card and driving license number issued by a particular Member State.
+😂0😂😂 For each identified issuing Member State, TACHOnet builds, logs and encrypts the new request, sends it to the Member State and waits for receiving the response.
+😂0😂😂 For each received response, TACHOnet deciphers it, logs it as-is in its tracking database and validates its syntax.
+😂0😂😂 If it’s valid, TACHOnet stores the response message in the database.
+😂0😂😂 When all responses are received or when the timeout is reached, TACHOnet builds, logs and encrypts the consolidated response, and sends it to the original caller.
+😂0😂😂 The same alternate flows as described for UC-01 may exist depending on the result of some events/actions of the basic flow.
+😂0😂😂 Data privacy must also be guaranteed.
+😂0😂😂 All <ref> must provide services for: <list>.
+😂0😂😂 The <ref> sending the request must be defined in TACHOnet.
+😂0😂😂 The <ref> sending the request must send it using the TACHOnet required request format.
+😂0😂😂 The <ref> sending the request has received a receipt and a response to its request.
+😂0😂😂 Please refer to <ref> for a complete description.
+😂0😂😂 The following diagram outlines the flow of messages exchanged between actors.
+😂0😂😂 In case of problems when sending a message, TACHOnet will automatically retry to send 3 times it at regular interval till request timeout.
+😂0😂😂 This use case consists of getting from TACHOnet the computed search keys corresponding to the given last name and first names.
+😂0😂😂 The <ref>s should call upon this service when issuing a new card to get the computed search keys of the driver’s surname and first names, so to store them in their local data store.
+😂0😂😂 When a <ref> will receive a TACHOnet request for checking driver’s issued card, it should use the search keys given in the request to search against their local data store.
+😂0😂😂 It’s therefore of major importance to use a common algorithm and to store computed search keys in the local data store.
+😂0😂😂 Nevertheless, Member States are free to use their own Phonetic algorithm.
+😂0😂😂 In such a case, it’s the Member State responsibility to compute the search keys based on the given driver’s surname and first of the first names.
+😂0😂😂 The basic flow consists of the following steps.
+😂0😂😂 The <ref> calls the TACHOnet service giving the driver’s surname and first names.
+😂0😂😂 TACHOnet checks the input parameters and, if valid, computes the corresponding surname and first of the first names search keys.
+😂0😂😂 TACHOnet returns the computed search keys as output parameters.
+😂0😂😂 If the input parameters are invalid, TACHOnet returns a negative status code to the request.
+😂0😂😂 This service should ideally be implemented as a synchronous Web Service.
+😂0😂😂 A web interface on top of this service should also be supplied to allow the <ref> users to access manually these TACHOnet services.
+😂0😂😂 A downloadable version of this web service should also be made available to enable some Member States to install and use it locally.
+😂0😂😂 The caller must provide the mandatory input parameters.
+😂0😂😂 The caller has received the computed search keys.
+😂0😂😂 <list>.
+😂0😂😂 The following diagram outlines the flow of messages exchanged between actors.
+😂0😂😂 Parameters should be UTF-8 encoded.
+😂0😂😂 These services are opened to anyone connected on TESTA.
+😂0😂😂 This use case consists of getting from TACHOnet the US/Ascii transliteration of the given driver’s surname, first names, place of birth and driving license number.
+😂0😂😂 Up to now, this use case only provides the transliteration from Greek or Latin to US/Ascii.
+😂0😂😂 Other transliterations will be provided when needed.
+😂0😂😂 The basic flow consists of the following steps.
+😂0😂😂 The <ref> calls the TACHOnet service giving the driver’s surname, first names, place of birth and driving license number.
+😂0😂😂 TACHOnet checks the input parameters and, if valid, transliterates the corresponding values into US/Ascii.
+😂0😂😂 TACHOnet returns the transliterated values as output parameters.
+😂0😂😂 If the input parameters are invalid, TACHOnet returns a negative status code to the request.
+😂0😂😂 This service should ideally be implemented as a synchronous Web Service.
+😂0😂😂 A web interface on top of this service should also be supplied to allow the <ref> users to access manually these TACHOnet services.
+😂0😂😂 A downloadable version of this web service should also be made available to enable some Member States to install and use it locally.
+😂0😂😂 The caller must provide the mandatory input parameters.
+😂0😂😂 The caller has received the computed search keys.
+😂0😂😂 <list>.
+😂0😂😂 The <ref> Administrator warns the TCN Administrator that she forgots her password.
+😂0😂😂 The TCN Administrator resets the corresponding <ref> Administrator account’s password using the <code>.
+😂0😂😂 The TCN Administrator warns the <ref> Administrator to log on again and change her password.
+😂0😂😂 Access to the <code> web site will be secured by using Windows accounts.
+😂0😂😂 The TCN Administrator has access to the <code>.
+😂0😂😂 In the production environment.
+😂0😂😂 Only one <ref> Administrator account will be created per Member State.
+😂0😂😂 All users are managed in the <code>.
+😂0😂😂 The TACHOnet Administrator will also be assigned one account.
+😂0😂😂 This use case consists of transferring, storing them and generating some usage statistics for the TCN Administrator and every <ref> Administrators.
+😂0😂😂 The usage statistics should give information about the incoming requests for a given period: <list>.
+😂0😂😂 The usage statistics should give information about the outgoing requests for a given period: <list>.
+😂0😂😂 The consolidated lists should also give information about the minimum, maximum and average value of the time it took to complete the transaction and for the given timeout value.
+😂0😂😂 Expired transactions are available and the Agent is scheduled on a nightly base.
+😂0😂😂 Transactions are transferred and statistics are generated.
+😂0😂😂 Statistics are a major measurement tool for identifying potential problems, assessing the overall usage of the system.
+😂0😂😂 The basic flow for this use case is the following.
+😂0😂😂 There are two spe<ref>l requirements.
+😂0😂😂 Usage statistics should be made available as a web-based interface.
+😂0😂😂 The web-based interface should support download of the rendered statistics in different formats as xml and Excel.
+😂0😂😂 SQL Reporting Services will be used to provide the whole TCN reporting solution.
+😂0😂😂 This use case consists of allowing the TCN Administrator and every <ref> Administrator to browse, via a secure Web interface, the usage statistics reports.
+😂0😂😂 There are five reports available: <list>.
+😂0😂😂 Transactions are transferred and statistics are generated.
+😂0😂😂 The actor has access to the <code> site.
+😂0😂😂 The actor has browsed and downloaded report.
+😂0😂😂 Statistics are a major measurement tool for identifying potential problems, assessing the overall usage of the system.
+😂0😂😂 This use case consists of logging as-is every message sent or received by TACHOnet.
+😂0😂😂 Such logging is provided out-of-the-box by <code> and will be configured at the channel level using the <code> tool.
+😂0😂😂 The basic flow consists of the following steps.
+😂0😂😂 Upon receiving a message, TACHOnet should log it as-is in the tracking database.
+😂0😂😂 Prior to sending a message, TACHOnet should log it as-is in the tracking database.
+😂0😂😂 TACHOnet should also provide a system for archiving “old” messages.
+😂0😂😂 Great care must be taken when setting up the tracking database in terms of sizing, performance, availability and security.
+😂0😂😂 A message is received by TACHOnet or about to be sent by TACHOnet.
+😂0😂😂 The received/sent message is logged in the tracking database.
+😂0😂😂 How long should TACHOnet keep track of a message? This section describes the use cases related to the “TCN Monitoring” package.
+😂0😂😂 The following diagram lists the use cases of this package.
+😂0😂😂 This section contains the following topics.
+😂0😂😂 This use case consists of monitoring the whole TACHOnet system.
+😂0😂😂 Such monitoring will be based on the <code> product, used as standard monitoring tool by the EC DI’s Data Center.
+😂0😂😂 Managing <code> through <code> is made possible by installing the <code> Management Pack for <code>.
+😂0😂😂 Nevertheless, as this pack consists of more than 700 rules, some configuration need to be made to configure the set of rules required for monitoring the <code> configuration of TACHOnet.
+😂0😂😂 The TCN Administrator has access to the <code> console.
+😂0😂😂 In order to constantly keep the availability and performance of the TACHOnet system at an optimum level, the system must constantly monitored and should raise some events when particular problems occur.
+😂0😂😂 See <code> documentation.
+😂0😂😂 <code> is used as central monitoring system.
+😂0😂😂 Will the TACHOnet servers be directly monitored from the central <code> console or should TACHOnet provide? Is there any special FW configuration between the TACHOnet servers and the central <code> console? What are the <code> rules that need be configured in <code> and how? This use case consists of managing a <ref> in terms of TACHOnet configuration.
+😂0😂😂 The TCN Administrator has access to the <code> and <code> tools.
+😂0😂😂 The <ref> configuration in TACHOnet has been updated.
+😂0😂😂 All Member States will not be ready at production day 1.
+😂0😂😂 Moreover, new candidate Member States will potentially join TACHOnet in the near future.
+😂0😂😂 The configuration of existing Member States could also change.
+😂0😂😂 Therefore, it’s important to provide the TCN Administrator with the tools or procedures to manage the TACHOnet configuration of a Member State.
+😂0😂😂 Managing Member States consists of adding a new Member State or modifying the current configuration of a Member State or removing a Member State.
+😂0😂😂 All these manual tasks will be described in details in the <ref> document.
+😂0😂😂 Anyway, some of these major tasks are outlined below.
+😂0😂😂 The following table lists the activities to carry out to add a new Member State in the TACHOnet configuration.
+😂0😂😂 Create the <code> organization corresponding to the new Member State with its relevant properties.
+😂0😂😂 Create the corresponding <code> messaging ports.
+😂0😂😂 Create the corresponding <code> distribution list.
+😂0😂😂 Update all the other <code> distribution lists to add the new messaging port corresponding to the new Member State.
+😂0😂😂 Create the corresponding <code> channels.
+😂0😂😂 Create the corresponding <code> receive functions.
+😂0😂😂 Add a new <ref> Administrator account.
+😂0😂😂 Changing the phone/fax/email of the Member State.
+😂0😂😂 Update the custom properties of the <code> organization corresponding to the Member State.
+😂0😂😂 Changing the url address where TACHOnet should send XML messages.
+😂0😂😂 Update the transport type of the <code> messaging port corresponding to the Member State.
+😂0😂😂 <code> provides the necessary tools to manage its configuration.
+😂0😂😂 These will be leveraged to update the Member States configuration.
+😂0😂😂 The TCN Administrator is a <code> Administrator and has access to the <code> and <code> tools.

@@ -1,0 +1,82 @@
+😂0😂😂 This section provides an overview of this project.
+😂0😂😂 The purpose of this document is to describe functionality and behavior of the new agentMom framework.
+😂0😂😂 This document is intended to be viewed only by project advisor and committee members.
+😂0😂😂 This document covers the software requirements for the project “Applying Broadcasting/Multicasting/Secured Communication to agentMom in Multi-Agent Systems”.
+😂0😂😂 agentMom 1.2 refers to current implementation of agentMom New agentMom refers to this project, including agentMom with capability of broadcasting, multicasting and secured communication Unicast refers to one-to-one communication in such a way that a packet originates from a single Internet host, and it is destined to a unique location of another Internet host.
+😂0😂😂 Multicast refers to one-to-many communication in such a way that a packet originates from a single Internet host, and it is destined to multiple receivers within the same multicast address.
+😂0😂😂 Broadcast refers to one-to-many communication in such a way that a packet originates from a single Internet host, and it is destined to all receivers within the same local network.
+😂0😂😂 Organization refers to a set of agents.
+😂0😂😂 Reorganization refers to a situation where the previous organization structure is not efficient to succeed the mission.
+😂0😂😂 Group refers to a set of agents who agree to use the same multicast address to subscribe group message.
+😂0😂😂 Time-To-Live refers to the number of hops that multicast message is allowed to remain in the network before it is discarded by the router.
+😂0😂😂 The remainder of this document provides a greater detail functionality and requirement of the software.
+😂0😂😂 Section 2 describes product perspective, overall functionality, intended users, constraints and assumption of this software.
+😂0😂😂 Section 3 provides general Use Cases and specific requirement of this software.
+😂0😂😂 This section provides an overview of the project functionality and factors that affect this project and its requirements.
+😂0😂😂 This project will be a framework that provides reusability of agent’s communication.
+😂0😂😂 It is implemented in Java and provides the basic building blocks for building agents, conversations between agents, and the message that are passed in the conversations.
+😂0😂😂 Enable agents to broadcast a message to all the agents within the same local network.
+😂0😂😂 Enable agents to multicast a message to all the agents within the same multicast address.
+😂0😂😂 Enable agents to unicast a message to other agents within organization.
+😂0😂😂 Allow agents to choose among unicast, multicast and broadcast communication.
+😂0😂😂 Allow agents to join and leave multicast group.
+😂0😂😂 Provide message encryption and decryption techniques for secured communication.
+😂0😂😂 Allow agents to choose to encrypt or not to encrypt message.
+😂0😂😂 Users who want to implement multi-agent systems based on this framework are expected to have general knowledge of Java programming, object-oriented programming and Multi-Agent Systems Engineering Methodology.
+😂0😂😂 We assume that each agent knows the address of destinating agents in order to send unicast message.
+😂0😂😂 We assume that each agent has enough knowledge to decide the best way to communicate with the other agents.
+😂0😂😂 In the case of using secured multicast communication, we assume that there is an agent whom each agent can request for the same encryption and decryption key.
+😂0😂😂 This agent should maintain a list of agents who are allowed to get the keys.
+😂0😂😂 We assume that each agent knows the multicast address in order to send multicast message.
+😂0😂😂 This section provides all of the project requirements in detail.
+😂0😂😂 Message is encrypted or Message is not encrypted.
+😂0😂😂 An agent sends notify to join/leave multicast group.
+😂0😂😂 Message is decrypted only if Message is encrypted.
+😂0😂😂 For example, <img> and Agent_D belong to the same group, and then <img> wants to leave the group and <img> wants to join the group.
+😂0😂😂 In this situation, when reorganization occurs, <img> who is previously not part of the group may send notify message to join the group, and <img> who is previously part of the group, may send notify message to leave the group.
+😂0😂😂 For instance, <img> suffers a failure in one of its capabilities and does not want to receive any further message from the group.
+😂0😂😂 <img> who may have capability to substitute <img> is needed to be part of the group.
+😂0😂😂 This involves sending notify of join and leave the group.
+😂0😂😂 Message is encrypted or Message is not encrypted.
+😂0😂😂 An agent sends unicast message to another agent.
+😂0😂😂 Another agent receives message.
+😂0😂😂 Message is decrypted only if Message is encrypted.
+😂0😂😂 In this situation, <img> wants to communicate with <img>.
+😂0😂😂 This direct communication can happen between any two agents within organization.
+😂0😂😂 Message is encrypted or Message is not encrypted.
+😂0😂😂 An agent sends multicast message to the group.
+😂0😂😂 Other agents in the group receive message.
+😂0😂😂 Message is decrypted only if Message is encrypted In this situation, <img> wants to send a message to everyone within the group, assuming that <img>, <img> and <img> subscribe to the same multicast address.
+😂0😂😂 This involves the multicast communication since other agents who do not belong to the group cannot receive this message.
+😂0😂😂 For instance, an agent may want to inform everyone in the group when the assigned tasks are completed.
+😂0😂😂 This is more effective than in unicast communication since only one copy is sent.
+😂0😂😂 Also, using bidding/market-based protocols fit well with this kind of communication.
+😂0😂😂 An agent may request a bid from other agents for doing some tasks.
+😂0😂😂 An agent sends message to everyone in the same local network Other agent in the same local network receive message In this situation, <img> wants to send a message to everyone within the same local network that agent A belongs to.
+😂0😂😂 This involves the broadcast communication since any agent in the same local network as <img> can receive this message.
+😂0😂😂 For instance, when a new agent who does not previously exist in that local network wants to announce the existence to other agents.
+😂0😂😂b <code> shall support the ability to send unicast message.
+😂0😂😂 <code> shall support the ability to receive unicast message.
+😂0😂😂 Unicast message shall only be received by the specified address.
+😂0😂😂 Unicast message shall arrive at the specified address and in order.
+😂0😂😂 <code> shall support the ability to send multicast message.
+😂0😂😂 <code> shall support the ability to receive multicast message.
+😂0😂😂 <code> shall support the ability to send request to join multicast group.
+😂0😂😂 <code> shall support the ability to send request to leave multicast group.
+😂0😂😂 agentMom shall not allow receiving multicast message from a group joining that multicast group.
+😂0😂😂 agentMom shall not allow receiving multicast message from a group after that multicast group.
+😂0😂😂 agentMom shall support the ability to set time-to-live for multicast message.
+😂0😂😂 agentMom shall support the ability to set multicast address and port for sending and receiving multicast message.
+😂0😂😂 agentMom shall support the ability to receive multicast message from multiple groups.
+😂0😂😂 <code> shall support the ability to sent broadcast message.
+😂0😂😂 <code> shall support the ability to receive broadcast message.
+😂0😂😂 *Broadcast message shall be sent to all possible hosts under the same local network.
+😂0😂😂 <code> shall support the ability to encrypt unicast message.
+😂0😂😂 <code> shall support the ability to decrypt unicast message.
+😂0😂😂 agentMom shall allow an agent to decide whether or not to encrypt a message.
+😂0😂😂 agentMom shall automatically decrypt encrypted message.
+😂0😂😂 agentMom shall support the ability to encrypt multicast message.
+😂0😂😂 agentMom shall support the ability to decrypt multicast message.
+😂0😂😂 <code> with shall support the use of the architecture that agent directly controls the conversations.
+😂0😂😂 <code> shall support the use of the architecture that agent’s components control the conversations.
+😂0😂😂 The new built agentMom shall be compatible with the agentMom 1.2

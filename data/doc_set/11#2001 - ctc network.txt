@@ -1,0 +1,182 @@
+😂0😂😂This Software Requirements Specification provides the requirements for the Center-to-Center Communications Communications project.
+😂0😂😂This document describes the requirements for the Dallas/Ft.
+😂0😂😂Worth Regional "Center-to-Center Communications Network" that is based on a Texas Department of Transportation C2C project.
+😂0😂😂The TxDOT C2c project initially connected the DFW TxDOT Traffic Management Centers.
+😂0😂😂This C2C infrastructure implements a repository for traffic data and provides a mechanism to exchange device control information between TMCs.
+😂0😂😂The C2C project will be implemented using the evolving ITS Traffic Management Data Dictionary standard, the message sets associated with TMDD, other ITS Data Elements and Message Sets.
+😂0😂😂The use of ITS standards will create a system that is reusable for other ITS application areas and will provide the State of Texas with a baseline system that can be cost effectively extended in the future.
+😂0😂😂The C2C infrastructure must interconnect several dissimilar traffic management systems.
+😂0😂😂In order to create the C2C infrastructure, interfaces to the existing systems will be created.
+😂0😂😂The data from these interfaces will communicate with the existing system in a "system specific" format.
+😂0😂😂The data being deposited into the C2C infrastructure will be converted to a standard format based on the ITS standards.
+😂0😂😂The C2C infrastructure is being created using a series of building blocks.
+😂0😂😂These building blocks allow the software to be utilized in a number of configurations by simply altering the configuration parameters of the software.
+😂0😂😂In a region such as Dallas/Ft.
+😂0😂😂Worth, multiple instances of the building blocks will be utilized.
+😂0😂😂The software is being designed so that multiple instances of a building block can be deployed by simply "configuring" the building block of operation within a specific agency.
+😂0😂😂Conceptually, the C2C infrastructure would be deployed as depicted in the following diagram.
+😂0😂😂Any data that is passed into the "cloud" in the above figure will be based on the ITS standards.
+😂0😂😂Systems will interface to the "cloud" using a project defined protocol.
+😂0😂😂New systems that are deployed based on the ITS standards will not utilize the project defined protocol but will be moved "into" the cloud because they themselves would be based on the ITS standards.
+😂0😂😂The C2C project has the following goals.
+😂0😂😂To provide a common repository for traffic information for the DFW Metroplex.
+😂0😂😂To provide a World Wide Web based graphical map to display traffic conditions in the DFW Metroplex.
+😂0😂😂To provide a Microsoft Windows application that will allow agencies without a formal Traffic Management Center to participate in the C2C infrastructure and information sharing.
+😂0😂😂To provide a system which supports ITS center-to-center communications for command/control/status of various ITS field devices including: Dynamic Message Signs, Lane Control Signals and Closed Circuit Television Cameras, Ramp Meters, and Highway Advisory Radios.
+😂0😂😂To utilize National ITS standards to implement the project.
+😂0😂😂To provide a software system that is extensible all local or regional partners.
+😂0😂😂This would allow a "local" common repository to be created by "linking" individual partners, a "regional" common repository to be created by "linking" local common repositories and a "statewide" common repository to be created by "linking" regional common repositories.
+😂0😂😂<ref> defines the requirements of the system.
+😂0😂😂Acronyms are defined in <ref>.
+😂0😂😂The following sections define the requirements for the C2C project.
+😂0😂😂Requirements are listed in separate sections and in table format for each functional area.
+😂0😂😂The C2C project mnemonic uniquely identifies the C2C project to distinguish its requirements from the requirements of other ITS systems.
+😂0😂😂The mnemonic for the C2C project is C2C.
+😂0😂😂The Requirement Category Mnemonic is a two-letter mnemonic for each functional area.
+😂0😂😂The Requirement Numbers are a combination of target Advanced Traffic Management System and sequential within a given functional area.
+😂0😂😂The columns of the tables are structured as follows.
+😂0😂😂The first column of the table contains the requirement identifier.
+😂0😂😂The requirement identifier is a three-part number that is used to uniquely identify each requirement.
+😂0😂😂The number consists of the following fields.
+😂0😂😂The second column of each table contains a description of the requirement.
+😂0😂😂The third column contains a rationale for the requirements.
+😂0😂😂If the rationale is left blank for a particular requirement, the requirement rationale is assumed obvious from the description.
+😂0😂😂The following tables list the interfaces that shall be developed.
+😂0😂😂<img> lists the interface requirements for supporting the roadway network data transmission.
+😂0😂😂For each roadway network it maintains, the Center shall provide the following information <list>.
+😂0😂😂The Center shall provide the following link information <list>.
+😂0😂😂The Center shall provide the following node information <list>.
+😂0😂😂<img> lists the interface requirements for supporting the traffic conditions data transmission.
+😂0😂😂For each link defined within the Center <list>.
+😂0😂😂<img> lists the interface requirements for supporting the incident data transmission.
+😂0😂😂The Center shall support the following information about each incident <list>.
+😂0😂😂<img> lists the interface requirements for supporting the lane closure data transmission.
+😂0😂😂The Center shall support the following information about each lane closure <list>.
+😂0😂😂<img> lists the interface requirements for supporting the Dynamic Message Sign data transmission.
+😂0😂😂The Center shall provide the following status information about each DMS <list>.
+😂0😂😂To support DMS control in other centers, the Center shall be able to support the following device control command for a DMS <list>.
+😂0😂😂<img> lists the interface requirements for supporting the Lane Control Signal data transmission.
+😂0😂😂The Center shall support the following status information about each LCS <list>.
+😂0😂😂To support LCS control in other centers, the Center shall be able to support the following device control command for a LCS <list>.
+😂0😂😂<img> lists the interface requirements for supporting the Closed Circuit Television data transmission.
+😂0😂😂The Center shall provide the following information status information about each CCTV <list>.
+😂0😂😂To support CCTV control in other centers, the Center shall be able to support the following CCTV control request <list>.
+😂0😂😂Ft.
+😂0😂😂Worth will not support Momentary Pan/Tilt/Zoom/Iris/Focus command.
+😂0😂😂To support video snapshots, the Center shall be able to support the following status information <list>.
+😂0😂😂To support CCTV switching in other centers, the Center shall be able to support the following CCTV switching command <list>.
+😂0😂😂Dallas will not support the Tour video switch command.
+😂0😂😂<img> lists the interface requirements for supporting the ramp meter data transmission.
+😂0😂😂The Center shall support the following status information about each ramp meter <list>.
+😂0😂😂To support Ramp Meter control in other centers, the Center shall be able to support the following device control command for a ramp meter <list>.
+😂0😂😂<img> lists the interface requirements for supporting the Highway Advisory Radio data transmission.
+😂0😂😂The Center shall support the following status information about each HAR <list>.
+😂0😂😂To support HAR control in other centers, the Center shall be able to support the following device control command for a HAR <list>.
+😂0😂😂<img> lists the interface requirements for supporting the Traffic Signals data transmission.
+😂0😂😂The Center shall support the following status information about each Traffic Signal <list>.
+😂0😂😂To support Traffic Signal control in other centers, the Center shall be able to support the following device control command for a Traffic Signal <list>.
+😂0😂😂<img> lists the interface requirements for supporting the Environmental Sensor Station data transmission.
+😂0😂😂The Center shall support the following status information about each ESS <list>.
+😂0😂😂<img> lists the interface requirements for supporting the High Occupancy Vehicle data transmission.
+😂0😂😂The Center shall support the following status information about each HOV <list>.
+😂0😂😂To support HOV Lane control in other centers, the Center shall be able to support the following device control command for a HOV Lane <list>.
+😂0😂😂<img> lists the interface requirements for supporting the Parking Lot data transmission.
+😂0😂😂The Center shall support the following status information about each Parking Lot <list>.
+😂0😂😂<img> lists the interface requirements for supporting the School Zone data transmission.
+😂0😂😂The Center shall support the following status information about each School Zone <list>.
+😂0😂😂To support School Zone control in other centers, the Center shall be able to support the following device control command for a School Zone <list>.
+😂0😂😂<img> lists the interface requirements for supporting the Railroad Crossing data transmission.
+😂0😂😂The Center shall support the following status information about each Railroad Crossing <list>.
+😂0😂😂<img> lists the interface requirements for supporting the Reversible Lanes data transmission.
+😂0😂😂The Center shall support the following status information about each Reversible Lane <list>.
+😂0😂😂To support Reversible Lane control in other centers, the Center shall be able to support the following device control command for a Reversible Lane <list>.
+😂0😂😂<img> lists the interface requirements for supporting the Dynamic Lane Assignment data transmission.
+😂0😂😂The Center shall support the following status information about each Dynamic Lane <list>.
+😂0😂😂To support Dynamic Lane control in other centers, the Center shall be able to support the following device control command for a Dynamic Lane <list>.
+😂0😂😂<img> lists the interface requirements for supporting the Transit data transmission.
+😂0😂😂The Center shall support the following status information about each Bus Stop <list>.
+😂0😂😂The Center shall support the following status information about each Bus Location <list>.
+😂0😂😂The Center shall support the following status information about each Light/Commuter Stop <list>.
+😂0😂😂The Center shall support the following status information about each Light/Commuter Location <list>.
+😂0😂😂The Center shall support the following status information about each Park and Ride Lot <list>.
+😂0😂😂The Center shall support the following status information about each Vehicle Priority <list>.
+😂0😂😂<img> lists the interface requirements for supporting network device status data transmission.
+😂0😂😂The Center shall support the following information about network device status <list>.
+😂0😂😂<img> lists the interface requirements supporting command timeframe requests and responses.
+😂0😂😂The device status requestor and Center shall support the following information for command timeframe request <list>.
+😂0😂😂This is used to determine when a center will accept a command from a remote user.
+😂0😂😂These are device type dependent.
+😂0😂😂The device status requestor and Center shall support the following information for command timeframe request <list>.
+😂0😂😂This is the response to a command timeframe request.
+😂0😂😂The follow sections detail the functional requirements of the C2C project.
+😂0😂😂The Data Collector Requirements define what must be stored on the Data Collector.
+😂0😂😂The requirements are listed in <img>.
+😂0😂😂The Data Collector shall be designed to support the storage of TMDD data elements and message set information.
+😂0😂😂The Data Transmission Requirements define the messaging protocols and message sets to be used for C2C communications and are listed in <img>.
+😂0😂😂The C2C Project shall utilize the TMDD standard to transmit information.
+😂0😂😂DATEX/ASN shall be used to transmit the TMDD message sets.
+😂0😂😂TCP/IP shall be used to transmit the DATEX/ASN data.
+😂0😂😂Derived from this requirement is the necessary TCP/IP connection management.
+😂0😂😂The Web Map application generates a map that can be displayed on an Internet WWW server.
+😂0😂😂The map provides a graphical depiction of the traffic conditions.
+😂0😂😂The requirements for the WWW map are listed in <img>.
+😂0😂😂The map shall display interstates and state highways on the graphical map.
+😂0😂😂The basemap data shall be derived from the North Central Texas Council of Governments Geo- Data warehouse.
+😂0😂😂The map user shall be able to alter the current magnification of the map.
+😂0😂😂The map user shall be able to pan the map in each of the following directions: North, South, East or West.
+😂0😂😂Each link displayed on the map shall be color coded to provide a graphical depiction of speeds.
+😂0😂😂A configuration file shall be provided to specify specific speed values.
+😂0😂😂The color coding shall be as follows <list>.
+😂0😂😂The map shall display the current incidents known to the C2C Project.
+😂0😂😂The user shall be able to click on an incident icon to obtain further information about the incident.
+😂0😂😂All current incidents shall be displayed in tabular format with the following information contained in the table <list>.
+😂0😂😂The map shall be capable of displaying the following for a DMS <list>.
+😂0😂😂The map shall be capable of displaying the following for a LCS <list>.
+😂0😂😂The map shall be capable of displaying the following for a CCTV <list>.
+😂0😂😂The Incident GUI must provide data to the C2C Infrastructure.
+😂0😂😂The GUI requirements are listed in <img>.
+😂0😂😂The Incident GUI shall allow the user to enter incident or lane closure information without the use of an Center.
+😂0😂😂The Incident GUI shall allow the user to input the following information for each incident <list>.
+😂0😂😂The Incident GUI shall allow the user to input the following information for each lane closure <list>.
+😂0😂😂The GUI shall provide a list of previously entered incidents.
+😂0😂😂The GUI shall allow the data about an incident to be modified.
+😂0😂😂The GUI shall allow a user to delete a previously entered incident.
+😂0😂😂The GUI shall provide a list of previously entered lane closures.
+😂0😂😂The GUI shall allow a user to delete a previously entered lane closure.
+😂0😂😂The GUI shall allow a user to delete a previously entered lane closure.
+😂0😂😂<img> contains the requirements for the Remote Control GUI.
+😂0😂😂The remote Center Control GUI shall be designed to execute on a public network and transmit equipment requests to the C-2-C software system.
+😂0😂😂The Remote Control GUI will execute as a local application on a PC.
+😂0😂😂The application will generate TMDD device control messages that will be sent to a Center for processing.
+😂0😂😂Connectivity through the various firewalls and gateways is not addressed by this requirement.
+😂0😂😂When the GUI application is initiated, the user shall be prompted for the following information <list>.
+😂0😂😂The user shall be provided with the capability to select a network identifier for a device command/control request.
+😂0😂😂Once an Center is selected, the user shall be able to select a DMS from a list and provide the following information <list>.
+😂0😂😂Once an Center is selected, the user shall be able to select a LCS from a list and provide the following information <list>.
+😂0😂😂Once an Center is selected, the user shall be able to issue a CCTV switching command <list>.
+😂0😂😂Once an Center is selected, the user shall be able to select a CCTV from a list and provide the following information <list>.
+😂0😂😂Once an Center is selected, the user shall be able to select a Ramp Meter from a list and provide the following information <list>.
+😂0😂😂Once an Center is selected, the user shall be able to select a HAR from a list and provide the following information <list>.
+😂0😂😂Once an Center is selected, the user shall be able to select a Traffic Signal from a list and provide the following information <list>.
+😂0😂😂Once an Center is selected, the user shall be able to select a HOV from a list and provide the following information <list>.
+😂0😂😂Once an Center is selected, the user shall be able to select a School Zone from a list and provide the following information <list>.
+😂0😂😂Once an Center is selected, the user shall be able to select a Reversible Lane from a list and provide the following information <list>.
+😂0😂😂Once an Center is selected, the user shall be able to select a Dynamic Lane from a list and provide the following information <list>.
+😂0😂😂For each device command/control status request sent by the Remote GUI, the status returned from the network identifier will be displayed in a scrollable list on the GUI.
+😂0😂😂The computer resource requirements are listed in <img>.
+😂0😂😂The C2C Server shall execute in a Microsoft Windows NT environment.
+😂0😂😂A DATEX/ASN runtime library shall be available on any computer communicating to the C2C project.
+😂0😂😂The web server application shall use ESRI's ARC Internet Map Server product for creating of map images.
+😂0😂😂The Design and implementation requirements are listed in <img>.
+😂0😂😂The C2C shall execute in a Microsoft Windows NT environment.
+😂0😂😂The C2C shall be implemented in the C/C++ programming language.
+😂0😂😂The C2C web interface shall be implemented using C/C++ and ESRI ARC IMS.
+😂0😂😂The Incident GUI shall be implemented using C/C++ and ESRI Map Objects.
+😂0😂😂The Remote Control GUI shall be implemented using C/C++ and ESRI Map Objects.
+😂0😂😂The C2C Project shall be capable of operating in one of two modes: normal mode for normal operations or in test mode for development and testing.
+😂0😂😂The requirements for these modes are listed in <img>.
+😂0😂😂The C2C shall be able to operate in normal mode.
+😂0😂😂In this mode the C2C receives data from all connected systems, including the Incident GUI, and combines the data into a single data store.
+😂0😂😂The C2C shall be able to operate in test mode.
+😂0😂😂In this mode, the C2C performs normal mode operations and also logs activities.
+😂0😂😂To provide additional information for development and testing.

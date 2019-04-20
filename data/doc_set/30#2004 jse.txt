@@ -1,0 +1,228 @@
+😂0😂😂Des Davison, Brett Kotze and Anne Clayton, of the JSE Securities Exchange South Africa, met with Arthur Cousins and Graham Lund, of the Money Market Forum, on the 19 March 2003.
+😂0😂😂The MMF launched a project to establish an electronic money market environment in South Africa.
+😂0😂😂 UNEXcor and STRATE tendered for the dematerialisation and settlement of money market instruments and in September 2002, the MMF appointed UNEXcor as the service provider.
+😂0😂😂Pursuant to the appointment of UNEXcor as the service provider of the dematerialisation and settlement of money market instruments an agreement to merge STRATE and UNEXcor has been reached effective from 01 August 2003.
+😂0😂😂 The new entity, hereinafter referred to as STRATE, will provide the services as originally tendered by UNEXcor.
+😂0😂😂The JSE is a paid-up member of the Association of National Numbering Agents, i.e. an authorised National Numbering Agent - an entity authorised to issue ISINs in accordance with ISO and ANNA rules and guidelines.
+😂0😂😂 In terms of the requirements of ANNA, only one NNA may be authorised per country.
+😂0😂😂The JSE issues and disseminates ISINs for equities when a new equity is loaded in the mainframe programme - EQUITY MASTER DATA.
+😂0😂😂 All equity master data is managed and maintained by the JSE's Listings Division.
+😂0😂😂 The JSE's Market Information Division also maintains and issues ISINs for bonds, as a service to BESA, in the mainframe programme GILT MASTER DATA, which is a manual process.
+😂0😂😂The MMF and STRATE have approached the JSE with their key requirements - to enable dematerialisation, trading and electronic clearing and settlement of money market instruments on the same day that requires the issuing of an ISIN code.
+😂0😂😂 The scope of this project is to provide an electronic method to enable the MMF participants via STRATE to create, amend and delete ISIN codes for money market instruments.
+😂0😂😂This document sets out the business requirements for the issuing of money market instruments ISIN codes by the JSE.
+😂0😂😂As STRATE will be paying for the development and monthly running costs of this service, this document will be forwarded to the JSE's Application and Service Division for an assessment and quote for costs of design, development, testing, implementation and monthly running costs of ISIN Issuance for Money Market Instruments.
+😂0😂😂The costs will be forwarded to STRATE for their review and approval and only thereafter, subject to NMPG approval of the SWIFT messages to be used and message content, will design and development start taking place.
+😂0😂😂Money market instruments are normally traded and settled on the same business day.
+😂0😂😂 Settlement is on a gross physical basis between seller and buyer.
+😂0😂😂 The majority of activity in the money market is undertaken in the primary market and the typical participants in this market are registered banks.
+😂0😂😂The Objectives of the Electronic Money Market are as follows: <list>.
+😂0😂😂To achieve an electronic clearing and settlement environment, all new instruments will be issued electronically before sale and delivery into the primary market.
+😂0😂😂 As an ISIN is the key securities code identification, and used by STRATEs system, SAFIRES, for settlement purposes and CSDPs for recording purposes, the MMF requires an electronic methodology to create, amend and delete ISINs for electronically issued money market instruments.
+😂0😂😂The MMF has approved SWIFT as the communication protocol and STRATE has recommended that the MT 598 User Defined SWIFT messages be used as the format for the messages, as detailed in <ref>.
+😂0😂😂 The content and format of the MT 598 User Defined SWIFT messages will require approval from the MMF and NMPG before finalisation and acceptance by the JSE.
+😂0😂😂The MMF requires that the JSE provide ISINs automatically in response to an electronic request, as the immediacy of the issuance of an ISIN is essential for the trading, and electronic clearing and settlement of money market instruments.
+😂0😂😂 The MMF estimates an issuance requirement of approximately 200 to 500 ISINs per day.
+😂0😂😂 To distinguish money market instruments ISINs from equities and bonds the MMF has requested the use of an ISIN prefix of ZAM.
+😂0😂😂Pursuant to the STRATE/UNEXcor merger, as noted above, it has been agreed that the SWIFT messages to create, amend or delete an ISIN for money market instruments would be routed via STRATE, and the interaction would therefore be limited, from the JSEs perspective, between STRATE and the JSE for the issuance of ISINs.
+😂0😂😂The automated ISIN Issuance for Money Market Instruments system will be implemented by the JSE in the 2nd quarter 2004.
+😂0😂😂The Systems Component Model, set out in <img> below, was sourced from the MMF document: <ref> and is included in this document for illustrative purposes.
+😂0😂😂The Conceptual Model set out in <img> below, is an adaptation of the Systems Component Model set out in <img>, to represent the participation of the JSE, in its capacity as a NNA, in providing the ISINs to STRATE as CSD/IOR.
+😂0😂😂This is included in this document for illustrative purposes.
+😂0😂😂The following assumptions have been made.
+😂0😂😂The Custodian and Banker components are incorporated into one entity - CSDP.
+😂0😂😂The Trading component refers to either a system or the act of reaching a contractual agreement.
+😂0😂😂And The MMF Participants communicate directly with the DvP Engine component or indirectly through the Trading/Reporting Engine.
+😂0😂😂 The JSE's ASD department will be required to develop a programme for the automatic issuance of ISINs for money market instruments.
+😂0😂😂 This will include a programme to "unstring" the MT 598 User Defined SWIFT messages and "string" the MT 598 User Defined SWIFT messages, as detailed in <ref>, for the request and notification of ISINs by/to STRATE.
+😂0😂😂 To differentiate between the JSEs current SWIFT BIC codes and ensure correct routing and message identification the JSE will apply for a new branch code "ISN" as an extension of their current BIC address.
+😂0😂😂 ANNA and ISO determine the rules regarding issuing and deleting ISINs.
+😂0😂😂  The rules and guidance notes are set out in the following documents: <list>.
+😂0😂😂 Further market rules regarding issuing, amending and deleting ISINs required will be provided by the JSE.
+😂0😂😂 The JSE and STRATE will enter into a Service Level Agreement that sets out all the arrangements pertaining to the service provided by the JSE and will include a Business Continuity Plan.
+😂0😂😂 This will be made available to money market participants for their perusal and reference.
+😂0😂😂 The MMF, in an effort to standardise money market instruments for the purposes of simplifying the management and processing of instruments, has identified four generic categories of money market instruments, as follows: <list>.
+😂0😂😂 These generic characteristics together with the approved the MT 598 User Defined SWIFT messages formats and contents will determine the fields required in the Money Market ISIN Issuance programme.
+😂0😂😂 The table below sets out per generic money market instrument.
+😂0😂😂 The data required to be held per MMI by the NNA.
+😂0😂😂 and The definitive characteristics required for the issuance of ISINs.
+😂0😂😂 In the interim the issued amount will not be required.
+😂1😂😂 However, the JSE's systems will be developed to cater for the issued amount, which will be defaulted.
+😂0😂😂 Refer <ref>, for fields and contents of the MT 598 User Defined SWIFT messages.
+😂0😂😂 9 SWIFT message types must be provided for, as detailed in the below table.
+😂0😂😂 This field identifies the <ref> of the message.
+😂0😂😂 This field identifies the sub-message type involved in the proprietary message.
+😂0😂😂 The valid value is <list>.
+😂0😂😂 This field identifies that this is a proprietary message.
+😂0😂😂 This should not have any contents.
+😂0😂😂 This field identifies the start of General block and it should have a value of GENL.
+😂0😂😂 This field identifies the function of the message.
+😂0😂😂 The valid value is <list>.
+😂0😂😂 This field gives the preparation date and time of the message.
+😂0😂😂 This field identifies the instruction indicator.
+😂0😂😂 The valid value is <list>.
+😂0😂😂 This field identifies the end of General block and it should have a value of GENL.
+😂0😂😂 This field identifies the start of the MMI Details block and it should have a value of MMID.
+😂0😂😂 This field identifies the Participant Code of the Issuer.
+😂0😂😂 This field identifies the ISIN information.
+😂0😂😂 This field identifies the Issued amount of a financial instrument.
+😂0😂😂 This field identifies the start of the Financial Instrument Attributes block and should have a value of FIA.
+😂0😂😂 This field identifies the Payment Frequency of the MMI.
+😂0😂😂 The valid values are <list>.
+😂0😂😂 This field identifies the Coupon Payment Day of the MMI.
+😂0😂😂 The valid values are 01-31.
+😂0😂😂 This field identifies the Generic Category of the instrument.
+😂0😂😂 The valid values are <list>.
+😂0😂😂 This field identifies the MMI Type.
+😂0😂😂 The valid values are: <list>.
+😂0😂😂 This field requires 4 alpha characters to be present.
+😂0😂😂 Where the MMI Type is less than 4 alpha characters, the spaces after the MMI Type must be filled with 'X's'.
+😂0😂😂 For example, NOT will be NOTX, ZB will be ZBXX, etc.
+😂0😂😂 This field identifies the maturity date of a financial instrument.
+😂0😂😂 This field identifies the issue date of a financial instrument.
+😂0😂😂 This field identifies the Coupon Rate of a financial instrument.
+😂0😂😂 It is optional for <ref> but mandatory for <ref>.
+😂0😂😂 This field identifies the end of the Financial Instrument Attributes block and should have a value of FIA.
+😂0😂😂 This field identifies the end of the MMI Details block and should have a value of MMID.
+😂0😂😂 The rejection from NNA can be of two types: <list>.
+😂0😂😂 On receipt of the message from the MMI Engine, NNA will perform basic validations.
+😂0😂😂 If the format of the message is not as per the 'Interface Specification - Volume A', then NNA will generate a rejection message to the MMI Engine.
+😂0😂😂 The layout of the MT598-901 is given below.
+😂0😂😂 This field identifies the <ref> of the message.
+😂0😂😂 This field identifies the sub-message type involved in the proprietary message.
+😂0😂😂 The valid value is <list>.
+😂0😂😂 This field identifies that this is a proprietary message.
+😂0😂😂 This should not have any contents.
+😂0😂😂 This field identifies the error code and the corresponding tag name.
+😂0😂😂 The format is <list>.
+😂0😂😂 This field gives the preparation date and time of the message.
+😂0😂😂 This field identifies the <ref> of the original message.
+😂0😂😂 On receipt of the message (MT598-150-NEWM) from the MMI Engine, NNA will perform basic validations.
+😂0😂😂 If the validation is not successful, then NNA will generate a rejection message (MT598-902) to the MMI Engine.
+😂0😂😂 The layout of the MT598-902 is given below.
+😂0😂😂 This field identifies the <ref> of the message.
+😂0😂😂 This field identifies the sub-message type involved in the proprietary message.
+😂0😂😂 The valid value is <list>.
+😂0😂😂 This field identifies that this is a proprietary message.
+😂0😂😂 This should not have any contents.
+😂0😂😂 This field identifies the start of GENL block and it should have a value of GENL.
+😂0😂😂 This field identifies the function of the message.
+😂0😂😂 The valid value is <list>.
+😂0😂😂 This field gives the preparation date and time of the message.
+😂0😂😂 This field identifies the instruction indicator.
+😂0😂😂 The valid value is <list>.
+😂0😂😂 This field identifies the start of linkage block and it should have a value of LINK.
+😂0😂😂 This block is mandatory for ISIN Confirmation.
+😂0😂😂 This field identifies the Sub-Message Type of the linked transaction.
+😂0😂😂 The valid value is 150.
+😂0😂😂 This field identifies the <ref> of the original message.
+😂0😂😂 This field identifies the MMI Type.
+😂0😂😂 The valid values are: <list>.
+😂0😂😂 This field requires 4 alpha characters to be present.
+😂0😂😂 Where the MMI Type is less than 4 alpha characters, the spaces after the MMI Type must be filled with 'X's'.
+😂0😂😂 For example, NOT will be NOTX, ZB will be ZBXX, etc..
+😂0😂😂
+😂0😂😂 This field identifies the maturity date of a financial instrument.
+😂0😂😂 If present, this should match with the original MT598-150 sent by STRATE.
+😂0😂😂 This field identifies the date of issue of a financial instrument.
+😂0😂😂 If present, this should match with the original MT598-150 sent by STRATE.
+😂0😂😂 This field identifies the Coupon Rate of a financial instrument.
+😂0😂😂 It is optional for <ref> but mandatory for Categories 2, 3 and 4.
+😂0😂😂 If present, this should match with the original MT598-150 sent by STRATE.
+😂0😂😂 This field identifies the end of financial instrument attributes block and should have a value of FIA.
+😂0😂😂 This field identifies the end of the MMI Details block and should have a value of MMID.
+😂0😂😂 The rejection from STRATE can be of two types: <list>.
+😂0😂😂 On receipt of the message from NNA, STRATE will perform basic validations.
+😂0😂😂 If the format of the message is not as per 'Interface Specification - Volume A', then STRATE will generate a rejection message to NNA.
+😂0😂😂 The layout of the MT598-901 is given in <ref>.
+😂0😂😂 On receipt of the message from NNA, STRATE will perform basic validations.
+😂0😂😂 If the validation is not successful, then STRATE will generate a rejection message to NNA.
+😂0😂😂 The layout of the MT598-902 is given in <ref>.
+😂0😂😂 The MMI Engine will forward the validated MMI Cancellation / De-Issue Request to NNA.
+😂0😂😂 The layout of the MT598-150 for MMI Cancellation / De-Issue is given below.
+😂0😂😂 This field identifies the <ref> of the message.
+😂0😂😂 This field identifies the sub-message type involved in the proprietary message.
+😂0😂😂 The valid value is <list>.
+😂0😂😂 This field identifies that this is a proprietary message.
+😂0😂😂 This should not have any contents.
+😂0😂😂 This field identifies the start of GENL block and it should have a value of GENL.
+😂0😂😂 This field identifies the function of the message.
+😂0😂😂 The valid value is <list>.
+😂0😂😂 This field gives the preparation date and time of the message.
+😂0😂😂 This field identifies the instruction indicator.
+😂0😂😂 The valid value is <list>.
+😂0😂😂 This field identifies the end of GENL block and it should have a value of GENL.
+😂0😂😂 This field identifies the start of the MMI Details block and it should have a value of MMID.
+😂0😂😂 This field identifies the Participant Code of the Issuer.
+😂0😂😂 This field identifies the ISIN information.
+😂0😂😂 This field identifies the cancelled / De-Issued amount of a financial instrument.
+😂0😂😂 This field identifies the end of the MMI Details block and should have a value of MMID.
+😂0😂😂 The rejection from NNA can be of two types: <list>.
+😂0😂😂 On receipt of the message from STRATE, NNA will perform basic validations.
+😂0😂😂 If the format of the message is not as per 'Interface Specification - Volume A', then NNA will generate a rejection message to STRATE.
+😂0😂😂 The layout of the MT598-901 is given in <ref>.
+😂0😂😂 On receipt of the message from STRATE, NNA will perform basic validations.
+😂0😂😂 If the validation is not successful, then NNA will generate a rejection message to STRATE.
+😂0😂😂 The layout of the MT598-902 is given in <ref>.
+😂0😂😂 On receipt of the message from the MMI Engine, NNA will perform the basic validations.
+😂0😂😂 If the validation is successful, then NNA will cancel the ISIN in question and generate an ISIN Cancellation Confirmation message to the MMI Engine.
+😂0😂😂 The layout of the MT598-151 is given below.
+😂0😂😂 This field identifies the <ref> of the message.
+😂0😂😂 This field identifies the sub-message type involved in the proprietary message.
+😂0😂😂 The valid value is <list>.
+😂0😂😂 This field identifies that this is a proprietary message.
+😂0😂😂 This should not have any contents.
+😂0😂😂 This field identifies the start of GENL block and it should have a value of GENL.
+😂0😂😂 This field identifies the function of the message.
+😂0😂😂 The valid value is <list>.
+😂0😂😂 This field gives the preparation date and time of the message.
+😂0😂😂 This field identifies the instruction indicator.
+😂0😂😂 The valid value is <list>.
+😂0😂😂 This field identifies the start of linkage block and it should have a value of LINK.
+😂0😂😂 This block is mandatory for ISIN Cancellation.
+😂0😂😂 This field identifies the Sub-Message Type of the linked transaction.
+😂0😂😂 The valid value is 150.
+😂0😂😂 This field identifies the <ref> of the original message.
+😂0😂😂 This field identifies the end of linkage block and it should have a value of LINK.
+😂0😂😂 This field identifies the end of GENL block and it should have a value of GENL.
+😂0😂😂 This field identifies the start of the MMI Details block and it should have a value of MMID.
+😂0😂😂 This field identifies the Participant Code of the Issuer.
+😂0😂😂 This should match with the original MT598-150 sent by STRATE.
+😂0😂😂 This field identifies the ISIN information.
+😂0😂😂 This field identifies the Cancelled / De-Issued amount of a financial instrument.
+😂0😂😂 This should match with the original MT598-150 sent by STRATE.
+😂0😂😂 This field identifies the end of the MMI Details block and should have a value of MMID.
+😂0😂😂 The rejection from STRATE can be of two types: <list>.
+😂0😂😂 On receipt of the message from NNA, STRATE will perform basic validations.
+😂0😂😂 If the format of the message is not as per 'Interface Specification - Volume A', then STRATE will generate a rejection message to NNA.
+😂0😂😂 The layout of the MT598-901 is given in <ref>.
+😂0😂😂 On receipt of the message from NNA, STRATE will perform basic validations.
+😂0😂😂 If the validation is not successful, then STRATE will generate a rejection message to NNA.
+😂0😂😂 The layout of the MT598-902 is given in <ref>.
+😂0😂😂 On Maturity Date, the MMI Engine will generate a MMI Cancellation Request to NNA.
+😂0😂😂 The layout of the MT598-150 for MMI Cancellation on Maturity is given below.
+😂0😂😂 This field identifies the <ref> of the message.
+😂0😂😂 This field identifies the sub-message type involved in the proprietary message.
+😂0😂😂 The valid value is <list>.
+😂0😂😂 This field identifies that this is a proprietary message.
+😂0😂😂 This should not have any contents.
+😂0😂😂 This field identifies the start of GENL block and it should have a value of GENL.
+😂0😂😂 This field identifies the function of the message.
+😂0😂😂 The valid value is <list>.
+😂0😂😂 This field gives the preparation date and time of the message.
+😂0😂😂 This field identifies the instruction indicator.
+😂0😂😂 The valid value is <list>.
+😂0😂😂 This field identifies the end of GENL block and it should have a value of GENL.
+😂0😂😂 This field identifies the start of the MMI Details block and it should have a value of MMID.
+😂0😂😂 This field identifies the Participant Code of the Issuer.
+😂0😂😂 This field identifies the ISIN information.
+😂0😂😂 This field identifies the Issued amount of a financial instrument.
+😂0😂😂 This field identifies the end of the MMI Details block and should have a value of MMID.
+😂0😂😂 The rejection from NNA can be of two types: <list>.
+😂0😂😂 On receipt of the message from STRATE, NNA will perform basic validations.
+😂0😂😂 If the format of the message is not as per 'Interface Specification - Volume A', then NNA will generate a rejection message to STRATE.
+😂0😂😂 The layout of the MT598-901 is given in <ref>.
+😂0😂😂 On receipt of the message from STRATE, NNA will perform basic validations.
+😂0😂😂 If the validation is not successful, then NNA will generate a rejection message (MT598-902) to STRATE.
+😂0😂😂 The layout of the MT598-902 is given in <ref>.
+😂0😂😂 The front end for the monitoring of the issuance of ISINs must cater for the following functionality: <list>.

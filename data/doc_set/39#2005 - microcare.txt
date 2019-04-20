@@ -1,0 +1,47 @@
+😂0😂😂 The system will be developed on Oracle 9i platform
+😂0😂😂 Front end will be VB.
+😂0😂😂 Reports will be crystal reports 9.
+😂1😂TODO: general with deails 😂 The system will be user friendly with maximum master table structure with all transaction screens to have drop down selection menus to minimize data entry errors.
+😂0😂😂 The main data entry screen on claims entry to have drop drown menu from patient��s profile selection to medicine cost to have drop down.
+😂0😂😂 Minimize the use of key board for any number entry to have a faster transaction data entry.
+😂1😂😂 The system will be easily trainable for the user with minimum computer skill with simple user step by step manual.
+😂0😂😂 The structural design of the database will have sequential links with surrogate keys.
+😂1😂TODO: same as above😂 The database storage will be highly efficient to manage and avoid empty unused spaced blocked, properly defragmenter on a periodic basis.
+😂0😂😂 This efficiency will have a maximum provision to expand this program beyond the pilot period, if the program requirements remain same.
+😂1😂TODO:😂 High intrusion controls will be in place in the system and the database.
+😂0😂😂 Access level controls, various organizational level user setting by including granular model setting.
+😂0😂😂  The purpose of this document is to explain the flow and the requirement of Voucher Management System required by Marie Stopes International Uganda during the various meetings held between MSIU and Microcare from 28th of Nov 2005 to 30th of Nov 2005.
+😂0😂😂 This document is purely based on the Functional Flow Diagram designed by Microcare.
+😂0😂😂 The document will explain every small entity of the system including various code generations, Bar-coding and Graphical User Interface etc.
+😂0😂😂 This document will help the system development team to understand the overall and detailed functions of every small entity in VMU and to design the system that will meet every requirement of the VMU program.
+😂0😂😂 This document will help the testing team to prepare the Test Cases and will help them to test every module in the system and overall testing of the system, so that the testing team will have confidence on the quality of this system.
+😂0😂😂 Past experiences with development aid showed, that financing inputs, e.g.
+😂0😂😂 facilities and equipment, does not result in the necessary improvement of health outcomes.
+😂0😂😂 Thus as a change of paradigm, the OBA concept finances agreed outputs with pre-defined quality rather than pre-defined inputs by selling vouchers for STD services at subsidised prices to patients.
+😂0😂😂 These vouchers will be refunded to service providers in the private sector, government hospitals, NGOs, and faith-based organisations.
+😂0😂😂 The major advantages of the OBA approach are, that it allows <list>.
+😂0😂😂 The approach was successfully applied in the sixties/seventies in South Korea and Taiwan.
+😂0😂😂 In recent years also a programme was run in Nicaragua but the OBA has not been implemented in larger scale programs.
+😂0😂😂 The principles of the voucher, the contents of the health care services, their required quality, the standards to be met by the providers and their infrastructure, as well as the measures for monitoring the quality have been defined in the PDS.
+😂0😂😂 The main structures and processes in the STD voucher programme are <list>.
+😂0😂😂 The programme is prepared, implemented and managed by the Voucher Management Unit.
+😂0😂😂 The VMU establishes a network of approved providers throughout Mbarara District.
+😂0😂😂 The VMU runs a marketing and behavioural change campaign to market and inform about the voucher services and how to use them.
+😂0😂😂 The VMU establishes and runs a distribution system with the purpose to distribute the STD vouchers to the sexually active population for which the above-mentioned providers are in reach.
+😂0😂😂  Distribution follows certain rules.
+😂0😂😂 The vouchers are packed in two with one voucher for the purchaser of the voucher, in the following addressed as ��client�� and one for the partner of the client.
+😂0😂😂 The voucher may only be bought for personal treatment or for the treatment of the partner.
+😂0😂😂 Only one voucher is sold at time.
+😂0😂😂 The option of selling more than one voucher to a person at a time introduces too many sources for fraud.
+😂0😂😂 Distributors keep a distribution list documenting distributor, voucher number, date, place of sale, and name and place of living of the customer.
+😂0😂😂 The client may honour the voucher at any approved provider of his choice.
+😂0😂😂 STD treatment according to the National Treatment Algorithms for STD in Uganda, adapted for this voucher scheme, is given to clients for free for the syndromes of <list>.
+😂0😂😂 In line with the NTA the voucher includes <list>.
+😂0😂😂 At the end of each month they hand in �C respectively the claims processing agency collects <list>.
+😂0😂😂  The voucher management system VMS is designed to atomize the process of Voucher Management Unit to minimize the manual process to maximize the quality of the project to understand the progress and timely out come of the project to take necessary steps by the MSIU Admin team to plan for the future and to increase the quality of the STD voucher service.
+😂0😂😂 The system will also control the existence of fraud in claims and will help the service provider to reach their payments in time without delay.
+😂0😂😂 The other features and details of system will be explained in below sections in the document.
+😂0😂😂 The voucher management system is subdivided into following modules to make the system easy for understanding, developing, testing and to implement.
+😂0😂😂  Each of the above modules are again subdivided into subsystems, those details are explained in below sections in the document.
+😂0😂😂 The preparation of SRS is purely based on the following documents.
+😂0😂😂 This section of the document is going to explain the functionalities of the system, its subsystems and how it��s integrated and working together.

@@ -1,0 +1,218 @@
+😂0😂😂The minimum set of requirements for the product to be accepted.
+😂0😂😂Requirements th at are considered to be likely inclusions to the product, time permitting.
+😂0😂😂Desirable Requirem ents that are not likely to be added in this version, but should be considered for future modifications.
+😂0😂😂MultiMahjong is a product consisting of two programs - a MultiMahjongServer and a MultiMahjongClient.
+😂0😂😂This Server/Client architecture will allow up to 4 players to play Mahjong against each other over a TCP/IP network.
+😂0😂😂The MultiMahjongClient program will also allow 1 player to play in a stand-alone mode.
+😂0😂😂As any game of Mahjong requires 4 players to play, and there may not be 4 people available for a network game, the game will allow users to choose enough computer opponents to make up the required 4 players.
+😂0😂😂In a single player game, the user will play against 3 computer opponents.
+😂0😂😂To play the game, users will use the MultiMahjongClient.
+😂0😂😂The MultiMahjongServer is to reside on a TCP/IP server and will communicate with MultiMahjongClients.
+😂0😂😂The client requires the product for commercial purposes.
+😂0😂😂The MultiMahjongClient program is to be sold to potential users  and the MultiMahjongServer is to initially reside on a server owned or operated by the client.
+😂0😂😂This document contains many references to the rules of Mahjong, specifically the Chinese rules of Mahjong.
+😂0😂😂It is assumed that the reader of this document is familiar with these rules as many of the requirements are Mahjong specific.
+😂0😂😂These rules can be found in the following book <list>.
+😂0😂😂The client has no existing system for MultiMahjong.
+😂0😂😂As this is only a suggestion for the proposed logical system, all requirements mentioned in this section are Level 2 requirements.
+😂0😂😂The following diagrams show the flow of data between the entities of the MultiMahjong system.
+😂0😂😂Note that these diagrams only describe the top level processes and the data that flows between them.
+😂0😂😂They do not describe the functions of the MultiMahjongClient and MultiMahjongServer programs as the processes are shared between both programs.
+😂0😂😂The functionality of the MultiMahjongClient and MultiMahjongServer programs is described in more detail in <ref>.
+😂0😂😂The MultiMahjongServer will allow connections from MultiMahjongClients and communicate with them using IP.
+😂0😂😂The MultiMahjongServer will serve as a node for MultiMahjongClients.
+😂0😂😂That is, it will be able to relay data received from one MultiMahjongClient to other MultiMahjongClients that request it.
+😂0😂😂The MultiMahjongServer will automate the game initialisation functions, such as: randomising tile order, randomising seating position and storing the "Game Info" database.
+😂0😂😂The MultiMahjongServer will contain a High Scores list with the names and scores of the top MultiMahjong players.
+😂0😂😂The MultiMahjongServer will allow players on MultiMahjongClient programs to chat with each other in real time.
+😂0😂😂The MultiMahjongServer will allow players on MultiMahjongClient programs to modify their own names and icons during gameplay.
+😂0😂😂The MultiMahjongServer will support an architecture whereby all Computer Opponents required will reside on it instead of on the MultiMahjongClient programs.
+😂0😂😂The MultiMahjongServer will have a graphical user interface with which the administrator of the server can get log information and change game settings.
+😂0😂😂The MultiMahjongServer will be able to save preferences to a file and read from that file at start-up.
+😂0😂😂Note that all requirements hereafter are concerned with the MultiMahjongClient program.
+😂0😂😂When the user begins the MultiMahjongClient program, they will be able to choose to create a new multi player game, to create a new single player game, to join an existing multi player game, or to quit the program.
+😂0😂😂These options will be available at any stage while the program is running as long as there is no game currently being played by the user.
+😂0😂😂When a user creates a new multi player game, they must <list>.
+😂0😂😂The MultiMahjongClient must send this game initialisation information to the MultiMahjongServer so that the MultiMahjongServer can create a new game.
+😂0😂😂The processing for any Computer Opponents will be done by the MultiMahjongClient program.
+😂0😂😂In a single player game, the MultiMahjongClient will need to process for 3 COs.
+😂0😂😂In a multi player game with 2 human players, each MultiMahjongClient will support 1 CO.
+😂0😂😂In a multi player game with 3 human players, only 1 of the 3 MultiMahjongClients will support a CO.
+😂0😂😂Obviously, in a multi player game with 4 human players, no CO is required.
+😂0😂😂When a user creates a new single player game, they must <list>.
+😂0😂😂When a user selects the option to join an existing game, the MultiMahjongClient will retrieve a list of any games that still require players from the MultiMahjongServer.
+😂0😂😂When a user wishes to join a multi player game, they must <list>.
+😂0😂😂The MultiMahjongClient must send this join information to the MultiMahjongServer.
+😂0😂😂In a multi player game, each MultiMahjongClient must retrieve the following data from the MultiMahjongServer <list>.
+😂0😂😂The list of un-started games that the MultiMahjongClient fetches from the MultiMahjongServer will be displayed in such a way that users can see the following information about each game <list>.
+😂0😂😂The MultiMahjongClient will save the user preferences in a file and read them in when the program begins.
+😂0😂😂Users who create a new game will be able to change the ability level of any CO involved in the game.
+😂0😂😂There will be 3 levels available: Beginner, Intermediate and Advanced.
+😂0😂😂Users who create a new game will be able to choose to play different variations of Mahjong rules other than those described in <ref>.
+😂0😂😂The variations will include the Cleared Hand variation and the Japanese variation.
+😂0😂😂Any user who creates or joins a game will be able to upload their own JPEG or GIF image that they wish to have displayed above their name, if they do not wish to use a preset icon.
+😂0😂😂The MultiMahjongClient must only allow players to make moves according to the Chinese rules of Mahjong as described in the rulebook, "How to Play Mah Jong".
+😂0😂😂The MultiMahjongClient will inform the user whose turn it is to pick up a tile.
+😂0😂😂The MultiMahjongClient will retrieve other players' changes in the game situation from the MultiMahjongServer.
+😂0😂😂The user's screen is then updated to display these changes.
+😂0😂😂The following game changes are displayed <list>.
+😂0😂😂If the configurations of the current discard, the tiles in a  user's hand, and the player whose turn it is, would allow the user to Chow/Pung/Kong/Mahjong under the Chinese rules of Mahjong, the MultiMahjongClient will inform the user that they can do so.
+😂0😂😂If they choose to take this action, then the MultiMahjongClient must send this information to the MultiMahjongServer.
+😂0😂😂User's will be able to pick up a tile from the wall if it is their turn.
+😂0😂😂If they choose to pick up, the MultiMahjongClient must send this information to the MultiMahjongServer.
+😂0😂😂User's will be able to discard a tile if they have picked one up.
+😂0😂😂When they choose to discard, the MultiMahjongClient must send this information to the MultiMahjongServer.
+😂0😂😂The MultiMahjongClient must inform the user if another player is fishing.
+😂0😂😂The MultiMahjongClient must inform the user if another player goes Mahjong.
+😂0😂😂The wind of the round is also updated.
+😂0😂😂The MultiMahjongClient must inform the user if the hand has ended in a draw.
+😂0😂😂The MultiMahjongClient will keep the user's tiles in order.
+😂0😂😂The MultiMahjongClient will play sound effects associated with certain game actions.
+😂0😂😂Users will be able to turn the sound on or off at any stage during the game.
+😂0😂😂Users will have access to the User's Documentation online  at any stage during the game.
+😂0😂😂Users will be able to view the High Scores list that is located on the MultiMahjongServer.
+😂0😂😂The MultiMahjongClient will automate the picking up of a tile from the wall if the user has no other option.
+😂0😂😂User's will be able to Undo their last move if playing in single player mode.
+😂0😂😂User's will be able to Save their game if playing in single player mode.
+😂0😂😂User's will be able to chat with each other in real time.
+😂0😂😂User's will be able to change their icons/pictures and names during the game.
+😂0😂😂The game will end when all 4 rounds have been played or if the user chooses to end the game.
+😂0😂😂The user will be able to end the game at any stage of the game.
+😂0😂😂The user will then be able to quit the program or begin/join a new game.
+😂0😂😂The MultiMahjongServer will inform all MultiMahjongClients connected to the game that the game has ended.
+😂0😂😂Users of any MultiMahjongClient previously connected to the game will have the choice to quit the program or to begin/join a new game.
+😂0😂😂If a user leaves the game prematurely, a new CO is created on another user's machine to fill their place.
+😂0😂😂This CO will take over the user's current position and circumstance within the game.
+😂0😂😂This CO will play at an ability level as defined in the Level 2 Requirements for the CO.
+😂0😂😂If a user leaves the game prematurely, a new CO is created on another user's machine to fill their place.
+😂0😂😂The user who created the game will decide at what level the CO will play at.
+😂0😂😂The CO must play moves according to the Chinese rules of Mahjong.
+😂0😂😂The CO will not have access to the data containing the faces of any tiles in the wall or any concealed tiles in any other players' hands.
+😂0😂😂The CO will have access to the number of tiles in the wall or in a player's hand.
+😂0😂😂The CO will be able to read any player's exposed or revealed hands.
+😂0😂😂The CO will be able to pick up tiles off the wall, discard tiles, reveal Kongs, and Chow/Pung/Kong/Mahjong.
+😂0😂😂The CO will be able to determine what tiles have not been played according to the tiles that have already been discarded, exposed or revealed.
+😂0😂😂The CO will be able to recognise "almost finished" sets of tiles and will not discard tiles in such sets.
+😂0😂😂This is to give the CO a basic level of strategy.
+😂0😂😂The CO will be able to play at 3 different ability levels: Beginner, Intermediate and Advanced.
+😂0😂😂The CO will be able to perform look ahead algorithms to determine its best move in the Intermediate and Advanced levels.
+😂0😂😂The CO will be able to perform calculations at any stage of the game.
+😂0😂😂The CO will be able to play any version of the rules that are specified by the user who creates the game.
+😂0😂😂There will be CO's of different playing styles that the user can choose from.
+😂0😂😂This section states all the requirements of the MultiMahjong system that are not related to the functionality of the MultiMahjong system.
+😂1😂😂The potential users of the MultiMahjongClient product will be anyone who enjoys playing or is interested in the game of Mahjong.
+😂0😂😂The product is aimed at users who have a basic knowledge how to operate a PC, Macintosh or Unix box.
+😂0😂😂Users who wish to play multi player Mahjong will not need to have advanced knowledge of TCP/IP networking.
+😂0😂😂It is assumed however, that the computer has been configured correctly to connect to a TCP/IP network.
+😂0😂😂Prior knowledge of Mahjong rules is not necessary, as the product will be designed for both players with some or no experience.
+😂0😂😂The user of the MultiMahjongServer will most likely have general knowledge of a Web Server environment.
+😂0😂😂The user will need to know how to set-up and operate a TCP/IP server.
+😂0😂😂The user will understand the basic principles of networking and know any networking information associated with the server the MultiMahjongServer program is run on.
+😂0😂😂Every error that occurs during program execution can be classified into two types - fatal and nonfatal errors.
+😂0😂😂The distinction between the two is that the program is unable to continue to execute upon encountering a fatal error.
+😂1😂🐋😂If a nonfatal error occurs, a dialogue box reporting the nature of error will be displayed.
+😂0😂😂As the error is classified 'nonfatal', the user will be able to continue the current game.
+😂0😂😂An option to access the online troubleshooting guide is included in the error dialogue box.
+😂1😂😂If a fatal error occurs, a dialogue box reporting the nature of error will be displayed.
+😂0😂😂The only option to the user is to quit the game.
+😂0😂😂All processes will be cleaned up and the program execution will terminate.
+😂1😂😂The MultiMahjong system is to be written using JDK 1.2.
+😂1😂😂The coding standard will be the same as that suggested by Sun Microsystems.
+😂0😂😂This document is available in PDF in our repository at <ref> or online at <link>.
+😂1😂😂Multiple languages will be supported using Java's Unicode standard.
+😂1😂😂The software will run on any machine that is capable of running a Java Virtual Machine that supports JDK 1.2.
+😂1😂🐋😂These machines include <list>.
+😂1😂😂The minimum system requirements for the product to operate under are <list>.
+😂2😂😂The CO must respond within 1 minute in both single and multi player modes.
+😂1😂😂The MultiMahjongServer must be able to handle requests in multi player mode of up to 10 simultaneous games.
+😂2😂😂The MultiMahjongClient must be able to calculate possible Chow/Pung/Kong/Mahjong moves  within 5 seconds of being informed of the last discard.
+😂1😂🐋😂As the data being exchanged between machines does not contain any private information and is not capable of undermining the system integrity of the computers connected to the MultiMahjongServer, encryption and protection of data are not needed.
+😂0😂😂This section states all the requirements of the MultiMahjong system that are related to what the user sees and how the user interacts with the MultiMahjong system.
+😂0😂😂The MultiMahjongServer will have no graphical user interface and will be run using a command prompt.
+😂0😂😂The MultiMahjongServer will have a graphical user interface with which the administrator of the server can get log information and change game settings.
+😂0😂😂No requirements for this graphical user interface are set in this document.
+😂0😂😂The MultiMahjongClient will have a graphical user interface that the user will be able to interact with using a mouse and a keyboard.
+😂0😂😂The details of this graphical user interface are described in <ref>.
+😂0😂😂Where it is appropriate, keyboard shortcuts will be provided for mouse based operations.
+😂0😂😂The MultiMahjongClient will have sound effects associated with the game actions.
+😂0😂😂The MultiMahjongClient will have animation also associated with game actions.
+😂0😂😂The graphical user interface described below only applies to the MultiMahjongClient program.
+😂0😂😂As the validity of these requirements will not be determined until the design phase, most of them are Level 2 or Level 3 requirements.
+😂0😂😂As described in <ref>, the existence of the GUI is a Level 1 requirement, however, the detail of the GUI is not necessarily so.
+😂0😂😂The GUI is to be designed so that the user can perform all of the Level 1 requirements set out in <ref>.
+😂0😂😂The GUI is to be contained within a screen resolution of 800 x 600 pixels.
+😂0😂😂All graphics will be in 16 bit colour.
+😂0😂😂There will be a Main Window that will contain the following game elements <list>.
+😂0😂😂The Main Window will also contain a tabbed frame to display the following items <list>.
+😂0😂😂The options at the beginning of the program, as described in <ref>, will be presented to the user using a dialogue box with buttons associated with each option.
+😂0😂😂The list of available games, as described in <ref>, will be presented to a user in a dialogue box with a scroll bar and selectable list items so that the user can select the game they wish to join.
+😂0😂😂The Main Window will show the dead tiles.
+😂0😂😂When a button becomes active, it will use animation to get the user's attention.
+😂0😂😂When a player performs a Chow/Pung/Kong/Mahjong, the tiles involved will be animated.
+😂0😂😂The user may click in the frame that contains the remaining wall and a frame showing the discarded tiles will be shown.
+😂0😂😂A draft version of the proposed Main Window appears below.
+😂0😂😂This section states all the documentation which is required to be included with the MultiMahjong product.
+😂0😂😂There will be no formal training sessions arranged.
+😂0😂😂The documentation included with the MultiMahjongClient and MultiMahjongServer applications will be of sufficient quality for users   to learn how to use the programs without any further explanation.
+😂0😂😂An administrator's manual, explaining how to install and operate the MultiMahjongServer, will be provided.
+😂0😂😂This manual will be provided as an electronic file.
+😂0😂😂The manual will contain the following sections.
+😂0😂😂How to install the MultiMahjongServer program.
+😂0😂😂The background knowledge the administrator must have in order to set-up and operate the MultiMahjongServer program.
+😂0😂😂How to configure the TCP/IP server the administrator is using to run the MultiMahjongServer program.
+😂0😂😂Troubleshooting guide for any problems the administrator may encounter during setup.
+😂0😂😂A section added to the manual which details some technical information on the MultiMahjong product.
+😂0😂😂The languages we used to write the MultiMahjong product and a history of how it developed.
+😂0😂😂A brief description of how the MultiMahjongServer and MultiMahjongClients interact.
+😂0😂😂The administrator's manual will also be viewable from within the MultiMahjongServer program.
+😂0😂😂The manual will contain the following sections.
+😂0😂😂How to use the GUI to get log info.
+😂0😂😂How to use the GUI to change game settings.
+😂0😂😂A user's manual, explaining how to install and operate the MultiMahjongClient, will be provided.
+😂0😂😂This manual will be provided in both a hard copy book and an electronic file.
+😂0😂😂The manual will contain the following sections.
+😂0😂😂How to install the MultiMahjongClient program.
+😂0😂😂How to begin a single/multi player game or join a multi player game.
+😂0😂😂How to play a game of MultiMahjong.
+😂0😂😂An explanation of what all parts of the GUI do and how to use them.
+😂0😂😂The user's manual will also be viewable from within the MultiMahjongClient program.
+😂0😂😂All design documentation and coding documentation will be maintained thoroughly during the project and delivered to the client.
+😂0😂😂This documentation will be available in electronic files, and, with the exception of source code, in hard copy format.
+😂0😂😂The documentation includes <list>.
+😂0😂😂The source code will be provided in hard copy format.
+😂0😂😂The acceptance criteria for the product are defined by all Level 1 requirements.
+😂0😂😂That is, Level 1 contains the minimum requirements that have to be met for the project to be accepted.
+😂0😂😂Levels 2 and 3 represent likely and future inclusions respectively, the feasibility of which will be determined during the project.
+😂0😂😂Note that Level 1 requirements may not necessarily be implemented if they are replaced by corresponding Level 2 or 3 requirements.
+😂0😂😂This section describes a possible scenario that incorporates some of the requirements mentioned in this document.
+😂0😂😂As some of the requirements used are Level 2 and Level 3 requirements, the actual implementation of the product may not reflect this scenario exactly.
+😂0😂😂The administrator  runs the MultiMahjongServer program on a server.
+😂0😂😂This program begins running and waits for MultiMahjongClients to connect.
+😂0😂😂A user , Bob, runs the MultiMahjongClient program on another computer.
+😂0😂😂A dialogue box appears on the Bob's computer displaying the options to begin the game.
+😂0😂😂Bob enters his name , chooses an icon , sets the score limit  and decides to select one human opponent and two CO opponents.
+😂0😂😂Bob then waits for a human opponent to join.
+😂0😂😂Another user, Sally, also runs the MultiMahjongClient program, enters her details and selects to join an existing game from the dialogue box.
+😂0😂😂The MultiMahjongClient retrieves a list of the available games from the MultiMahjongServer.
+😂0😂😂The MultiMahjongClient displays this list on the screen .
+😂0😂😂Sally selects Bob's game and joins the game.
+😂0😂😂Bob sees that Sally has joined and selects to begin the game.
+😂0😂😂The MultiMahjongServer receives the begin game command from Bob's MultiMahjongClient and it initialises all information necessary to begin the game  and sends it to both Sally's and Bob's MultiMahjongClients.
+😂0😂😂The processing for one CO player will be done by the MultiMahjongClient running on Bob's machine, the other by the MultiMahjongClient running on Sally's machine.
+😂0😂😂A main window containing all the game information is displayed on both Sally's and Bob's screens.
+😂0😂😂Bob, Sally and the CO's take turns in picking up and discarding tiles .
+😂0😂😂After Sally discards a certain tile, Bob can Chow, and a button named 'Chow' in his main window becomes active.
+😂0😂😂Bob chooses to Chow by clicking on this button.
+😂0😂😂Bob's MultiMahjongClient sends this move to the MultiMahjongServer, which subsequently sends this move to the other MultiMahjongClient.
+😂0😂😂The tiles in both Bob's and Sally's main window are updated to show that Bob has Chow'ed.
+😂0😂😂The hand continues in this fashion, with all players making moves within the Chinese rules of Mahjong.
+😂0😂😂After a few moves, the combination of tiles in Sally's hand allows her to Mahjong and a button named 'Mahjong' becomes active in her main window.
+😂0😂😂Sally clicks this button and a new hand begins.
+😂0😂😂When all hands have been played, the Wind of the Round indicator is updated and a new round begins.
+😂0😂😂The game continues in this fashion.
+😂0😂😂At the end of the 4th round, Bob goes Mahjong.
+😂0😂😂Bob's MultiMahjongClient sends this information to the MultiMahjongServer  which sends it to the other MultiMahjongClient.
+😂0😂😂The main window on both MultiMahjongClients is closed and the original dialogue box is displayed.
+😂0😂😂Both Bob and Sally choose to quit the program and the MultiMahjongClients on both machines exit.
+😂0😂😂I, hereby agree that the requirements specified within this document agree with my own requirements and expectations of the product, and abide by the Acceptance Criteria.
+😂0😂😂Any alterations to any of the Acceptance Criteria specified above, are to be negotiated between myself and the team.

@@ -1,0 +1,99 @@
+😂0😂😂The software described in this document is the <link> and associated support pages.
+😂0😂😂Rev1 of the website was created on or about summer of 2006.
+😂0😂😂This document describes requirements for Rev2, summer of2007.
+😂0😂😂There may be a need for future updates of the website.
+😂0😂😂The scope of the Get Real website is limited to attracting and encouraging Oregon high school students to take coursework leading toward abaccalaureate degree in computer science at one of the seven OregonUniversity System campuses.
+😂0😂😂There are no standard document requirements for this document.
+😂0😂😂Primary readers of this document are the web designers contributing to and testing of the Get Real website.
+😂0😂😂Contributors to this document are members of the Computer Science TaskForce subcommittee of ETIC.
+😂0😂😂The remaining sections of this SRS describe the functional requirements for Get Real site.
+😂0😂😂The scope of the Get Real website is to provide a high school teen friendly se tof web pages that are easy to navigate and at the same time provides sufficient depth and information about careers in computer science.
+😂0😂😂Two potential groups of viewers exist students interested in CSseeking more in-depth information about a CS career, and college bound students not necessarily interested in CS who might be attracted to a CScareer with the right “push” from information on the Get Real site.
+😂0😂😂The goal of Get Real is to encourage more Oregon students to choose computer science and related majors, eventually increasing the number of computer science graduates from Oregon universities.
+😂0😂😂Maintaining a teen friendly site is deemed of highest importance in order to hold student attention and guide the viewer to information that will lead to a decision to pursue a career in CS.
+😂0😂😂Benefits for using the site should include<list>.
+😂0😂😂Related sites visited by students to gain career information include: <list> etc.
+😂0😂😂For web page development at the Capital Center, use the local site files for Dreamweaver on<ref>.
+😂0😂😂Be cautious of others modifying pages on the site.
+😂0😂😂Always use Dreamweaver check in/out feature.
+😂0😂😂Adhere to CSS and other style conventions established in Get Real version 1.
+😂0😂😂List any other documents or Web addresses to which this SRS refers.
+😂0😂😂These may include user interface style guides, contracts, standards, system,requirements specifications, use case documents, or a vision and scope document.
+😂0😂😂Provide enough information so that the reader could access a copy of each reference, including title, author, version number, date, and source or location.
+😂0😂😂This product is an update of the existing Get Real web site version 1.
+😂0😂😂The new site will be version 2.
+😂0😂😂A future version 3 may be needed to incorporate ideaslearned from version 2.
+😂0😂😂Major features of the Get Real website include the following pages/subsections<list>.
+😂0😂😂Users are typical Oregon high school students, grades 9 to12 in ALL high schools across Oregon.
+😂0😂😂Two potential groups of viewers (students) exist<lists>A third group of students might be those interested careers as diverse as protein research, weather prediction, neurobotics, medicine, law or other sciences where a CS minor could contribute to a better understanding of data and information.
+😂0😂😂A “Consider a CS minor” section could provide helpful information.
+😂0😂😂Oregon High school students from several schools and classes were interviewed to gain their feedback on version 1 of the Get Real site.
+😂1😂😂Common themes emerged in the need to change/update overall site graphic design and real people.
+😂0😂😂Students who are not generally interested in CS, suggested graphic design changes, more white space, pictures, and easier to navigate pages.
+😂0😂😂This group was much less tolerant of the site than the CS folks had been.
+😂0😂😂They wanted a site that “spoke to them” and felt that if you were not a computer science student, it had very little to offer.
+😂0😂😂The suggestion was very strong that the site be broken into more readable chunks of information.
+😂0😂😂The term “walls of text” appeared several times.
+😂0😂😂The need for more visually attractive information also was a central theme.
+😂0😂😂They wanted color, photos, diagrams, charts, etc. to break up the text and make the site attractive.
+😂0😂😂Many of them commented positively on the spinning globe and satellite menu.
+😂0😂😂Students who are interested in CS and engineering suggested changes in the Real People, Resources, and Colleges sections.
+😂0😂😂Most of them spent their time in the college comparison chart, and in the real people part of the site.
+😂0😂😂It sounded like they were attracted by the pictures.
+😂0😂😂Several commented positively on the sections in each person’s story.
+😂0😂😂The college comparison chart again scored positive marks.
+😂0😂😂Changes to version 2 should include design changes to all existing pages to accommodate faster page reading and shorter reader attention span.
+😂0😂😂One example used on the engineergirl.org site uses an interactive table menu for more detailed information, leaving the main pages short and to the point.
+😂0😂😂Identify the various user classes that you anticipate will use this product.
+😂0😂😂User classes may be differentiated based on frequency of use, subset of product functions used, technical expertise, security or privilege levels,educational level, or experience.
+😂0😂😂Describe the pertinent characteristics of each user class.
+😂0😂😂Certain requirements may pertain only to certain user classes.
+😂0😂😂Distinguish the favored user classes from those who are less important to satisfy.
+😂0😂😂The Get Real site runs as an extension of the OUS site e.g.~getreal.ous.edu~Being part of the OUS domain will maximize Google and other search engine hits.
+😂0😂😂The site runs on OSU servers.
+😂1😂😂Constraints for the website include<list>.
+😂0😂😂There are no user documents.
+😂1😂None??😂There are no development assumptions or dependencies.
+😂0😂😂This section provides more detailed information about each web page.
+😂0😂😂A listing of the computer science offerings from Oregon university System campuses and other Oregon colleges.
+😂0😂😂Offers answers to the questions: “how can I contribute to society and how much money can I make with a computer science degree?”A people section outlining recent CS graduates and more experienced professionals in CS and related careers.
+😂0😂😂A key point is to show real people using their CS knowledge in diverse fields, and not cooped up in a cubicle.
+😂0😂😂Students are interested in two groups of professionals, recent grads, and experienced professionals.
+😂1😂😂The use of video or audio could help convey a personal message that could “push” some students to pursue a CS degree.
+😂0😂😂Computer science students and young professionals are presented here: “a day in the life of” “power to change the world” and Pathways in computer science” <link> Reviewers of this document should review these videos.
+😂0😂😂Click link above then“Video Downloads Available“.
+😂0😂😂These profiles convey clear messages of CS majors using their degrees in a variety of diverse careers.
+😂0😂😂The intent is to profile women computer scientists and engineers as people who work every day to solve problems and make the world a better, cleaner,safer place.
+😂0😂😂“These women are also actively involved in their communities, raising families,and enjoying all kinds of sports and hobbies.
+😂0😂😂”<link> is an example of youth oriented site that shows women in exciting engineeringcareers and has good use of white space on the pages.
+😂0😂😂<link>This site lists a resource for those wishing to contact women in computer architecture.
+😂0😂😂Get Real might use a similar list for girls interested in contacting recent grads or women CS professionals.
+😂0😂😂Explore a wide range of pre-college technology school students.
+😂0😂😂A list of focused questions and answers with topics include: money, people, and colleges.
+😂0😂😂A list of articles outside the Get Real site including “50 best jobs in America,Dream Jobs 2007, etc.
+😂0😂😂The intent of this section is to show recommended curricula for high school students interested in CS and related careers.
+😂0😂😂This page should provide pointers to curricula recommendations from OUS campuses and other university sources.
+😂0😂😂The ACM has recommended curricula for HS CS students.
+😂0😂😂UO is working on this area, no other campus has recommended HS coursesAt least two kinds of searches are needed,  internal search of the Get Real site, and external search of CS related outside sites such as OUS campuses,articles on CS etc.
+😂0😂😂Google, for example provides tools for internal and external searches.
+😂0😂😂The Get Real prototype index page<link> has examples of various search engines.
+😂0😂😂A listing with links to ACM, IEEE, and key sub groups such as SIGGRAPH, to show students the national and international strength of CS organizations.
+😂0😂😂Pointers should lead to student sections of these organizations.
+😂0😂😂Selected articles from the chancellor’s office daily communications distribution,fed to RSS subscribers on the Get Real site.
+😂0😂😂This feature requires X hours per week of web design resource for editing the URLs to the DSS feed.
+😂0😂😂Get fast feedback from the Oregon University System on questions asked in aQ and A format.
+😂0😂😂Answers are posted in an FAQ section for all to read.
+😂0😂😂A Grador Prof BLOG on CS careers would also work here.
+😂0😂😂Information for students in medicine, law, business, and other professions to provide students visibility of the high value of having a CS minor.
+😂0😂😂The video“pathways in Computer Science” is a good example of CS majors in diverse fields.
+😂0😂😂Other new page ideas here.
+😂1😂😂The Get Real site should work and be tested against IE, Firefox and Netscape.
+😂1😂😂There are no special hardware interface requirements.
+😂1😂😂There are no special software interface requirements.
+😂1😂😂There are no special communication interface requirements.
+😂1😂😂The Get Real site should be hosted on a server that can provide adequate response time.
+😂0😂😂High school students tend to have short attentions spans, so a slow server would not be satisfactory for this application.
+😂0😂😂The current OUS<link> site is a good example of rapid response time.
+😂1😂😂Copyright and other security measures for Get Real should be the same as the OUS site.
+😂1😂😂There is a need to track and evaluate the “hits” and time spent on the student-focused website over time; and make content, design, and navigation changes as needed based on evaluation of hits.
+😂1😂😂Web design conventions should be consistent with the standards and conventions used on the OUS site.

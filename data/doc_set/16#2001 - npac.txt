@@ -1,0 +1,657 @@
+😂0😂😂 NPAC SMS shall ensure that the status for Block broadcasts to EDR Local SMSs and Subscription Versions with LNP Type of POOL broadcasts to non-EDR Local SMSs, are synchronized, by performing the following.
+😂0😂😂 The status for the Block and Subscription Versions shall cross-reference one another and contain the results of the broadcast of the Block to the EDR Local SMSs, and the broadcast of the Subscription Versions to the non-EDR Local SMSs.
+😂0😂😂 The status for each Subscription Version shall only be set, once the broadcasts of the Block to all EDR and Subscription Versions to non-EDR Local SMSs has been completed, and a response has been received by all EDR and non-EDR Local SMSs or retries have been exhausted.
+😂0😂😂 The status for the Block shall only be set, once the broadcasts of the Block to all EDR and Subscription Versions to non-EDR Local SMSs has been completed, and a response has been received by all EDR and non-EDR Local SMSs or retries have been exhausted.
+😂0😂😂 The status for the Block shall reflect the information contained in <ref>.
+😂0😂😂 NPAC SMS shall set the status of a Block for Block Creation, based on the data contained in <ref>.
+😂0😂😂 As a summary of the table, the Block's status will be set on Creation to: <list>.
+😂0😂😂 NPAC SMS shall set the status of a Block for Block Modification, based on the data contained in <ref>.
+😂0😂😂 As a summary of the table, the Block's status will be set on Modification to: <list>.
+😂0😂😂 NPAC SMS shall set the status of a Block for Block Deletion, based on the data contained in <ref>.
+😂0😂😂 As a summary of the table, the Block's status will be set on Deletion to: <list>.
+😂0😂😂 NPAC SMS shall ensure that the <ref> and the Subscription Versions <ref>s for Block broadcasts to EDR Local SMSs and Subscription Versions broadcasts to non-EDR Local SMSs, are synchronized, by performing the following.
+😂0😂😂 The <ref> for the Block and Subscription Versions <ref>s for the Subscription Versions shall cross-reference one another and contain the results of the broadcast of the Block to the EDR Local SMSs, and the broadcast of the Subscription Versions to the non-EDR Local SMSs.
+😂0😂😂 The Subscription Versions <ref>s for the Subscription Versions shall be set, based on the results of the Block broadcasts to all EDR Local SMSs and the Subscription Version broadcasts to all non-EDR Local SMSs, and a response has been received by all EDR and non-EDR Local SMSs or retries have been exhausted, for Activations, Modifications, and Deletions.
+😂0😂😂 The <ref> for the Block shall be set, based on the results of the Block broadcasts to all EDR Local SMSs and the Subscription Version broadcasts to all non-EDR Local SMSs, and a response has been received by all EDR and non-EDR Local SMSs or retries have been exhausted.
+😂0😂😂 The <ref> for the Block shall be based on the summary of all Subscription Versions with LNP Type of POOL within the 1K Block.
+😂0😂😂 The <ref> for the Block shall reflect the information contained in <ref>.
+😂0😂😂 NPAC SMS shall set the <ref> of a Block for updates, based on the data contained in <ref>.
+😂0😂😂 NPAC SMS shall remove a non-EDR Service Provider from the <ref> when the Service Provider is no longer on the <ref> for ALL subscription versions in the 1K Block.
+😂0😂😂 NPAC SMS shall remove an EDR Service Provider from ALL subscription version's <ref> when the Service Provider is no longer on the <ref>.
+😂0😂😂 NPAC SMS shall generate a unique alarmable error message when a Block's status is initially set to either Partial Failure or Failed, for Block Activation requests initiated by NPAC Personnel.
+😂0😂😂 NPAC SMS shall generate a unique alarmable error message when a Block's status is updated to Active with a <ref>, for each occurrence, for Block Modification requests initiated by NPAC Personnel.
+😂0😂😂 NPAC SMS shall generate a unique alarmable error message when a Block's status is updated to Old with a <ref>, for Block Deletion requests that were initiated through the NPA-NXX-X deletion by NPAC Personnel.
+😂0😂😂 NPAC SMS shall provide a mechanism to send a recurring page to NPAC Personnel, based on a configurable interval, when a unique alarmable error message is generated as defined in <ref>.
+😂0😂😂 The configurable interval will be set by M&P.
+😂0😂😂 NPAC SMS shall provide a mechanism to stop the recurring page to NPAC Personnel, whenever the Block's status is set to Active AND the <ref> is empty, or, the Block's status is set to Old AND the <ref> is empty.
+😂0😂😂 NPAC SMS shall apply NPA-NXX Filters to Block broadcasts to the Local SMS.
+😂0😂😂 NPAC SMS shall allow NPAC personnel, Service Provider via the SOA to NPAC SMS Interface, or Service Provider via the NPAC SOA Low-tech Interface, to request the creation of a Number Pooling Block.
+😂0😂😂 NPAC SMS shall reject a request to create a Block by a Service Provider via the NPAC SMS to Local SMS Interface, and will return an error message to the LSMS.
+😂0😂😂 NPAC SMS shall require NPAC personnel or Service Provider via the SOA to NPAC SMS Interface to specify the Block Holder SPID, the NPA-NXX-X, and the initial routing information, as defined in the Number Pooling Block Holder Information.
+😂0😂😂 NPAC SMS shall reject the request and issue a unique alarmable error message to the NPAC personnel at the time of Block Creation for an NPAC initiated request, from the NPAC Administrative Interface, if there are any TNs within the 1K Block, that contain an SV, with a status of pending/conflict/cancel-pending/failed, and where a currently active SV does NOT exist, for the given TN.
+😂0😂😂 NPAC SMS shall reject the request and issue an error message to the SOA at the time of Block Creation from the SOA via the SOA to NPAC SMS Interface, if there are any TNs within the 1K Block, that contain an SV, for a given TN in the 1K Block, with a status of pending/conflict/cancel-pending/failed, and where a currently active SV does NOT exist, for the given TN.
+😂0😂😂 NPAC SMS shall perform field-level data validations to ensure that the value formats for the following input data, is valid according to the formats specified in the Subscription Version Data Model upon Block creation for a Number Pool.
+😂0😂😂 NPAC SMS shall, upon successfully creating a Block, set the Block's status to sending, and broadcast an addition of a Block, to EDR Local SMSs, via the NPAC SMS to Local SMS Interface.
+😂0😂😂 NPAC SMS shall update the Activation Broadcast Complete Timestamp of the Block upon completion of the broadcast, and the FIRST successful response, for either an EDR or non-EDR Local SMS.
+😂0😂😂 NPAC SMS shall update the status of the Block upon completion of the Activation broadcast, and a response from ALL EDR and non-EDR Local SMSs, or retries are exhausted, as defined in <ref>.
+😂0😂😂 NPAC SMS shall update the <ref> upon completion of the Activation broadcast, and a response from ALL EDR and non-EDR Local SMSs, or retries are exhausted, as defined in <ref>.
+😂0😂😂 NPAC SMS shall allow NPAC Personnel to modify the SOA Origination Indicator on the NPAC Block record, via the NPAC Administrative Interface.
+😂0😂😂 NPAC SMS shall suppress the broadcast to a Local SMS, of a modification to a Block's SOA Origination Indicator.
+😂0😂😂 NPAC SMS shall suppress the creation of a Block modification notification, when the Block's SOA Origination Indicator is modified to FALSE.
+😂0😂😂 NPAC SMS shall allow NPAC personnel, Service Provider via the SOA to NPAC SMS Interface, or Service Provider via the NPAC SOA Low-tech Interface, to modify the block holder default routing information, for a 1K Block as stored in the NPAC SMS.
+😂0😂😂 NPAC SMS shall reject a request to modify a Block by a Service Provider via the NPAC SMS to Local SMS Interface, and will return an error message to the LSMS.
+😂0😂😂 NPAC SMS shall allow a Service Provider via the SOA to NPAC SMS Interface or Service Provider via the NPAC SOA Low-tech Interface, to modify Block data for Blocks where the Block Holder SPID matches the Service Provider making the request.
+😂0😂😂 NPAC SMS shall allow a Service Provider via the SOA to NPAC SMS Interface, to modify Block data by specifying either Block ID, or NPA-NXX-X value and status, in the request.
+😂0😂😂 NPAC SMS shall reject and issue an error message to NPAC personnel, Service Provider via the SOA to NPAC SMS Interface, or Service Provider via the NPAC SOA Low-tech Interface, when modifying block holder data, for a 1K Block as stored in the NPAC SMS, and the Block's current status is not active, or the Block has at least one Service Provider in the <ref>.
+😂0😂😂 NPAC SMS shall, upon processing a valid request to modify a Block, update the status of the Block, at the start of the broadcast of a Block modification to the Local SMSs, from an active status to a sending status.
+😂0😂😂 NPAC SMS shall, upon successfully modifying a Block and setting the Block's status to sending, broadcast a modification of a Block to EDR Local SMSs, via the NPAC SMS to Local SMS Interface.
+😂0😂😂 NPAC SMS shall update the <ref> of the Block upon completion of the broadcast, and the FIRST successful response, for either an EDR or non-EDR Local SMS.
+😂0😂😂 NPAC SMS shall update the status of the Block upon completion of the Modification broadcast, and a response from ALL EDR and non-EDR Local SMSs, or retries are exhausted, as defined in <ref>.
+😂0😂😂 NPAC SMS shall update the <ref> upon completion of the broadcast, and a response from ALL EDR and non-EDR Local SMSs, or retries are exhausted, as defined in <ref>.
+😂0😂😂 NPAC SMS shall create an old Block with a new version id for an active Block prior to modification.
+😂0😂😂 NPAC SMS shall broadcast no data to the Local SMSs due to the creation of an old Block with a new version id for an active Block prior to modification.
+😂0😂😂 NPAC SMS shall not allow NPAC Personnel to request a delete of a Block in the NPAC SMS.N
+😂0😂😂 OTE: This is initiated at the NPA-NXX-X level, and is part of a multi-step "cascading delete" process.
+😂0😂😂 NPAC SMS shall reject a request to delete a Block by a Service Provider via the SOA to NPAC SMS interface, and will return an error message to the SOA.
+😂0😂😂 NPAC SMS shall reject a request to delete a Block by a Service Provider via the NPAC SMS to Local SMS Interface, and will return an error message to the LSMS.
+😂0😂😂 NPAC SMS shall not allow Service Provider Personnel to request a delete of a Block in the NPAC SMS via the NPAC SOA Low-tech Interface.
+😂0😂😂 NPAC SMS shall, upon processing a valid request to delete an NPA-NXX-X, update the status of the Block at the start of the broadcast to the Local SMSs, from an active status to a sending status.
+😂0😂😂 NPAC SMS shall, upon setting the Block's status to sending, broadcast a delete of a Block, to EDR LSMSs, via the NPAC SMS to Local SMS Interface.
+😂0😂😂 NPAC SMS shall update the <ref> of the Block upon completion of the broadcast, and the FIRST successful response, for either an EDR or non-EDR Local SMS.
+😂0😂😂 NPAC SMS shall update the status of the Block upon completion of the Deletion broadcast, and a response from ALL EDR and non-EDR Local SMSs, or retries are exhausted, as defined in RR3-137.1 and RR3-137.4.
+😂0😂😂 NPAC SMS shall update the <ref> upon completion of the broadcast, and a response from ALL EDR and non-EDR Local SMSs, or retries are exhausted, as defined in <ref>.
+😂0😂😂 NPAC SMS shall create an old Block with a new version id for a disconnected Block when the NPA-NXX-X Holder Information de-pool request is received.
+😂0😂😂 NPAC SMS shall broadcast no data to the Local SMSs due to the creation of an old Block with a new version id for a disconnected Block when the NPA-NXX-X Holder Information de-pool request is received.
+😂0😂😂 NPAC SMS shall allow NPAC Personnel to query the block holder information for all data as listed in the Block Holder Information Data Model, for a 1K Block as stored in the NPAC SMS.
+😂0😂😂 NPAC SMS shall allow a Service Provider SOA via the SOA to NPAC SMS Interface, Service Provider Local SMS via the NPAC SMS to Local SMS Interface, or Service Provider via the NPAC SOA Low-tech Interface, to query Block Holder Information, regardless of the value in the requesting Service Provider's EDR Indicator.
+😂0😂😂 NPAC SMS shall return, to the NPAC Personnel or requesting Service Provider, all Block data that match the query selection criteria.
+😂0😂😂 The NPAC SMS shall use the default routing restoration information in the Number Pooling Block Holder Information as the block holder default routing, when a ported pooled number is disconnected or port to original port is activated, and returns the TN to the block, once the Block exists, except for Old with or without a <ref>.
+😂0😂😂 The NPAC SMS shall send a notification to the Code Holder, and suppress the notification to the Block Holder, when a ported pooled number is disconnected, for TN in the block, when the Block is being de-pooled, and the most recent block contains a status of Old, with a <ref>.
+😂0😂😂 The notifications characteristics for a disconnect of a ported pooled number, during de-pooling of a Block, with a Block that contains a status of Old with a <ref>, is additional functionality that defines Code Holder responsibility and notification messages.
+😂0😂😂 In essence, even though the de-pooled Block is post-effective date, it has the behavior of a Block that has NOT been pooled and is in a pre-effective date stage.
+😂0😂😂 Also, the customer disconnect date notification is going to the Code Holder, but the TN cannot be re-assigned in their inventory.
+😂0😂😂 NPAC SMS shall apply NPA-NXX Filters to Block re-sends to the Local SMS.
+😂0😂😂 NPAC SMS shall allow NPAC Personnel to re-send Block Information, one Block at a time, via the NPAC Administrative Interface.
+😂0😂😂 NPAC SMS shall allow NPAC Personnel to re-send Block Information, to a single Service Provider or all Service Providers in the <ref>, via the NPAC Administrative Interface.
+😂0😂😂 NPAC SMS shall use the value in the Service Provider's EDR Indicator to determine the type of data to re-send to the Service Provider, when a re-send request is initiated.
+😂0😂😂 NPAC SMS shall re-send Block Information to an EDR Local SMS, by re-sending the previously failed Block Object, via the NPAC SMS to Local SMS Interface.
+😂0😂😂 NPAC SMS shall re-send Block Information to a non-EDR Local SMS, by re-sending the previously failed Subscription Version, via the NPAC SMS to Local SMS Interface.
+😂0😂😂 NPAC SMS shall update the status of the failed Block, specified in the re-send request, at the start of the re-send to the Local SMSs, from a failed status to a sending status.
+😂0😂😂 NPAC SMS shall update the status of the partial failure Block, specified in the re-send request, at the start of the re-send to the Local SMSs, from a partial failure status to a sending status.
+😂0😂😂 NPAC SMS shall update the status of the active Block, with a <ref>, specified in the re-send request, at the start of the re-send to the Local SMSs, from an active status to a sending status.
+😂0😂😂 NPAC SMS shall update the status of the old Block, with a <ref>, specified in the re-send request, at the start of the re-send to the Local SMSs, from an old status to a sending status.
+😂0😂😂 NPAC SMS shall, upon setting the Block's status to sending, broadcast a re-send of a Block, to EDR LSMSs, via the NPAC SMS to Local SMS Interface.
+😂0😂😂 NPAC SMS shall update the <ref> of the Block and the <ref> of each Subscription Version with LNP Type of POOL, by removing the previously failed Local SMS, upon a successful re-send to a previously failed Local SMS.
+😂0😂😂 NPAC SMS shall update the status of the Block, specified in the re-send request for a Block Creation, Modification, or Deletion, at the completion of the re-send to the Local SMS, and a response from the Local SMS or if retries have been exhausted, from a sending status, as defined in <ref>.
+😂0😂😂 NPAC SMS shall update the <ref>, specified in the re-send request for a Block Creation, Modification, or Deletion, at the completion of the re-send to the Local SMS, and a response from the Local SMS or if retries have been exhausted, as defined in <ref>.
+😂0😂😂 NPAC SMS shall allow NPAC personnel to request a bulk data download file for Block data via the NPAC Administrative Interface.
+😂0😂😂 NPAC SMS shall include the Requesting Service Provider, Active and Partial Failure Blocks Only or Latest View of Block Activity Choice, Time Range in Central Time, and Block Range as Selection Criteria fields for the Block bulk data download file via the NPAC Administrative Interface.
+😂0😂😂 NPAC SMS shall allow NPAC Personnel to select either Active and Partial Failure Blocks Only or Latest View of Block Activity, and shall use the selected choice, for Block data.
+😂0😂😂 NPAC SMS shall use the Active and Partial Failure Blocks Only selection to only include Blocks with a status of either Active or Partial Failure in the Block Bulk Data Download file.
+😂0😂😂 NPAC SMS shall use the Latest View of Block Activity selection to include all Blocks, regardless of status, in order to capture activation, modification, and deletion transactions for Block data, but only include the latest instance of the Block in the Block Bulk Data Download file, for a given NPA-NXX-X, when a Block has more than one activity within the specified time range.
+😂0😂😂 NPAC SMS shall use the Start Time Range entry field as an inclusive start range in GMT, and the End Time Range entry field as an inclusive ending range in GMT, for Block data that were broadcast during the specified Time Range.
+😂0😂😂 NPAC SMS shall use the Start and End Time Range entry fields to include Block data, based on the Activation Broadcast Timestamp, Modify Broadcast Timestamp, and Disconnect Broadcast Timestamp, in the NPAC's Block Data Model, when generating the file for the Latest View of Block Activity selection.
+😂0😂😂 NPAC SMS shall use the first Block Range entry field as an inclusive start range, and the second Block Range entry field as an inclusive ending range, for Block data.
+😂0😂😂 If the Block Range was 303-242-2 through 303-355-6, the inclusive range would contain all Blocks within the TN Range of 303-242-2000 through 303-355-6999.
+😂0😂😂 NPAC SMS shall edit the selection criteria combination as shown in the table below.
+😂0😂😂 Such that a combination of: <list>.
+😂0😂😂 NPAC SMS shall provide a bulk data download file, based on the selection criteria, that contains all Blocks in the NPAC SMS, regardless of the value in the Service Provider's EDR Indicator.
+😂0😂😂 NPAC SMS shall sort the Block Bulk Data Download file, in ascending order based on the value in the NPA-NXX-X attribute.
+😂0😂😂 NPAC SMS shall apply NPA-NXX Filters to Blocks in the creation of bulk data download files.
+😂0😂😂 NPAC SMS shall automatically put the bulk data download file into the FTP sub-directory of the Service Provider, based on SPID, that requested the creation of the bulk data download file.
+😂0😂😂 Service Provider Data Administration functions allow NPAC personnel to receive and record data needed to identify authorized LNP Service Providers.
+😂0😂😂 The Service Provider data indicates the LNP Service Providers and includes location, contact name, security, routing, and network interface information.
+😂0😂😂 Service Provider Administration supports functionality to manage Service Provider data.
+😂0😂😂 There can be only one instance of Service Provider data for a specific LNP Service Provider.
+😂0😂😂 All NPAC Customers will obtain a unique Service Provider ID from a proper source.
+😂0😂😂 The NPAC SMS shall allow NPAC Personnel to add a Service Provider.
+😂0😂😂 NPAC SMS shall allow modification of Service Provider data via the NPAC SMS to Local SMS interface or the SOA to NPAC SMS interface.
+😂0😂😂 Service Providers can only modify their own data.
+😂0😂😂 NPAC SMS shall allow NPAC personnel to delete a Service Provider.
+😂0😂😂 NPAC SMS shall allow NPAC personnel to view Service Provider data.
+😂0😂😂 NPAC SMS shall allow NPAC personnel to view a list of Subscription Versions associated with the Service Provider.
+😂0😂😂 NPAC SMS shall allow authorized Service Provider personnel to view their own Service Provider data via the SOA to NPAC SMS interface, the NPAC SMS to Local SMS interface, and the NPAC SOA Low-tech Interface.
+😂0😂😂 NPAC SMS shall allow authorized Service Provider personnel to modify their own Service Provider data.
+😂0😂😂 NPAC SMS shall broadcast all additions, modifications, and deletions of NPAC Customer names via the NPAC SMS to Local SMS interface and/or SOA to NPAC SMS interface.
+😂0😂😂 This section describes NPAC SMS functionality required to support the NPAC personnel requests described in the above section.
+😂0😂😂 The following specifies user requests and lists the NPAC SMS functionality needed to support those requests.
+😂0😂😂 NPAC personnel can request that Service Provider data be created in the NPAC SMS.
+😂0😂😂 The functionality described below enables a new instance of Service Provider data for a Service Provider to be created, provided that no other Service Provider data exists for the Service Provider.
+😂0😂😂 NPAC SMS shall require the following to be entered to identify the Service Provider, when NPAC personnel are creating a new Service Provider: <list>.
+😂0😂😂 NPAC SMS shall check to see if there is an existing Service Provider with the same Service Provider ID.
+😂0😂😂 NPAC SMS shall inform the user that the Service Provider data already exists for the Service Provider, if it does exist, and that the new Service Provider data cannot be created.
+😂0😂😂 NPAC SMS shall require the following data if there is no existing Service Provider data: <list>.
+😂0😂😂 The following data is optional: <list>.
+😂0😂😂 NPAC SMS shall validate that all required Service Provider data has been received, after the Service Provider data has been collected.
+😂0😂😂 NPAC SMS shall notify NPAC personnel upon successful creation of the new Service Provider.
+😂0😂😂 NPAC SMS shall issue an appropriate error message upon unsuccessful creation of the new Service Provider.
+😂0😂😂 NPAC personnel and the SOA to NPAC SMS interface and the NPAC to Local SMS interface can request that Service Provider data be modified in the NPAC SMS.
+😂0😂😂 The functionality described below enables the user to modify data for the Service Provider.
+😂0😂😂 NPAC SMS shall require one of the following data items to identify the Service Provider data to be modified: <list>.
+😂0😂😂 The Service Provider ID is required over the SOA to NPAC SMS interface and the NPAC SMS to Local SMS interface.
+😂0😂😂 NPAC SMS shall issue an appropriate error message to the user if the Service Provider data to be modified does not exist.
+😂0😂😂 NPAC SMS shall allow Service Provider data to be modified or added to the Service Provider data with the exception of the data listed in <ref>.
+😂0😂😂 NPAC SMS shall allow NPAC Operations personnel to modify the data in <ref>, with the exception of the NPAC Customer ID.
+😂0😂😂 NPAC SMS shall revalidate that all required Service Provider data is present when a user attempts to submit modified Service Provider data.
+😂0😂😂 NPAC SMS shall issue an appropriate error message to the user if the Service Provider data fails validation on a modify.
+😂0😂😂 NPAC personnel can request that the Service Provider data be deleted.
+😂0😂😂 Deleted Service Provider data will be written to a history file.
+😂0😂😂 The functionality described below enables a user to delete data for the Service Provider.
+😂0😂😂 NPAC SMS shall require the Service Provider ID and/or Service Provider name from the user to identify the Service Provider data to be deleted.
+😂0😂😂 NPAC SMS shall generate an error message and send it to the request originator, if the Service Provider data does not exist, or if is has already been deleted and exists only in a history file.
+😂0😂😂 NPAC SMS will not proceed further with the deletion request.
+😂0😂😂 NPAC SMS shall perform the deletion of the Service Provider data, notify the user that the deletion request was successful, if there are no affected Subscription Versions, and write the Service Provider data to a history file.
+😂0😂😂 NPAC SMS shall notify the user that the request to delete the Service Provider data cannot be completed until the affected individual Subscription Versions are modified, if affected Subscription Versions are found.
+😂0😂😂 NPAC SMS shall determine if there are any Subscription Versions being affected by the NPA-NXX and/or LRN data being deleted.
+😂0😂😂 The query functionality discussed in this section will give users the ability to view Service Provider and Subscription data.
+😂0😂😂 A user may not be able to modify a particular data item because they do not have the proper security permissions, therefore the data is made available via NPAC SMS for read only purposes.
+😂0😂😂 NPAC SMS shall allow NPAC personnel to view all Subscription Versions associated with a Service Provider ID and/or Service Provider Name.
+😂0😂😂 NPAC SMS shall allow NPAC personnel to view all Subscription Versions associated with an LRN.
+😂0😂😂 NPAC SMS shall allow NPAC personnel to view all Subscription Versions associated with an NPA-NXX.
+😂0😂😂 The following specifies NPAC SMS functionality needed to support the user requests described above.
+😂0😂😂 NPAC SMS shall require the Service Provider ID and/or the Service Provider Name for queries regarding Service Provider data.
+😂0😂😂 NPAC SMS shall provide the request originator with a message indicating that there was no data in the NPAC SMS that matched the search keys for a Service Provider query, if no match was found.
+😂0😂😂 NPAC SMS shall return all Service Provider data associated with the Service Provider ID and/or Service Provider Name, as listed in <ref>, if the Service Provider data matches the query criteria.
+😂0😂😂 Service Providers are only allowed to query their own data.
+😂0😂😂 NPAC SMS shall receive the Service Provider ID, a request to view subscription data, and optionally the subscription data status types to be returned for queries regarding subscription data for a specific Service Provider.
+😂0😂😂 NPAC SMS shall provide the request originator with a message indicating that there was no data in NPAC SMS that matched the search keys, if NPAC SMS does not have subscription data as specified by the request originator.
+😂0😂😂 NPAC SMS shall receive the attributes to be searched on for queries regarding Subscription Versions associated with the Service Provider.
+😂0😂😂 Allowable attributes are the following data elements from <ref>: <list>.
+😂0😂😂 NPAC SMS shall return all active Subscription Versions associated with the Service Provider which satisfy the selection criteria, up to a tunable parameter number of Subscription Versions for queries initiated via the NPAC SMS to Local SMS interface.
+😂0😂😂 NPAC SMS shall return all Subscription Versions regardless of Subscription Version status for queries initiated via the NPAC SOA Low-tech Interface.
+😂0😂😂 NPAC SMS shall return an "out of range" error and the count of subscription records returned by a query, if more than a tunable parameter number of Subscription Versions are found.
+😂0😂😂 NPAC SMS shall provide the request originator with a message indicating that there was no data in NPAC SMS that matched the search keys, if NPAC SMS does not have Subscription Versions as specified by the request originator.
+😂0😂😂 NPAC SMS shall allow Service Providers to add/delete the NPA-NXX and/or LRN data via the NPAC SMS to Local SMS interface and SOA to NPAC SMS interface provided the changes do not cause mass updates to the Subscription Versions.
+😂0😂😂 NPAC SMS shall allow removal of a Service Provider by NPAC personnel only if all associated LRNs are removed, and no Subscription Versions are associated with the LRN.
+😂0😂😂 NPAC SMS shall allow removal of a Service Provider by NPAC personnel only if all associated NPA-NXXs are removed, and no Subscription Versions are associated with the NPA-NXX.
+😂0😂😂 NPAC SMS shall allow removal of an NPA-NXX by NPAC personnel only if no Subscription Versions, except for Old without a <ref> or Canceled Subscription Versions, exist for the NPA-NXX.
+😂0😂😂 NPAC SMS shall allow the removal of an NPA-NXX by NPAC personnel only if Number Pooling NPA-NXX-X Information, does not exist for the NPA-NXX.
+😂0😂😂 NPAC SMS shall allow the removal of an LRN by NPAC personnel only if no Subscription Versions, except for Old without a <ref> or Canceled Subscription Versions, exist and use the LRN.
+😂0😂😂 NPAC SMS shall allow the removal of an LRN by NPAC personnel only if Number Pooling Block Information, except for Old with NO <ref>, do not exist and do not use the LRN.
+😂0😂😂 NPAC SMS shall validate upon request to add an NPA-NXX for a service provider, that the NPA-NXX does not exist for any service provider in the region.
+😂0😂😂 NPAC SMS shall upon finding that an NPA-NXX already exists for a service provider in a region, reject a request to add an NPA-NXX for a service provider and report an error to the user.
+😂0😂😂 NPAC SMS shall validate upon request to add an LRN for a service provider, that the LRN does not exist for any service provider in the region.
+😂0😂😂 NPAC SMS shall upon finding that an LRN already exists for a service provider in a region, reject a request to add an LRN for a service provider and report an error to the user.
+😂0😂😂 Subscription Management functions allow NPAC personnel and SOA to NPAC SMS interface users to specify data needed for ported numbers.
+😂0😂😂 The subscription data indicates how local number portability should operate to meet subscribers' needs.
+😂0😂😂 These functions will be accessible to authorized service providers via an interface from their operations systems to the NPAC SMS and will also be accessible to NPAC personnel.
+😂0😂😂 Subscription Management supports functionality to manage multiple versions of subscription data.
+😂0😂😂 See <ref>, for more details on the different states of a version.
+😂0😂😂 NPAC SMS shall allow only one pending, cancel pending, conflict, disconnect pending, failed or partial failure Subscription Version per subscription.
+😂0😂😂 NPAC SMS shall allow only one active Subscription Version per subscription.
+😂0😂😂 NPAC SMS shall allow multiple old and/or canceled Subscription Versions per subscription.
+😂0😂😂 Subscription Version management provides functionality to manage multiple time sensitive views of subscription data.
+😂0😂😂 This section addresses version management for LNP and the user and system functionality needed for subscription administration.
+😂0😂😂 In this context a version may be defined as time sensitive subscription data.
+😂0😂😂 At any given time, a Subscription Version in the SMS can have one of several statuses (e.g
+😂0😂😂 .,
+😂0😂😂 active, old) and may change status depending on results of different SMS processes.
+😂0😂😂 This section describes the different statuses that a version can have and the SMS processes that can change the status.
+😂0😂😂 This section also discusses functionality and data that is needed for Subscription Management.
+😂0😂😂 NPAC SMS automatically sets a Subscription Version in conflict directly to canceled after it has been in conflict for a tunable number of calendar days.
+😂0😂😂 The old Service Provider User sends a cancellation request for a Subscription Version created by that Service Provider with a status of conflict that has not been concurred by the other new Service Provider.
+😂0😂😂 User cancels a Subscription Version in conflict or cancels a Subscription Version that was created by or concurred to by both Service Providers.
+😂0😂😂 User sends a cancellation request for a Subscription Version that was created by or concurred to by both Service Providers.
+😂0😂😂 User sets a Subscription Version with a status of cancel pending to conflict.
+😂0😂😂 NPAC SMS automatically sets a Subscription Version with a status of cancel pending to conflict if cancel pending acknowledgment has not been received from the new Service Provider within a tunable timeframe.
+😂0😂😂 User removes a Subscription Version from conflict.
+😂0😂😂 New Service Provider User removes a Subscription Version from conflict.
+😂0😂😂 This action can only occur if a tunable number of hours have elapsed since the Subscription Version was placed in conflict.
+😂0😂😂 User sets a Subscription Version with a status of pending to conflict.
+😂0😂😂 User creates a Subscription Version for an existing pending Subscription Version for the old Service Provider and does not provide authorization for the transfer of service.
+😂0😂😂 Old Service Provider sends a Subscription Version creation or modification request for a Subscription Version with a status of pending, which revokes the old Service Provider's authorization for transfer of service.
+😂0😂😂 This action can only be taken once, and must be taken a tunable number of hours prior to the new Service Provider due date.
+😂0😂😂 User cancels a Subscription Version with a status of pending that has not been concurred by both service providers.
+😂0😂😂 User sends a cancellation request for a Subscription Version created by that Service Provider with a status of pending that has not been concurred by the other Service Provider.
+😂0😂😂 NPAC SMS automatically sets a pending Subscription Version to cancel after authorization for the transfer of service has not been received from the new Service Provider within a tunable timeframe.
+😂0😂😂 NPAC SMS automatically sets a pending Subscription Version to cancel if an activation request is not received a tunable amount of time after new Service Provider due date.
+😂0😂😂 User cancels a Subscription Version with a status of pending that has been created/concurred by both Service Providers.
+😂0😂😂 Service Provider User sends a cancellation request for a Subscription Version with a status of pending that has been concurred by the other Service Provider.
+😂0😂😂 NPAC SMS automatically sets a cancel pending Subscription Version to canceled after receiving cancel pending acknowledgment from the concurring Service Provider, or the final cancellation concurrence window has expired without cancel concurrence from the old Service Provider.
+😂0😂😂 User creates a Subscription Version for the old Service Provider and does not provide authorization for the transfer of service.
+😂0😂😂 User sends an old Service Provider Subscription Version creation request and does not provide authorization for the transfer of service.
+😂0😂😂 User creates a Subscription Version for either the new or old Service Provider.
+😂0😂😂 If the create is for the old Service Provider and authorization for the transfer of service is not provided, refer to <ref>.
+😂0😂TODO: 此部分根据原始文档说明全部为functional requirements, 人工检查前100条未发现任何non-functional，故根据原始文档全部标记为0😂 Authorized users can invoke the following functionality in the NPAC SMS to administer subscription data.
+😂0😂😂 NPAC SMS shall allow NPAC personnel and the SOA to NPAC SMS interface to create a Subscription Version.
+😂0😂😂 NPAC SMS shall allow NPAC personnel, a Service Provider SOA via the SOA to NPAC SMS Interface, or Service Provider via the NPAC SOA Low-tech Interface, to create inter-service provider ports or intra-service provider ports for a TN within the 1K Block, when the currently active Subscription Version is LNP Type POOL, and the Block’s status is active, with an empty Failed SP List.
+😂0😂😂 NPAC SMS shall allow NPAC personnel and the SOA to NPAC SMS interface to modify a Subscription Version.
+😂0😂😂 NPAC SMS shall allow NPAC personnel and the SOA to NPAC SMS interface to activate a Subscription Version.
+😂0😂😂 NPAC SMS shall allow NPAC personnel to set a Subscription Version to conflict.
+😂0😂😂 NPAC SMS shall prohibit a Subscription Version in conflict from being activated.
+😂0😂😂  NPAC SMS shall allow NPAC personnel and the SOA to NPAC SMS interface to disconnect a Subscription Version.
+😂0😂😂 NPAC SMS shall allow NPAC personnel and the SOA to NPAC SMS interface to cancel a Subscription Version.
+😂0😂😂 NPAC SMS shall allow NPAC personnel, Local SMS/ SOA to NPAC SMS interface to query for a Subscription Version.
+😂0😂😂 This section describes NPAC SMS functionality required to support NPAC personnel and SOA to NPAC SMS interface user requests defined in the above section.
+😂0😂😂 Additionally, NPAC SMS functionality will perform operations which are not invoked by a direct user request.
+😂0😂😂 Some examples of this are: monitor a Subscription Version to determine whether the old and the new facilities-based Service Providers have authorized the transfer of service for a ported number, issue appropriate notifications to Service Providers, and change the status of a Subscription Version based on tunable parameters.
+😂0😂😂 This section provides the requirements for the Subscription Version Create functionality, which is executed upon the user requesting to create a Subscription Version.
+😂0😂😂 NPAC SMS shall notify all accepting Local SMSs and SOAs of the NPA-NXX, effective date, and owning Service Provider when an NPA-NXX is being ported for the first time immediately after creation validation of a Subscription Version.
+😂0😂😂 NPAC SMS shall notify all accepting Local SMSs and SOAs of the NPA-NXX, effective date, and owning Service Provider when a new NPA-NXX involved in an NPA Split, is being ported for the first time, after the start of permissive dialing, immediately after creation validation of a Subscription Version.
+😂0😂😂 This section provides the Subscription Version Creation requirements for performing an Inter-Service Provider port of a TN.
+😂0😂😂 There are two types of Inter-Service Provider ports: A port of a TN to a new Service Provider from the Old, or a “porting to original” port.
+😂0😂😂 A “porting to original” port implies that all porting data will be removed from the Local SMSs and the TN will revert to the default routing, which ultimately results in the TN returning to the original “donor” Service Provider.
+😂0😂😂  The primary differences in functionality between these two types of Inter-Service Provider ports is that for a “porting to original” port, the routing data is not supplied and upon activation, a delete request is broadcast to the Local SMSs instead of a create request.
+😂0😂😂 Both port types of Inter-Service Provider ports require authorization for the transfer of service from the new Service Provider.
+😂0😂😂 NPAC SMS shall accept the following data from the NPAC personnel or old Service Provider upon Subscription Version creation for an Inter-Service Provider port: <list>.
+😂0😂😂 NPAC SMS shall require the following data from NPAC personnel or the new Service Provider upon Subscription Version creation for an Inter-Service Provider port when NOT “porting to original”: <list>.
+😂0😂😂  NPAC SMS shall require the following data from NPAC personnel or the new Service Provider upon Subscription Version creation for an Inter-Service Provider “porting to original” port: <list>.
+😂0😂😂 NPAC SMS shall accept the following optional fields from NPAC personnel or the new Service Provider upon Subscription Version creation for an Inter-Service Provider port: <list>.
+😂0😂😂 NPAC SMS shall perform field-level data validations to ensure that the value formats for the following input data, if supplied, is valid according to the formats specified in <img> upon Subscription Version creation for an Inter-Service Provider port: <list>.
+😂0😂😂  NPAC SMS shall verify the old and new Service Provider due dates are the same upon initial Subscription Version creation for an Inter-Service Provider port.
+😂0😂😂 NPAC SMS shall verify that the due date is the current or a future date upon Subscription Version creation for an Inter-Service Provider port.
+😂0😂😂 NPAC SMS shall verify that the NPA-NXX to be ported exists as an NPA-NXX in the NPAC SMS system upon Subscription Version creation for an Inter-Service Provider port.
+😂0😂😂 NPAC SMS shall verify that the due date is greater than, or equal to, the NPA-NXX effective date upon Subscription Version creation for an Inter-Service Provider Port.
+😂0😂😂 NPAC SMS shall verify that the old and new Service Provider IDs exist in the NPAC SMS system upon Subscription Version creation for an Inter-Service Provider port.
+😂0😂😂 NPAC SMS shall verify that an input LRN is associated with the new Service Provider in the NPAC SMS system upon Subscription Version creation for an Inter-Service Provider port.
+😂0😂😂  NPAC SMS shall verify that the originating user is identified as the new or old Service Provider on the incoming Subscription Version upon Subscription Version creation for an Inter-Service Provider port.
+😂0😂😂 NPAC SMS shall verify that authorization for transfer of service for a given Service Provider does not already exist when a Service Provider creates a Subscription Version for an Inter-Service Provider port.
+😂0😂😂 NPAC SMS shall verify that the incoming New and Old Service Provider IDs match the IDs in the current pending version, if one exists, upon Subscription Version creation for an Inter-Service Provider port.
+😂0😂😂 NPAC SMS shall require and only allow the Status Change Cause Code to be set when the Old Service Provider authorization is set to false.
+😂0😂😂 NPAC SMS shall verify that the old Service Provider ID on the version being created is equal to the new Service Provider ID on the active Subscription Version, if an active version exists upon Subscription Version creation for an Inter-Service Provider port.
+😂0😂😂 NPAC SMS shall validate that the old Service Provider in the create message is the Service Provider to which the TN’s NPA-NXX is assigned if there is currently no active Subscription Version for the TN in the NPAC SMS.
+😂0😂😂 NPAC SMS shall if the old and new service provider timer types match set the subscription version timer type to that timer type.
+😂0😂😂 NPAC SMS shall if the old and new service provider timer types do not match set the subscription version timer type to the longer timer type of the port out type for the old service provider and the port in type of the new service provider.
+😂0😂😂 NPAC SMS shall if the old and new service provider business hours and days match set the subscription version business type to the business type for the business hours and days supported.
+😂0😂😂  NPAC SMS shall if the old and new service provider business hours and days do not match set the subscription version business type to the shorter business hours and days.
+😂0😂😂 NPAC SMS shall send an appropriate error message to the originating NPAC personnel or SOA to NPAC SMS interface user if any of the validations fail upon Subscription Version creation for an Inter-Service Provider port.
+😂0😂😂 NPAC SMS shall not apply the incoming data to an existing subscription if any of the validations fail upon Subscription Version creation for an Inter-Service Provider port.
+😂0😂😂 NPAC SMS shall not create a new Subscription Version, if a version does not exist, if any of the validations fail upon Subscription Version creation for an Inter-Service Provider port.
+😂0😂😂 NPAC SMS shall apply the incoming data to an existing Subscription Version if all validations pass upon Subscription Version creation for an Inter-Service Provider or port.
+😂0😂😂 NPAC SMS shall create a new Subscription Version, if a version does not already exist, if all validations pass at the time of Subscription Version creation for an Inter-Service Provider port.
+😂0😂😂 NPAC SMS shall provide long and short Initial Concurrence Window tunable parameters which are defined as the number of business hours subsequent to the time the Subscription Version was initially created by which both Service Providers can authorize transfer of service if this is an Inter-Service Provider port.
+😂0😂😂 NPAC SMS shall allow the NPAC SMS Administrator to modify the long and short Initial Concurrence Window tunable parameters.
+😂0😂😂 NPAC SMS shall default the long Initial Concurrence Window tunable parameter to 9 business hours.
+😂0😂😂  NPAC SMS shall default the short Initial Concurrence Window tunable parameter to 1 business hour.
+😂0😂😂 NPAC SMS shall set a Subscription Version to pending upon successful subscription creation and the Old Service Provider has authorized transfer of service if this is an Old Service Provider create request for an Inter-Service Provider port.
+😂0😂😂 NPAC SMS shall notify the old and new Service Providers when a Subscription Version is set to pending upon successful subscription creation for an Inter-Service Provider port.
+😂0😂😂 NPAC SMS shall set a Subscription Version directly to conflict and set the cause code, if the Subscription Version passed validations, but this is a create request from the Old Service Provider and the Old Service Provider did not authorize transfer of service for an Inter-Service Provider port and specified a cause code.
+😂0😂😂 NPAC SMS shall set the conflict timestamp to the current time when a Subscription Version is set to conflict at the time of subscription version creation for an Inter-Service Provider port.
+😂0😂😂 NPAC SMS shall notify the Old and New Service Provider when a Subscription Version is set to conflict at the time of Subscription Version creation for an Inter-Service Provider or port.
+😂0😂😂 NPAC SMS shall include the cause code in the conflict notification to the Old and New Service Provider when the Old Service Provider did not authorize transfer of service for an Inter-Service Provider port on creation.
+😂0😂😂 NPAC SMS shall send a notification to the Service Provider who has not yet authorized the transfer of service, when the Initial Concurrence Window tunable parameter for a pending Subscription Version has expired.
+😂0😂😂 NPAC SMS shall provide long and short Final Concurrence Window tunable parameters which are defined as the number of business hours after the concurrence request is sent by the NPAC SMS by which time both Service Providers can authorize transfer of subscription service for an Inter-Service Provider port.
+😂0😂😂  NPAC SMS shall allow the NPAC SMS Administrator to modify the long and short Final Concurrence Window tunable parameters.
+😂0😂😂 NPAC SMS shall default the long Final Concurrence Window tunable parameter to 9 business hours.
+😂0😂😂 NPAC SMS shall default the short Final Concurrence Window tunable parameter to 1 business hour.
+😂0😂😂 NPAC SMS shall set the Subscription Version status to cancel when the Final Concurrence Window tunable parameter expires and a new Service Provider has not sent authorization for the transfer of service.
+😂0😂😂 NPAC SMS shall reject an inter-service provider Subscription Version Create message where there is no active subscription version for the TN in the NPAC SMS, or inter-service provider Port-to-Original Subscription Version Create message for a TN within the 1K Block, from NPAC Personnel, a Service Provider SOA via the SOA to NPAC SMS Interface, or Service Provider via the NPAC SOA Low-tech Interface, after the Creation of the NPA-NXX-X, and prior to the existence of the Block in the NPAC SMS.
+😂0😂😂  NPAC SMS shall validate that the New Service Provider is the Block Holder, in an inter-service provider port-to-original port for a TN within the 1K Block, once the Block exists in the NPAC SMS.
+😂0😂😂 NPAC SMS shall allow a pending Subscription Version to be activated without an old Service Provider authorization for transfer of service.
+😂0😂😂 NPAC SMS shall allow activation without Old Service Provider concurrence only after the final concurrence window timer has expired.
+😂0😂😂 NPAC SMS shall upon expiration of the Final Concurrence Timer send a notification to the old service provider via the SOA to NPAC SMS interface to inform them of the timer expiration.
+😂0😂😂  This section provides the Subscription Version Creation requirements for performing an Intra-Service Provider port of a TN.
+😂0😂😂 An Intra-Service Provider port of a TN is when a TN is ported to a new location within the current Service Provider network.
+😂0😂😂 A “port to original” port for an Intra-Service Provider port should be handled by a requesting user via submission of a Disconnect request to the NPAC SMS.
+😂0😂😂 NPAC SMS shall require the following data from the NPAC personnel or the Current Service Provider at the time of Subscription Version Creation for an Intra-Service Provider port: <list>.
+😂0😂😂 NPAC SMS shall accept the following optional fields from the NPAC personnel or the Current Service Provider upon a Subscription Version Creation for an Intra-Service Provider port: <list>.
+😂0😂😂  NPAC SMS shall perform field-level data validations to ensure that the value formats for the following input data, if supplied, is valid according to the formats specified in <img> upon Subscription Version creation for an Intra-Service Provider port: <list>.
+😂0😂😂 NPAC SMS shall validate that the new and old Service Provider IDs are identical to the ID of the requesting user at the time of Subscription Version creation for an Intra-Service Provider port.
+😂0😂😂 NPAC SMS shall verify that the input due date is the current or a future due date upon Subscription Version creation for an Intra-Service Provider port.
+😂0😂😂 NPAC SMS shall verify that the NPA-NXX for the TN to be ported exists as an NPA-NXX in the NPAC SMS system upon Subscription Version creation for an Intra-Service Provider port.
+😂0😂😂 NPAC SMS shall verify that the due date is greater than, or equal to, the NPA-NXX effective date upon Subscription Version creation for an Intra-Service Provider port.
+😂0😂😂  NPAC SMS shall verify that the LRN is associated with the new Service Provider in the NPAC SMS system upon Subscription Version creation for an Intra-Service Provider port.
+😂0😂😂 NPAC SMS shall verify that the authorization for transfer of service for a given Service Provider does not already exist when a Service Provider creates a Subscription Version for an Intra-Service Provider port.
+😂0😂😂 NPAC SMS shall verify that the old Service Provider ID on the version being created is equal to the new Service Provider ID on the active Subscription Version, if an active version exists, upon Subscription Version creation for an Intra-Service Provider port.
+😂0😂😂 NPAC SMS shall allow an Intra-Service Provider port to occur for a telephone number not associated with a current active version.
+😂0😂😂 NPAC SMS shall validate that the old Service Provider in the create message is the Service Provider to which the TN’s NPA-NXX is assigned if there is currently no active Subscription Version for the TN in the NPAC SMS.
+😂0😂😂 NPAC SMS shall send an appropriate error message to the originating NPAC personnel or SOA to NPAC SMS Interface if any of the validations fail at the time of Subscription Version creation for an Intra-Service Provider port.
+😂0😂😂 NPAC SMS shall not create a new Subscription Version if any of the validations fail at the time of Subscription Version creation for an Intra-Service Provider port.
+😂0😂😂 NPAC SMS shall set a Subscription Version to pending upon successful creation of a Subscription Version for an Intra-Service Provider port.
+😂0😂😂  NPAC SMS shall notify the current Service Provider when a Subscription Version is set to pending upon a successful creation of a Subscription Version for an Intra-Service Provider port.
+😂0😂😂 NPAC SMS shall allow NPAC personnel to create intra-service provider ports for a TN within the 1K Block, after the Creation of the NPA-NXX-X and up to the NPA-NXX-X's Effective Date, only where the new/old Service Provider is the Code Holder SPID, and a previously active SV does NOT exist in the NPAC SMS.
+😂0😂😂 NPAC SMS shall reject an intra-service provider Subscription Version Create message for a TN within the 1K Block, from a Service Provider SOA via the SOA to NPAC SMS Interface, or Service Provider via the NPAC SOA Low-tech Interface, after the Creation of the NPA-NXX-X Holder Information, and a previously active SV does NOT exist in the NPAC SMS.
+😂0😂😂 This section provides the requirements for the Subscription Version Modification functionality, which is executed upon the user requesting modify Subscription Version.
+😂0😂😂 NPAC SMS shall return an error to the originating NPAC personnel or SOA to NPAC SMS interface user if the version status is sending, failed, partial failure, canceled, cancel pending, old or disconnect pending upon Subscription Version modification.
+😂0😂😂 NPAC SMS shall receive the following data from the originating NPAC personnel or SOA to NPAC SMS interface user to identify a pending or conflict Subscription Version to be modified: <list>.
+😂0😂😂 NPAC SMS shall allow the following data to be modified in a pending or conflict Subscription Version for an Inter-Service Provider or Intra-Service Provider port by the new/current Service Provider or NPAC personnel: <list>.
+😂0😂😂  NPAC SMS shall allow the following data to be modified in a pending, or conflict Subscription Version for a “porting to original” port by the new Service Provider or NPAC personnel: <list>.
+😂0😂😂 NPAC SMS shall allow the following data to be modified in a pending or conflict Subscription Version for an Inter-Service Provider port by the old Service Provider or NPAC personnel: <list>.
+😂0😂😂 NPAC SMS shall allow the old Service Provider to modify the old Service Provider authorization flag to false and set the cause code.
+😂0😂😂 As a result the NPAC SMS will set the Subscription Version status to conflict provided the version has not previously been set into conflict by the Old Service Provider for reasons other than cancellation.
+😂0😂😂 NPAC SMS shall accept the following optional fields from the NPAC personnel or the new Service Provider upon modification of a pending or conflict Subscription version: <list>.
+😂0😂😂 NPAC SMS shall perform field-level data validations to ensure that the value formats for the following input data, if supplied, is valid according to the formats specified in <img> upon Subscription Version modification.
+😂0😂😂  NPAC SMS shall verify that an input due date is the current or future date upon Subscription Version modification.
+😂0😂😂 NPAC SMS shall allow a request to modify the due date of a Subscription Version, when the new value is equal to, or greater than, the corresponding NPA-NXX effective date.
+😂0😂😂 NPAC SMS shall verify that an input LRN is associated with the new Service Provider in the NPAC SMS system upon Subscription Version modification.
+😂0😂😂 NPAC SMS shall verify that the originating user is identified as the new or old Service Provider on the current Subscription Version, if one exists, upon Subscription Version modification.
+😂0😂😂 NPAC SMS shall require and only allow the Status Change Cause Code to be set when the Old Service Provider authorization is set to false.
+😂0😂😂  NPAC SMS shall send an error message to the originating user if the modified pending or conflict Subscription Version fails validations.
+😂0😂😂 NPAC SMS shall leave the original version intact upon validation failure of a modified pending or conflict Subscription Version.
+😂0😂😂 NPAC SMS shall send an appropriate message to the old and new Service Providers upon successful modification of a Subscription Version.
+😂0😂😂 NPAC SMS shall set the conflict timestamp to the current time when a Subscription Version is set to conflict upon Subscription Version modification.
+😂0😂😂 NPAC SMS shall notify the Old and New Service Provider when a Subscription Version is set to conflict upon Subscription Version modification.
+😂0😂😂 NPAC SMS shall include the cause code for conflict in the conflict notification to the Old and New Service Provider when a Subscription Version is set to conflict upon Subscription Version modification.
+😂0😂😂 NPAC SMS shall allow only NPAC personnel and the current Service Provider to modify their own active Subscription Versions.
+😂0😂😂 NPAC SMS shall require the following data from NPAC personnel or SOA to NPAC SMS interface users to identify the active Subscription Version to be modified: <list>.
+😂0😂😂  NPAC SMS shall allow the following data to be modified for an active Subscription Version: <list>.
+😂0😂😂 NPAC SMS shall accept the following optional fields from the new Service Provider or NPAC personnel for an active Subscription Version to be modified: <list>.
+😂0😂😂 NPAC SMS shall perform field-level data validations to ensure that the value formats for the following input data, if supplied, is valid according to the formats specified in <img> upon Subscription Version modification of an active version: <list>.
+😂0😂😂 NPAC SMS shall verify that an input LRN is associated with the new Service Provider in the NPAC SMS system upon Subscription Version modification of an active version.
+😂0😂😂  NPAC SMS shall send an appropriate error message to the originating user if the modified active Subscription Version fails validations.
+😂0😂😂 NPAC SMS shall leave the original version intact upon validation failure of a modified active Subscription Version.
+😂0😂😂 NPAC SMS shall create an old Subscription Version with a new version id for an active Subscription Version prior to modification.
+😂0😂😂 NPAC SMS shall broadcast no data to the Local SMSs due to the creation of an old Subscription Version with a new version id for an active Subscription Version prior to modification.
+😂0😂😂 NPAC SMS shall record the current date and time as the broadcast date and time stamp upon initiation of broadcasting of the modified active Subscription Version.
+😂0😂😂 NPAC SMS shall notify the originating user indicating successful modification of an active Subscription Version.
+😂0😂😂 NPAC SMS shall record the current date and time as the Broadcast Complete Date and Time Stamp, after one Local SMS has successfully acknowledged modifying the new Subscription Version.
+😂0😂😂 NPAC SMS shall proceed with the broadcast modified active subscription process upon successful modification of an active Subscription Version.
+😂0😂😂 NPAC SMS shall determine which Local SMSs to send the Subscription Version to by identifying all Local SMSs that are accepting Subscription version data downloads for the given NPA-NXX.
+😂0😂😂 NPAC SMS shall send the modified Subscription version via the NPAC SMS to Local SMS Interface to the Local SMSs.
+😂0😂😂  NPAC SMS shall set the Subscription Version status to sending upon sending the Subscription version to the Local SMSs.
+😂0😂😂 NPAC SMS shall upon completion of the broadcast return the status of the modified active subscription to its previous state.
+😂0😂😂 NPAC SMS shall use the Subscription Modification Retry Attempts tunable parameter which defines the number of times a new Subscription Version will be sent to a Local SMS which has not acknowledged receipt of the modify request.
+😂0😂😂 NPAC SMS shall use the Subscription Modification Retry Interval tunable parameter, which defines the delay between sending new Subscription Versions to a Local SMS that has not acknowledged receipt of the modify request.
+😂0😂😂 NPAC SMS shall resend the modified Subscription Version a Subscription Modification Retry Attempts tunable parameter number of times to a Local SMS that has not acknowledged the receipt of the modification request once the Subscription Activation Retry Interval tunable parameter expires.
+😂0😂😂 NPAC SMS shall retain the status for the Subscription Version being modified as sending until the earlier of the Subscription Version retry period has expired for all Local SMSs, or until all Local SMSs have acknowledged the modification.
+😂0😂😂 NPAC SMS shall notify the NPAC SMS Administrator of all Local SMSs where a modify has failed, once each Local SMS has successfully responded or failed to respond during the modification retry period.
+😂0😂😂 NPAC SMS shall provide NPAC SMS personnel with the functionality to re-send modify active Subscription Version requests to all failed Local SMSs.
+😂0😂😂 NPAC SMS shall send a list to the Current Service Provider of all Local SMSs that failed modification when a Subscription Version modify active fails.
+😂0😂😂  This section provides the requirements for the functionality to place a Subscription Version in to conflict and remove it from conflict.
+😂0😂😂 NPAC SMS shall require the following data from NPAC personnel to identify the Subscription Version to be placed in conflict: <list>.
+😂0😂😂 NPAC SMS shall send an error message to the NPAC personnel or old Service Provider if the version status is not pending or cancel pending upon attempting to set the Subscription Version to conflict.
+😂0😂😂 NPAC SMS shall send an error message to the SOA if the cause code is not specified upon setting the Subscription Version to conflict.
+😂0😂😂 NPAC SMS shall only allow a subscription version to be placed into conflict by the Old Service provider one time.
+😂0😂😂 NPAC SMS shall provide a Conflict Restriction Tunable which is defined as the time on the business day prior to the New Service Provider due date that a pending Subscription Version can no longer be placed into conflict state by the old Service Provider.
+😂0😂😂 NPAC SMS shall provide a Conflict Restriction Window that restricts an Old Service Provider from putting a Subscription Version into Conflict.
+😂0😂😂 NPAC SMS shall restrict a Subscription Version from being placed into Conflict by the Old Service Provider, when the Conflict Restriction Window Tunable Time is reached AND the Final Concurrence Timer has expired.
+😂0😂😂  The date used for the Conflict Restriction Window Tunable calculation relies on the date value specified in the New Service Provider due date.
+😂0😂😂 NPAC SMS shall allow the NPAC SMS Administrator to modify the Conflict Restriction Window Tunable parameter.
+😂0😂😂 NPAC SMS shall default the Conflict Restriction Window Tunable parameter to 12 noon.
+😂0😂😂 NPAC SMS shall not apply the Conflict Restriction Window Tunable to subscription versions being ported using short timers.
+😂0😂😂 NPAC SMS shall, upon placing a Subscription Version into conflict, set the version status to conflict.
+😂0😂😂 NPAC SMS shall, upon placing a Subscription Version into conflict, record the current date and time as the conflict date and time stamp.
+😂0😂😂 NPAC SMS shall issue an appropriate message to the originating user and the Old and New Service Providers indicating successful completion of the process to place a subscription in conflict.
+😂0😂😂 NPAC SMS shall provide a Conflict Expiration Window tunable parameter which is defined as a number of calendar days a Subscription Version will remain in conflict prior to cancellation.
+😂0😂😂 NPAC SMS shall default the Conflict Expiration Window tunable parameter to 30 calendar days.
+😂0😂😂 NPAC SMS shall allow the NPAC SMS Administration to modify the Conflict Expiration Window tunable parameter.
+😂0😂😂  NPAC SMS shall set the status of the Subscription Version to cancel after a Subscription Version has been in conflict for a Conflict Expiration Window tunable parameter number of calendar days.
+😂0😂😂 NPAC SMS shall set a Subscription Version cancellation date timestamp to the current time upon setting a conflict Subscription Version to cancel.
+😂0😂😂 NPAC SMS shall notify both Service Providers after a Subscription Version status is set to cancel from conflict.
+😂0😂😂 NPAC SMS shall require the following data from the NPAC personnel user, new, or old Service Provider to identify the Subscription Version to be set from conflict to pending: <list>.
+😂0😂😂 NPAC SMS shall send an error message to the originating user if the Subscription Version status is not in conflict upon attempting to set the Subscription Version to pending.
+😂0😂😂 NPAC SMS shall set the version status to pending if the Subscription Version is in conflict upon a request from NPAC personnel, new, or old service providers to set a Subscription Version to pending.
+😂0😂😂 NPAC SMS shall send an appropriate message to the originating user indicating successful completion of the process to set a subscription to pending.
+😂0😂😂 NPAC SMS shall inform both Service Providers when the status of a Subscription Version is set to pending for an Inter-Service Provider port.
+😂0😂😂  NPAC SMS shall provide long and short Conflict Resolution New Service Provider Restriction tunable parameters which are defined as a number of business hours after the subscription version is put into conflict that the NPAC SMS will prevent it from being removed from conflict by the New Service Provider.
+😂0😂😂 NPAC SMS shall default the long Conflict Resolution New Service Provider Restriction tunable parameter to 6 business hours.
+😂0😂😂 NPAC SMS shall allow the NPAC SMS Administration to modify the long and short Conflict Resolution New Service Provider Restriction tunable parameters.
+😂0😂😂 NPAC SMS shall default the short Conflict Resolution New Service Provider Restriction tunable parameter to 6 business hours.
+😂0😂😂 NPAC SMS shall update the conflict resolution date and time stamp with the current date and time and set the old Service Provider Authorization flag to true when conflict is resolved.
+😂0😂😂 This section provides the requirements for the Subscription Version Activation functionality, which is executed upon the NPAC personnel or SOA to NPAC SMS interface user requesting to activate a Subscription Version.
+😂0😂😂 Requirements related to activation are contained in requirement <ref>.
+😂0😂😂 NPAC SMS shall require the following data from the NPAC personnel or new service provider to identify the Subscription Version to be activated: <list>.
+😂0😂😂 NPAC SMS shall record the current date and time as the Activation Broadcast Complete Date and Time Stamp, as soon as one Local SMS has successfully acknowledged activating the new Subscription Version.
+😂0😂😂  NPAC SMS shall proceed with the “immediate” disconnect processing when a “porting to original” Subscription Version is activated.
+😂0😂😂 NPAC SMS shall set the Activation Received timestamp to the current date and time upon receiving a Subscription Version activation request.
+😂0😂😂 NPAC SMS shall send an error message to the originating user if the version status is not pending upon Subscription Version activation.
+😂0😂😂 NPAC SMS shall verify that a Subscription Version is in a valid pending state by checking that a new Service Provider time stamp exists and that the effective date of the NPA-NXX has been reached.
+😂0😂😂 NPAC SMS shall send an error message to the originating user if the Subscription validation fails.
+😂0😂😂 NPAC SMS shall verify that a pending Subscription Version is eligible for activation by ensuring that the new Service Provider due date is less than or equal to the current date.
+😂0😂😂 NPAC SMS shall determine which Local SMSs to send the Subscription Version to by identifying all Local SMS that are accepting Subscription Version data downloads for the given NPA-NXX.
+😂0😂😂 NPAC SMS shall send the activated Subscription Version for an activated Inter or Intra-Service Provider port via the NPAC SMS to Local SMS Interface to the Local SMSs.
+😂0😂😂 NPAC SMS shall set the subscription status to sending upon sending the activated Subscription Version to the Local SMSs.
+😂0😂😂  NPAC SMS shall record the current date and time as the broadcast date and time stamp upon initiating sending the activated subscription to the Local SMSs.
+😂0😂😂 NPAC SMS shall log the activation responses resulting from the activation requests sent to the Local SMSs.
+😂0😂😂 NPAC SMS shall provide a Local SMS Activation Log Retention Period tunable parameter which is defined as the number of calendar days Local SMS activation responses will remain in the log.
+😂0😂😂 NPAC SMS shall allow the NPAC SMS Administrator to modify the Local SMS Activation Log Retention Period tunable parameter.
+😂0😂😂 NPAC SMS shall default the Local SMS Activation Log Retention Period tunable parameter to 90 calendar days.
+😂0😂😂 NPAC SMS shall allow NPAC personnel to view the Local SMS Activation Message log.
+😂0😂😂 NPAC SMS shall, upon receiving successful activation acknowledgment from all involved Local SMSs, set the sending Subscription Version status to active.
+😂0😂😂 NPAC SMS shall upon receiving successful activation acknowledgment from any involved Local SMSs, set the previous active Subscription Version status to old.
+😂0😂😂 NPAC SMS shall provide a Subscription Activation Retry Attempts tunable parameter which defines the number of times a new Subscription Version will be sent to a Local SMS which has not acknowledged receipt of the activation request.
+😂0😂😂  NPAC SMS shall provide a Subscription Activation Retry Interval tunable parameter, which defines the delay between sending new Subscription Versions to a Local SMS that has not acknowledged receipt of the activation request.
+😂0😂😂 NPAC SMS shall allow the NPAC SMS Administrator to modify the Subscription Activation Retry Attempts tunable parameter.
+😂0😂😂 NPAC SMS shall allow the NPAC SMS Administrator to modify the Subscription Activation Retry Interval tunable parameter.
+😂0😂😂 NPAC SMS shall default the Subscription Activation Retry Attempts tunable parameter to 3 times.
+😂0😂😂 NPAC SMS shall default the Subscription Activation Retry Interval tunable parameter to 2 minutes.
+😂0😂😂 NPAC SMS shall resend the activated Subscription Version a Subscription Activation Retry Attempts tunable parameter number of times to a Local SMS that has not acknowledged the receipt of the activation request once the Subscription Activation Retry Interval tunable parameter expires.
+😂0😂😂 NPAC SMS shall consider the Subscription Version activation for a given Local SMS failed once the applicable Activation Retry tunable parameter number of retries has been exhausted for that Local SMS.
+😂0😂😂 NPAC SMS shall retain the status for the Subscription Version being activated as sending until the Subscription Version retry period expires for all Local SMSs, or until all Local SMSs have acknowledged the activation.
+😂0😂😂 NPAC SMS shall notify the NPAC SMS Administrator of all Local SMSs where new activation failed, once each Local SMS has successfully responded or failed to respond during the activation retry period.
+😂0😂😂  NPAC SMS shall set the Subscription Version status to partial failure if the activation resulting from an subscription version activation request failed in one or more, but not all, of the Local SMSs.
+😂0😂😂 NPAC SMS shall set the status of a previous active version to old when a Subscription Version activation succeeds for at least one of the Local SMSs.
+😂0😂😂 NPAC SMS shall set the status of the Subscription Version to failed if the Subscription Version fails activation resulting from an subscription version activation request in all the Local SMSs to which it was sent.
+😂0😂😂 NPAC SMS shall notify the NPAC System Administrator when a Subscription Version fails activation at all of the Local SMSs.
+😂0😂😂 NPAC SMS shall provide NPAC SMS personnel with the functionality to re-send activate Subscription Version requests to all failed Local SMSs.
+😂0😂😂 NPAC SMS shall send a list to the Old and New Service Providers of all Local SMSs that failed activation when a Subscription Version is set to failed or partial failure subsequent to Subscription Version activation for an Inter-Service Provider port.
+😂0😂😂 NPAC SMS shall send a list to the current Service Provider of all Local SMSs that failed activation when a Subscription Version is set to failed or partial failure subsequent to Subscription Version activation for an Intra-Service Provider port.
+😂0😂😂 NPAC SMS shall allow NPAC personnel, a Service Provider SOA via the SOA to NPAC SMS Interface, or Service Provider via the NPAC SOA Low-tech Interface, to activate intra-service provider ports for a TN within the 1K Block, where there is no active Subscription Version in the NPAC SMS.
+😂0😂😂  The NPAC SMS shall broadcast a new Subscription Version Create to a non-EDR Local SMS, upon activating a port-to-original Subscription Version, where the TN is within the range of a 1K Block, once the Block exists in the NPAC SMS.
+😂0😂😂 The NPAC SMS shall broadcast a Subscription Version Delete to an EDR Local SMS, upon activating a port-to-original Subscription Version, where the TN is within the range of a 1K Block, once the Block exists in the NPAC SMS.
+😂0😂😂 This section provides the requirements for the Subscription Version Disconnect functionality, which is executed upon the NPAC personnel or SOA to NPAC SMS interface user requesting to have a Subscription Version disconnected.
+😂0😂😂 NPAC SMS shall receive the following data from the NPAC personnel or current Service Provider to identify an active Subscription Version to be disconnected: <list>.
+😂0😂😂 NPAC SMS shall require the following input data upon a Subscription Version disconnect: <list>.
+😂0😂😂 NPAC SMS shall accept the following optional input data upon a Subscription Version disconnect: <list>.
+😂0😂😂 NPAC SMS shall allow only NPAC personnel or the Current Service Provider to invoke the functionality to disconnect a Subscription Version.
+😂0😂😂  NPAC SMS shall send an appropriate error message to the originating user that the Subscription Version is not active in the network and cannot be disconnected or set to disconnect pending if there is no Subscription Version with a status of active.
+😂0😂😂 NPAC SMS shall notify the originating user that the active Subscription Version cannot be disconnected if a version of that subscription version with a status other than canceled or old exists.
+😂0😂😂 NPAC SMS shall create an old Subscription Version with a new version id for a disconnect-pending Subscription Version when the immediate or deferred disconnect request is received.
+😂0😂😂 NPAC SMS shall broadcast no data to the Local SMSs due to the creation of an old Subscription Version with a new version id for a disconnect-pending Subscription Version when the immediate or deferred disconnect request is received.
+😂0😂😂 NPAC SMS shall set the status of a Subscription Version to disconnect pending upon a Subscription Version disconnect request when an effective release date is specified.
+😂0😂😂 NPAC SMS shall inform the current Service Provider when the status of a Subscription Version is set to Disconnect Pending.
+😂0😂😂 NPAC SMS shall notify the new Service Provider of the Subscription Version Customer Disconnect Date and Effective Release Date immediately prior to broadcasting a Subscription Version disconnect.
+😂0😂😂 NPAC SMS shall immediately proceed with the broadcasting of the disconnect after the Customer Disconnect Date notification is sent if no Effective Release Date was specified with the request.
+😂0😂😂 NPAC SMS shall proceed with the broadcasting of the disconnect when the specified Effective Release Date is reached if an Effective Release Date was specified with the request.
+😂0😂😂  NPAC SMS shall broadcast the disconnect Subscription Version message to the Local SMSs that are accepting Subscription Version data downloads for the given NPA-NXX via the NPAC SMS to Local SMS Interface.
+😂0😂😂 NPAC SMS shall record the current date and time as the disconnect broadcast date and time stamp upon sending of disconnect messages to the Local SMSs.
+😂0😂😂 NPAC SMS shall set a Subscription Version status to sending upon sending the disconnect messages to the Local SMSs.
+😂0😂😂 NPAC SMS shall update the Disconnect Complete timestamp of the previously active Subscription Version upon completion of the broadcast, and the FIRST successful response from a Local SMS.
+😂0😂😂 NPAC SMS shall set the disconnect Subscription Version to old if a successful response from at least one Local SMS is returned.
+😂0😂😂 NPAC SMS shall update the status of the disconnect Subscription Version upon completion of the Deletion broadcast, and a response from ALL Local SMSs, or retries are exhausted.
+😂0😂😂 NPAC SMS shall set the status of the disconnect Subscription Version to active if the disconnect fails in all the Local SMSs to which it was sent.
+😂0😂😂 NPAC SMS shall notify the NPAC SMS System Administrator when a disconnect Subscription Version fails in all of the Local SMSs.
+😂0😂😂 NPAC SMS shall provide authorized NPAC SMS personnel with the functionality to resend all failed disconnect requests to the Local SMSs.
+😂0😂😂  NPAC SMS shall allow the NPAC SMS Administrator to modify the Subscription Disconnect Retry Attempts tunable parameter, which is defined as the number of times the NPAC SMS will resend a disconnect message to an unresponsive Local SMS.
+😂0😂😂 NPAC SMS shall default the Subscription Disconnect Retry Attempts tunable parameter to 3 times.
+😂0😂😂 NPAC SMS shall allow the NPAC SMS Administrator to modify the Subscription Disconnect Retry Interval tunable parameter, which is defined as the amount of time that shall elapse between disconnect retries.
+😂0😂😂 NPAC SMS shall default the Subscription Disconnect Retry Interval tunable parameter to 2 minutes.
+😂0😂😂 NPAC SMS shall resend a Subscription Version disconnect message a Subscription Disconnect Retry Attempts tunable parameter number of times to a Local SMS that has not acknowledged the receipt of a disconnect once the Subscription Disconnect Retry Interval tunable parameter expires.
+😂0😂😂 NPAC SMS shall retain the status for the Subscription Version being disconnected as sending until the Subscription Disconnect Retry Attempts tunable parameter period expires for all Local SMSs, or until all Local SMSs have acknowledged the disconnect.
+😂0😂😂 NPAC SMS shall consider the disconnect Subscription Version request to have failed at a specific Local SMS after the Subscription Disconnect Retry Attempts tunable parameter count for the specific Local SMS has been exhausted.
+😂0😂😂 NPAC SMS shall send a list of the Local SMSs where the disconnect request failed to the NPAC SMS System Administrator after every local SMS has either succeeded or failed with the disconnect.
+😂0😂😂  NPAC SMS shall set the disconnect Subscription Version status to old if the disconnect request failed at one or more, but not all, of the Local SMSs.
+😂0😂😂 NPAC SMS shall provide authorized NPAC SMS personnel with the functionality to resend disconnect requests to all Local SMSs that failed to register the disconnect request.
+😂0😂😂 The NPAC SMS shall reinstate the Block default routing, block holder Service Provider Id and the LNP Type to POOL for a subscription version upon a disconnect for a ported TN, or an activate for a Port-To-Original TN, belonging to the 1K Block, once the Block exists in the NPAC SMS, except for a status of Old, with or without a Block Failed SP List.b
+😂0😂😂 scription Version - Customer Disconnect Date Notification for Pooled Number NPAC SMS shall notify the Block Holder of the Subscription Version Customer Disconnect Date and Effective Release Date, for a ported pooled Subscription Version that is being disconnected, prior to reinstating the default routing.
+😂0😂😂 The NPAC SMS shall broadcast a new Subscription Version Create to a non-EDR Local SMS, upon a disconnect of a ported pooled Subscription Version, where the TN is within the 1K Block.
+😂0😂😂 The NPAC SMS shall broadcast a Subscription Version Delete to an EDR Local SMS, upon a disconnect of a ported pooled Subscription Version, where the TN is within the 1K Block.
+😂0😂😂 NPAC SMS shall update the Status of the individual subscription version broadcast to the EDR Local SMSs, and the individual subscription version broadcast to the non-EDR Local SMSs, upon completion of the disconnect broadcast to ALL EDR and non-EDR Local SMSs.
+😂0😂😂  NPAC SMS shall, upon broadcasting the <code> of the Subscription Version to EDR Local SMSs, and <code> of Subscription Version to non-EDR Local SMSs, set the status of the Subscription Version being <code> to: <list>.
+😂0😂😂  NPAC SMS shall, upon broadcasting the <code> of the Subscription Version to EDR Local SMSs, and <code> of Subscription Version to non-EDR Local SMSs, set the status of the Subscription Version being <code> to: <list>.
+😂0😂😂 NPAC SMS shall update the Status of the individual subscription version broadcast to the EDR Local SMSs, the individual subscription version broadcast to the non-EDR Local SMSs, and the individual subscription version representing the port-to-original request, upon completion of the Port-To-Original broadcast to ALL EDR and non-EDR Local SMSs.
+😂0😂😂 NPAC SMS shall, upon broadcasting the <code> of the Subscription Version to EDR Local SMSs, and <code> of Subscription Version to non-EDR Local SMSs, set the status of the Subscription Version being <code> to: <list>.
+😂0😂😂 NPAC SMS shall, upon broadcasting the <code> of the Subscription Version to EDR Local SMSs, and <code> of Subscription Version to non-EDR Local SMSs, set the status of the previously active Subscription Version being <code> to: <list>.
+😂0😂😂 NPAC SMS shall, upon broadcasting the <code> of the Subscription Version to EDR Local SMSs, and <code> of Subscription Version to non-EDR Local SMSs, set the status of the Subscription Version being <code> to: <list>.
+😂0😂😂  NPAC SMS shall update the <code> of the individual subscription version that were broadcast to the EDR Local SMSs with the discrepant Local SMS, upon completion of the broadcast of the <code> of the Subscription Version to EDR Local SMSs, and the <code> of the Subscription Version to non-EDR Local SMSs.
+😂0😂😂 NPAC SMS shall update the <code> of the individual subscription version that were sent up in the Port-to-Original Activate request by the SOA with the discrepant Local SMS, upon completion of the broadcast of the <code> of the Subscription Version to EDR Local SMSs, and the <code> of the Subscription Version to non-EDR Local SMSs.
+😂0😂😂 This section provides the requirements for the Subscription Version Cancellation functionality, which is executed upon the NPAC personnel or SOA to NPAC SMS interface user requesting to cancel a Subscription Version.
+😂0😂😂 NPAC SMS shall inform both old and new Service Providers when the status of a Subscription Version is set to cancel pending for an Inter-Service Provider port.
+😂0😂😂 NPAC SMS shall receive the following data from the NPAC personnel to identify a Subscription Version to be canceled: <list>.
+😂0😂😂 NPAC SMS shall send an appropriate error message to the originating user if the status is not pending, conflict, or disconnect pending.
+😂0😂😂  NPAC SMS shall send an appropriate error message to the originating user if the originating user is neither the New nor the Old Service Provider in the existing Subscription Version upon Subscription Version cancellation.
+😂0😂😂 NPAC SMS shall set the Subscription Version cancellation date and time to current upon setting the Subscription Version status to canceled.
+😂0😂😂 NPAC SMS shall set the subscription version status to cancel upon receiving a cancellation from the old Service Provider if the New Service Provider has not sent a subscription version create.
+😂0😂😂 NPAC SMS shall set the subscription version status to cancel upon receiving a cancellation from the New Service Provider if the Old Service Provider has not sent an subscription version create.
+😂0😂😂 NPAC SMS shall return an error if a Service Provider sends a cancellation for a subscription version that has not been created by that Service Provider.
+😂0😂😂 NPAC SMS shall set the subscription version status to Cancel Pending upon receiving a cancellation from either the Old or New Service Provider for a subscription version with a pending status for an Inter-Service Provider or Port to original port.
+😂0😂😂 NPAC SMS shall set the subscription version status to cancel upon receiving a cancellation from the new Service Provider on a subscription in conflict that was previously in cancel pending and for which only the old service provider has sent a cancellation acknowledgment.
+😂0😂😂 NPAC SMS shall return an error to the Old Service Provider if they attempt to cancel a Subscription Version that is in conflict due to lack of New Service Provider cancellation concurrence on a subscription version that was previously in cancel pending state.
+😂0😂😂 NPAC SMS shall set the subscription version status to Active upon receiving a cancellation for a subscription version with a status of disconnect pending.
+😂0😂😂  NPAC SMS shall set the subscription version status to cancel upon receiving a cancellation from the current Service Provider for an Intra-Service Provider port.
+😂0😂😂 NPAC SMS shall set the Subscription Version status to cancel upon receiving cancellation pending acknowledgment from the Service Provider that did not initiate the cancellation for an Inter-Service Provider port.
+😂0😂😂 NPAC SMS shall notify both old and new Service Providers after a Subscription Version’s status is set to canceled for an Inter-Service Provider port.
+😂0😂😂 NPAC SMS shall notify the current Service Provider after a Subscription Version’s status is set to canceled for an Intra-Service Provider port.
+😂0😂😂 NPAC SMS shall update the old Service Provider cancellation date and time stamp with the current date and time when the cancellation acknowledgment is received from the old Service Provider.
+😂0😂😂 NPAC SMS shall update the new Service Provider cancellation date and time stamp with the current date and time when the cancellation acknowledgment is received from the new Service Provider.
+😂0😂😂 NPAC SMS shall provide long and short Cancellation-Initial Concurrence Window tunable parameters, which are defined as the number of business hours after the version is set to Cancel Pending by which the non-originating Service Provider is expected to acknowledge the pending cancellation.
+😂0😂😂 NPAC SMS shall allow the NPAC SMS Administrator to modify the long and short Cancellation-Initial Concurrence Window tunable parameters.
+😂0😂😂 NPAC SMS shall default the long Cancellation-Initial Concurrence Window tunable parameter to 9 business hours.
+😂0😂😂  NPAC SMS shall default the short Cancellation-Initial Concurrence Window tunable parameter to 9 business hours.
+😂0😂😂 NPAC SMS shall provide long and short Cancellation-Final Concurrence Window tunable parameters which are defined as the number of business hours after the second cancel pending notification is sent by which both Service Providers are expected to acknowledge the pending cancellation.
+😂0😂😂 NPAC SMS shall allow the NPAC SMS Administrator to modify the long and short Cancellation-Final Concurrence Window tunable parameters.
+😂0😂😂 NPAC SMS shall default the long Cancellation-Final Concurrence Window tunable parameter to 9 business hours.
+😂0😂😂 NPAC SMS shall default the short Cancellation-Final Concurrence Window tunable parameter to 9 business hours.
+😂0😂😂 NPAC SMS shall send a notification to the Service Provider who has not yet acknowledged the cancel pending status when the Cancellation-Initial Concurrence Window tunable parameter expires.
+😂0😂😂 NPAC SMS shall set the Subscription Version status to conflict when the NPAC SMS has not received the cancellation acknowledgment from the new Service Provider and the Cancellation-Final Concurrence Window tunable parameter has expired.
+😂0😂😂 NPAC SMS shall set the Subscription Version status to cancel and set the cause code to “NPAC SMS automatic cancellation” when the NPAC SMS has not received the cancellation acknowledgment from the Old Service Provider and the Cancellation-Final Concurrence Window tunable parameter has expired.
+😂0😂😂 NPAC SMS shall notify the old and new Service Providers upon setting a Subscription Version to conflict.
+😂0😂😂  This section provides the requirements for the Subscription Version resend functionality, which is executed upon the NPAC personnel requesting to resend a Subscription Version.
+😂0😂😂 NPAC SMS shall receive the following data from NPAC personnel to identify a subscription version that contains a Failed SP List with one or more SPIDS, to be resent: <list>.
+😂0😂😂 NPAC SMS shall require NPAC personnel to specify a TN Range to identify multiple subscription versions that contain a Failed SP List with one or more SPIDS, to be resent.
+😂0😂😂 NPAC SMS shall require the following input data from NPAC personnel upon a Subscription Version resend: <list>.
+😂0😂😂 NPAC SMS shall send an error message to the originating user upon Subscription Version resend if the version does not have a list of failed LSMSs associated with the subscription’s last operation.
+😂0😂😂 NPAC SMS shall resend a Subscription Version activation request, if the Subscription Version previously failed activation, to the designated list of failed Local SMSs via the NPAC SMS to Local SMS Interface upon a Subscription Version resend request.
+😂0😂😂 NPAC SMS shall resend a Subscription Version disconnect request, if the Subscription Version previously failed disconnect, to the designated list of failed Local SMSs via the NPAC SMS to Local SMS Interface upon a Subscription Version resend request.
+😂0😂😂 NPAC SMS shall set a failed or partial failure Subscription Version to sending subsequent to resending to the Local SMSs via the NPAC SMS to Local SMS Interface.
+😂0😂😂  NPAC SMS shall proceed with the standard activation processing subsequent to resending a Subscription Version activation request to the Local SMSs via the NPAC SMS to Local SMS Interface.
+😂0😂😂 NPAC SMS shall proceed with the standard disconnect processing subsequent to resending a Subscription Version disconnect request to the Local SMSs via the NPAC SMS to Local SMS Interface.
+😂0😂😂 NPAC SMS shall resend a Subscription Version modify active request, if an active Subscription Version previously failed modification, to the designated list of failed Local SMSs via the NPAC SMS to Local SMS Interface upon a Subscription Version resend request.
+😂0😂😂 NPAC SMS shall proceed with the standard modify active processing subsequent to resending a Subscription Version modify request to the Local SMSs via the NPAC SMS to Local SMS Interface.
+😂0😂😂 NPAC SMS shall prevent NPAC Personnel from re-sending a Subscription Version with LNP Type of POOL, via the NPAC Administrative Interface.
+😂0😂😂 NPAC SMS shall re-send Subscription Versions to a discrepant non-EDR Local SMS via the NPAC SMS to Local SMS Interface, when a re-send request is initiated to a Block.
+😂0😂😂 NPAC SMS shall update the <code> of the failed Subscription Versions with LNP Type of POOL in the 1K Block, at the start of the re-send to the Local SMSs, from a failed status to a sending status.
+😂0😂😂 NPAC SMS shall update the <code> of the partial failure Subscription Versions with LNP Type of POOL in the 1K Block, at the start of the re-send to the Local SMSs, from a partial failure status to a sending status.
+😂0😂😂  NPAC SMS shall update the <code> of the active Subscription Version with LNP Type of POOL in the 1K Block, with a Failed SP List, at the start of the re-send to the Local SMSs, from an active status to a sending status.
+😂0😂😂 NPAC SMS shall update the <code> of the old Subscription Version with LNP Type of POOL in the 1K Block, with a Failed SP List, at the start of the re-send to the Local SMSs, from an old status to a sending status.
+😂0😂😂 NPAC SMS shall update the <code> of the Subscription Version with LNP Type of POOL in the 1K Block, by removing the previously failed Local SMS, upon a successful re-send to a previously failed Local SMS.
+😂0😂😂 NPAC SMS shall update the <code> of the Subscription Version and the Block, specified in the re-send request for a Block Creation, Modification, or Deletion, at the completion of the re-send to the Local SMS, and a response from the Local SMS or if retries have been exhausted, from a sending status, as defined in <ref>.
+😂0😂😂 NPAC SMS shall update the <code> of the Subscription Version with LNP Type of POOL in the 1K Block, specified in the re-send request for a Block Creation, Modification, or Deletion, at the completion of the re-send to the Local SMS, and a response from the Local SMS, or if retries have been exhausted, as defined in <ref>.
+😂0😂😂 NPAC SMS shall examine a Service Provider's EDR Indicator, at the time of re-send, to determine the message to re-send, for a disconnect or a Port-To-Original Subscription Version of a ported pooled TN, where the TN is contained within a Pooled 1K Block.
+😂0😂😂 NPAC SMS shall, for a re-send of a disconnect Subscription Version of a ported pooled TN, where the TN is contained within a Pooled 1K Block, re-broadcast the Delete request of the Subscription Version that was active prior to the disconnect broadcast to a discrepant EDR Local SMS.
+😂0😂😂  NPAC SMS shall, for a re-send of a disconnect Subscription Version of a ported pooled TN, where the TN is contained within a Pooled 1K Block, re-broadcast the Create request of the Subscription Version that was created to restore default routing to a discrepant non-EDR Local SMS.
+😂0😂😂 NPAC SMS shall, for a re-send of a Port-To-Original Subscription Version of a ported pooled TN, where the TN is contained within a Pooled 1K Block, re-broadcast the Delete request of the Subscription Version that was active prior to the Port-To-Original broadcast to a discrepant EDR Local SMS.
+😂0😂😂 NPAC SMS shall, for a re-send of a Port-To-Original Subscription Version of a ported pooled TN, where the TN is contained within a Pooled 1K Block, re-broadcast the Create request of the Subscription Version that was created to restore default routing, and shall NOT re-broadcast the Delete request of the Subscription Version that was active prior to the Port-To-Original broadcast to a discrepant non-EDR Local SMS.
+😂0😂😂 This section provides the requirements for the Subscription Version Query functionality, which is executed upon the user requesting a query of <ref>.
+😂0😂😂  NPAC SMS shall allow NPAC personnel, SOA to NPAC SMS interface users, and NPAC SMS to Local SMS interface users to query data maintained by the NPAC SMS for a Subscription and all its Versions.
+😂0😂😂 The following requirements specify the NPAC SMS query functionality defined above.
+😂0😂😂 NPAC SMS shall receive the following data to identify a Subscription Version to be queried: <list>.
+😂0😂😂 NPAC SMS shall only retrieve Subscription Versions with a specific status when the user supplies a specific Subscription Version status as part of the query criteria.
+😂0😂😂 NPAC SMS shall return all Subscription Versions associated with a ported TN that the requester is eligible to view if the originating user has not provided a Subscription Version status as part of the query criteria.
+😂0😂😂 NPAC SMS shall return the following output data for a Subscription Version query request initiated by NPAC personnel or a SOA to NPAC SMS interface user: <list>.
+😂0😂😂  NPAC SMS shall return the following output data for a Subscription Version query request initiated over the NPAC SMS to Local SMS interface: <list>.
+😂0😂😂  NPAC SMS shall send the originating user an appropriate message indicating that there was no data found if no Subscription Versions were found for a query.
+😂0😂😂 NPAC SMS shall allow NPAC personnel or SOA to NPAC SMS interface users to retrieve subscription data that they cannot modify.
+😂0😂😂 NPAC SMS shall allow authorized NPAC personnel, SOA to NPAC SMS interface users, or NPAC SMS to Local SMS interface users to submit query requests for Subscription Version data based on a single ported TN only.
+😂0😂😂 NPAC SMS shall allow old and new Service Providers or NPAC personnel to view a Subscription Version for any ported TN.
+😂0😂😂 NPAC SMS shall allow NPAC Customers who are neither the old nor the new Service Provider to view only those Subscription Versions for a ported TN with a status of active, partial-failure, disconnect-pending, canceled or old.
+😂0😂😂 NPAC SMS shall only allow Subscription Version queries of online subscription Versions that have not been archived.
+😂0😂😂 NPAC SMS shall return Subscription Versions with LNP Type of POOL that match the query selection criteria, on query requests by NPAC personnel, SOA via the SOA to NPAC SMS Interface, Local SMS via the NPAC SMS to Local SMS Interface, or Service Provider via the NPAC SOA Low-tech Interface, regardless of the value in the requesting Service Provider’s EDR Indicator.
+😂0😂😂  This section details the functional requirements for user interaction with the NPAC SMS to appropriately operate in the National Number Pooling Environment.
+😂0😂😂 The following requirements outline the basic NPAC SMS processing requirements for subscription versions in a National Number Pooling environment.
+😂0😂😂 NPAC SMS shall reject a message from NPAC personnel, a Service Provider SOA via the SOA to NPAC SMS Interface, a Service Provider LSMS via the NPAC SMS to Local SMS Interface, or a Service Provider via the NPAC SOA Low-tech Interface, to Create, Modify, Cancel, Set to Conflict, Activate, or Disconnect, a Subscription Version with an LNP Type of POOL.
+😂0😂😂 NPAC SMS shall suppress status change and attribute value change notifications to the old and new/current service provider SOA systems for Subscription Versions with LNP Type of POOL.
+😂0😂😂 NPAC SMS shall apply NPA-NXX Filters to subscription version broadcasts to the Local SMSs, for Subscription Versions with LNP Type of POOL.
+😂0😂😂 NPAC SMS shall broadcast an addition, modification, or deletion of Subscription Versions, with LNP Type of POOL, to non-EDR LSMSs, via the NPAC SMS to Local SMS Interface, upon successful update of the 1K Block in the NPAC SMS, for Subscription Versions.
+😂0😂😂 NPAC SMS shall consider an EDR Local SMS to be discrepant and shall update the Subscription Version Failed SP List for all Subscription Versions with LNP Type of POOL in the 1K Block, based on an EDR Local SMS failing to process the Block Object, for an addition, modification, deletion, re-send, or mass update.
+😂0😂😂  NPAC SMS shall maintain data integrity for SPID, LRN and DPC/SSN data, between Subscription Versions with LNP Type of POOL in a 1K Block, and the corresponding Number Pooling Block, in the NPAC SMS.
+😂0😂😂 The following section outlines the NPAC SMS functional requirements for processing pooled subscription version additions.
+😂0😂😂 Subscription versions with LNP Type set to POOL are created when a Number Pool Block is activated.
+😂0😂😂 NPAC SMS shall create individual subscription versions, with LNP Type of POOL, for each TN within the 1K Block, that does not already exist with a status of active/partial failure/disconnect pending/old with a Failed SP List/sending, immediately after successfully creating Number Pooling Block Holder Information in the NPAC SMS.
+😂0😂😂 NPAC SMS shall automatically populate the following data upon Subscription Version creation for a Pooled Number port: <list>.
+😂0😂😂  NPAC SMS shall upon finding an existing subscription version with an active, partial failure, disconnect pending, old with a failed SP list, or sending status for any TNs within the 1K Block, will bypass and not alter that TN/subscription version, log an information message, and continue processing.
+😂0😂😂 NPAC SMS shall set a Subscription Version of LNP Type POOL in the 1K Block, to sending upon successful subscription creation.
+😂0😂😂 NPAC SMS shall update the status of each Subscription Version with LNP Type of POOL for each TN in the 1K Block, upon completion of the broadcast, and a response from ALL EDR and non-EDR Local SMSs, or retries are exhausted/timers have expired, as defined in <ref>.
+😂0😂😂 NPAC SMS shall update the <code> with the discrepant Local SMS of the individual subscription version with LNP Type of POOL, upon completion of the activation broadcast to All EDR and non-EDR Local SMSs, an unsuccessful response from at least one Local SMS, and a response from ALL EDR and non-EDR Local SMSs, or retries are exhausted/timers have expired, as defined in <ref>.
+😂0😂😂  The following requirements define validation processing on behalf of the NPAC SMS once a Number Pool Block has been activated.
+😂0😂😂 NPAC SMS shall, upon successful completion of a Block Create request, where the Block status is active, verify that 1000 individual TNs exist for the Block, with an LNP Type of either: <list>.
+😂0😂😂 NPAC SMS shall run the Block Create Validation Process within 24 hours of Block Creation where the Block status is active.
+😂0😂😂 NPAC SMS shall, upon finding any missing TNs with a status of Old without a Failed SP List, in the 1K Block, upon performing the Subscription Version Completion Check defined in RR5-96, log an information message, create a Subscription Version with LNP Type of POOL in the NPAC SMS using the routing data in the Block, and set the status to sending for the Subscription Version.
+😂0😂😂 NPAC SMS shall, for any missing TNs in the 1K Block defined in RR5-98, broadcast the Subscription Version with LNP Type of POOL, to all non-EDR Local SMSs, via the NPAC SMS to Local SMS Interface.
+😂0😂😂 NPAC SMS shall update the <code> of the Block based on the results of the broadcast of the Subscription Versions to all non-EDR Local SMSs, or retries are exhausted, as defined in <ref>.
+😂0😂😂  NPAC SMS shall update the <code> of the Block based on the results of the broadcast of the Subscription Versions to all non-EDR Local SMSs, or retries are exhausted, as defined in <ref>.
+😂0😂😂 NPAC SMS shall upon finding any missing TNs within the 1K Block during the Block Create Validation Process, log an information message, and continue processing.
+😂0😂😂 NPAC SMS shall automatically apply the updates to the attributes of the individual subscription versions with LNP Type of POOL, with a status of active, for each TN within the 1K Block after successfully modifying a Number Pooling Block in the NPAC SMS.
+😂0😂😂 NPAC SMS shall update the status of the individual subscription versions with LNP Type of POOL, with a status of active, for each TN within the 1K Block, upon the start of the broadcast of a Block Modification to the Local SMSs, from an active status to a sending status, after successfully modifying a Number Pooling Block in the NPAC SMS.
+😂0😂😂 NPAC SMS shall update the <code> of each Subscription Version with LNP Type of POOL, with a status of active, for each TN in the 1K Block, upon completion of the broadcast, and a response from All EDR and non-EDR Local SMSs, or retries are exhausted, as defined in <ref>.
+😂0😂😂 NPAC SMS shall update the <code> with the discrepant Local SMS of the individual subscription version with LNP Type of POOL, with a status of active, upon completion of the modification broadcast to All EDR and non-EDR Local SMSs, an unsuccessful response from at least one Local SMS, and a response from ALL EDR and non-EDR Local SMSs, or retries are exhausted, as defined in <ref>.
+😂0😂😂  NPAC SMS shall, upon processing a valid request to delete an NPA-NXX-X, update the status of the Subscription Versions with LNP Type of POOL in the 1K Block, at the start of the broadcast to all EDR and non-EDR Local SMSs, from an active status to a sending status.
+😂0😂😂 NPAC SMS shall, upon setting the Subscription Versions with LNP Type of POOL in the 1K Block status to sending, broadcast a delete of Subscription Versions with LNP Type of POOL in the 1K Block, to non-EDR LSMSs, via the NPAC SMS to Local SMS Interface.
+😂0😂😂 NPAC SMS shall update the <code> of a particular Subscription Version with LNP Type of POOL for each TN in the 1K Block, upon completion of the broadcast, a response for the Block to all EDR Local SMSs and that particular Subscription Version to non-EDR Local SMSs, or retries are exhausted, as defined in <ref>.
+😂0😂😂 NPAC SMS shall update the <code> with the discrepant Local SMS of the individual subscription version with LNP Type of POOL, upon completion of the deletion broadcast to All EDR and non-EDR Local SMSs, an unsuccessful response from at least one Local SMS, and a response from ALL EDR and non-EDR Local SMSs, or retries are exhausted, as defined in <ref>.
+😂0😂😂 NPAC SMS shall ensure that upon completion of an NPA-NXX-X delete, there are no Subscription Versions of LNP Type POOL, remaining in the 1K Block.
+😂0😂😂  NPAC SMS shall filter out Subscription Versions with LNP Type of POOL for Bulk Data Download files of Subscription Version data, when the requesting Service Provider has an EDR Indicator set to TRUE.
+😂0😂😂  Two CMIP-based, mechanized interfaces to the NPAC SMS were defined in the Illinois NPAC RSMS RFP.
+😂0😂😂 One interface supports the Service Provider’s Service Order Administration systems.
+😂0😂😂 This interface is referred to as the SOA to NPAC SMS interface.
+😂0😂😂 The second interface supports the Service Provider’s Local Service Management System.
+😂0😂😂 This interface is referred to as the NPAC SMS to LSMS interface.
+😂0😂😂 Both of the interfaces support two-way communications.
+😂0😂😂 The CMIP protocol provides for six types of transactions over the interface.
+😂0😂😂 They are: <list>.
+😂0😂😂 NPAC SMS Interoperable Interface shall be designed in terms of CMIP transactions in a manager-agent relationship.
+😂0😂😂 While it is expected that dedicated links will be used for the interfaces, switched connections should also be supported.
+😂0😂😂 Reliability and availability of the links will be essential and high capacity performance will be needed.
+😂0😂😂  The SOA to NPAC SMS Interface and the NPAC SMS to Local SMS Interface shall be open, non-proprietary interfaces and will not become the property of any entity.
+😂0😂😂 Both of the NPAC SMS interfaces, as defined above, shall be implemented via the following protocol stack.
+😂0😂😂 NPAC SMS shall support multiple application associations per Service Provider.
+😂0😂😂 Both the SOA to NPAC SMS and the NPAC SMS to Local SMS interfaces shall be available on a 24 by 7 basis, consistent with other availability requirements in this specification.
+😂0😂😂 A 99.9
+😂0😂😂  % reliability rate shall be maintained for both the SOA to NPAC SMS and NPAC SMS to Local SMS interfaces.
+😂0😂😂  A range activate will contain an average of 20 TNs.
+😂0😂😂 20% of all downloads as specified in <ref> will be processed via range activations.
+😂0😂😂 A transaction rate of 2 CMIP transactions per second shall be supported by each SOA to NPAC SMS interface association.
+😂0😂😂 NPAC SMS shall support a rate of 5.2
+😂0😂😂  CMIP operations per second over a single SOA to NPAC SMS interface association.
+😂0😂😂 A transaction rate of 25 TN downloads per second shall be supported by each NPAC SMS to Local SMS interface.
+😂0😂😂 NPAC SMS shall, given a transaction rate of 25 TN downloads per second and the assumptions concerning range activations expressed above, support a rate of 5.2
+😂0😂😂  CMIP operations per second over each NPAC SMS to Local SMS interface association.
+😂0😂😂 The interoperable interface model defining both the NPAC to Local SMS and the SOA to NPAC SMS shall be specified in terms of ISO 10165-4, "Guideline for the Definition of Managed Objects”.
+😂0😂😂 The interface specification shall be referred to as the “NPAC SMS Interoperable Interface Specification”.
+😂0😂😂 The interface specified shall be capable of extension to account for evolution of the interface requirements.
+😂0😂😂  NPAC SMS shall acknowledge receiving a cancel pending request for a Subscription Version via the SOA to NPAC SMS Interface.
+😂0😂😂 NPAC SMS shall acknowledge receiving a conflict resolution request for a Subscription Version via the SOA to NPAC SMS Interface.
+😂0😂😂 NPAC SMS shall allow a specific Subscription Version to be placed into a deferred disconnect status by having the effective date in the future via the SOA to NPAC SMS Interface.
+😂0😂😂 NPAC SMS shall notify a Service Provider of a request for a Subscription Version status to be changed to cancel via the SOA to NPAC SMS Interface.
+😂0😂😂 NPAC SMS shall notify a Service Provider of a request for a Subscription Version status to be changed to conflict resolution via the SOA to NPAC SMS Interface.
+😂0😂😂 NPAC SMS shall allow NPAC System Administrators to specify a tunable parameter value for the maximum number of download records.
+😂0😂😂 NPAC SMS shall allow NPAC System Administrators to specify a tunable parameter value for the maximum time range for a download.
+😂0😂😂 NPAC SMS shall constrain all queries on the NPAC SMS to Local SMS Interface to one NPA-NXX plus additional filter criteria.
+😂0😂😂  NPAC SMS shall, for a Subscription Version Resynchronization request, over the NPAC SMS to Local SMS Interface, only send subscription version that are not filtered on the Local SMS.
+😂0😂😂 The NPAC SOA Low-tech Interface supports the request functionality of the SOA to NPAC SMS interface.
+😂0😂😂 NPAC SMS shall provide an NPAC SOA Low-tech Interface.
+😂0😂😂 NPAC SMS shall support Create Subscription Version requests via a secure, NPAC SOA Low-tech Interface.
+😂0😂😂 NPAC SMS shall support Cancel Subscription Version requests via a secure, NPAC SOA Low-tech Interface.
+😂0😂😂 NPAC SMS shall support Modify Subscription Version requests via a secure, NPAC SOA Low-tech Interface.
+😂0😂😂 NPAC SMS shall support query of Subscription Versions via a secure, NPAC SOA Low-tech Interface.
+😂0😂😂 NPAC SMS shall support Activation of Subscription Versions via a secure, NPAC SOA Low-tech Interface.
+😂0😂😂 NPAC SMS shall allow NPAC personnel and users of the SOA to NPAC SMS interface to request disconnection of a Subscription Version via a secure, NPAC SOA Low-tech Interface.
+😂0😂😂  NPAC SMS shall support SOA to NPAC SMS audit requests for all, part or one Service Provider via the NPAC SOA Low-tech Interface.
+😂0😂😂 NPAC SMS shall allow NPAC Personnel and users of the SOA to NPAC SMS interface to request creation of a Number Pool Block via a secure, NPAC SOA Low-tech Interface.
+😂0😂😂 NPAC SMS shall allow NPAC Personnel and users of the SOA to NPAC SMS interface to request modification of a Number Pool Block via a secure, NPAC SOA Low-tech Interface.
+😂0😂😂 NPAC SMS shall support, via a secure NPAC SOA Low-tech Interface, a method to view and locally capture notifications that have occurred for the service provider upon request.
+😂0😂😂 NPAC SMS shall provide a SOA Retry Attempts tunable parameter which defines the number of times a message will be sent to a SOA which has not acknowledged receipt of the message.
+😂0😂😂 NPAC SMS shall provide a SOA Retry Interval tunable parameter, which defines the delay between sending a message to a SOA that has not acknowledged receipt of the message.
+😂0😂😂 NPAC SMS shall allow the NPAC SMS Administrator to modify the SOA Retry Attempts tunable parameter.
+😂0😂😂 NPAC SMS shall allow the NPAC SMS Administrator to modify the SOA Retry Interval tunable parameter.
+😂0😂😂  NPAC SMS shall default the SOA Retry Attempts tunable parameter to 3 times.
+😂0😂😂 NPAC SMS shall default the SOA Retry Interval tunable parameter to 2 minutes.
+😂0😂😂 NPAC SMS shall resend the message a SOA Retry Attempts tunable parameter number of times to a SOA that has not acknowledged the receipt of the message once the SOA Retry Interval tunable parameter expires.
+😂0😂😂 NPAC SMS shall provide an LSMS Retry Attempts tunable parameter which defines the number of times a message will be sent to a Local SMS which has not acknowledged receipt of the message.
+😂0😂😂 NPAC SMS shall provide an LSMS Retry Interval tunable parameter, which defines the delay between sending a message to a Local SMS that has not acknowledged receipt of the message.
+😂0😂😂 NPAC SMS shall allow the NPAC SMS Administrator to modify the LSMS Retry Attempts tunable parameter.
+😂0😂😂 NPAC SMS shall allow the NPAC SMS Administrator to modify the LSMS Retry Interval tunable parameter.
+😂0😂😂 NPAC SMS shall default the LSMS Retry Attempts tunable parameter to 3 times.
+😂0😂😂 NPAC SMS shall default the LSMS Retry Interval tunable parameter to 2 minutes.
+😂0😂😂 NPAC SMS shall resend the message an LSMS Retry Attempts tunable parameter number of times to a Local SMS that has not acknowledged the receipt of the message once the LSMS Retry Interval tunable parameter expires.
+😂0😂😂  NPAC SMS shall support recovery of all CMIP notifications defined in the IIS that are emitted over the NPAC SMS to Local SMS and SOA to NPAC SMS interfaces.
+😂0😂😂 Examples of notifications to be recovered include: <list>.
+😂0😂😂 NPAC SMS shall recover all notifications, failed or successful, in time sequence order when notification recovery is requested by the SOA or LSMS.
+😂0😂😂 NPAC SMS shall use the Maximum Download Duration Tunable to limit the time range requested in a notification recovery request.
+😂0😂😂 NPAC SMS shall support the recovery of notifications for the SOA and LSMS as independent requests.
+😂0😂😂 NPAC SMS shall allow the SOA to only recover SOA notifications.
+😂0😂😂 NPAC SMS shall allow the LSMS to only recover LSMS notifications.
+😂0😂😂  NPAC SMS shall provide a mechanism that allows a SOA or LSMS to recover network data downloads that were missed during a broadcast to the SOA or LSMS.
+😂0😂😂 NPAC SMS shall recover all network data download broadcasts in time sequence order when network data recovery is requested by the SOA or LSMS.
+😂0😂😂 NPAC SMS shall use the Maximum Download Duration Tunable to limit the time range requested in a network data recovery request.
+😂0😂😂 NPAC SMS shall support the recovery of network data for the SOA and LSMS as independent requests.
+😂0😂😂 NPAC SMS shall allow the SOA to only recover network data downloads intended for the SOA.
+😂0😂😂 NPAC SMS shall allow the LSMS to only recover network data downloads intended for the LSMS.
+😂0😂😂 NPAC SMS shall support the following network data download criteria: <list>.
+😂0😂😂 NPAC SMS shall require one of the following network data download choices: <list>.
+😂0😂😂  NPAC SMS shall process a Service Provider request to download Network data over the NPAC SMS to Local SMS Interface, when a Service Provider establishes an association with the resynchronization flag set to TRUE, and the download of NPA-NXX-X is TRUE, and shall send the NPA-NXX-X portion of the Network data when the Service Provider's NPAC Customer LSMS NPA-NXX-X Indicator is set to TRUE.
+😂0😂😂 NPAC SMS shall process a Service Provider request to download Network data over the NPAC SMS to Local SMS Interface, when a Service Provider establishes an association with the resynchronization flag set to TRUE, and the download of NPA-NXX-X is TRUE, and shall suppress the NPA-NXX-X portion of the Network data when the Service Provider's NPAC Customer LSMS NPA-NXX-X Indicator is set to FALSE.
+😂0😂😂 NPAC SMS shall queue up a single instance of all messages to the Local SMS, via the NPAC SMS to Local SMS Interface, when a Service Provider establishes an association with the NPAC SMS and where the resynchronization flag is set to TRUE.
+😂0😂😂 NPAC SMS shall send queued up messages to the Local SMS, via the NPAC SMS to Local SMS Interface, when a Service Provider has sent a message to the NPAC SMS that resynchronization has been completed.
+😂0😂😂 NPAC SMS shall apply NPA-NXX Filters to NPA-NXX-X resynchronization to the Local SMS via the NPAC SMS to Local SMS Interface.
+😂0😂😂 NPAC SMS shall process a Service Provider request to download Network data over the SOA to NPAC SMS Interface, when a Service Provider establishes an association with the resynchronization flag set to TRUE, and the download of NPA-NXX-X is TRUE, and shall send the NPA-NXX-X portion of the Network data when the Service Provider's NPAC Customer SOA NPA-NXX-X Indicator is set to TRUE.

@@ -1,0 +1,347 @@
+😂0😂😂This is the Software Requirements Specification for GAMMA-J's Web Store.
+😂0😂😂This Web Store is designed to allow new online store owners a quick and easy means to setup and perform sales and other core business over the internet.
+😂0😂😂This document will outline all of the functions, capabilities and requirements for Version 1 of GAMMA-J's Web Store.
+😂0😂😂Version 1 is planned for implementation on a "plug and play" USB Key.
+😂0😂😂Future versions will be based on other network appliances.
+😂0😂😂This document is intended to flush out the requirements by the customer GAMMA-J.
+😂0😂😂The customer can review this document to ensure their needs along with the needs of their user's are being met in their new Web Store program.
+😂0😂😂The development team will also use this document for guidance on overall design and implementation of the Web Store system.
+😂0😂😂The test and verification team can reference this to ensure the requirements are being meet for the customer.
+😂0😂😂Finally, the tech writer will use this to assist with user documentation.
+😂0😂😂This document is designed to be review from beginning to end; however, readers who are new to technical documentation may want to refer to <ref> first.
+😂0😂😂According to GAMMA-J's Functional Needs Statement this Web Store will <list>.
+😂0😂😂The initial inventory will be 100 items.
+😂0😂😂Expandable with unique codes, the owners can purchase to expand the inventory.
+😂0😂😂The minimum total inventory will be 20,000 items.
+😂0😂😂Since this will be a "Plug and Play device", no software installation will be necessary.
+😂0😂😂This software will contain all of the basic needs to manage an online store.
+😂0😂😂Advanced needs can be added in the future via "plug-ins".
+😂0😂😂More detail on the functionality of the Web Store can be found in <ref> System Features and in the function Needs statement.
+😂0😂😂This document draws insight from the Web Store System Overview, Functional Needs Statement, and Stakeholder Goals List.
+😂0😂😂Web Store is a new system designed for users new to the online E-commerce.
+😂0😂😂This will be a plug and play device with its own CPU and operating system.
+😂0😂😂The Web Store will be a quick and easy means to setup and operate an online Web Store.
+😂0😂😂The <img> is a context diagram showing external system interfaces.
+😂0😂😂AM allows users to create, edit, and view accounts information.
+😂0😂😂It also allows the user to login/out of the system.
+😂0😂😂SE is the tool that assists the user in finding a specific item in the database.
+😂0😂😂It can receive search criteria, find search criteria, and return the results of the search.
+😂0😂😂PM allows sales personnel to manage the product line shown on the web site.
+😂0😂😂SC is temporary storage for customers shopping on the web.
+😂0😂😂Items from the inventory can be reserved in a virtual cart until the customer decides to purchase them.
+😂0😂😂PP is used to approve and transfer payment from buyers when purchasing items in the cart.
+😂0😂😂Is generally the owner that takes care of maintenance for the Web Store system.
+😂0😂😂The administrator will be in charge of assigning privileges of accounts.
+😂0😂😂Suggested more than one individual can have administrator privilege to ensure advisability.
+😂0😂😂Full documentation will be provided to the Administrator to assist with this process.
+😂0😂😂Is generally the owner of the Web Store tasked with updating inventory and product line descriptions.
+😂0😂😂Once added, sales personnel can add, delete and change descriptions, pictures, prices, and when ready flag items for customers to buy.
+😂0😂😂A customer is an individual wishing to purchase inventory from GAMMA-J's Web Store.
+😂0😂😂The Web store will have a variety of clientele depending upon the inventory loaded on the Key.
+😂0😂😂When creating a new account on Web Store it will default as a customer account.
+😂0😂😂Later if the account needs to be upgraded the administrator can accomplish this via the administrator interface.
+😂1😂😂Web Store shall operate with the following internet browsers: Microsoft Internet Explorer version 6 and 7, Netscape Communicator Version 4 and 5.
+😂1😂😂Web Store shall operate on an Intel based system with Slackware Linux 2.6 and Apache Web Server.
+😂1😂😂The operating system is designed by the Yoggie Corporation.
+😂0😂😂Although maintenance documentation will be supplied and the operating system will be tested, the developers of this Web Store are not responsible for the functionality of the operating system.
+😂1😂😂The system shall use SQL based database to store inventory information.
+😂1😂😂USB interface and divers are provided by Yoggie Corporation.
+😂1😂😂Must use a SQL based database.
+😂0😂😂SQL standard is the most widely used database format.
+😂0😂😂Restricting to SQL allows easy of use and compatibility for Web Store.
+😂0😂😂Compatibility is only tested and verified for Microsoft Internet Explorer version 6 and 7, Netscape Communicator Version 4 and 5.
+😂1😂😂Other versions may not be 100% compatible.
+😂0😂😂Also other browsers such as Mozilla or Firefox may not be 100% compatible.
+😂1😂😂Shall install online help for users via the web interface.
+😂1😂😂Shall deliver Operations and Maintenance manual, Users Guide book, and Installation Instructions for the Administrator.
+😂0😂🐋😂Assume the delivery of development, test and evaluate samples of the USB system from Yoggie.
+😂0😂🐋😂Assume Yoggie will freeze the baseline of the USB system after delivery.
+😂0😂😂Customers will be able to create accounts to store their profiles, contact information, purchase history, and confirm orders.
+😂0😂😂This is a high priority system feature.
+😂0😂😂Security methods will ensure that customer accounts remain confidential and resistant to tampering.
+😂0😂😂Customers will be able to create accounts to store their customer profiles, configure contact information, view their purchase history, and confirm orders.
+😂0😂😂Customers will be able to register, log in, and log out of their accounts.
+😂0😂😂Furthermore, Customer profiles will also include payment information, such as the ability to store credit card information, and address information.
+😂0😂😂Inventory management will allow for the placement of products into multi-tiered categories.
+😂0😂😂This is a medium priority system feature.
+😂0😂😂Products will be stored in multi-tiered categories; a category can contain sub categories or products.
+😂0😂😂The inventory management will allow for administrators to update the categories, the products placed in categories, and the specific product details.
+😂0😂😂Customers will be able to add and store products for purchase within the shopping cart.
+😂0😂😂This feature is a medium priority system feature.
+😂0😂😂Customers will also be able to add products into the shopping cart.
+😂0😂😂The shopping cart will clearly display the number of items in the cart, along with the total cost.
+😂0😂😂The customer will also be able to add to or remove products from the shopping cart prior to checkout and order confirmation.
+😂0😂😂Order confirmation will allow the customer to review their order after checkout prior to confirmation.
+😂0😂😂This is a medium priority system feature.
+😂0😂😂Customers will be able to confirm the order after checkout.
+😂0😂😂If the order is incorrect, the customer will be able to revise and update their order.
+😂0😂😂The customer will then receive a confirmation email with the specific order details.
+😂0😂😂The interface will be presented to the customer in a web browser.
+😂0😂😂The interface must remain consistent among various web browsers and be intuitive to the customer.
+😂0😂😂This is a medium priority system feature.
+😂0😂😂Customers will be presented with an unambiguous interface to assist in browsing the categories and products.
+😂0😂😂Customers will be able to search for products matching their search criteria.
+😂0😂😂The interface will be compatible with all major web browsers such as Internet Explorer, Mozilla Navigator, Mozilla Firefox, Opera, and Safari.
+😂0😂😂The system will feature an API to allow customers to build custom plug-ins to be able to meet their needs.
+😂0😂😂This is a high priority system feature as it ensures the flexibility of the system to be tailored to specific needs.
+😂0😂😂The system will implement an Application Interface to allow for various plug-ins to interact with the system.
+😂0😂😂The plug-in API will be well documented and specifications will be provided to plug-in developers.
+😂0😂😂The order database of WebOrder will communicate with the account system through a programmatic interface for the billing operations.
+😂0😂😂Through programmatic interface, WebOrder will transmit information of items ordered by customers to the Inventory management system.
+😂1😂😂The WebOrder system shall send an e-mail confirmation to the customer that the items they ordered will be delivered to the shipping address along with tracking number.
+😂1😂😂The WebOrder system shall send an e-mail to System Administrator regarding any technical queries from customers or sales people.
+😂2😂😂Upon the USB being plugged in the system shall be able to be deployed and operational in less than 1 minute.
+😂2😂😂The system shall be able to handle 1000 customers logged in concurrently at the same time.
+😂2😂😂The system shall be able to retrieve 200 products per second.
+😂2😂😂The system shall be able to add product to shopping cart in less than 2ms.
+😂2😂😂The system shall be able to search for a specified product in less than 1 second.
+😂2😂😂The system shall be able to email customer and vendor in less than 1 second.
+😂2😂😂The system shall be able to validate credit card in less than 2 seconds.
+😂2😂😂The system shall be able to acquire shipping charges in less than 2 seconds.
+😂2😂😂The system shall be able to restore 1000 records per second.
+😂1😂😂The system will do periodic backups through a live internet connection.
+😂1😂😂The system shall validate credit cards against fraud.
+😂1😂😂The system shall encrypt all sensitive information via https.
+😂1😂😂The system shall encrypt all customer data in database.
+😂1😂😂The system shall auto detect IP DOS attacks and block IP automatically.
+😂1😂😂The system shall detect consecutive failed login attempts.
+😂1😂😂The system shall be protected by open source firewall called Firestarter.
+😂1😂😂<ref> The system shall have an availability of 99.99%.
+😂1😂😂The system shall perform searches via Dijkstra's shortest path algorithm.
+😂1😂😂For returning customers, the system shall validate 'existing' credit card in system after each log in.
+😂1😂😂The system shall automatically compress image files that are too large in size.
+😂1😂😂The system will employ on demand asynchronous loading for faster execution of pages.
+😂1😂😂The system shall validate email address existence.
+😂1😂😂The system shall be easy to use.
+😂1😂😂The system shall be easy to learn.
+😂1😂😂The system shall utilize help bubbles to assist managers, customers, and administrators.
+😂1😂😂The system shall employ easy to locate buttons.
+😂1😂😂The system shall prompt customer with friend easy to read error messages.
+😂1😂😂The system shall utilize consistent symbols and colors for clear notifications.
+😂1😂😂The system shall utilize interchangeable plugins.
+😂1😂😂The system shall be easily updatable for fixes and patches.
+😂1😂😂The system shall create logs of all changes, updates, or fixes that are done to the site.
+😂1😂😂The system shall be easy to upgrade.
+😂1😂😂The system shall be extremely portable via the usb drive.
+😂1😂😂The system shall be easy to migrate or backed up via another usb drive.
+😂1😂😂The system should be able to run under debug mode.
+😂1😂😂The system should be able to run test credit card transactions.
+😂1😂😂The system should be able to run test shipping orders.
+😂1😂😂The system should be able to create test environment of weborder system.
+😂1😂😂The system hardware shall be fixed and patched via an internet connection.
+😂1😂😂Yoggie shall coordinate on future enhancement and features with our organization.
+😂1😂😂The system shall adhere to the following hardware requirements.
+😂0😂😂Customer must be able to access the web order system via a web browser with HTTPS.
+😂0😂😂Customer clicks button or link to "Register".
+😂0😂😂Customer first clicks on the button or link to initiate registration process.
+😂0😂😂System prompts the customer to fill out his/her first name, last name, billing address, shipping address, email address, and their password.
+😂0😂😂Customer enters fields.
+😂0😂😂System validates the customer's information.
+😂0😂😂System creates a new account for the Customer.
+😂0😂😂System creates a session cookie.
+😂0😂😂System displays an account home page to Customer.
+😂0😂😂The Customer registers and creates a new customer account with the system.
+😂0😂😂Customer account must already be registered.
+😂0😂😂Customer clicks button or link to "Login".
+😂0😂😂Customer clicks on the button or link to initiate the login process.
+😂0😂😂System prompts the customer for his/her email and password.
+😂0😂😂System verifies the information.
+😂0😂😂System creates session cookie.
+😂0😂😂System displays account home page to the Customer.
+😂0😂😂The Customer is logged into the system.
+😂0😂😂Customer must be logged-in on the system.
+😂0😂😂Customer clicks on the button or link to "Edit Account".
+😂0😂😂Customer clicks the button or link to initiate the process to edit the account.
+😂0😂😂System displays the account home page to the Customer.
+😂0😂😂Customer clicks the button or link in order to edit the account details.
+😂0😂😂System verifies the changes.
+😂0😂😂System stores new account information.
+😂0😂😂The Customer has changed the account details.
+😂0😂😂Customer must be logged-in on the system.
+😂0😂😂Customer clicks on the button or link to "Logout".
+😂0😂😂Customer clicks the button or link in order to initiate logout process.
+😂0😂😂System terminates the session cookie.
+😂0😂😂System displays the home page.
+😂0😂😂The Customer is logged out of the system.
+😂0😂😂The customer must be logged-in on the system.
+😂0😂😂Customer clicks the button or link to "Add To Cart".
+😂0😂😂Customer clicks the button or link in order to add to the cart with specified quantity.
+😂0😂😂System adds the item to the cart.
+😂0😂😂System prompts the Customer to edit the quantity or remove the item from cart.
+😂0😂😂Customer confirms the items in the cart.
+😂0😂😂System stores cookie with cart details.
+😂0😂😂Customer returns to product listings.
+😂0😂😂The Customer has added item to the shopping cart.
+😂0😂😂Customer places and confirms an order for the checkout process.
+😂0😂😂Customer must be logged-in on the system.
+😂0😂😂Customer must have item in the shopping cart.
+😂0😂😂Customer clicks button or link to "Ckeckout".
+😂0😂😂Customer clicks the button or link to initiate the checkout process.
+😂0😂😂System calculates order of items in the shopping cart.
+😂0😂😂System appends cookie with flag for checkout process.
+😂0😂😂System presents the customer with the account details and payment methods.
+😂0😂😂Customer confirms account details and payment methods.
+😂0😂😂Customer confirms order.
+😂0😂😂System stores order confirmation and order details.
+😂0😂😂System sends email confirmation to the Customer.
+😂0😂😂System appends cookie with flag for completed checkout process.
+😂0😂😂The Customer has placed and confirmed an order.
+😂0😂😂Administrator account must already be registered.
+😂0😂😂Administrator clicks button or link to "Login".
+😂0😂😂Administrator clicks button or link to initiate login process.
+😂0😂😂System prompts the Administrator for email and password.
+😂0😂😂System verifies information.
+😂0😂😂System creates session cookie.
+😂0😂😂System displays account home page to Administrator.
+😂0😂😂The Administrator is logged into the system.
+😂0😂😂Administrator must be logged-in on the system.
+😂0😂😂Administrator clicks button or link to "Logout".
+😂0😂😂Administrator clicks button or link to initiate logout process.
+😂0😂😂System terminates the session cookie.
+😂0😂😂System displays home page.
+😂0😂😂The Administrator is logged out of the system.
+😂0😂😂Administrator must be able to access the weborder system via a web browser with HTTPS.
+😂0😂😂Administrator clicks button or link to "Add Users".
+😂0😂😂Administrator clicks the button or link to initiate Add user process.
+😂0😂😂System prompts the Administrator to fill out first name, last name, username, email address, password, and privileges of the user.
+😂0😂😂System validates new user information.
+😂0😂😂System creates a new account for the new user with desired privileges.
+😂0😂😂System displays account home page to Administrator.
+😂0😂😂A new customer account is created within the system.
+😂0😂😂Administrator must be able to access the weborder system via a web browser with HTTPS.
+😂0😂😂Administrator clicks button or link to "Remove User".
+😂0😂😂Administrator clicks button or link to initiate the remove user process.
+😂0😂😂System prompts the Administrator to select a user by searching or viewing a list of users.
+😂0😂😂System displays user information.
+😂0😂😂System confirms deletion of selected user.
+😂0😂😂System displays account home page to Administrator.
+😂0😂😂An account has been deleted within the system.
+😂0😂😂Alter properties such as passwords and privileges of the user.
+😂0😂😂Administrator must be able to access the weborder system via a web browser with HTTPS.
+😂0😂😂Administrator clicks button or link to "Change User Properties".
+😂0😂😂Administrator clicks the button or link to initiate change user properties process.
+😂0😂😂System prompts the Administrator to select a user by searching or viewing a list of users.
+😂0😂😂System displays the user information.
+😂0😂😂System alters the user properties.
+😂0😂😂System displays the account home page to Administrator.
+😂0😂😂An account has been altered within the system.
+😂0😂😂Administrator must be able to access the weborder system via a web browser with HTTPS.
+😂0😂😂Administrator clicks the button or link to "Install Plug-ins ".
+😂0😂😂Administrator clicks the button or link to initiate Plug-in installation process.
+😂0😂😂System prompts the Administrator to upload the Plug-in module.
+😂0😂😂System installs plug-in and validates changes.
+😂0😂😂System displays plug-in options to the Administrator.
+😂0😂😂A new plug-in is installed in the application.
+😂0😂😂Administrator must be able to access the weborder system via a web browser with HTTPS.
+😂0😂😂Administrator clicks the button or link to "Install Plug-ins ".
+😂0😂😂Administrator clicks the button or link to initiate Plug-in deletion process.
+😂0😂😂System prompts the Administrator to select the desired Plug-in module.
+😂0😂😂System removes the plug-in and validates changes.
+😂0😂😂A plug-in is removed from the application.
+😂0😂😂Administrator must be able to access the weborder system via a web browser with HTTPS.
+😂0😂😂Administrator clicks button or link to "Manage Plug-ins ".
+😂0😂😂Administrator clicks the button or link to initiate Plug-in Options process.
+😂0😂😂System prompts the Administrator to select the desired Plug-in module.
+😂0😂😂System displays all plug-in options to the Administrator.
+😂0😂😂System confirms changes with the Administrator.
+😂0😂😂A plug-in's options have successfully been changed.
+😂0😂😂Administrator must be able to access the weborder system via a web browser with HTTPS.
+😂0😂😂Administrator clicks the button or link to "Install Patch".
+😂0😂😂Administrator clicks the button or link to initiate Patching process.
+😂0😂😂System prompts the Administrator to upload the patch.
+😂0😂😂System automatically installs patches and reinitializes software.
+😂0😂😂System confirms that patch has been successfully installed.
+😂0😂😂The web store was successfully updated.
+😂0😂😂Sales Person account must already be registered.
+😂0😂😂Sales Person clicks button or link to "Login".
+😂0😂😂Sales Person clicks the button or link to initiate login process.
+😂0😂😂System prompts the Sales Person for email and password.
+😂0😂😂System verifies the information.
+😂0😂😂System creates session cookie.
+😂0😂😂System displays the account home page to Sales Person.
+😂0😂😂The Sales Person is logged into the system.
+😂0😂😂Sales Person must be logged-in on the system.
+😂0😂😂Sales Person clicks the button or link to "Logout".
+😂0😂😂Sales Person clicks the button or link to initiate logout process.
+😂0😂😂System terminates the session cookie.
+😂0😂😂System displays home page.
+😂0😂😂The Sales Person is logged out of the system.
+😂0😂😂Sales Person must be able to access the weborder system via a web browser with HTTPS.
+😂0😂😂Sales Person clicks the button or link to "Add Product".
+😂0😂😂Sales Person clicks the button or link to initiate Add Product process.
+😂0😂😂System prompts the Sales Person to fill out product name, product id, product description, product price, upload a product image, number of items in inventory, and availability of product.
+😂0😂😂System validates the new product information.
+😂0😂😂System creates a new product page for the new product.
+😂0😂😂System displays the newly created product page.
+😂0😂😂A new product is created within the system.
+😂0😂😂Sales Person must be able to access the weborder system via a web browser with HTTPS.
+😂0😂😂Sales Person clicks the button or link to "Remove Product".
+😂0😂😂Sales Person clicks the button or link to initiate Remove Product process.
+😂0😂😂System prompts the Sales Person to select a product by searching or viewing a list of products.
+😂0😂😂System validates the product information.
+😂0😂😂System removes the product page and product information from the system.
+😂0😂😂System displays the newly created product page.
+😂0😂😂A product is deleted from the system.
+😂0😂😂Sales Person must be able to access the weborder system via a web browser with HTTPS.
+😂0😂😂Sales Person clicks the button or link to "Update Product Attributes".
+😂0😂😂Sales Person clicks the button or link to initiate Update Product Attributes process.
+😂0😂😂System prompts the Sales Person to select a product by searching or viewing a list of products.
+😂0😂😂System displays all of the product attributes and allows Sales Person to update the product name, product id, product description, product price, update the product image, product availability, and/or the number of items in the inventory.
+😂0😂😂System validates the product information.
+😂0😂😂System updates the product page and product information within the system.
+😂0😂😂System displays the newly updated product page.
+😂0😂😂The product attributes have been changed.
+😂0😂😂Customer must be able to access the weborder system via a web browser with HTTPS.
+😂0😂😂Customer clicks the button or link to "Register".
+😂0😂😂Customer clicks the button or link to initiate registration process.
+😂0😂😂System prompts the customer to fill out first name, last name, billing address, shipping address, email address, and password.
+😂0😂😂Customer enters fields.
+😂0😂😂System validates customer's information.
+😂0😂😂System creates a new account for the Customer.
+😂0😂😂System creates session cookie.
+😂0😂😂System displays account home page to Customer.
+😂0😂😂The Customer registers and creates a new customer account with the system.
+😂0😂😂Customer account must already be registered.
+😂0😂😂Customer clicks the button or link to "Login".
+😂0😂😂Customer clicks the button or link to initiate login process.
+😂0😂😂System prompts the customer for email and password.
+😂0😂😂System verifies the information.
+😂0😂😂System creates session cookie.
+😂0😂😂System displays account home page to Customer.
+😂0😂😂The Customer is logged into the system.
+😂0😂😂Customer must be logged-in on the system.
+😂0😂😂Customer clicks button or link to "Edit Account".
+😂0😂😂Customer clicks button or link to initiate the process to edit the account.
+😂0😂😂System displays account home page to Customer.
+😂0😂😂Customer clicks button or link to edit the account details.
+😂0😂😂System verifies the changes.
+😂0😂😂System stores new account information.
+😂0😂😂The Customer has changed the account details.
+😂0😂😂Customer must be logged-in on the system.
+😂0😂😂Customer clicks button or link to "Logout".
+😂0😂😂Customer clicks button or link to initiate logout process.
+😂0😂😂System terminates the session cookie.
+😂0😂😂System displays home page.
+😂0😂😂The Customer is logged out of the system.
+😂0😂😂The customer must be logged-in on the system.
+😂0😂😂Customer clicks button or link to "Add To Cart".
+😂0😂😂Customer clicks the button or link to add to the cart with specified quantity.
+😂0😂😂System adds the item to the cart.
+😂0😂😂System prompt Customer to edit quantity or remove item from cart.
+😂0😂😂Customer confirms items in cart.
+😂0😂😂System stores cookie with cart details.
+😂0😂😂Customer returns to product listings.
+😂0😂😂The Customer has added item to the shopping cart.
+😂0😂😂Customer must be logged-in on the system.
+😂0😂😂Customer must have item in the shopping cart.
+😂0😂😂Customer clicks button or link to "Ckeckout".
+😂0😂😂Customer clicks the button or link to initiate the checkout process.
+😂0😂😂System calculates order of items in the shopping cart.
+😂0😂😂System appends cookie with flag for checkout process.
+😂0😂😂System presents customer with account details and payment methods.
+😂0😂😂Customer confirms account details and payment methods.
+😂0😂😂Customer confirms order.
+😂0😂😂System stores order confirmation and order details.
+😂0😂😂System sends email confirmation to the Customer.
+😂0😂😂System appends cookie with flag for completed checkout process.
+😂0😂😂The Customer has placed and confirmed an order.

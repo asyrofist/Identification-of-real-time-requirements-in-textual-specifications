@@ -1,0 +1,276 @@
+
+😂0😂😂 The DPU-BOOT CSC shall execute when power is applied to the DPU.
+😂0😂😂 The DPU-BOOT CSC shall include a DRAM BIT consisting of two write/read/compare tests.
+😂0😂😂 The first test shall write the address of each memory location to that location.
+😂0😂😂 The second test shall write the complement of each memory location to that location.
+😂0😂😂 The DPU-BOOT CSC shall create a record of failed DRAM blocks, BIT_DRAM, in the SYSTEM_BLOCK.
+😂0😂😂 The DPU-BOOT CSC shall provide a monitor which accepts commands over the RS-232 interface.
+😂0😂😂 The Bootstrap Monitor of DPU-BOOT CSC shall be activated if the Clear-To-Send (CTS) signal is active on the RS-232 interface.
+😂0😂TODO:😂 If no activity is detected on the RS-232 interface within 30 seconds, the Bootstrap shall load a configuration of DPU-RTOS according to BC_INDEX in the SYSTEM_BLOCK.
+😂0😂😂 The DPU-BOOT CSC shall increment the BOOT_CNT parameter in the EEPROM each time the DPU-RTOS is copied from EEPROM to DRAM and executed.
+😂1😂TODO:😂 The Bootstrap Monitor of the DPU-BOOT CSC shall provide the capability to read from Dynamic Random Access Memory (DRAM), the VME bus, and the Input/Output Channel Controller (IOCC) on command.
+😂1😂TODO:😂 The Bootstrap Monitor of the DPU-BOOT CSC shall provide the capability to write to Dynamic Random Access Memory (DRAM), the VME bus, and the Input/Output Channel Controller (IOCC) on command.
+😂1😂TODO:😂 The Bootstrap Monitor of the DPU-BOOT CSC shall provide the capability to download configurations of the DPU-RTOS from the RS-232 interface to EEPROM on command.
+😂1😂😂 The Bootstrap Monitor of the DPU-BOOT CSC shall provide the capability to load a configuration of the DPU-RTOS from EEPROM to DRAM and start its execution on command.
+😂0😂😂 The DPU-BOOT CSC shall test and clear DRAM on power-on using the COLD_MEM_SIZE obtained from the SYSTEM_BLOCK.
+😂0😂😂 The DPU-BOOT CSC shall set the processor speed to MHz.
+😂0😂😂 The DPU-BOOT CSC shall boot the primary or alternate configuration of DPU-RTOS according to the BC_INDEX in the SYSTEM_BLOCK.
+😂0😂😂 The DPU-BOOT CSC shall toggle the BC_INDEX (selecting the opposite configuration) after reading it during the boot process.
+😂1😂😂 The DPU-BOOT CSC shall provide the capability to automatically load a configuration of DPU-RTOS from EEPROM to DRAM and start its execution.
+😂0😂😂 The DPU-BOOT CSC shall include a CPU BIT consisting of a branch test, a fixed point test, a floating point test, an interrupt test, a timer test, and a register test.
+😂0😂😂 The DPU-BOOT CSC shall create a record of the CPU BIT in the SYSTEM_BLOCK.
+😂2😂😂 The DPU-BOOT CSC shall complete Stage 1 BIT, and load DPU-RTOS in less than A seconds following a hardware reset if CTS is not asserted.
+😂0😂😂 The DPU-BOOT CSC shall attempt to complete its normal execution sequence following detection of any failure.
+😂0😂😂 The DPU-BOOT CSC shall enable power to the EEPROM on the SCM.
+😂0😂😂 The DPU-BOOT CSC shall disable write-protection of the EEPROM on the SCM.
+😂0😂😂 The DPU-BOOT CSC shall enable EDAC on the SCM.
+😂0😂😂 The DPU-BOOT CSC shall log detected BIT failures to the SYSTEM_BLOCK.
+😂2😂TODO:😂 The DPU-BOOT CSC shall display a message via RS-232 on detection of a BIT failure.
+😂0😂😂 The DPU-BOOT CSC shall initialize the BIT_DATA in the SYSTEM_BLOCK to the incomplete/failure state prior to executing Stage 1 BIT.
+😂0😂😂 The Bootstrap Monitor of the DPU-BOOT CSC shall validate commands entered for syntax and number of arguments.
+😂0😂😂 The Bootstrap Monitor of the DPU-BOOT CSC shall output an error message to the RS-232 interface if an invalid command argument option is entered.
+😂0😂😂 The Bootstrap Monitor of the DPU-BOOT CSC shall output an error message to the RS-232 interface if an incorrect number of command arguments are entered.
+😂0😂😂 At the end of a download, the Bootstrap Monitor of the DPU-BOOT CSC shall compute a CHKS_32 on the X stored in EEPROM and compare it against the CHKS_32 sent with the X during the transfer.
+😂0😂😂 The Bootstrap Monitor shall output to to the RS-232 interface both CHKS_32s and a message indicating whether the download was successful.
+😂0😂😂 The DPU-BOOT CSC shall put the processor into diagnostic mode.
+😂0😂😂 The Bootstrap Monitor of the DPU-BOOT CSC shall follow the protocol specified in BSPS-01, Bootstrap Monitor Protocol Specification, with the following noted exceptions.
+😂0😂😂 The Bootstrap CSC shall address hardware modules as defined in document 1400, Company X Specification for the Company X Communication/Memory Module.
+😂0😂😂 The DPU-BOOT CSC shall initialize Error Detection and Correction (EDAC) on the RSC by clearing DRAM.
+😂1😂😂 The DPU-BOOT CSC X shall occupy no more than 32 KB of PROM.
+😂2😂TODO:😂 The DPU-BOOT CSC shall periodically strobe the PSM Watchdog Timer at B second intervals (+/- 1/2 second) by writing 0xEB90 to the Watchdog Clear Register, SCM_WDR.
+😂0😂😂 The Bootstrap CSC shall continue the strobe during transition of control from the Bootstrap to the Operating System.
+😂2😂😂 The DPU-BOOT CSC shall perform successive writes to a word page of EEPROM within C msecs, or wait a minimum of D usecs between successive writes.
+😂2😂😂 The DPU-BOOT CSC shall wait a minimum of C msecs after a write to EEPROM before performing a read from EEPROM.
+😂0😂😂 The DPU-BOOT CSC shall write to EEPROM in 32-bit words only.
+😂0😂😂 The DPU-BOOT CSC shall read from EEPROM in 32-bit words only.
+😂0😂😂 The DPU-1553 CSC shall address hardware modules as defined in document 1400, Company X Specification for the Company X Communication/Memory Module.
+😂0😂😂 Tthe DPU-CCM shall create DPU_HK_START and forward it to DPU-SCUI at bootup.
+😂0😂😂 The DPU-CCM shall include the capability to write data to DRAM, the VME Bus, and the Input/Output Channel Controller (IOCC) on ground command.
+😂0😂😂 The DPU-CCM shall include the capability to read data from DRAM, the VME Bus, and the IOCC on ground command.
+😂0😂😂 The DPU-CCM shall have the capability of calculating a CHKS_32 for a particular address range on command.
+😂0😂TODO:😂 The DPU-CCM shall forward the DPU_HBEAT message to DPU-ICUI for transmission to the ICU at an interval of A seconds.
+😂0😂TODO:😂 The DPU-CCM shall strobe the Watchdog timer by writing to the SCM_WDR at an interval of 1 second.
+😂0😂😂 The DPU-CCM shall interpret and execute/dispatch real-time DPU_CMDs.
+😂0😂😂 The DPU-CCM shall provide the capability to echo to the spacecraft each received command from the spacecraft or the ICU.
+😂0😂😂 The DPU-CCM shall provide a command to reboot the DPU.
+😂0😂😂 The DPU-CCM shall support a NOOP command that does nothing but serve as a valid command.
+😂2😂TODO:😂 The DPU-CCM shall forward CLK_MSGs to the DPU-TIS for processing immediately upon receipt (I.e.shall not enqueue the message to the command dispatcher queue).
+😂0😂😂 The DPU-CCM shall utilize bootup default values stored in the SYSTEM_CONFIG_AREA in EEPROM when initializing the FSW The DPU-CCM shall forward ACS_MSGs to the DPU-DPA for processing immediately upon receipt (I.e.shall not enqueue the message to the command dispatcher queue).
+😂0😂😂 The DPU-CCM shall quietly discard any unrecognized observatory messages (I.e.messages which do not have a DPU command APID).
+😂0😂😂 The DPU-CCM shall notify the ICU upon completion of boot and flight software initialization.
+😂0😂😂 The DPU-CCM shall spawn tasks for DPU-CCM, DPU-DPA, DPU-DCX, DPU-SCUI, and DPU-TMALI at bootup.
+😂0😂😂 The DPU-CCM shall collect DPU_HK and forward it to the DPU-SCUI.
+😂0😂😂 On boot, the DPU-CCM shall toggle the BC_INDEX if the boot is successful.
+😂0😂😂 A boot is successful if command and telemetry communications have been established with the spacecraft.
+😂0😂😂 The DPU-CCM shall provide a command to resend DPU_HK_START.
+😂2😂😂 The DPU-CCM shall produce DPU_HK at a commandable rate, with a default of 10 seconds.
+😂0😂😂 The DPU-CCM shall monitor the status of DPU-SCUI, DPU-CCM, DPU-DCX, DPU-TMALI, and DPU-DPA by examining their TASK_INFO and report this information in DPU_HK.
+😂0😂😂 The DPU-CCM shall implement a mechanism whereby large memory loads and dumps can be accomplished incrementally.
+😂2😂😂 The DPU-CCM shall process real-time non-deferred commands within B ms of receipt from the ICU or the SCU.
+😂0😂😂 The DPU-CCM shall record an error to the LAST_BOOT_IVEC location in EEPROM and discontinue strobing the Watchdog Timer should an unrecoverable software error occur.
+😂0😂😂 An unrecoverable software error is defined as an error that causes a loss of commandability or ground communication.
+😂0😂😂 The DPU-CCM shall provide a mechanism for other CSCs to report errors for inclusion in the DPU_HK.
+😂0😂😂 The DPU-CCM shall collect a TASK_HBEAT from DPU-SCUI, DPU-CCM, DPU-DCX, DPU-TMALI, and DPU-DPA .
+😂0😂😂 Non-responsive tasks will be reported in DPU_HK.
+😂0😂😂 The DPU-CCM shall be able to count a consecutively reported error.
+😂0😂😂 When the the count for a particular error ID, exceeds 250 for a particular reporting period, the error code will be replaced with a error code sequence which shall include the original error code and the number of times the error was reported.
+😂0😂😂 The DPU-CCM shall check the length of a received DPU_CMD against an expected value from a lookup table indexed by FUNCTION code.
+😂0😂😂 If the received value does not match the expected, then the command will be discarded, and an error will be enqueued.
+😂0😂😂 The DPU-CCM shall, in rejecting a command, report an error in DPU_HK indicating the byte-code of the command being rejected in the LSB of the errno as described in 03691-DPUSDP-01.
+😂2😂TODO:可维护😂 The DPU-CCM shall maintain counts of both the number of commands successfully received and rejected and report the parameters in DPU_HK.
+😂0😂😂 The DPU-CCM shall use DPU-EEPRM to access the EEPROM.
+😂0😂😂 The DPU-CCM shall use DPU-ICUI to communicate with the ICU.
+😂0😂😂 The DPU-TMALI shall install callbacks for handling all DPU-DCI interrupts including Error interrupt, Ping-Pong Timeout interrupt, and Ping-Pong Complete Flag interrupt.
+😂1😂😂 The DPU-TMALI shall be capable of making data available from the DCI to DPU-DPA.
+😂0😂😂 DPU-TMALI will populate a ring buffer with frames of data for application task retrieval.
+😂0😂😂 The DPU-TMALI shall provide a function which sets the current event bit ordering mode in the DCI driver.
+😂0😂😂 The DPU-TMALI shall provide TMALI_HK to the DPU-CCM on request.
+😂0😂😂 The DPU-TMALI shall allocate a ring buffer of size specified by TMALI_BUFFER_SIZE provided during initialization for storing incoming frames of data.
+😂0😂😂 The default buffer size shall be 15 MB.
+😂0😂😂 The DPU-TMALI shall configure the ping-pong frame limit at startup as specified by TMALI_PP_LIMIT provided during initialization.
+😂0😂😂 The default value shall be M frames and shall be capable of being modified dynamically.
+😂0😂😂 The DPU-TMALI shall configure the DCI interface data timeout at startup as specified by TMALI_TIMEOUT provided during initialization.
+😂0😂😂 The default value shall be N milliseconds and shall be capable of being modified dynamically.
+😂0😂😂 The DPU-TMALI shall utilize SCM_DCI_SR, along with ERRNO provided by DPU-DCI to decode errors and place them on an error queue for DPU-CCM.
+😂0😂😂 The DPU-TMALI shall install a callback routine to respond to the DCI Error Interrupt.
+😂0😂😂 The DPU-TMALI shall place the starting address of the event ring buffer in TMALI_HK.
+😂0😂😂 The DPU-TMALI shall use DPU-DCI to communicate with the DCI Interface.
+😂0😂😂 The DPU-SCUI shall construct CCSDS Source Packets from Data Packages as defined by CCSDS-102.0-B-4, and in accordance with interface control document 1143-EI-S19121.
+😂0😂😂 The DPU-SCUI shall time stamp the secondary header of the Source Packets with the current SC_TIME retrieved from the DPU-TIS module.
+😂0😂😂 The DPU-SCUI shall be capable of packing created CCSDS Source Packets into STPDUs using segmented (grouped) packets for transfer to the SCU as defined by CCSDS-102.0-B-4 and in accordance with interface control document 1143-EI-S19121.
+😂0😂😂 The DPU-SCUI shall notify the SCU of new data by using the Transfer Request Counter in accordance with interface control document 1143-EI-S19121.
+😂0😂😂 The DPU-SCUI shall receive command messages in the form of Telecommand Packets from the SCU and make them available to the DPU-CCM.
+😂0😂😂 The DPU-SCUI shall provide SCUI_HK to the DPU-CCM on request.
+😂0😂😂 The DPU-SCUI shall provide the capability for data producing applications to specify whether or not queued data may be segmented.
+😂0😂😂 The DPU-SCUI shall provide the capability to handle high priority data.
+😂0😂😂 High priority data shall be processed before low priority data.
+😂0😂😂 In the condition that low priority data is being processed when new high priority data arrives, DPU-SCUI shall finish processing the low priority data and then immediately shift all resources to processing the high priority data.
+😂0😂😂 The DPU-SCUI shall buffer an amount of data specified by the SCU_BUFFER_SIZE parameter provided during initialization.
+😂0😂😂 The default buffer size will be set to X MB of data.
+😂2😂😂 The DPU-SCUI shall be capable of receiving a telecommand from the SCU every N ms and forward it to DPU-CCM for processing.
+😂0😂😂 The DPU-SCUI shall rate-buffer the delivery of STPDUs to the SCU according to the SCU_BUFFER_RATE parameter provided during initialization.
+😂2😂😂 The default value shall provide data to the SCU at a rate of X Kbps and shall be capable of being modified dynamically.
+😂2😂😂 The DPU-SCUI shall be capable of preparing one STPDU for delivery to the SCU every M milliseconds, or shall indicate a No Data condition to the SCU by maintaining an un-incremented ST_PDU Transfer Request Counter field.
+😂0😂😂 The DPU-SCUI, in the event of a buffer full condition, shall discard new data, return an error to the caller, and report an error condition to the DPU-CCM.
+😂0😂😂 The DPU-SCUI shall detect the condition in which the SCU fails to read one or more MIL-STD-1553B subaddresses during the transmission of a STPDU, shall cancel the write on those subaddresses, record new data to those subaddresses, and report an error to the DPU-CCM.
+😂2😂😂 The DPU-SCUI shall cancel the write to each subaddress if the SCU fails to read a pending STPDU after a timeout specified by a value calculated based on the SCU_POLL_RATE parameter provided during initialization, shall record new data to those subaddresses, and report an error to the DPU-CCM.
+😂0😂😂 The SCU_POLL RATE parameter shall have a default setting of J ms and shall be capable of being modified dynamically.
+😂0😂😂 The DPU-SCUI shall report errors to the DPU-CCM for inclusion in the DPU Housekeeping information.
+😂0😂😂 The DPU-SCUI shall compute a CHKS16 for telecommands received from the SCU.
+😂0😂😂 If the CHKS16 does not match the value included in the telecommand, an error will be reported to DPU-CCM.
+😂0😂😂 If the checksum computes correctly, the command will be forwarded to DPU-CCM for execution.
+😂0😂😂 The DPU-SCUI shall use DPU-1553 to communicate with the MIL-STD-1553B Interface.
+😂0😂😂 The DPU-SCUI shall communicate with the SCU according to the protocol defined in document 1143-EI-S19121.
+😂0😂😂 The DPU compression software shall produce compressed Data Packages from uncompressed Data Packages.
+😂0😂😂 The DPU compression software shall forward compressed data to DPU-SCUI.
+😂0😂😂 The DPU compression software shall report errors to the DPU-CCM for inclusion in the DPU Housekeeping information.
+😂1😂😂 The DPU-TIS shall provide the capability for application programs to access the SC_TIME from the SCM.
+😂1😂😂 The DPU-TIS shall provide the capability for application programs to access the current UT_DELTA.
+😂1😂😂 The DPU-TIS shall provide the capability for an application program to set the value of the SC_TIME register(s) on the SCM and enable the 1PPS clock jam register, if automatic time synchronization is enabled.
+😂0😂😂 The DPU-TIS shall provide the capability for an application program to jam the value of the SC_TIME into the hardware, if automatic time synchronization is disabled.
+😂0😂😂 The DPU-TIS shall provide TIS_HK to the DPU-CCM on request.
+😂0😂😂 This DPU-TIS shall provide the capability for an application program to enable and disable automatic time synchronization.
+😂0😂😂 The DPU-TIS shall provide the capability for an application program to select the active 1PPS signal.
+😂0😂😂 The DPU-TIS shall report errors to an application program by setting the ERRNO task variable and returning ERROR.
+😂0😂😂 The DPU-1553 CSC shall address hardware modules as defined in document 1400-01, Company X Specification for the Company X Communication/Memory Module.
+😂0😂😂 The DPU-TIS shall read from the SCM registers in B-bit words only.
+😂0😂😂 The DPU-TIS shall write to the SCM registers in B-bit words only.
+😂0😂😂 The DPU-ICUI shall receive real-time DPU_CMDs from the ICU via SSI and forward them to DPU-CCM.
+😂1😂😂 The DPU-ICUI shall provide an API for other CSCs to transmit messages to the ICU.
+😂1😂😂 The DPU-ICUI shall provide ICUI_HK to the DPU-CCM on request.
+😂2😂😂 The DPU-ICUI shall forward real-time commands to DPU-CCM within 500 milliseconds of receipt from the ICU.
+😂1😂🐋😂 The DPU-ICUI shall report errors to DPU-CCM for inclusion in the DPU_HK.
+😂0😂😂 The DPU-ICUI shall compute a CHKS_16 for DPU_CMDs received from the ICU.
+😂2😂🐋😂 If the expected checksum is not computed, the command will be discarded, an error will be enqueued to DPU-CCM, and a NAK message transmitted to the ICU within a second.
+😂0😂😂 The DPU-ICUI shall check the length of a received DPU_CMD against the message length determined by the Inter-Block Gap.
+😂2😂🐋😂 If the received value does not match, then the command will be discarded, and an error will be enqueued to DPU-CCM, and a NAK message transmitted to the ICU within a second.
+😂0😂😂 The DPU-ICUI shall use DPU-SSI to communicate with the SSI Interface.
+😂0😂😂 The DPU-ICUI shall install an ISR to be invoked on the SSI receiver interblock gap interrupt, for the receiving and processing of commands from the ICU.
+😂0😂😂 The DPU-ICUI shall format messages according to DPUICD-01, Section 3.1
+😂1😂🐋😂 The DPU-DPA shall be able to perform tracking based on data collected from the detector by calculating the spacecraft drift using successive tracking frames using the algorithm described in Appendix C.
+😂0😂😂 If commanded, during the collection of event data, the DPU-DPA shall produce PROD_ACS_MSG.
+😂0😂😂 The DPU-DPA shall provide a event mode window per exposure.
+😂0😂😂 The size of the window shall be commandable.
+😂0😂😂 The event mode exposure time shall be commandable.
+😂0😂😂 There shall be four engineering modes associated with the detector: raw event list mode, channel boundary mode, centroid confirmation mode, and intensifier characteristics mode.
+😂0😂😂 In Image Mode, the DPU-DPA shall be capable of binning images at different levels.
+😂0😂😂 The raw event list engineering mode shall collect events for transmission to the ground.
+😂0😂😂 The channel boundary engineering mode shall create an array of look-up table (LUT) channel boundaries, PROD_CHAN_BOUND, from a flat field, and PROD_MN_DATA, using the algorithm described in Appendix C.
+😂0😂😂 The centroid confirmation engineering mode shall produce a PROD_CENTROID_CONF.
+😂0😂😂 This mode shall divide a full frame image into a certain regions.
+😂0😂😂 Each region shall be processed to form an 8x8 confirmation image.
+😂0😂😂 The certain confirmation images shall be sent to the solid state recorder as one data product.
+😂0😂😂 The Intensifier Characteristics Engineering mode shall produce a pulse-height histogram, PROD_INTENSE_CHAR.
+😂0😂😂When observing a new GRB, and the XRT_POS becomes available from the ICU, the DPU-DPA shall shift and resize the image and event windows appropriately.
+😂0😂😂The DPU-DPA shall command DPU-TMALI to reorder EVENT data bits as a function of the Detector Electronics Output Format (Science Mode 3, Full-Frame High Res), and the commanded DPU science or engineering mode.
+😂1😂😂The DPU-DPA will obtain the initial tracking frame time from the ICU.
+😂0😂😂When tracking is enabled, the DPU-DPA will produce a PROD_TRACKING_REC at the commanded rate.
+😂0😂😂The DPU-DPA shall provide a task heartbeat to DPU-CCM.
+😂1😂😂The DPU-DPA shall be capable of providing DPA_HK on request.
+😂0😂😂The DPU-DPA will complete the exposure in the time specified by the MODE command - even if it's required to truncate the final tracking frame.
+😂1😂😂The DPU-DPA shall collect event mode data, preserving the time and spatial resolution in the specified event window.
+😂1😂😂The DPU-DPA shall perform bounds checking before accessing memory.
+😂1😂😂The DPU-DPA shall be capable of collecting detector events over the full  FOV.
+😂0😂😂The DPU-DPA shall transition MODE based on the protocol specified in document DPUICD-01, section 2.2
+😂0😂😂There DPU-DPA shall have three science modes, X, Y mode, and X/Y mode.
+😂0😂😂The DPU-DPA shall use the first tracking image accumulated after entering Image mode to locate guide stars using the algorithm described in Appendix C.
+😂0😂😂In image mode, the DPU-DPA shall calculate the memory location to increment for each valid detector event received.
+😂0😂😂The memory location shall be incremented for each valid event.
+😂0😂😂Each memory location shall be able to count so many events.
+😂0😂😂An Image mode exposure shall produce a PROD_IMAGE.
+😂0😂😂The image mode shall consist of a science window.
+😂0😂😂The image mode shall shift successive frames according to the calculated spacecraft drift and co-add the frame into an accumulated image.
+😂0😂😂Image mode shall have the ability to produce a Parameterized Finding Chart, PROD_FINDING_CHART, of the image if commanded, using the algorithm described in Appendix C.
+😂0😂😂The Parameterized Finding Chart shall consist of the brightest sources.
+😂0😂😂Each source shall be parameterized by its position [X,Y] and Intensity/brightness.
+😂0😂😂The DPU-DPA shall produce a Parameterized Finding Chart, PROD_FINDING_CHART, that is so many bytes.
+😂0😂😂When commanded to event mode by the ICU, the DPU-DPA shall be capable of collecting time-tagged photon events and producing a PROD_EVENT.
+😂0😂😂The DPU-DPA shall calculate drift with respect to the reference frame based on the established guide stars then perform a shift-and-add of the image mode data.
+😂2😂😂The DPU-DPA shall initiate reaction/response to a command from the DPU-CCM with a latency of no greater than 10 ms.
+😂1😂😂On failure to obtain an acceptable tracking solution, the DPU-DPA shall apply the most recent tracking solution and report an error to DPU-CCM.
+😂1😂😂The DPU-DPA shall report errors to DPU-CCM.
+😂1😂🐋😂If the DPU-SCUI FIFO is full when DPU-DPA attempts to enqueue its data product, DPU-DPA shall suspend event processing until room is available on the respective FIFO for the current data product.
+😂1😂😂Incoming data may be dropped while suspended.
+😂1😂😂An error shall be reported DPU-CCM.
+😂1😂🐋😂The DPU-RTOS shall be a real-time, multi-tasking operating system.
+😂0😂😂The DPU-RTOS shall schedule tasks based on priority, and shall time-slice tasks with the same priority.
+😂1😂🐋😂The DPU-RTOS shall provide the capability to invoke user-installed Interrupt Service Routines (ISRs) in response to internal and external (VME) interrupts.
+😂0😂😂At startup, the DPU-RTOS shall execute the BIT device RAM tests (cold boot only), install device drivers, execute the BIT driver loopback tests (cold boot only), and then spawn the application flight software.
+😂0😂😂The DPU-RTOS shall include the capability to dynamically load object modules from the EEPROM.
+😂0😂🐋😂The DPU-RTOS shall provide a function to allow an application program to write to the Real-Time Clock registers on the RAD6000SC CPU Module.
+😂0😂😂The DPU-RTOS shall provide a function to allow an application program to read from the Real-Time Clock registers on the RAD6000SC CPU Module.
+😂0😂😂The DPU-RTOS shall exclude failed DRAM from the system memory pool based on the contents of the BIT_DRAM results in the SYSTEM_BLOCK.
+😂0😂😂The system memory table does not include the Interrupt Vector Table (IVT), nor the text and data segment.
+😂1😂😂The text segment and IVT of the DPU-RTOS shall be write-protected.
+😂0😂😂The DPU-RTOS shall install an hook routine which is invoked on system exception which shall attempt to record the interrupt vector to the LAST_BOOT_IVEC location in EEPROM prior to reboot.
+😂1😂😂The DPU-BIT shall perform two write/read/compare tests on the RAM for the MIL-STD-1553B.
+😂1😂🐋😂The first test shall construct and write half-word (16-bit) values obtained by adding the upper and lower half-words of each each memory address.
+😂1😂🐋😂The second test shall construct and write the ones complement of the half-word values used in the first test.
+😂0😂😂The DPU-BIT shall perform MIL-STD-1553B internal BIT.
+😂0😂😂The DPU-BIT shall test the Error Detection and Correction (EDAC) on the Company X Communication/Memory Module by reading preprogrammed error locations in PROM.
+😂0😂😂The DPU-BIT shall test the Programmable Read Only Memory (PROM) by computing a checksum and comparing it to a checksum stored in PROM.
+😂1😂🐋😂The DPU-BIT shall perform two write/read/compare tests on the RAM for the DCI Data Buffers.
+😂0😂😂The first test shall write the address of each location to that location.
+😂0😂😂The second test shall write the ones complement of the values used in the first test.
+😂2😂😂The DPU-BIT shall complete the BIT within A seconds.
+😂1😂🐋😂The DPU-BIT shall report errors that occur during tests as failures in the test results.
+😂0😂😂The DPU-EDAC shall address hardware modules as defined in document 1400, Company X Specification for the Company X Communication/Memory Module, and document IBM-FAULT-MGMT, RSC System: Fault Handling and Storage Management.
+😂0😂😂The DPU-BIT shall use the EEPROM Driver CSC when reading from and writing to the EEPROM.
+😂0😂😂The DPU-BIT shall use the 1553 Driver CSC to perform MIL-STD-1553B internal BIT.
+😂0😂😂The DPU-EDAC shall contain a background task which walks DRAM to trip single-bit errors (SBEs).
+😂0😂😂The DPU-EDAC shall record the number of SBEs that have been detected in DRAM since boot and the address of the last two SBEs.
+😂0😂😂The DPU-EDAC shall record the number of MBEs that have been detected in DRAM since boot and the address of the last two MBEs.
+😂0😂😂The DPU-EDAC shall record the number of SBEs that have been detected in PROM and EEPROM since boot and the address of the last two SBEs.
+😂0😂😂The DPU-EDAC shall record the number of MBEs that have been detected in PROM and EEPROM since boot and the address of the last two MBEs.
+😂0😂😂The DPU-BIT shall report BIT_HK on request.
+😂0😂😂The DPU-EDAC shall install an ISR to be invoked when an SBE occurs and scrub the location containing the SBE.
+😂0😂😂The DPU-EDAC shall record the current contents of EDAC_HK to EEPROM and force a DPU watchdog in the event an MBE in DRAM is detected.
+😂0😂😂The DPU-EDAC shall report EDAC_HK on request.
+😂0😂😂The DPU-1553 CSC shall address hardware modules as defined in document 1400, Company X Specification for the Company X Communication/Memory Module.
+😂0😂😂The DPU-ADC shall create a fixed analog conversion scan list containing the A DPU analog values (active values plus one ground reference value).
+😂0😂😂The DPU-ADC shall provide an application program with the capability to read the most recent A/D results in the scan list.
+😂0😂😂The DPU-ADC shall provide an application program with a function to perform an alternating read/setup-start sequence which will read the A/D result setup on the last call store the result into the scan list, and setup the conversion for the next item in the scan list; then on the next call start the conversion which was setup during the last call.
+😂0😂😂The DPU-ADC shall provide an application program with the capability to read the current values of the SCM_ADC_MUX and SCM_ADC_DAT registers.
+😂0😂😂The DPU-ADC shall report errors to an application program by setting the ERRNO task variable and returning ERROR.
+😂0😂😂The DPU-ADC CSC shall address hardware modules as defined in document 1400, Company X Specification for the Company X Communication/Memory Module.
+😂0😂😂The DPU-ADC shall read from the SCM registers in B-bit words only.
+😂0😂😂The DPU-ADC shall write to the SCM registers in B-bit words only.
+😂0😂😂The DPU-SSI shall provide the capability for an application program to set the Inter-Block Gap (IBG) Timeout for transmitted and received messages.
+😂0😂😂The DPU-SSI shall provide the capability for an application program to install a callback routine to respond to the receive IBG Interrupt.
+😂0😂😂The DPU-SSI shall provide the capability for an application program to install a callback routine to respond to the transmit IBG Interrupt.
+😂0😂😂The DPU-SSI shall provide the capability for an application program to enable/disable the VME Slave Interrupt on the SCM for the SSI Interface.
+😂0😂😂The DPU-SSI shall provide the capability for an application program to independently mask/unmask each of the SSI Interrupt Conditions using the SCM_SSI_CSR.
+😂0😂😂The DPU-SSI shall provide the capability for an application to determine the number of bytes in a message received from the ICU.
+😂0😂😂The DPU-SSI shall provide an operational mode (Tx MESSAGE MODE) for transmitting blocks in which consecutive words in a block are transmitted,  and the transmitter is disabled until a transmit IBG interrupt is received.
+😂0😂😂At this point the transmitter is re-enabled, and the next message can be transmitted.
+😂0😂😂The DPU-SSI shall provide the capability for an application program to install a callback routine to respond to the SSI Error Interrupt.
+😂0😂😂The DPU-SSI shall provide an application program with the capability to read the SSI status register.
+😂0😂😂The DPU-SSI shall report errors to an application program by setting the ERRNO task variable and returning ERROR.
+😂0😂😂The DPU-SSI shall provide the capability for an application program to reset the SSI by writing to the SSI Reset Register.
+😂0😂😂The DPU-SSI shall address hardware modules as defined in document 1400, Company X Specification for the Company X Communication/Memory Module.
+😂0😂😂The DPU-SSI shall read from the SSI registers in 16-bit words only.
+😂0😂😂The DPU-SSI shall write to the SSI registers in 16-bit words only.
+😂0😂😂The DPU-DCI shall provide the capability for an application program to set the Address Limit at which the hardware will swap ping-pong buffers.
+😂0😂😂The DPU-DCI shall provide an application program with the ability to read and write the hardware ping-pong buffers when in Test Mode.
+😂0😂😂The DPU-DCI shall provide an application program with the ability to force a ping-pong buffer swap when the interface is in Test Mode.
+😂0😂😂The DPU-DCI shall provide an application program with the ability to read the current hardware status, including the Data Level Trigger, the Data Timeout Trigger, the DCI Event Mode, and the Normal/Test Mode.
+😂0😂😂The DPU-DCI shall provide an application program with a function to read the contents of the ping/pong buffer.
+😂0😂😂The DPU-DCI shall provide an application program with the ability to configure the SCM_DCI_WIN parameters.
+😂2😂🐋😂The DPU-DCI shall provide the capability for an application program to set a timeout in milliseconds that specifies a period during which no new events have been received by the hardware, after which the hardware will swap ping-pong buffers and interrupt the software.
+😂0😂😂The DPU-DCI shall provide the capability for an application program to arm the ping-pong buffer for swap.
+😂0😂😂The DPU-DCI shall provide the capability for an application program to install a callback routine to respond to the Timeout Interrupt Condition (INTTO_EN).
+😂0😂😂The DPU-DCI shall provide the capability for an application program to install a callback routine to respond to the DCI Address Limit Interrupt Condition (INTADR_EN).
+😂0😂😂The DPU-DCI shall provide the capability for an application program to enable/disable the VME Slave Interrupt on the SCM for the DCI Interface.
+😂0😂🐋😂The DPU-DCI shall provide the capability for an application program to mask/unmask each of the DCI Interrupt Conditions using the SCM_DCI_CSR.
+😂0😂🐋😂The DPU-DCI shall provide an application program with the capability to command the DCI hardware to reorder the bit sequence of each event's original Detector Electronics Output Format as it is received.
+😂0😂🐋😂The DPU-DCI shall provide an application program with the ability to toggle the hardware interface between Normal mode and Test mode.
+😂0😂😂The DPU-DCI shall provide the capability for an application program to receive data at a rate of A bytes per second over the DCI interface.
+😂0😂😂The DPU-DCI shall provide the capability for an application program to install a callback routine to respond to the DCI Error Interrupt (INTERR_EN).
+😂1😂😂The DPU-DCI shall provide access to the DCI status register so that an application program can determine error type.
+😂1😂🐋😂The DPU-DCI shall report errors to an application program by setting the ERRNO task variable and returning ERROR.
+😂0😂😂The DPU-DCI shall address hardware modules as defined in document 1400, Company X Specification for the Company X Communication/Memory Module.
+😂0😂😂The DPU-DCI shall read from the DCI Memory in B-bit words only, using the load multiple/store multiple instructions.
+😂0😂😂The DPU-DCI shall write to the DCI Registers in C-bit words only
+😂0😂😂The DPU-DCI shall read from the DCI Registers in C-bit words only
+😂0😂😂The DPU-DCI shall write to the DCI Memory in B-bit words only.
+😂0😂😂The DPU-DCI shall provide the capability for an application program to reset the DCI by writing to the DCI Reset Register.

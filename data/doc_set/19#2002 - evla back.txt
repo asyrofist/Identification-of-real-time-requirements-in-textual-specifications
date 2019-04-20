@@ -1,0 +1,239 @@
+😂0😂😂The primary goal of this document is to provide a complete and accurate list of requirements for the EVLA Correlator Backend System.
+😂0😂😂Upon completion, the document will act as a binding contract between developers and users and will provide a common point of reference for system expectations.
+😂0😂😂The primary audience of this document includes, but is not limited to, project leaders, the designers and developers of the system and the end user.
+😂0😂😂The document may also be of interest to EVLA project scientists and engineers or as a reference for individuals involved in similar projects with similar requirements.
+😂0😂😂The requirements contained in this document are numbered based on the section/subsection in which they appear.
+😂0😂😂Text found between "<" and ">" indicates questions or comments to myself and/or readers.
+😂0😂😂And In most cases, the phrase "The user" can be replaced with "An authorized user".
+😂0😂😂The Correlator Backend System lies between the Correlator and the End-to-End Systems.
+😂0😂😂It is the primary component of the real-time astronomical data processing capability of the EVLA.
+😂0😂😂Its primary responsibility is to perform basic data assembly, formatting and processing services and to support the desire for real-time inspection of the astronomical data stream.
+😂0😂😂The major functions the Correlator Backend System must perform are as follows.
+😂0😂😂Receive data from the Correlator in real-time.
+😂0😂😂Assemble time-series from the Correlator lag output.
+😂0😂😂Perform Fourier Transforms of the assembled time series.
+😂0😂😂Perform a limited number of additional processes upon user request.
+😂0😂😂Deliver suitably formatted results to the End-to-End System.
+😂0😂😂This document will define only those requirements that must be fulfilled by the Correlator Backend System.
+😂0😂😂The remainder of this document contains a more detailed description of the Correlator Backend System as well as the requirements necessary to design and build the system.
+😂0😂😂<ref> provides a general description of the Correlator Backend System.
+😂0😂😂<ref> details the requirements of the product and is the core of this document.
+😂0😂😂The format of the document follows that outlined in <ref>.
+😂0😂😂The EVLA Correlator Backend System will be designed and implemented as a real-time data processing system.
+😂0😂😂The system is expected to be implemented on a distributed memory cluster of connected processors.
+😂0😂😂Computers in the system will all be exactly the same and operating systems and applications running on them will communicate with one another and the Monitor and Control System over a network.
+😂0😂😂Data input to the system from the Correlator and output from it to the End-to-End System will be over very high-speed networks.
+😂0😂😂The networks connecting the internal processors, the Correlator and the E2E are part of the BE System.
+😂0😂😂Currently, only a conceptual diagram exists for the system and should be viewed as such.
+😂0😂😂The BE Management functions will run on one of the cluster processors with one or more shadow processors standing by.
+😂0😂😂The remaining processors will be running the Data Processing functions.
+😂0😂😂Correlator lag data will be received directly from the Correlator Baseline Boards in the form of Lag Frames.
+😂0😂😂The lag frames contain correlation lag values and all auxiliary parameters needed to assemble the lags into complete lag sets.
+😂0😂😂It is currently assumed that all observational modes yielding correlator results that are transmitted to the Backend will be in the form of lag frames.
+😂0😂😂Additional auxiliary data and meta-data needed for processing prior to output to the e2e System will arrive via the Monitor and Control System, whether produced by the Correlator or some other part of the EVLA System.
+😂0😂😂The BE will receive and act upon status requests and control commands originating in or via the M&C System.
+😂0😂😂The Correlator lag frames will be assembled into time series, normalized, and when necessary time stamp adjusted.
+😂0😂😂The time series will also be Fourier Transformed and other user selectable time and/or frequency domain processes will be applied.
+😂0😂😂Prior to output, the end results will be formatted to meet the internal needs of the e2e.
+😂0😂😂Formatted spectra will be transferred to the End-to-End System.
+😂0😂😂All pertinent meta-data will be contained in the formatted output.
+😂0😂😂The fundamental unit of output is the minimum sub-band cross-power spectrum produced by the Correlator.
+😂0😂😂No "stitching" operations that combine spectra from different sub-bands will be performed.
+😂0😂😂The BE will produce a variety of error, warning, status and other reports and messages that will be transferred to the M&C for final disposition.
+😂0😂😂The Correlator Backend System will conduct a number of self-monitoring activities on application and system software as well as hardware systems to detect system failure and out of spec conditions.
+😂0😂😂The ability to attempt recovery from failure and out of spec performance conditions will be built into the system.
+😂0😂😂The system will provide control and auxiliary parameters to input, output, processing, monitor, recovery, and other functions and receive status and performance data from them.
+😂0😂😂It will also communicate with the external Monitor and Control System.
+😂0😂😂All use of the Correlator Backend System will be indirect via the Monitor and Control System.
+😂0😂😂The BE system will not directly produce any user interface screens.
+😂0😂😂The primary contact with array operations will be via status and error messages channeled through the Monitor and Control System.
+😂0😂😂The ability of the Backend System to achieve and maintain real-time processing will be vitally dependent upon reliable operation and rapid diagnosis and repair of faults in the hardware and software systems.
+😂0😂😂These individuals will be responsible for performing corrective and preventive maintenance along with periodic performance tests and upgrades.
+😂0😂😂Engineers and technicians will need tools to inspect individual devices from remote locations.
+😂0😂😂These individuals are primarily interested in the science that is obtained from the instrument.
+😂0😂😂Their main interaction will be to select and provide parameters for any additional data processing beyond the Fourier transforms.
+😂0😂😂These individuals are responsible for developing the software and will interact with the system to ensure that it is functioning properly.
+😂0😂😂The software developer requires remote access to the system so that troubleshooting can be accomplished away from the EVLA and during non-working hours.
+😂0😂😂A few authorized individuals may be allowed access to parts of the system that are usually considered restricted.
+😂0😂😂The Correlator Backend System is a critical component in the Astronomical data path.
+😂0😂😂If it is unavailable, incoming astronomical data will be lost.
+😂0😂😂The ultimate throughput capability of the real-time data processing pipeline of the Backend System will be constrained by the computational performance limits of available computer hardware and the practical ability to configure and maintain large numbers of processors.
+😂0😂😂The ultimate throughput capability of the real-time data processing pipeline of the Backend System will be constrained by the efficiency of supporting software systems, data processing code and our ability to configure and tune them for maximum performance.
+😂0😂😂The ability to realize and maintain real-time operations is critically dependent upon the performance levels of available network systems.
+😂0😂😂Operations performed shall be reversible.
+😂0😂😂That is, the original raw uncorrected data must be recoverable from the processing output.
+😂0😂😂The ability to maintain real-time operations over realistic extended periods of time is dependent on the mean time to failure of the hardware and software components of the computing and communications systems.
+😂0😂😂It is assumed that the Correlator will deliver suitably formatted network data packets to the input network of the Backend System.
+😂0😂😂Lag frames will not necessarily arrive in Lag Set order.
+😂0😂😂All lag frames for the same baseline will be directed to the same Backend processor.
+😂0😂😂It is further assumed that the number of lags per Lag Set will always be a power of two.
+😂0😂😂It is assumed that all auxiliary data needed for processing and formatting operations will be provided directly by the correlator or indirectly by the Monitor and Control System in a timely manner.
+😂0😂😂Much of this data will originate from the Station Board CMIBS.
+😂0😂😂It is assumed that the e2e System will be capable of accepting output data rates and volumes generated by the Backend System.
+😂0😂😂Visibility data from different baselines could be processed by different BE processors.
+😂0😂😂Final assembly of all visibility data is expected to be performed by the e2e system.
+😂0😂😂The BE shall receive LTA or Speed Dump Lag Frames from the Correlator.
+😂0😂😂For a detailed description of the two dump formats see <ref>.
+😂0😂😂This will most likely be in the form of one or more frames per UDP/IP packet.
+😂0😂😂The transfer shall take place in such a manner that all data needed to perform any Fourier Transform shows-up on a single processor.
+😂0😂😂The BE shall receive, via M&C, State Count data produced by the Correlator.
+😂0😂😂The BE shall receive, via M&C, data and parameters specific to the current EVLA Observational Mode needed for processing the Correlator Lag values.
+😂0😂😂The BE shall receive, via M&C, all meta-data necessary to format BE results for delivery to the E2E.
+😂0😂😂The BE shall provide operational status data to and receive control data from the M&C System.
+😂0😂😂This includes Lag Frame destination addresses and address changes.
+😂0😂😂The BE shall provide error and warning reports to M&C as operating conditions warrant.
+😂0😂😂The BE shall provide several optionally selectable levels of printed messages detailing operational parameters at critical locations in the system.
+😂0😂😂The BE shall deliver formatted final results to the e2e System.
+😂0😂😂The BE shall produce all data needed by the e2e System for archiving and further processing.
+😂0😂😂The output is currently expected to be in a form compatible with AIPS++ Measurement Sets.
+😂0😂😂The BE shall acknowledge receipt of all data received from M&C.
+😂0😂😂The BE shall notify M&C of any detected interruptions of data delivery from the Correlator.
+😂0😂😂The BE shall verify successful delivery of output to the e2e.
+😂0😂😂The BE shall guarantee safe delivery of all internal messages.
+😂0😂😂The BE shall be able to handle lag frames of less than 128 values.
+😂0😂😂The BE shall be able to handle lag sets up to a maximum size of 262,144 values.
+😂0😂😂The BE shall receive incoming data packets from the Correlator to Backend network interface.
+😂0😂😂This network is a part of the BE System.
+😂0😂😂The BE shall verify the successful receipt of incoming data from the Correlator.
+😂0😂😂This includes checking for receive errors and determining that all expected data was received, accumulation of error statistics and comparison against tolerances, and reporting of all out of tolerance conditions.
+😂0😂😂The BE shall store input data records in a memory buffer and track buffer locations of all input data until data processing is complete.
+😂0😂😂Report any buffer overflow conditions.
+😂0😂😂The BE shall respond to incoming correlator mode changes, user optional processing sequence and/or parameter changes, and other external inputs that affect the data processing pipeline.
+😂0😂😂Update internal parameter tables and synchronize data processing pipeline with new operational conditions.
+😂0😂😂The BE shall assemble the received input data into continuous time series.
+😂0😂😂The BE shall ensure that time series data is correctly ordered and contains valid data values along its entire extent.
+😂0😂😂Compare against tolerances and report all out of tolerance conditions.
+😂0😂😂The BE shall replace all invalid data with zero values.
+😂0😂😂The BE shall keep track of data invalids.
+😂0😂😂The BE shall be able to apply normalizations based on reported data invalid counts.
+😂0😂😂The BE shall be able to apply corrections based on state count and/or quantizer power measurement data.
+😂0😂😂This is the VanVleck correction.
+😂0😂😂The BE shall be able to make time stamp adjustments as required by the observational mode and correlator output parameters.
+😂0😂😂This may arise when recirculation is used.
+😂0😂😂The BE shall be able to perform windowing operations prior and subsequent to Fourier Transform.
+😂0😂😂This will be needed for narrow band RFI mitigation.
+😂0😂😂Post Fourier Transform windowing will be applied as a convolution.
+😂0😂😂The BE shall be able to apply user selected time domain processes.
+😂0😂😂These processes should be constructed to be chainable and repeatable in the chain.
+😂0😂😂No Optional time domain processes have as yet been proposed.
+😂0😂😂The BE shall be able to perform Fourier Transform the lag set time series.
+😂0😂😂A power-of-two complex-to-complex Fast Fourier Transform with retention of all output positive and negative frequencies will be used.
+😂0😂😂This process must be able to accept as input the output of any of the time domain processes.
+😂0😂😂The BE shall be able to apply user selected frequency domain processes.
+😂0😂😂These processes should be constructed to be chainable and repeatable in the chain.
+😂0😂😂No frequency domain processes have as yet been proposed.
+😂0😂😂The BE shall be able to sum the frequency domain, spectral results.
+😂0😂😂The amount of summation will be controlled by an observational mode parameter obtained via M&C.
+😂0😂😂The BE shall keep track of the number of samples/dumps integrated in each spectral channel.
+😂0😂😂The summation will occur after all optional frequency domain processing, or if none, after the Fourier Transform.
+😂0😂😂Integration for long periods of time is what will throttle the output of the Correlator to a rate manageable by the E2E.
+😂0😂😂The BE shall combine the finished spectra with meta- and auxiliary data to form suitably formatted output data sets.
+😂0😂😂AIPS++ Measurement Sets are the expected entities.
+😂0😂😂The BE shall store formatted output data records in a memory buffer with backup disk buffering.
+😂0😂😂Store data ready for transmission to the e2e System until successful transfer has occurred.
+😂0😂😂Report any errors and buffer overflow conditions that occur.
+😂0😂😂The BE shall send output data to the e2e System.
+😂0😂😂The BE shall verify that all sent data was successfully received.
+😂0😂😂Report all errors.
+😂0😂😂The BE shall monitor data transfer rates from the Correlator and to the e2e.
+😂0😂😂Accumulate data transfer statistics and compare against tolerances.
+😂0😂😂Report all out of tolerance conditions.
+😂0😂😂The BE shall monitor the overall data processing rate.
+😂0😂😂Compare against tolerances and report all out of tolerance conditions.
+😂0😂😂The BE shall trap, flag and repair inf’s, NaN’s, underflows, overflows and other computation errors.
+😂0😂😂Accumulate computation error statistics and compare against tolerances.
+😂0😂😂Report all out of tolerance conditions.
+😂0😂😂The BE shall periodically or upon request check PID’s and assure that all started tasks are alive and running.
+😂0😂😂Report missing, stopped, defunct and other damaged processes.
+😂0😂😂The BE shall periodically or upon request check Backend physical processors and assure that all needed processors are alive and responding.
+😂0😂😂Report all crashed, stopped, or unresponsive processors.
+😂0😂😂The BE shall periodically or upon request check all Backend internal networks and assure that all communication connections are intact and functioning.
+😂0😂😂Report all non-functioning components.
+😂0😂😂The BE shall be able to initiate a processing task on any Backend processor.
+😂0😂😂The BE shall be able to signal a kill for any Backend process.
+😂0😂😂The BE shall be able to alter the priority of any of the BE tasks.
+😂0😂😂The BE shall be able to initiate a reboot of any Backend a physical processor.
+😂0😂😂The BE shall be able to initiate a reboot of any internal network.
+😂0😂😂The BE shall be able to redistribute internal workload among its processors.
+😂0😂😂This may involve change of destination IP address for the Correlator network.
+😂0😂😂BE processes shall not violate archive data requirements.
+😂0😂😂All processes shall be reversible; the raw unconverted input always being recoverable from the output.
+😂0😂😂A memory buffer of lag frames.
+😂0😂😂Data entry status queue to track each record in the buffer.
+😂0😂😂The lag frames will contain all information necessary to properly assemble complete lag sets.
+😂0😂😂A memory buffer plus backup disk storage of all processed spectra.
+😂0😂😂These will be converted to output AIPS++ Measurement Set entities prior to transfer to the e2e.
+😂0😂😂Data entry status queue to track each record in the buffer.
+😂0😂😂Names, position in sequence, and adjustable parameters for all fixed and user selectable processing pipeline applications.
+😂0😂😂A table of flags needed to identify various internal conditions relating to error response and processing state.
+😂0😂😂All internally and externally generated data about the processed time series and spectra including invalid data flags, processes applied, coordinates, etc.
+😂0😂😂Error number, error source, error rates, and time stamp.
+😂0😂😂Warning number, warning source, warning rates, and time stamp.
+😂0😂😂Internal system component and time stamp.
+😂0😂😂Internal system component recovery action result.
+😂0😂😂Internal system component functional state.
+😂1😂😂The Backend System shall maintain input data fidelity and dynamic range across all processing, manipulation and I/O functions.
+😂1😂😂The system shall be capable of flagging and marking corrupted data segments and proceeding without interruption or effect on other data.
+😂0😂😂This includes, but is not limited to, partial data, zero data, underflows, overflows, infinities, and NaN’s whether obtained on input or arising during processing.
+😂1😂😂The BE System shall be capable of accepting an aggregate data input stream from the Correlator of a minimum of 1.6 Gbytes/sec.
+😂1😂😂This must be done simultaneously with the output stream, but not necessarily over the same interconnects.
+😂0😂😂This is an initial deployment specification and will be increased over time.
+😂1😂😂The BE System shall be capable of delivering an output data stream to the e2e System of a minimum of 25 MBytes/sec.
+😂0😂😂This includes resends and simultaneous transfer of data stored due to a previous e2e connection outage.
+😂1😂😂This must be done simultaneously with the output stream, but not necessarily over the same interconnects.
+😂0😂😂This is an initial deployment specification and will be increased over time.
+😂1😂😂The total processor capability of the BE System shall be sufficient to accomplish all processing tasks while avoiding loss or delay on the input and output data streams.
+😂1😂😂The BE System shall have sufficient memory with sufficient access speeds to accomplish all processing tasks while avoiding loss or delay on the input and output data streams.
+😂1😂😂The BE System shall have sufficient storage with sufficient access speeds to meet short duration Correlator bursting demands plus a standby reserve to meet reliability needs and handle outage recovery demands.
+😂1😂😂All math/science application software shall take optimal advantage of all language, compiler, and system computational features and resources to reduce run times to the minimum practical level.
+😂1😂😂All management software functions shall take optimal advantage of all language, compiler and system features and resources to reduce overheads to the minimum practical level.
+😂1😂😂All input and output, and storage and retrieval operations shall take optimal advantage of all system resources to reduce overhead and latency to the minimal practical level.
+😂1😂😂All data processing functions shall be chainable and repeatable in the processing pipeline in cases where this makes computational sense.
+😂1😂😂Operating system, message passing and other middle-ware, and programming language used shall follow industry standards and be commonly available and widely used.
+😂1😂😂Availability of source code for the OS will be very important.
+😂1😂😂The Backend System shall be self-monitoring.
+😂1😂😂It will be capable of detecting, reporting on and automatically taking action to remedy or lessen the impact of, at a minimum, the following types of abnormal conditions: processor hardware failure, operating system hangs or crashes, computational performance below minimum specifications, computational error rates above maximum specification, internal communications failures, and external communications disruptions.
+😂1😂😂The software part of the system shall be able to perform without total system restart due to internal failure between array maintenance windows.
+😂1😂😂The hardware part of the system shall be able to perform indefinitely without complete loss of service, except in the event of total failure of primary and backup power.
+😂1😂😂The system shall be capable of responding in a loss-less manner to I/O and processing changes arising from Correlator mode changes.
+😂1😂😂The system shall continue to operate in a loss-less manner in the event of a temporary loss of availability of the e2e System.
+😂1😂😂The system shall be able to complete processing of all onboard data, deliver the results to the End-to-End System and maintain availability for immediate resumption of operations once Correlator access is restored.
+😂1😂😂The system shall continue to operate during the absence of the M&C System until the first encounter of unavailable critical auxiliary data.
+😂1😂😂The system will cache a predetermined amount of correlator data after the first encounter of unavailable critical data and complete all requested operations on cached data once the unavailable critical data is obtained.
+😂1😂😂The system shall be able to sit at idle and resume operations with minimal delay.
+😂1😂😂All system processing and interconnect hardware shall be readily accessible for maintenance, repair, replacement and/or reconfiguration.
+😂1😂😂All systems and application source code shall be available to or on the systems that execute it.
+😂1😂😂All software application modules shall be debuggable.
+😂1😂😂All software processes shall be killable, restartable, debuggable and testable without affecting normal operations.
+😂1😂😂Software tools and pre-built applications that do not have source code available shall come with a complete diagnostic package and customer support.
+😂1😂😂Operating system software shall either have source code available or come with sufficient diagnostics and customer support.
+😂1😂😂I/O, communications, and processing hardware shall be easily expandable, reconfigureable, augmentable and replaceable to meet increasing data transfer and processing demands imposed by EVLA science, Correlator changes, and availability of new hardware.
+😂1😂😂<ref>, above, shall be accomplished in manner that is transparent to processing, communications and I/O software functions with the possible exception of recompilation of executables.
+😂1😂😂<ref>, above, shall be accomplished in a manner that is seamless, in that it does not affect hardware modules or software functionality that it meets at interfaces.
+😂1😂😂The Backend system shall ultimately be scaleable to an extent that it will be capable of handling up to two Gbytes per second per Correlator output channel in real-time.
+😂1😂😂The Backend System needs a robust security mechanism in place so that unauthorized users are not allowed access.
+😂0😂😂Authorized users are expected to be restricted to software and hardware development, testing, maintenance and operations personnel.
+😂1😂😂All users of the Backend System must be uniquely identified.
+😂0😂😂This could be done via a username and associated password scheme that would authenticate and authorize the user access to the system and, if applicable, grant the user access to restricted or controlled parts of the system.
+😂0😂😂If a user cannot be identified, they will not be given access.
+😂1😂😂In order to monitor all past access to the system, all attempts to access the system should be logged.
+😂0😂😂Users’ needs and expectations from the system will be different.
+😂1😂😂Systems operations should be given unrestricted access to all aspects of the system and should have the authority to grant and revoke privileges on a per-user basis.
+😂0😂😂Development, testing and maintenance personnel, on the other hand, require access to some parts of the system, but not all, indicating that an access level is needed that allows privileges to be granted on a per-user and what-do-you-need-to-do basis.
+😂1😂😂All users of the system shall login using some form of unique identification.
+😂1😂😂All login attempts shall be done in a secure manner.
+😂1😂😂A system administrator shall have unrestricted access to all aspects of the system.
+😂1😂😂Each user shall have a set of system access properties that defines the user’s privileges within the system.
+😂1😂😂The administrator shall have the ability to create and add a new user to the system.
+😂1😂😂The administrator shall have the ability to remove a user from the system.
+😂1😂😂The administrator shall have the ability to edit a user’s system access properties.
+😂1😂😂The administrator shall have the ability to block all access to the system for all users or selectively by user.
+😂1😂😂All blocked users with active sessions shall automatically be logged off.
+😂1😂😂The system shall continue operations, although not necessarily at full capacity, on all unaffected resources during partial shutdowns for maintenance, repair and/or upgrade.
+😂1😂😂The system shall be able to handle non-real-time operations in a transparent fashion.
+😂1😂😂Non-real-time refers to input data from a source other than the Correlator.
+😂1😂😂Modular design principles shall be employed to the maximum extent possible.
+😂1😂😂Maximal practical use of available "hot-swappable" devices and components shall be made.
+😂1😂😂Complete and comprehensible hardware systems specifications and configuration information shall be readily available.
+😂1😂😂Software system and application code shall be well documented and written in a generally familiar language or languages.
+😂1😂😂Software shall be written in a style that is easily readable and using practices that allow for minimal confusion.
