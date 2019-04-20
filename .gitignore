@@ -118,4 +118,6 @@ dmypy.json
 # Add by Yirany
 .idea
 /data/*
-/temp/*
+!/data/doc_set
+!/data/data_source_origin.config
+**/temp/*
