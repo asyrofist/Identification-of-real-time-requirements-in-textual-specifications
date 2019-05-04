@@ -57,7 +57,7 @@ def change_inner_ratio(x, label):
     return x, label
 
 
-# Database.dump_example(pos_sentences, neg_sentences, STOP_WORDS, FEATURE_MODE)
+Database.dump_example(pos_sentences, neg_sentences, STOP_WORDS, FEATURE_MODE)
 pos, neg = Database.load_example(FEATURE_MODE)
 if FEATURE_MODE == 'word2vec':
     avg = lambda sentence: sum([item.vector for item in sentence]) / len(sentence)
