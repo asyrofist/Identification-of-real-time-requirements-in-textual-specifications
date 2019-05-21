@@ -69,7 +69,6 @@ class Fetcher(object):
                 total_list += [sentence.strip() for sentence in f.readlines() if
                                Fetcher.has_keyword(sentence, keywords)]
         total_list = [sentence.lower() for sentence in total_list if len(sentence)]
-        total_list = [lemmalization(sentence) for sentence in total_list]
         return total_list
 
 
