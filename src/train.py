@@ -78,7 +78,7 @@ if FEATURE_MODE == "word2vec":
     model_name += "_" + EMBEDDING_TYPE
 
 model_name += "_" + str(RAND_SEED)
-model = model_type(name=model_name, author='wang')
+model = model_type(name=model_name, author='yirany')
 train_data = [np.array(item).reshape(-1) for item in train_data]
 evaluate_data = [np.array(item).reshape(-1) for item in evaluate_data]
 model.train(train_data, train_label)
