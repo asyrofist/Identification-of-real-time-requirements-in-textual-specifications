@@ -19,6 +19,25 @@ def fetch(number_of_sentences: int, doc_list: tuple = tuple(range(1, 49)), keywo
     return text[:number_of_sentences]
 
 
+def change_inner_ratio(x, label, mode, rand_seed, ratio):
+    pos_label = (0, 1)
+    neg_label = (1, 0)
+    data = list(zip(x, label))
+    pos, neg = [], []
+    for v, lab in data:
+        if lab == pos_label:
+            pos.append((v, lab))
+        elif lab == neg_label:
+            neg.append((v, lab))
+        else:
+            raise ValueError('Unknown label', lab)
+    pos, neg = change_feature_ratio(pos, neg, ratio, mode=mode, seed=rand_seed)
+    data = pos + neg
+    random.Random(0).shuffle(data)
+    x, label = list(zip(*data))
+    return x, label
+
+
 def change_ratio(origin, division, ratio, mode, seed=0):
     """
         change the ratio of difference type of sentences
