@@ -96,14 +96,14 @@ class TextPreProcessor(object):
 
         doc = TextPreProcessor.nlp(sentence)
         tokens = list(doc)
-        tokens = [tok for tok in tokens if tok.text not in stop_words]
+        tokens = [tok for tok in tokens if tok.lemma_ not in stop_words]
 
         if embedding_type == 'default':
             embeddings = [tok.vector for tok in tokens]
-            tokens = [tok.text for tok in tokens]
+            tokens = [tok.lemma_ for tok in tokens]
             tokens = [Token(text, vector) for text, vector in zip(tokens, embeddings)]
         elif embedding_type == 'google_word2vec':
-            tokens = [tok.text for tok in tokens]
+            tokens = [tok.lemma_ for tok in tokens]
             tokens = TextPreProcessor.get_google_word2vec(tokens)
         else:
             raise NotImplementedError("Embedding type not implemented")
