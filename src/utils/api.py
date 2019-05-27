@@ -38,6 +38,15 @@ def change_inner_ratio(x, label, mode, rand_seed, ratio):
     return x, label
 
 
+def generate_name(model_type, feature_mode, rand_seed, embedding_type=None):
+    model_name = model_type.__name__ + "_" + feature_mode
+    if feature_mode == "word2vec":
+        model_name += "_" + embedding_type
+
+    model_name += "_" + str(rand_seed)
+    return model_name
+
+
 def change_ratio(origin, division, ratio, mode, seed=0):
     """
         change the ratio of difference type of sentences

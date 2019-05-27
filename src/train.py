@@ -16,7 +16,7 @@ SIZE = int(1E6)
 BETA = 1
 EMBEDDING_TYPE = 'default'
 FEATURE_MODE = 'word2vec'  # or 'tfidf', 'word2vec'
-CHANGE_RATIO_MODE = 'overSample'
+CHANGE_RATIO_MODE = 'subSample'
 DOC_LIST = (1, 2, 4, 7, 11, 16, 19, 20, 21, 22, 25, 26, 30, 31, 32, 37, 39, 51, 53)
 STOP_WORDS = TextPreProcessor.get_default_stop_words()
 DIVISION = [[0, 1], [2]]
@@ -32,7 +32,6 @@ for dtype in DIVISION[0]:
     neg_sentences += data[dtype]
 for dtype in DIVISION[1]:
     pos_sentences += data[dtype]
-
 
 # print('Positive sentences ', len(pos_sentences))
 # print('Negative sentences ', len(neg_sentences))
@@ -53,14 +52,15 @@ print('Feature fetched! %ss' % (time.time() - start_time))
 print('pos ', len(pos))
 print('neg ', len(neg))
 
-model_name = model_type.__name__ + "_" + FEATURE_MODE
-if FEATURE_MODE == "word2vec":
-    model_name += "_" + EMBEDDING_TYPE
-
-model_name += "_" + str(RAND_SEED)
+model_name = generate_name(model_type, FEATURE_MODE, RAND_SEED, EMBEDDING_TYPE)
 model = model_type(name=model_name, author='yirany')
 train_data = [np.array(item).reshape(-1) for item in train_data]
+
+part = 0.3
+train_data = train_data[:int(len(train_data) * part)]
+train_label = train_label[:int(len(train_label) * part)]
+
 evaluate_data = [np.array(item).reshape(-1) for item in evaluate_data]
-model.train(train_data, train_label)
+model.train(train_data, train_label, random_state=7778)
 evaluate = list(zip(evaluate_data, [0] * len(evaluate_label), [""] * len(evaluate_label), evaluate_label))
 model.evaluate(evaluate, beta=BETA)
